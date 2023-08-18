@@ -32,7 +32,7 @@ Function AccuracyCheck(ByVal TableName,ByVal FildsStr,ByVal CheckBits) 'TableNam
     CheckmodelName = "自定义脚本检查类->控制点坐标小数位规范性检查"
     
     '查询字段值
-    SqlStr = "Select " & TableName & "." & "objectid," & FildsStr & " From " & TableName
+    SqlStr = "Select " & TableName & "." & "objectid," & FildsStr & " From " & TableName & "Where " & TableName & ".ID > 0"
     GetSQLRecordAll SqlStr,ValArr,SearchCount  'ValArr = [(值1,值2,值3....)(值1,值2,值3....)]
     
     '字段名称数组
