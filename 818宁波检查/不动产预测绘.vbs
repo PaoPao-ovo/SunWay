@@ -1,16 +1,59 @@
+
+'===================================================检查参数定义==================================================
+
+'检查组名称
+Dim strGroupName
+
+'检查项名称
+Dim strCheckName
+
+'检查模型名称
+Dim CheckmodelName
+
+'检查描述
+Dim strDescription
+
 '====================================================入口=========================================================
 
 '检查入口
 Sub OnClick()
-    
+    JzZmjCheck "ZD_宗地基本信息属性表"
 End Sub' OnClick
 
 '===================================================检查函数=======================================================
 
-'建筑总面积检查
-Function JzZmjCheck(ByVal TableName,ByVal Filds)
-    SqlStr = "Select " & TableName & "." & Filds & " From " & TableName
+'预测绘建筑总面积检查
+Function JzZmjCheck(ByVal TableName)
+    
+    '检查记录配置
+    strGroupName = "房屋基本信息面积汇总逻辑检查"
+    strCheckName = "建筑总面积检查"
+    CheckmodelName = "自定义脚本检查类->建筑总面积检查"
+    
+    '获取总建筑面积
+    SqlStr = "Select " & TableName & ".ID,JZZMJ From " & TableName "Inner Join GeoAreaTB On" & TableName & ".ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 "
     GetSQLRecordAll SqlStr,TotalAreaArr,SearchCount
+    If SearchCount = 1 Then
+        ZDArr = Split(TotalAreaArr(0),",", - 1,1)
+        JZZMJ = Transform(ZDArr(1))
+    End If
+    
+    '获取总地上建筑面积
+    SqlStr = "Select Sum(FWDSDXZMJHZXX.YCDSZJZMJ) From FWDSDXZMJHZXX WHERE FWDSDXZMJHZXX.ID > 0"
+    GetSQLRecordAll SqlStr,YCDSArr,SearchCount
+    YCDSZMJ = YCDSArr(0)
+    
+    '获取总地下建筑面积
+    SqlStr = "Select Sum(FWDSDXZMJHZXX.YCDXZJZMJ) From FWDSDXZMJHZXX WHERE FWDSDXZMJHZXX.ID > 0"
+    GetSQLRecordAll SqlStr,YCDXArr,SearchCount
+    YCDXZMJ = YCDXArr(0)
+    
+    SumArea = YCDSZMJ + YCDXZMJ
+    
+    '检查判断
+    If JZZMJ <> SumArea Then
+        SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,ZDArr(0),""
+    End If
     
 End Function' JzZmjCheck 
 
