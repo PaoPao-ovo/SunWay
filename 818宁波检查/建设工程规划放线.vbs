@@ -17,7 +17,7 @@ Dim strDescription
 
 '检查入口
 Sub OnClick()
-    CheckFilds = X,Y,GC
+    CheckFilds = X,Y,GC '检查字段
     AccuracyCheck KZDZBCGXXB,CheckFilds,3
 End Sub' OnClick
 
@@ -51,8 +51,10 @@ Function AccuracyCheck(ByVal TableName,ByVal FildsStr,ByVal CheckBits) 'TableNam
     Next 'i
 End Function' AccuracyCheck
 
-
-
+'字段空值检查
+Function FildsEmptyCheck(ByVal TableName,ByVal FildsStr)
+    
+End Function ' FildsEmptyCheck
 
 '======================================================工具类函数====================================================
 
