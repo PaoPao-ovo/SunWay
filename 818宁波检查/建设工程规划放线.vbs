@@ -17,7 +17,8 @@ Dim strDescription
 
 '检查入口
 Sub OnClick()
-    
+    CheckFilds = X,Y,GC
+    AccuracyCheck KZDZBCGXXB,CheckFilds,3
 End Sub' OnClick
 
 '=====================================================检查函数======================================================
