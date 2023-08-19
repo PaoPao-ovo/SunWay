@@ -26,7 +26,7 @@ End Sub' OnClick
 Function ZhuangCheck()
     
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【JZMJ】
-    ' 2:自然幢（ZRZ）表中【JZMJ】累计汇总。
+    ' 2:自然幢（JG_自然幢属性表）表中【JZMJ】累计汇总。
     
     '检查记录配置
     strGroupName = "总体指标表面积逻辑检查"
@@ -40,9 +40,29 @@ Function ZhuangCheck()
     JZMJ = JZMJArr(0)
     
     '获取自然幢总面积
-    
+    SqlStr = "Select Sum(JG_自然幢属性表.)"
 End Function' ZhuangCheck
 
+'建筑基地面积与基地面汇总值是否一致
+Function BasementCheck()
+    
+    ' 1：规划实测汇总信息表(JGSCHZXX)表中【JDMJ】
+    ' 2: 基底_面(JD_POLYGON)属性表中的【JDMJ】的所有记录的累加和
+
+    '检查记录配置
+    strGroupName = "总体指标表面积逻辑检查"
+    strCheckName = "建筑基地面积与基地面汇总值一致性检查"
+    CheckmodelName = "自定义脚本检查类->建筑基地面积与基地面汇总值一致性检查"
+    strDescription = "建筑基地面积与基地面汇总值一致性检查"
+
+    '获取总面积 JDMJ
+    SqlStr = "Select Sum(JGSCHZXX.JDMJ) From JGSCHZXX Where JGSCHZXX.ID > 0 "
+    GetSQLRecordAll SqlStr,JDMJArr,SearchCount
+    JDMJ = JDMJArr(0)
+
+    '获取基地面积之和
+    SqlStr = ""
+End Function' BasementCheck
 
 '======================================================工具类函数====================================================
 

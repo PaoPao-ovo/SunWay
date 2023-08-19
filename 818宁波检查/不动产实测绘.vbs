@@ -30,9 +30,9 @@ Function JzZmjCheck(ByVal TableName)
     ' 3 地上部分总计：房屋地上地下总面积汇总信息表（FWDSDXZMJHZXX）字段：【YCDXZJZMJ】或字段【SCDXZJZMJ】
     
     '检查记录配置
-    strGroupName = "房屋基本信息面积汇总逻辑检查"
-    strCheckName = "建筑总面积检查"
-    CheckmodelName = "自定义脚本检查类->建筑总面积检查"
+    strGroupName = "图表一致性检查"
+    strCheckName = "房屋基本信息面积汇总逻辑检查"
+    CheckmodelName = "自定义脚本检查类->房屋基本信息面积汇总逻辑检查"
     strDescription = TableName & "的【JZZMJ】与FWDSDXZMJHZXX表的【SCDSZJZMJ】和【SCDXZJZMJ】之和不相等"
     
     '获取总建筑面积 JZZMJ
