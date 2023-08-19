@@ -40,7 +40,7 @@ Function ZhuangCheck()
     JZMJ = JZMJArr(0)
     
     '获取自然幢总面积
-    SqlStr = "Select Sum(JG_自然幢属性表.) "
+    SqlStr = "Select Sum(JG_自然幢属性表.) 1111111111"
 End Function' ZhuangCheck
 
 '建筑基地面积与基地面汇总值是否一致
