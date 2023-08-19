@@ -118,6 +118,32 @@ Function DsJzzMjCheck()
     
 End Function' DsJzzMjCheck
 
+'H表地上检查
+Function HDSCheck()
+    
+    ' 1：房屋类型汇总值：房屋类型面积汇总信息表（FWLXMJHZXX）中【FWLXMC】和【SCJZMJ】和【KJWZ】
+    ' 2：户（H）：实际层数【SJCS】、房屋类型名称【FWLXMC】、预测建筑面积【YCJZMJ】、实测建筑面积【SCJZMJ】的值的累加和。（说明：按照地上、地下分别检查判断）
+    ' 举例说明：当房屋类型面积汇总信息表（FWLXMJHZXX）的【KJWZ】=地上 且【FWLXMC】=”住宅”的【SCJZMJ】的值是否等于户（H）的【SJCS】大于0且【FWLXMC】=”住宅”的【SCJZMJ】的值的累加和。
+    
+    '检查记录配置
+    strGroupName = "房屋基本信息面积汇总逻辑检查"
+    strCheckName = "房屋类型面积汇总值与户表统计面积值一致性检查"
+    CheckmodelName = "自定义脚本检查类->房屋类型面积汇总值与户表统计面积值一致性检查"
+    strDescription = "房屋类型面积汇总值与户表统计面积值不一致"
+    
+    '获取所有的房屋类型名称 FWLXMCArr
+    SqlStr = "Select DISTINCT FWLXMJHZXX.FWLXMC From FWLXMJHZXX Where FWLXMJHZXX.ID > 0 "
+    GetSQLRecordAll SqlStr,FWLXMCArr,FWLXMCCount
+    
+    '获取对应的实测地上建筑面积
+    For CurrentCount = 0 To UBound(FWLXMCArr)
+        If FWLXMCArr(CurrentCount) <> "" Then
+            
+        End If
+    Next 'CurrentCount
+    
+End Function' HCheck
+
 '======================================================工具类函数====================================================
 
 '获取所有记录
