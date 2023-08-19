@@ -22,8 +22,26 @@ End Sub' OnClick
 
 '===================================================检查函数=======================================================
 
-
-
+'建筑面积值与幢面积汇总值是否一致
+Function ZhuangCheck()
+    
+    ' 1：规划实测汇总信息表(JGSCHZXX)表中【JZMJ】
+    ' 2:自然幢（ZRZ）表中【JZMJ】累计汇总。
+    
+    '检查记录配置
+    strGroupName = "总体指标表面积逻辑检查"
+    strCheckName = "建筑面积值与幢面积汇总值一致性检查"
+    CheckmodelName = "自定义脚本检查类->建筑面积值与幢面积汇总值一致性检查"
+    strDescription = "建筑面积值与幢面积汇总值不一致"
+    
+    '获取总建筑面积 JZMJ
+    SqlStr = "Select Sum(JGSCHZXX.JZMJ) From JGSCHZXX Where JGSCHZXX.ID > 0 "
+    GetSQLRecordAll SqlStr,JZMJArr,SearchCount
+    JZMJ = JZMJArr(0)
+    
+    '获取自然幢总面积
+    
+End Function' ZhuangCheck
 
 
 '======================================================工具类函数====================================================
