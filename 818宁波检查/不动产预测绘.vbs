@@ -25,12 +25,17 @@ End Sub' OnClick
 '预测绘建筑总面积检查
 Function JzZmjCheck(ByVal TableName)
     
+    ' 1 建筑面积：宗地基本信息表【JZMJ】（ZD_宗地基本信息属性表[JZZMJ]）
+    ' 2 地上部分总计：房屋地上地下总面积汇总信息表（FWDSDXZMJHZXX）字段：【YCDSZJZMJ】或字段【SCDSZJZMJ】
+    ' 3 地上部分总计：房屋地上地下总面积汇总信息表（FWDSDXZMJHZXX）字段：【YCDXZJZMJ】或字段【SCDXZJZMJ】
+    
     '检查记录配置
     strGroupName = "房屋基本信息面积汇总逻辑检查"
     strCheckName = "建筑总面积检查"
     CheckmodelName = "自定义脚本检查类->建筑总面积检查"
+    strDescription = TableName & "的【JZZMJ】与FWDSDXZMJHZXX表的【YCDSZJZMJ】和【YCDXZJZMJ】之和不相等"
     
-    '获取总建筑面积
+    '获取总建筑面积 JZZMJ
     SqlStr = "Select " & TableName & ".ID,JZZMJ From " & TableName "Inner Join GeoAreaTB On" & TableName & ".ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 "
     GetSQLRecordAll SqlStr,TotalAreaArr,SearchCount
     If SearchCount = 1 Then
@@ -38,12 +43,12 @@ Function JzZmjCheck(ByVal TableName)
         JZZMJ = Transform(ZDArr(1))
     End If
     
-    '获取总地上建筑面积
+    '获取总地上建筑面积 YCDSZMJ
     SqlStr = "Select Sum(FWDSDXZMJHZXX.YCDSZJZMJ) From FWDSDXZMJHZXX WHERE FWDSDXZMJHZXX.ID > 0"
     GetSQLRecordAll SqlStr,YCDSArr,SearchCount
     YCDSZMJ = YCDSArr(0)
     
-    '获取总地下建筑面积
+    '获取总地下建筑面积 YCDXZMJ
     SqlStr = "Select Sum(FWDSDXZMJHZXX.YCDXZJZMJ) From FWDSDXZMJHZXX WHERE FWDSDXZMJHZXX.ID > 0"
     GetSQLRecordAll SqlStr,YCDXArr,SearchCount
     YCDXZMJ = YCDXArr(0)
@@ -56,6 +61,62 @@ Function JzZmjCheck(ByVal TableName)
     End If
     
 End Function' JzZmjCheck 
+
+'预测地下建筑总面积检查
+Function DxJzzMjCheck()
+    
+    ' 1:地下部分总计: 房屋地上地下总面积汇总信息表（FWDSDXZMJHZXX）字段：【YCDXZJZMJ】或字段【SCDXZJZMJ】
+    ' 2:其他部分+人防部位：房屋类型面积汇总信息表（FWLXMJHZXX）表【SCJZMJ】或【YCJZMJ】的累计和。（条件限制：空间位置【KJWZ】为：地下）。
+    
+    '检查记录配置
+    strGroupName = "房屋基本信息面积汇总逻辑检查"
+    strCheckName = "建筑地下总面积检查"
+    CheckmodelName = "自定义脚本检查类->建筑地下总面积检查"
+    strDescription = "预测地下总建筑与其他部分和人防部分面积之和不等"
+    
+    '获取地下总面积 YCDXZMJ
+    SqlStr = "Select Sum(FWDSDXZMJHZXX.YCDXZJZMJ) From FWDSDXZMJHZXX WHERE FWDSDXZMJHZXX.ID > 0"
+    GetSQLRecordAll SqlStr,YCDXArr,SearchCount
+    YCDXZMJ = YCDXArr(0)
+    
+    '地下其他部分面积和人防部分面积 QTMJ
+    SqlStr = "Select Sum(FWLXMJHZXX.YCJZMJ) From FWLXMJHZXX WHERE FWLXMJHZXX.ID > 0 And FWLXMJHZXX.KJWZ = '地下' "
+    GetSQLRecordAll SqlStr,QTArr,SearchCount
+    QTMJ = QTArr(0)
+    
+    If YCDXZMJ <> QTMJ Then
+        SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
+    End If
+    
+End Function' DxJzzMjCheck
+
+'预测地上建筑总面积检查
+Function DsJzzMjCheck()
+    
+    ' 1：地上部分总计：房屋地上地下总面积汇总信息表（FWDSDXZMJHZXX）字段：【YCDSZJZMJ】或字段【SCDSZJZMJ】
+    ' 2: 地上户面积统计: 房屋类型面积汇总信息表（FWLXMJHZXX）表【SCJZMJ】或【YCJZMJ】的累计和。（条件限制：空间位置【KJWZ】为：地上）。
+    
+    '检查记录配置
+    strGroupName = "房屋基本信息面积汇总逻辑检查"
+    strCheckName = "建筑地下总面积检查"
+    CheckmodelName = "自定义脚本检查类->建筑地下总面积检查"
+    strDescription = "预测地下总建筑与其他部分和人防部分面积之和不等"
+    
+    '获取地下总面积 YCDSZMJ
+    SqlStr = "Select Sum(FWDSDXZMJHZXX.YCDSZJZMJ) From FWDSDXZMJHZXX WHERE FWDSDXZMJHZXX.ID > 0"
+    GetSQLRecordAll SqlStr,YCDXArr,SearchCount
+    YCDSZMJ = YCDXArr(0)
+    
+    '地下其他部分面积和人防部分面积 QTMJ
+    SqlStr = "Select Sum(FWLXMJHZXX.YCJZMJ) From FWLXMJHZXX WHERE FWLXMJHZXX.ID > 0 And FWLXMJHZXX.KJWZ = '地上' "
+    GetSQLRecordAll SqlStr,QTArr,SearchCount
+    QTMJ = QTArr(0)
+    
+    If YCDSZMJ <> QTMJ Then
+        SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
+    End If
+    
+End Function' DsJzzMjCheck
 
 '======================================================工具类函数====================================================
 
