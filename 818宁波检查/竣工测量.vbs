@@ -39,8 +39,14 @@ Function ZhuangCheck()
     GetSQLRecordAll SqlStr,JZMJArr,SearchCount
     JZMJ = JZMJArr(0)
     
-    '获取自然幢总面积
-    SqlStr = "Select Sum(JG_自然幢属性表.) 1111111111"
+    '获取自然幢总面积 SumArea
+    SqlStr = "Select Sum(JG_自然幢属性表.JZMJ) From JG_自然幢属性表 Inner Join GeoAreaTB On JG_自然幢属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0"
+    GetSQLRecordAll SqlStr,SumAreaArr,SumCount
+    SumArea = SumAreaArr(0)
+    
+    If JZMJ <> SumArea Then
+        SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
+    End If
 End Function' ZhuangCheck
 
 '建筑基地面积与基地面汇总值是否一致
@@ -48,21 +54,94 @@ Function BasementCheck()
     
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【JDMJ】
     ' 2: 基底_面(JD_POLYGON)属性表中的【JDMJ】的所有记录的累加和
-
+    
     '检查记录配置
     strGroupName = "总体指标表面积逻辑检查"
     strCheckName = "建筑基地面积与基地面汇总值一致性检查"
     CheckmodelName = "自定义脚本检查类->建筑基地面积与基地面汇总值一致性检查"
-    strDescription = "建筑基地面积与基地面汇总值一致性检查"
-
+    strDescription = "建筑基地面积与基地面汇总值不一致"
+    
     '获取总面积 JDMJ
     SqlStr = "Select Sum(JGSCHZXX.JDMJ) From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,JDMJArr,SearchCount
     JDMJ = JDMJArr(0)
-
-    '获取基地面积之和
-    SqlStr = ""
+    
+    '获取基地面积之和 SumArea
+    SqlStr = "Select Sum(JD_POLYGON.JDMJ) From JD_POLYGON Inner Join GeoAreaTB On JG_自然幢属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And JD_POLYGON.ID > 0"
+    GetSQLRecordAll SqlStr,SumAreaArr,SumCount
+    SumArea = SumAreaArr(0)
+    
+    If JDMJ <> SumArea Then
+        SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
+    End If
 End Function' BasementCheck
+
+'绿地面积与绿地范围线面积汇总值是否一致性
+Function LvAreaCheck()
+    
+    ' 1：规划实测汇总信息表(JGSCHZXX)表中【LDMJ】
+    ' 2:绿化要素属性表(LHYS)中【LHMJ】的所有记录的累加和
+    
+    '检查记录配置
+    strGroupName = "总体指标表面积逻辑检查"
+    strCheckName = "绿地面积与绿地范围线面积汇总值一致性检查"
+    CheckmodelName = "自定义脚本检查类->绿地面积与绿地范围线面积汇总值一致性检查"
+    strDescription = "绿地面积与绿地范围线面积汇总值不一致"
+    
+    '绿地总面积 LDMJ
+    SqlStr = "Select Sum(JGSCHZXX.LDMJ) From JGSCHZXX Where JGSCHZXX.ID > 0 "
+    GetSQLRecordAll SqlStr,LDMJArr,SearchCount
+    LDMJ = LDMJArr(0)
+    
+    '绿化要素面积之和 SumLhArea
+    SqlStr = "Select Sum(GH_绿化要素属性表.LHMJ) From GH_绿化要素属性表 Inner Join GeoAreaTB On GH_绿化要素属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_绿化要素属性表.ID > 0"
+    GetSQLRecordAll SqlStr,LHMJArr,LHCount
+    SumLhArea = LHMJArr(0)
+    
+    If LDMJ <> SumLhArea Then
+        SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
+    End If
+End Function' LvAreaCheck
+
+'建筑密度与基地面积除用地面积的值是否一致
+Function ConstractDensityCheck()
+    
+    ' 1：规划实测汇总信息表(JGSCHZXX)表中【JZMD】
+    ' 2：规划实测汇总信息表(JGSCHZXX)表中【JDMJ】/【YDMJ】
+    
+    '检查记录配置
+    strGroupName = "总体指标表面积逻辑检查"
+    strCheckName = "建筑密度与基地面积除用地面积一致性检查"
+    CheckmodelName = "自定义脚本检查类->建筑密度与基地面积除用地面积一致性检查"
+    strDescription = "建筑密度与基地面积除用地面积不一致"
+    
+    '获取建筑密度 JZMD
+    SqlStr = "Select JGSCHZXX.JZMD From JGSCHZXX Where JGSCHZXX.ID > 0 "
+    GetSQLRecordAll SqlStr,JZMDArr,SearchCount
+    JZMD = JZMDArr(0)
+    
+    '获取基底面积 JDMJ
+    SqlStr = "Select JGSCHZXX.JDMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
+    GetSQLRecordAll SqlStr,JDMJArr,SearchCount
+    JDMJ = JDMJArr(0)
+    
+    '获取用地面积 YDMJ
+    SqlStr = "Select JGSCHZXX.YDMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
+    GetSQLRecordAll SqlStr,YDMJArr,SearchCount
+    YDMJ = YDMJArr(0)
+    
+    '计算密度 Density
+    Density = JDMJ / YDMJ
+    
+    If JZMD <> Density Then
+        SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
+    End If
+End Function' ConstractDensityCheck
+
+'绿化率值与绿地面积除以用地面积值是否一致
+Function LHPercrntCheck()
+    
+End Function' LHPercrntCheck
 
 '======================================================工具类函数====================================================
 
