@@ -74,7 +74,7 @@ Function DxJzzMjCheck()
     CheckmodelName = "自定义脚本检查类->建筑地下总面积检查"
     strDescription = "实测地下总建筑与其他部分和人防部分面积之和不等"
     
-    '获取地下总面积 SCDXZMJ
+    '获取地下总面积 SCDXZMJ 11111
     SqlStr = "Select Sum(FWDSDXZMJHZXX.SCDXZJZMJ) From FWDSDXZMJHZXX WHERE FWDSDXZMJHZXX.ID > 0"
     GetSQLRecordAll SqlStr,SCDXArr,SearchCount
     SCDXZMJ = SCDXArr(0)
