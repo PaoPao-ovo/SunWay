@@ -168,7 +168,7 @@ Function HDXCheck()
     CheckmodelName = "自定义脚本检查类->房屋基本信息面积汇总逻辑检查"
     strDescription = "房屋类型面积汇总值与户表统计面积值不一致"
     
-    '获取所有的房屋类型名称 FWLXMCArr
+    '获取所有的房屋类型名称 FWLXMCArr 111
     SqlStr = "Select DISTINCT FWLXMJHZXX.FWLXMC From FWLXMJHZXX Where FWLXMJHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,FWLXMCArr,FWLXMCCount
     
