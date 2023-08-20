@@ -34,7 +34,7 @@ Sub OnClick()
     
     ' DSFJDCWCheck
     
-    DSFJDCHES
+    ' DSFJDCHES
     
     ' DXFJDCWCheck
     
@@ -52,7 +52,7 @@ Sub OnClick()
     
     ' FWCheck
     
-    ' DDFWCheck
+    DDFWCheck
     
     ' FHDYGSCheck
     
@@ -439,7 +439,7 @@ Function DXFJDCWCheck()
     '获取地下机动车车位个数 DXFJDCWGS
     SqlStr = "Select JGSCHZXX.DXJDCWGS From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,DXFJDCWGSArr,SearchCount
-    DXFJDCWGS = DXFJDCWGSArr(0)
+    DXFJDCWGS = Transform(DXFJDCWGSArr(0))
     
     '获取室外车位个数 SNCWGS
     SqlStr = "Select GH_室内车位属性表.ID From GH_室内车位属性表 Inner Join GeoAreaTB On GH_室内车位属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_室内车位属性表.CWLX = '非机动车位' "
@@ -451,7 +451,7 @@ Function DXFJDCWCheck()
         SNCWGS = SNCWGS + Round(Area * ZSXS)
     Next 'i
     
-    If DXFJDCWGS <> SNCWGS Then
+    If DXFJDCWGS - SNCWGS <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
     
@@ -479,7 +479,7 @@ Function DXFJDCHES()
         ZSXS = Transform(SSProcess.GetObjectAttr(IDArr(i),"[ZSXS]"))
         Area = Transform(SSProcess.GetObjectAttr(IDArr(i),"[MJ]"))
         CWGS = Transform(SSProcess.GetObjectAttr(IDArr(i),"[CWGS]"))
-        If Round(Area * ZSXS) <> CWGS Then
+        If Round(Area * ZSXS) - CWGS <> 0  Then
             SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,SSProcess.GetObjectAttr(IDArr(i),"SSObj_X"),SSProcess.GetObjectAttr(IDArr(i),"SSObj_Y"),0,2,IDArr(i),""
         End If
     Next 'i
@@ -504,7 +504,7 @@ Function LvDAreaCheck()
     '获取绿地总面积 LDZMJ
     SqlStr = "Select JGSCHZXX.LDZMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,LDZMJArr,LDCount
-    LDZMJ = LDZMJArr(0)
+    LDZMJ = Transform(LDZMJArr(0))
     
     '获取集中绿地和单块绿地面积之和 SumArea
     SqlStr = "Select JGSCHZXX.JZLDMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
@@ -517,7 +517,7 @@ Function LvDAreaCheck()
     
     SumArea = JZLDMJ + DKLDMJ
     
-    If LDZMJ <> SumArea Then
+    If LDZMJ - SumArea <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
     
@@ -552,7 +552,7 @@ Function DKLVCheck()
         SumArea = SumArea + Transform(SSProcess.GetObjectAttr(IDArr(i),"[LHMJ]"))
     Next 'i
     
-    If DKLDMJ <> SumArea Then
+    If DKLDMJ - SumArea <> 0  Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
     
@@ -587,7 +587,7 @@ Function JZLDCheck()
         SumArea = SumArea + Transform(SSProcess.GetObjectAttr(IDArr(i),"[LHMJ]"))
     Next 'i
     
-    If DKLDMJ <> SumArea Then
+    If DKLDMJ - SumArea <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
     
@@ -637,7 +637,7 @@ Function RFMJCheck()
     GetSQLRecordAll SqlStr,SumAreaArr,SumCount
     SumArea = Transform(SumAreaArr(0))
     
-    If RFZMJ <> SumArea Then
+    If RFZMJ - SumArea <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
     
@@ -648,7 +648,7 @@ End Function' RFMJCheck
 '房屋用途与功能区用途面积汇总值是否一致（所有幢）
 Function FWCheck()
     
-    ' 1：主要经济指标面积汇总信息表(SCZYJJZBXXB)中的每个【YT】：例如：住宅 面积【SCJZMJ】
+    ' 1：主要经济指标面积汇总信息表(ZYJJZBMJHZB)中的每个【YT】：例如：住宅 面积【SCJZMJ】
     ' 2：规划功能区（GHGNQ）表中的【YT】 = “住宅”的所有面积值。
     
     ClearCheckRecord
@@ -659,7 +659,7 @@ Function FWCheck()
     CheckmodelName = "自定义脚本检查类->房屋用途与功能区用途面积汇总值一致性检查"
     strDescription = "房屋用途与功能区用途面积汇总值不一致"
     
-    SqlStr = "Select DISTINCT SCZYJJZBXXB.YT From SCZYJJZBXXB Where SCZYJJZBXXB.ID > 0"
+    SqlStr = "Select DISTINCT ZYJJZBMJHZB.YT From ZYJJZBMJHZB Where ZYJJZBMJHZB.ID > 0"
     GetSQLRecordAll SqlStr,YTArr,YTCount
     
     For i = 0 To YTCount - 1
@@ -668,11 +668,11 @@ Function FWCheck()
         GetSQLRecordAll SqlStr,SumAreaArr,SumCount
         SumArea = SumAreaArr(0)
         
-        SqlStr = "Select SCZYJJZBXXB.SCJZMJ From SCZYJJZBXXB Where SCZYJJZBXXB.ID > 0 And SCZYJJZBXXB.YT = '" & YTArr(i) & "'"
+        SqlStr = "Select ZYJJZBMJHZB.SCJZMJ From ZYJJZBMJHZB Where ZYJJZBMJHZB.ID > 0 And ZYJJZBMJHZB.YT = '" & YTArr(i) & "'"
         GetSQLRecordAll SqlStr,SCJZMJArr,SearchCount
         SCJZMJ = SCJZMJArr(0)
         
-        If SumArea <> SCJZMJ Then
+        If SumArea - SCJZMJ <> 0 Then
             SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
         End If
     Next 'i
@@ -705,13 +705,13 @@ Function DDFWCheck()
         For j = 0 To YTCount - 1
             SqlStr = "Select Sum(JG_规划功能区属性表.JZMJ) Form JG_规划功能区属性表 Inner Join GeoAreaTB On JG_规划功能区属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And JG_规划功能区属性表.SSZRZ = '" & LDArr(i) & "' And JG_规划功能区属性表.YT = '" & YTArr(j) & "'"
             GetSQLRecordAll SqlStr,SumAreaArr,SumCount
-            SumArea = SumAreaArr(0)
+            SumArea = Transform(SumAreaArr(0))
             
             SqlStr = "Select SCLDMJHZXX.JZMJ Where SCLDMJHZXX.LD = '" & LDArr(i) & "' And SCLDMJHZXX.YT = '" & YTArr(j) & "'"
             GetSQLRecordAll SqlStr,JZMJArr,SearchCount
-            JZMJ = JZMJArr(0)
+            JZMJ = Transform(JZMJArr(0))
             
-            If JZMJ <> SumArea Then
+            If JZMJ - SumArea <> 0 Then
                 SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
             End If
         Next 'j
@@ -738,7 +738,7 @@ Function FHDYGSCheck()
     '获取防护单元个数 FHDYGS
     SqlStr = "Select RFPROJECTINFO.FHDYGS From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 "
     GetSQLRecordAll SqlStr,FHDYGSArr,FHDYGSCount
-    FHDYGS = FHDYGSArr(0)
+    FHDYGS = Transform(FHDYGSArr(0))
     
     '获取图上范围线个数 YSCount
     SSProcess.ClearSelection
@@ -747,7 +747,7 @@ Function FHDYGSCheck()
     SSProcess.SelectFilter
     YSCount = SSProcess.GetSelGeoCount()
     
-    If YSCount <> FHDYGS Then
+    If YSCount - FHDYGS <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
     
@@ -772,14 +772,14 @@ Function RFJZMJCheck()
     '人防建筑面积 RFJZMJ
     SqlStr = "Select RFPROJECTINFO.RFJZMJ From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 "
     GetSQLRecordAll SqlStr,RFJZMJArr,RFJZCount
-    RFJZMJ = RFJZMJArr(0)
+    RFJZMJ = Transform(RFJZMJArr(0))
     
     '人防功能区面积汇总值 SumArea
     SqlStr = "Select Sum(RF_人防功能区属性表.JZMJ) Form RF_人防功能区属性表 Inner Join GeoAreaTB On RF_人防功能区属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0"
     GetSQLRecordAll SqlStr,SumAreaArr,SumCount
-    SumArea = SumAreaArr(0)
+    SumArea = Transform(SumAreaArr(0))
     
-    If RFJZMJ <> SumArea Then
+    If RFJZMJ - SumArea <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
     
@@ -804,14 +804,14 @@ Function YBQCheck()
     '掩蔽区面积 YBQMJ
     SqlStr = "Select RFPROJECTINFO.YBQMJ From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 "
     GetSQLRecordAll SqlStr,YBQMJArr,YBQCount
-    YBQMJ = YBQMJArr(0)
+    YBQMJ = Transform(YBQMJArr(0))
     
     '人防功能区（掩蔽区）面积汇总值 SumArea
     SqlStr = "Select Sum(RF_人防功能区属性表.JZMJ) Form RF_人防功能区属性表 Inner Join GeoAreaTB On RF_人防功能区属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And RF_人防功能区属性表.YSDM = '" & "600301'"
     GetSQLRecordAll SqlStr,SumAreaArr,SumCount
-    SumArea = SumAreaArr(0)
+    SumArea = Transform(SumAreaArr(0))
     
-    If YBQMJ <> SumArea Then
+    If YBQMJ - SumArea <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
     
