@@ -69,12 +69,12 @@ Function DxJzzMjCheck()
     ' 2:其他部分+人防部位：房屋类型面积汇总信息表（FWLXMJHZXX）表【SCJZMJ】或【YCJZMJ】的累计和。（条件限制：空间位置【KJWZ】为：地下）。
     
     '检查记录配置
-    strGroupName = "房屋基本信息面积汇总逻辑检查"
-    strCheckName = "建筑地下总面积检查"
-    CheckmodelName = "自定义脚本检查类->建筑地下总面积检查"
+    strGroupName = "图表一致性检查"
+    strCheckName = "房屋基本信息面积汇总逻辑检查"
+    CheckmodelName = "自定义脚本检查类->房屋基本信息面积汇总逻辑检查"
     strDescription = "实测地下总建筑与其他部分和人防部分面积之和不等"
     
-    '获取地下总面积 SCDXZMJ 11111
+    '获取地下总面积 SCDXZMJ
     SqlStr = "Select Sum(FWDSDXZMJHZXX.SCDXZJZMJ) From FWDSDXZMJHZXX WHERE FWDSDXZMJHZXX.ID > 0"
     GetSQLRecordAll SqlStr,SCDXArr,SearchCount
     SCDXZMJ = SCDXArr(0)
@@ -97,9 +97,9 @@ Function DsJzzMjCheck()
     ' 2: 地上户面积统计: 房屋类型面积汇总信息表（FWLXMJHZXX）表【SCJZMJ】或【YCJZMJ】的累计和。（条件限制：空间位置【KJWZ】为：地上）。
     
     '检查记录配置
-    strGroupName = "房屋基本信息面积汇总逻辑检查"
-    strCheckName = "建筑地下总面积检查"
-    CheckmodelName = "自定义脚本检查类->建筑地下总面积检查"
+    strGroupName = "图表一致性检查"
+    strCheckName = "房屋基本信息面积汇总逻辑检查"
+    CheckmodelName = "自定义脚本检查类->房屋基本信息面积汇总逻辑检查"
     strDescription = "实测地下总建筑与其他部分和人防部分面积之和不等"
     
     '获取地下总面积 SCDSZMJ
@@ -126,9 +126,9 @@ Function HDSCheck()
     ' 举例说明：当房屋类型面积汇总信息表（FWLXMJHZXX）的【KJWZ】=地上 且【FWLXMC】=”住宅”的【SCJZMJ】的值是否等于户（H）的【SJCS】大于0且【FWLXMC】=”住宅”的【SCJZMJ】的值的累加和。
     
     '检查记录配置
-    strGroupName = "房屋基本信息面积汇总逻辑检查"
-    strCheckName = "房屋类型面积汇总值与户表统计面积值一致性检查"
-    CheckmodelName = "自定义脚本检查类->房屋类型面积汇总值与户表统计面积值一致性检查"
+    strGroupName = "图表一致性检查"
+    strCheckName = "房屋基本信息面积汇总逻辑检查"
+    CheckmodelName = "自定义脚本检查类->房屋基本信息面积汇总逻辑检查"
     strDescription = "房屋类型面积汇总值与户表统计面积值不一致"
     
     '获取所有的房屋类型名称 FWLXMCArr
@@ -163,9 +163,9 @@ Function HDXCheck()
     ' 举例说明：当房屋类型面积汇总信息表（FWLXMJHZXX）的【KJWZ】=地上 且【FWLXMC】=”住宅”的【SCJZMJ】的值是否等于户（H）的【SJCS】大于0且【FWLXMC】=”住宅”的【SCJZMJ】的值的累加和。
     
     '检查记录配置
-    strGroupName = "房屋基本信息面积汇总逻辑检查"
-    strCheckName = "房屋类型面积汇总值与户表统计面积值一致性检查"
-    CheckmodelName = "自定义脚本检查类->房屋类型面积汇总值与户表统计面积值一致性检查"
+    strGroupName = "图表一致性检查"
+    strCheckName = "房屋基本信息面积汇总逻辑检查"
+    CheckmodelName = "自定义脚本检查类->房屋基本信息面积汇总逻辑检查"
     strDescription = "房屋类型面积汇总值与户表统计面积值不一致"
     
     '获取所有的房屋类型名称 FWLXMCArr

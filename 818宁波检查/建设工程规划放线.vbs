@@ -27,9 +27,9 @@ End Sub' OnClick
 Function AccuracyCheck(ByVal TableName,ByVal FildsStr,ByVal CheckBits) 'TableName = 表名,FildsStr = 查询的字段字符串,CheckBits = 检查位数
     
     '检查记录配置
-    strGroupName = "属性精度检查"
-    strCheckName = "控制点坐标小数位规范性检查"
-    CheckmodelName = "自定义脚本检查类->控制点坐标小数位规范性检查"
+    strGroupName = "图表一致性检查"
+    strCheckName = "控制点坐标表小数位规范性检查"
+    CheckmodelName = "自定义脚本检查类->控制点坐标表小数位规范性检查"
     
     '查询字段值
     SqlStr = "Select " & TableName & "." & "objectid," & FildsStr & " From " & TableName & "Where " & TableName & ".ID > 0"
