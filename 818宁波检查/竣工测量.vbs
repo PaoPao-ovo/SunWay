@@ -29,9 +29,9 @@ Function ZhuangCheck()
     ' 2:自然幢（JG_自然幢属性表）表中【JZMJ】累计汇总。
     
     '检查记录配置
-    strGroupName = "总体指标表面积逻辑检查"
-    strCheckName = "建筑面积值与幢面积汇总值一致性检查"
-    CheckmodelName = "自定义脚本检查类->建筑面积值与幢面积汇总值一致性检查"
+    strGroupName = "图表一致性检查"
+    strCheckName = "总体指标表面积逻辑检查"
+    CheckmodelName = "自定义脚本检查类->总体指标表面积逻辑检查"
     strDescription = "建筑面积值与幢面积汇总值不一致"
     
     '获取总建筑面积 JZMJ
@@ -56,7 +56,7 @@ Function BasementCheck()
     ' 2: 基底_面(JD_POLYGON)属性表中的【JDMJ】的所有记录的累加和
     
     '检查记录配置
-    strGroupName = "总体指标表面积逻辑检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "建筑基地面积与基地面汇总值一致性检查"
     CheckmodelName = "自定义脚本检查类->建筑基地面积与基地面汇总值一致性检查"
     strDescription = "建筑基地面积与基地面汇总值不一致"
@@ -83,7 +83,7 @@ Function LvAreaCheck()
     ' 2:绿化要素属性表(LHYS)中【LHMJ】的所有记录的累加和
     
     '检查记录配置
-    strGroupName = "总体指标表面积逻辑检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "绿地面积与绿地范围线面积汇总值一致性检查"
     CheckmodelName = "自定义脚本检查类->绿地面积与绿地范围线面积汇总值一致性检查"
     strDescription = "绿地面积与绿地范围线面积汇总值不一致"
@@ -110,7 +110,7 @@ Function ConstractDensityCheck()
     ' 2：规划实测汇总信息表(JGSCHZXX)表中【JDMJ】/【YDMJ】
     
     '检查记录配置
-    strGroupName = "总体指标表面积逻辑检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "建筑密度与基地面积除用地面积一致性检查"
     CheckmodelName = "自定义脚本检查类->建筑密度与基地面积除用地面积一致性检查"
     strDescription = "建筑密度与基地面积除用地面积不一致"
@@ -145,7 +145,7 @@ Function LHPercrntCheck()
     ' 2：规划实测汇总信息表(JGSCHZXX)表中【LDMJ】/【YDMJ】
     
     '检查记录配置
-    strGroupName = "总体指标表面积逻辑检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "绿化率值与绿地面积除以用地面积一致性检查"
     CheckmodelName = "自定义脚本检查类->绿化率值与绿地面积除以用地面积一致性检查"
     strDescription = "绿化率值与绿地面积除以用地面积不一致"
@@ -181,7 +181,7 @@ Function DSJDCCheck()
     ' 2：室外车位属性表（SWCW）表中【CWLX】<> “非机动车位” ，按照【ZSXS】值进行统计汇总（面积*折算系数算出个数，汇总）
     
     '检查记录配置
-    strGroupName = "总体指标表面积逻辑检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "地上机动车位个数与地上停车位个数一致性检查"
     CheckmodelName = "自定义脚本检查类->地上机动车位个数与地上停车位个数一致性检查"
     strDescription = "地上机动车位个数与地上停车位个数不一致"
@@ -213,7 +213,7 @@ Function DXJDCCheck()
     ' 2：室内车位属性表（SNCW）表中【CWLX】 <> “非机动车位“ ，按照【ZSXS】值进行汇总（面积 * 折算系数算出个数，汇总）
     
     '检查记录配置
-    strGroupName = "总体指标表面积逻辑检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "地下机动车位个数与地下停车位个数一致性检查"
     CheckmodelName = "自定义脚本检查类->地下机动车位个数与地下停车位个数一致性检查"
     strDescription = "地下机动车位个数与地下停车位个数不一致"
@@ -246,7 +246,7 @@ Function DSFJDCWCheck()
     ' 2：室外车位属性表（SWCW）表中【CWLX】=“非机动车位“ ，按照【ZSXS】值进行统计汇总（面积*折算系数算出个数，汇总）
     
     '检查记录配置
-    strGroupName = "总体指标表面积逻辑检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "地上非机动车位个数与地上非机动车位个数一致性检查"
     CheckmodelName = "自定义脚本检查类->地上非机动车位个数与地上非机动车位个数一致性检查"
     strDescription = "地上非机动车位个数与地上非机动车位个数不一致"
@@ -277,7 +277,7 @@ Function DSFJDCHES()
     ' 1：室外车位属性表（SWCW）表中【CWLX】=“非机动车位“ ，面积【MJ】*折算系数【ZSXS】是否等于车位个数【CWGS】
     
     '检查记录配置
-    strGroupName = "总体指标表面积逻辑检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "地上非机动车位核实数量检查"
     CheckmodelName = "自定义脚本检查类->地上非机动车位核实数量检查"
     strDescription = "地上非机动车位核实数量不一致"
@@ -303,7 +303,7 @@ Function DXFJDCWCheck()
     ' 2：室内车位属性表（SNCW）表中【CWLX】=“非机动车位“ ，按照【ZSXS】值进行汇总（面积*折算系数算出个数，汇总）
     
     '检查记录配置
-    strGroupName = "总体指标表面积逻辑检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "地下非机动车位个数与地下非机动车位个数一致性检查"
     CheckmodelName = "自定义脚本检查类->地下非机动车位个数与地下非机动车位个数一致性检查"
     strDescription = "地下非机动车位个数与地下非机动车位个数不一致"
@@ -334,7 +334,7 @@ Function DXFJDCHES()
     ' 1：室内车位属性表（SNCW）表中【CWLX】=“非机动车位“ ，面积【MJ】*折算系数【ZSXS】是否等于车位个数【CWGS】
     
     '检查记录配置
-    strGroupName = "总体指标表面积逻辑检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "地下非机动车位核实数量检查"
     CheckmodelName = "自定义脚本检查类->地下非机动车位核实数量检查"
     strDescription = "地下非机动车位核实数量不一致"
@@ -359,7 +359,7 @@ Function LvDAreaCheck()
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【LDZMJ】=【JZLDMJ】+【DKLDMJ】
     
     '检查记录配置
-    strGroupName = "总体指标表面积逻辑检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "绿地总面积检查"
     CheckmodelName = "自定义脚本检查类->绿地总面积检查"
     strDescription = "绿地总面积与集中绿地和单块绿地面积之和不一致"
@@ -392,7 +392,7 @@ Function DKLVCheck()
     ' 2：绿化划分信息表（LHHF）其中的【MC】=单块绿地，并通过【ID_LDK】绿地块ID与绿化要素属性表（LHYS）中的【ID_LDK】取【LHMJ】的汇总值
     
     '检查记录配置
-    strGroupName = "总体指标表面积逻辑检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "单块绿地面积与单块绿地范围面面积汇总值一致性检查"
     CheckmodelName = "自定义脚本检查类->单块绿地面积与单块绿地范围面面积汇总值一致性检查"
     strDescription = "单块绿地面积与单块绿地范围面面积汇总值不一致"
@@ -423,7 +423,7 @@ Function JZLDCheck()
     ' 2：绿化划分信息表（LHHF）其中的【MC】=集中绿地，并通过【ID_LDK】绿地块ID与绿化要素属性表（LHYS）中的【ID_LDK】取【LHMJ】的汇总值
     
     '检查记录配置
-    strGroupName = "总体指标表面积逻辑检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "集中绿地面积与集中绿地范围面面积汇总值一致性检查"
     CheckmodelName = "自定义脚本检查类->集中绿地面积与集中绿地范围面面积汇总值一致性检查"
     strDescription = "集中绿地面积与集中绿地范围面面积汇总值不一致"
@@ -454,7 +454,7 @@ Function DGCDCheck()
     ' 2：人防功能区属性表（RFGNQ）中【JZMJ】值累加和
     
     '检查记录配置
-    strGroupName = "总体指标表面积逻辑检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "登高场地个数与登高场地面个数一致性检查"
     CheckmodelName = "自定义脚本检查类->登高场地个数与登高场地面个数一致性检查"
     strDescription = "登高场地个数与登高场地面个数不一致"
@@ -469,7 +469,7 @@ Function RFMJCheck()
     ' 2：人防功能区属性表（RFGNQ）中【JZMJ】值累加和
     
     '检查记录配置
-    strGroupName = "总体指标表面积逻辑检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "人防总面积与人防功能区面积汇总值一致性检查"
     CheckmodelName = "自定义脚本检查类->人防总面积与人防功能区面积汇总值一致性检查"
     strDescription = "人防总面积与人防功能区面积汇总值不一致"
@@ -496,7 +496,7 @@ Function FWCheck()
     ' 2：规划功能区（GHGNQ）表中的【YT】 = “住宅”的所有面积值。
     
     '检查记录配置
-    strGroupName = "主要经济技术指标检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "房屋用途与功能区用途面积汇总值一致性检查"
     CheckmodelName = "自定义脚本检查类->房屋用途与功能区用途面积汇总值一致性检查"
     strDescription = "房屋用途与功能区用途面积汇总值不一致"
@@ -527,7 +527,7 @@ Function DDFWCheck()
     ' 2：规划功能区（GHGNQ）表中的【SSZRZ】=“1#”且【YT】=“住宅”的【JZMJ】的值的累加值。
     
     '检查记录配置
-    strGroupName = "建筑物建筑面积汇检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "房屋用途与功能区用途面积汇总值一致性检查（按单幢）"
     CheckmodelName = "自定义脚本检查类->房屋用途与功能区用途面积汇总值一致性检查（按单幢）"
     strDescription = "房屋用途与功能区用途面积汇总值不一致"
@@ -563,7 +563,7 @@ Function FHDYGSCheck()
     ' 2:人防防护单元范围线（RFFHDYFW）要素个数。
     
     '检查记录配置
-    strGroupName = "人防工程基本信息检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "防护单元个数与防护单元范围线个数一致性检查"
     CheckmodelName = "自定义脚本检查类->防护单元个数与防护单元范围线个数一致性检查"
     strDescription = "防护单元个数与防护单元范围线个数不一致"
@@ -592,7 +592,7 @@ Function RFJZMJCheck()
     ' 2:人防功能区（RFGNQ）中的【JZMJ】的所有汇总值
     
     '检查记录配置
-    strGroupName = "人防工程基本信息检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "人防建筑面积与人防功能区面积汇总值一致性检查"
     CheckmodelName = "自定义脚本检查类->人防建筑面积与人防功能区面积汇总值一致性检查"
     strDescription = "人防建筑面积与人防功能区面积汇总值不一致"
@@ -619,7 +619,7 @@ Function YBQCheck()
     ' 2:人防功能区（RFGNQ）中的【YSDM】=“600301”的【JZMJ】的所有汇总值
     
     '检查记录配置
-    strGroupName = "人防工程基本信息检查"
+    strGroupName = "图表一致性检查"
     strCheckName = "掩蔽区面积与人防功能区（掩蔽区）面积汇总值一致性检查"
     CheckmodelName = "自定义脚本检查类->掩蔽区面积与人防功能区（掩蔽区）面积汇总值一致性检查"
     strDescription = "掩蔽区面积与人防功能区（掩蔽区）面积汇总值不一致"
