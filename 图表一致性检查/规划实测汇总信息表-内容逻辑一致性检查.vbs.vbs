@@ -17,12 +17,49 @@ Dim strDescription
 
 '检查入口
 Sub OnClick()
-
-    ClearCheckRecord
-
-    ZhuangCheck
     
-    ShowCheckRecord
+    'ZhuangCheck
+    
+    'BasementCheck
+    
+    'LvAreaCheck
+    
+    ' ConstractDensityCheck
+    
+    ' LHPercrntCheck
+    
+    ' DSJDCCheck
+    
+    ' DXJDCCheck
+    
+    ' DSFJDCWCheck
+    
+    DSFJDCHES
+    
+    ' DXFJDCWCheck
+    
+    ' DXFJDCHES
+    
+    ' LvDAreaCheck
+    
+    ' DKLVCheck
+    
+    ' JZLDCheck
+    
+    ' DGCDCheck
+    
+    ' RFMJCheck
+    
+    ' FWCheck
+    
+    ' DDFWCheck
+    
+    ' FHDYGSCheck
+    
+    ' RFJZMJCheck
+    
+    ' YBQCheck
+    
 End Sub' OnClick
 
 '===================================================检查函数=======================================================
@@ -32,6 +69,8 @@ Function ZhuangCheck()
     
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【JZMJ】
     ' 2:自然幢（JG_自然幢属性表）表中【JZMJ】累计汇总。
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -43,30 +82,35 @@ Function ZhuangCheck()
     SqlStr = "Select Sum(JGSCHZXX.JZMJ) From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,JZMJArr,SearchCount
     JZMJ = JZMJArr(0)
-
+    
     If JZMJ = Null Or JZMJ = "" Then
         JZMJ = 0
     End If
-
+    
     '获取自然幢总面积 SumArea
-    SqlStr = "Select Sum(JG_自然幢属性表.JZMJ) From JG_自然幢属性表 Inner Join GeoAreaTB On JG_自然幢属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0"
+    SqlStr = "Select Sum(FC_自然幢信息属性表.JZMJ) From FC_自然幢信息属性表 Inner Join GeoAreaTB On FC_自然幢信息属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0"
     GetSQLRecordAll SqlStr,SumAreaArr,SumCount
     SumArea = SumAreaArr(0)
-
+    
     If SumArea = Null Or SumArea = "" Then
         SumArea = 0
     End If
-
-    If JZMJ <> SumArea Then
+    
+    If JZMJ - SumArea <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
+    
+    ShowCheckRecord
+    
 End Function' ZhuangCheck
 
 '建筑基地面积与基地面汇总值是否一致
 Function BasementCheck()
     
-    ' 1：规划实测汇总信息表(JGSCHZXX)表中【JDMJ】
-    ' 2: 基底_面(JD_POLYGON)属性表中的【JDMJ】的所有记录的累加和
+    ' 1：规划实测汇总信息表(JGSCHZXX)表中【JZJDMJ】
+    ' 2: 基底_面(JG_建筑物基底面属性表)属性表中的【JDMJ】的所有记录的累加和
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -75,18 +119,29 @@ Function BasementCheck()
     strDescription = "建筑基地面积与基地面汇总值不一致"
     
     '获取总面积 JDMJ
-    SqlStr = "Select Sum(JGSCHZXX.JDMJ) From JGSCHZXX Where JGSCHZXX.ID > 0 "
+    SqlStr = "Select Sum(JGSCHZXX.JZJDMJ) From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,JDMJArr,SearchCount
     JDMJ = JDMJArr(0)
     
+    If JDMJ = Null Or JDMJ = "" Then
+        JDMJ = 0
+    End If
+    
     '获取基地面积之和 SumArea
-    SqlStr = "Select Sum(JD_POLYGON.JDMJ) From JD_POLYGON Inner Join GeoAreaTB On JG_自然幢属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And JD_POLYGON.ID > 0"
+    SqlStr = "Select Sum(JG_建筑物基底面属性表.JDMJ) From JG_建筑物基底面属性表 Inner Join GeoAreaTB On JG_建筑物基底面属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And JG_建筑物基底面属性表.ID > 0"
     GetSQLRecordAll SqlStr,SumAreaArr,SumCount
     SumArea = SumAreaArr(0)
     
-    If JDMJ <> SumArea Then
+    If SumArea = Null Or SumArea = "" Then
+        SumArea = 0
+    End If
+    
+    If JDMJ - SumArea <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
+    
+    ShowCheckRecord
+    
 End Function' BasementCheck
 
 '绿地面积与绿地范围线面积汇总值是否一致性
@@ -94,6 +149,8 @@ Function LvAreaCheck()
     
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【LDMJ】
     ' 2:绿化要素属性表(LHYS)中【LHMJ】的所有记录的累加和
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -106,21 +163,35 @@ Function LvAreaCheck()
     GetSQLRecordAll SqlStr,LDMJArr,SearchCount
     LDMJ = LDMJArr(0)
     
+    If LDMJ = Null Or LDMJ = "" Then
+        LDMJ = 0
+    End If
+    
     '绿化要素面积之和 SumLhArea
     SqlStr = "Select Sum(GH_绿化要素属性表.LHMJ) From GH_绿化要素属性表 Inner Join GeoAreaTB On GH_绿化要素属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_绿化要素属性表.ID > 0"
     GetSQLRecordAll SqlStr,LHMJArr,LHCount
     SumLhArea = LHMJArr(0)
     
-    If LDMJ <> SumLhArea Then
+    If SumLhArea = Null Or SumLhArea = "" Then
+        SumLhArea = 0
+    End If
+    
+    If LDMJ - SumLhArea <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
+    
+    ShowCheckRecord
+    
 End Function' LvAreaCheck
 
 '建筑密度与基地面积除用地面积的值是否一致
 Function ConstractDensityCheck()
     
+    
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【JZMD】
-    ' 2：规划实测汇总信息表(JGSCHZXX)表中【JDMJ】/【YDMJ】
+    ' 2：规划实测汇总信息表(JGSCHZXX)表中【JZJDMJ】/【YDMJ】
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -132,23 +203,39 @@ Function ConstractDensityCheck()
     SqlStr = "Select JGSCHZXX.JZMD From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,JZMDArr,SearchCount
     JZMD = JZMDArr(0)
+    JZMD = Transform(JZMD)
     
     '获取基底面积 JDMJ
-    SqlStr = "Select JGSCHZXX.JDMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
+    SqlStr = "Select JGSCHZXX.JZJDMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,JDMJArr,SearchCount
     JDMJ = JDMJArr(0)
+    
+    If JDMJ = Null Or JDMJ = "" Then
+        JDMJ = 0
+    End If
     
     '获取用地面积 YDMJ
     SqlStr = "Select JGSCHZXX.YDMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,YDMJArr,SearchCount
     YDMJ = YDMJArr(0)
     
-    '计算密度 Density
-    Density = JDMJ / YDMJ
+    If YDMJ = Null Or YDMJ = "" Then
+        YDMJ = 0
+    End If
     
-    If JZMD <> Density Then
+    '计算密度 Density
+    If YDMJ <> 0 Then
+        Density = (JDMJ / YDMJ) * 100
+    Else
+        Density = 100
+    End If
+    
+    If JZMD - Density <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
+    
+    ShowCheckRecord
+    
 End Function' ConstractDensityCheck
 
 '绿化率值与绿地面积除以用地面积值是否一致
@@ -156,6 +243,8 @@ Function LHPercrntCheck()
     
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【LVL】
     ' 2：规划实测汇总信息表(JGSCHZXX)表中【LDMJ】/【YDMJ】
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -166,24 +255,30 @@ Function LHPercrntCheck()
     '获取绿化率 LVL
     SqlStr = "Select JGSCHZXX.LVL From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,LVLArr,SearchCount
-    LVL = LVLArr(0)
+    LVL = Transform(LVLArr(0))
     
     '获取绿地面积 LDMJ
     SqlStr = "Select JGSCHZXX.LDMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,LDMJArr,SearchCount
-    LDMJ = LDMJArr(0)
+    LDMJ = Transform(LDMJArr(0))
     
     '获取用地面积 YDMJ
     SqlStr = "Select JGSCHZXX.YDMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,YDMJArr,SearchCount
-    YDMJ = YDMJArr(0)
+    YDMJ = Transform(YDMJArr(0))
     
     '实际密度 RealDensity
-    RealDensity = LDMJ / YDMJ
+    If YDMJ <> 0 Then
+        RealDensity = (LDMJ / YDMJ) * 100
+    Else
+        RealDensity = 100
+    End If
     
-    If RealDensity <> LVL Then
+    If RealDensity - LVL <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
+    
+    ShowCheckRecord
     
 End Function' LHPercrntCheck
 
@@ -192,6 +287,8 @@ Function DSJDCCheck()
     
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【DSJDCWGS】
     ' 2：室外车位属性表（SWCW）表中【CWLX】<> “非机动车位” ，按照【ZSXS】值进行统计汇总（面积*折算系数算出个数，汇总）
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -202,7 +299,7 @@ Function DSJDCCheck()
     '获取地上机动车车位个数 DSJDCWGS
     SqlStr = "Select JGSCHZXX.DSJDCWGS From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,DSJDCWGSArr,SearchCount
-    DSJDCWGS = DSJDCWGSArr(0)
+    DSJDCWGS = Transform(DSJDCWGSArr(0))
     
     '获取室外机动车个数 SWCWGS
     SqlStr = "Select GH_室外车位属性表.ID From GH_室外车位属性表 Inner Join GeoAreaTB On GH_室外车位属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_室外车位属性表.CWLX <> '非机动车位' "
@@ -214,9 +311,12 @@ Function DSJDCCheck()
         SWCWGS = SWCWGS + Round(Area * ZSXS)
     Next 'i
     
-    If DSJDCWGS <> SWCWGS Then
+    If DSJDCWGS - SWCWGS <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
+    
+    ShowCheckRecord
+    
 End Function' DSJDCCheck
 
 '地下机动车位个数与地下停车位个数是否一致
@@ -224,6 +324,8 @@ Function DXJDCCheck()
     
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【DXJDCWGS】
     ' 2：室内车位属性表（SNCW）表中【CWLX】 <> “非机动车位“ ，按照【ZSXS】值进行汇总（面积 * 折算系数算出个数，汇总）
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -234,7 +336,7 @@ Function DXJDCCheck()
     '获取地下机动车车位个数 DXJDCWGS
     SqlStr = "Select JGSCHZXX.DXJDCWGS From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,DXJDCWGSArr,SearchCount
-    DXJDCWGS = DXJDCWGSArr(0)
+    DXJDCWGS = Transform(DXJDCWGSArr(0))
     
     '获取室外机动车个数 SNCWGS
     SqlStr = "Select GH_室内车位属性表.ID From GH_室内车位属性表 Inner Join GeoAreaTB On GH_室内车位属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_室内车位属性表.CWLX <> '非机动车位' "
@@ -246,9 +348,11 @@ Function DXJDCCheck()
         SNCWGS = SNCWGS + Round(Area * ZSXS)
     Next 'i
     
-    If DXJDCWGS <> SNCWGS Then
+    If DXJDCWGS - SNCWGS <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
+    
+    ShowCheckRecord
     
 End Function' DXJDCCheck
 
@@ -257,6 +361,8 @@ Function DSFJDCWCheck()
     
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【DSFJDCWGS】
     ' 2：室外车位属性表（SWCW）表中【CWLX】=“非机动车位“ ，按照【ZSXS】值进行统计汇总（面积*折算系数算出个数，汇总）
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -267,7 +373,7 @@ Function DSFJDCWCheck()
     '获取地下机动车车位个数 DSFJDCWGS
     SqlStr = "Select JGSCHZXX.DXJDCWGS From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,DSFJDCWGSArr,SearchCount
-    DSFJDCWGS = DSFJDCWGSArr(0)
+    DSFJDCWGS = Transform(DSFJDCWGSArr(0))
     
     '获取室外车位个数 SWCWGS
     SqlStr = "Select GH_室外车位属性表.ID From GH_室外车位属性表 Inner Join GeoAreaTB On GH_室外车位属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_室外车位属性表.CWLX = '非机动车位' "
@@ -279,15 +385,20 @@ Function DSFJDCWCheck()
         SWCWGS = SWCWGS + Round(Area * ZSXS)
     Next 'i
     
-    If DSFJDCWGS <> SWCWGS Then
+    If DSFJDCWGS - SWCWGS <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
+    
+    ShowCheckRecord
+    
 End Function' DSFJDCWCheck
 
 '地上非机动车位核实数量检查
 Function DSFJDCHES()
     
     ' 1：室外车位属性表（SWCW）表中【CWLX】=“非机动车位“ ，面积【MJ】*折算系数【ZSXS】是否等于车位个数【CWGS】
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -302,10 +413,12 @@ Function DSFJDCHES()
         ZSXS = Transform(SSProcess.GetObjectAttr(IDArr(i),"[ZSXS]"))
         Area = Transform(SSProcess.GetObjectAttr(IDArr(i),"[MJ]"))
         CWGS = Transform(SSProcess.GetObjectAttr(IDArr(i),"[CWGS]"))
-        If Round(Area * ZSXS) <> CWGS Then
+        If Round(Area * ZSXS) - CWGS <> 0  Then
             SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,SSProcess.GetObjectAttr(IDArr(i),"SSObj_X"),SSProcess.GetObjectAttr(IDArr(i),"SSObj_Y"),0,2,IDArr(i),""
         End If
     Next 'i
+    
+    ShowCheckRecord
     
 End Function' DSFJDCHES
 
@@ -314,6 +427,8 @@ Function DXFJDCWCheck()
     
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【DXFJDCWGS】
     ' 2：室内车位属性表（SNCW）表中【CWLX】=“非机动车位“ ，按照【ZSXS】值进行汇总（面积*折算系数算出个数，汇总）
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -339,12 +454,17 @@ Function DXFJDCWCheck()
     If DXFJDCWGS <> SNCWGS Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
+    
+    ShowCheckRecord
+    
 End Function' DXFJDCWCheck
 
 '地下非机动车位核实数量检查
 Function DXFJDCHES()
     
     ' 1：室内车位属性表（SNCW）表中【CWLX】=“非机动车位“ ，面积【MJ】*折算系数【ZSXS】是否等于车位个数【CWGS】
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -364,12 +484,16 @@ Function DXFJDCHES()
         End If
     Next 'i
     
+    ShowCheckRecord
+    
 End Function' DXFJDCHES
 
 '绿地总面积是否等于集中绿地面积+单块绿地面积面积和
 Function LvDAreaCheck()
     
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【LDZMJ】=【JZLDMJ】+【DKLDMJ】
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -396,6 +520,9 @@ Function LvDAreaCheck()
     If LDZMJ <> SumArea Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
+    
+    ShowCheckRecord
+    
 End Function' LvDAreaCheck
 
 '单块绿地面积与单块绿地范围面面积汇总值是否一致
@@ -403,6 +530,8 @@ Function DKLVCheck()
     
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【DKLDMJ】
     ' 2：绿化划分信息表（LHHF）其中的【MC】=单块绿地，并通过【ID_LDK】绿地块ID与绿化要素属性表（LHYS）中的【ID_LDK】取【LHMJ】的汇总值
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -427,6 +556,8 @@ Function DKLVCheck()
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
     
+    ShowCheckRecord
+    
 End Function' DKLVCheck
 
 '集中绿地面积与集中绿地范围面面积汇总值是否一致
@@ -434,6 +565,8 @@ Function JZLDCheck()
     
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【JZLDMJ】
     ' 2：绿化划分信息表（LHHF）其中的【MC】=集中绿地，并通过【ID_LDK】绿地块ID与绿化要素属性表（LHYS）中的【ID_LDK】取【LHMJ】的汇总值
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -458,6 +591,8 @@ Function JZLDCheck()
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
     
+    ShowCheckRecord
+    
 End Function' JZLDCheck
 
 '登高场地个数与登高场地面个数是否一致
@@ -466,12 +601,15 @@ Function DGCDCheck()
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【RFZMJ】
     ' 2：人防功能区属性表（RFGNQ）中【JZMJ】值累加和
     
+    ClearCheckRecord
+    
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "登高场地个数与登高场地面个数一致性检查"
     CheckmodelName = "自定义脚本检查类->登高场地个数与登高场地面个数一致性检查"
     strDescription = "登高场地个数与登高场地面个数不一致"
     
+    ShowCheckRecord
     
 End Function' DGCDCheck
 
@@ -480,6 +618,8 @@ Function RFMJCheck()
     
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【RFZMJ】
     ' 2：人防功能区属性表（RFGNQ）中【JZMJ】值累加和
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -500,6 +640,9 @@ Function RFMJCheck()
     If RFZMJ <> SumArea Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
+    
+    ShowCheckRecord
+    
 End Function' RFMJCheck
 
 '房屋用途与功能区用途面积汇总值是否一致（所有幢）
@@ -507,6 +650,8 @@ Function FWCheck()
     
     ' 1：主要经济指标面积汇总信息表(SCZYJJZBXXB)中的每个【YT】：例如：住宅 面积【SCJZMJ】
     ' 2：规划功能区（GHGNQ）表中的【YT】 = “住宅”的所有面积值。
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -531,6 +676,9 @@ Function FWCheck()
             SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
         End If
     Next 'i
+    
+    ShowCheckRecord
+    
 End Function' FWCheck
 
 '房屋用途与功能区用途面积汇总值是否一致（按单幢）
@@ -538,6 +686,8 @@ Function DDFWCheck()
     
     ' 1：实测楼栋面积汇总信息表（SCLDMJHZXX）表中【LD】=“1#”且【YT】=“住宅”的【JZMJ】
     ' 2：规划功能区（GHGNQ）表中的【SSZRZ】=“1#”且【YT】=“住宅”的【JZMJ】的值的累加值。
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -567,6 +717,8 @@ Function DDFWCheck()
         Next 'j
     Next 'i
     
+    ShowCheckRecord
+    
 End Function' DDFWCheck
 
 '防护单元个数与防护单元范围线个数否一致
@@ -574,6 +726,8 @@ Function FHDYGSCheck()
     
     ' 1：人防项目信息表（RFPROJECTINFO）中的【FHDYGS】的值
     ' 2:人防防护单元范围线（RFFHDYFW）要素个数。
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -596,6 +750,9 @@ Function FHDYGSCheck()
     If YSCount <> FHDYGS Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
+    
+    ShowCheckRecord
+    
 End Function' FHDYGSCheck
 
 '人防建筑面积与人防功能区面积汇总值是否一致
@@ -603,6 +760,8 @@ Function RFJZMJCheck()
     
     ' 1：人防项目信息表（RFPROJECTINFO）中的【RFJZMJ】的值
     ' 2:人防功能区（RFGNQ）中的【JZMJ】的所有汇总值
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -623,6 +782,9 @@ Function RFJZMJCheck()
     If RFJZMJ <> SumArea Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
+    
+    ShowCheckRecord
+    
 End Function' RFJZMJCheck
 
 '掩蔽区面积与人防功能区（掩蔽区）面积汇总值是否一致
@@ -630,6 +792,8 @@ Function YBQCheck()
     
     ' 1：人防项目信息表（RFPROJECTINFO）中的【YBQMJ】的值
     ' 2:人防功能区（RFGNQ）中的【YSDM】=“600301”的【JZMJ】的所有汇总值
+    
+    ClearCheckRecord
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -650,6 +814,9 @@ Function YBQCheck()
     If YBQMJ <> SumArea Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
+    
+    ShowCheckRecord
+    
 End Function' YBQCheck
 
 '======================================================工具类函数====================================================
