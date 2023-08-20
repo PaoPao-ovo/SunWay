@@ -56,6 +56,9 @@ Function FildsEmptyCheck(ByVal TableName,ByVal FildsStr)
     MdbName = SSProcess.GetProjectFileName
     FildsArr = Split(FildsStr,",", - 1,1)
     For i = 0 To UBound(FildsArr)
+        '字段名称,数据类型,字段大小,字段属性,字段序号,是否必须字段,是否允许为空,排序比较方式,字段别名,源字段名,源表名,字段规则,字段规则内容,缺省值
+        '数字类型为 7,4,15
+        '字符串为 10  
         SSProcess.GetAccessFieldInfo1 MdbName,TableName,FildsArr(i),FieldsInfo
         FieldsInfoArr = Split(FieldsInfo,",", - 1,1)
         If FieldsInfoArr(1) <> "" Then
