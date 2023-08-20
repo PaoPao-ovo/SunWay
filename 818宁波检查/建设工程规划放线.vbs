@@ -53,8 +53,14 @@ End Function' AccuracyCheck
 
 '字段空值检查
 Function FildsEmptyCheck(ByVal TableName,ByVal FildsStr)
+    MdbName = SSProcess.GetProjectFileName
+    FildsArr = Split(FildsStr,",", - 1,1)
+    For i = 0 To UBound(FildsArr)
+        SSProcess.GetAccessFieldInfo1 MdbName,TableName,FildsArr(i),FieldsInfo
+        FieldsInfoArr = Split(FieldsInfo,",",-1,1)
+    Next 'i
     
-End Function ' FildsEmptyCheck
+End Function' FildsEmptyCheck
 
 '======================================================工具类函数====================================================
 
