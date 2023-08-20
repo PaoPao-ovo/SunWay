@@ -17,7 +17,12 @@ Dim strDescription
 
 '检查入口
 Sub OnClick()
+
+    ClearCheckRecord
+
+    ZhuangCheck
     
+    ShowCheckRecord
 End Sub' OnClick
 
 '===================================================检查函数=======================================================
@@ -38,12 +43,20 @@ Function ZhuangCheck()
     SqlStr = "Select Sum(JGSCHZXX.JZMJ) From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,JZMJArr,SearchCount
     JZMJ = JZMJArr(0)
-    
+
+    If JZMJ = Null Or JZMJ = "" Then
+        JZMJ = 0
+    End If
+
     '获取自然幢总面积 SumArea
     SqlStr = "Select Sum(JG_自然幢属性表.JZMJ) From JG_自然幢属性表 Inner Join GeoAreaTB On JG_自然幢属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0"
     GetSQLRecordAll SqlStr,SumAreaArr,SumCount
     SumArea = SumAreaArr(0)
-    
+
+    If SumArea = Null Or SumArea = "" Then
+        SumArea = 0
+    End If
+
     If JZMJ <> SumArea Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
@@ -640,6 +653,17 @@ Function YBQCheck()
 End Function' YBQCheck
 
 '======================================================工具类函数====================================================
+
+'清空缓存的所有检查记录
+Function ClearCheckRecord()
+    SSProcess.RemoveCheckRecord strGroupName, strCheckName
+End Function' ClearCheckRecord
+
+'显示所有检查记录
+Function ShowCheckRecord()
+    SSProcess.ShowCheckOutput
+    SSProcess.SaveCheckRecord
+End Function' ShowCheckRecord
 
 '获取所有记录
 Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)
