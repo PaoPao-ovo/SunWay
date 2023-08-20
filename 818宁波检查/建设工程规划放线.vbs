@@ -58,6 +58,9 @@ Function FildsEmptyCheck(ByVal TableName,ByVal FildsStr)
     For i = 0 To UBound(FildsArr)
         SSProcess.GetAccessFieldInfo1 MdbName,TableName,FildsArr(i),FieldsInfo
         FieldsInfoArr = Split(FieldsInfo,",",-1,1)
+        If FieldsInfoArr(1) <> "" Then
+            SqlStr = "Select " & TableName & "." & FildsArr(i) & " Where " & FildsArr(i) & " = '' Or " & FildsArr(i) & " = '*' Or " &  FildsArr(i) & " = NULL "
+        End If
     Next 'i
     
 End Function' FildsEmptyCheck
