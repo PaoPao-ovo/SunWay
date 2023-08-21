@@ -29,7 +29,7 @@ Sub OnClick()
     HDSCheck
     
     HDXCheck
-
+    
     ShowCheckRecord
     
 End Sub' OnClick
@@ -48,12 +48,12 @@ Function JzZmjCheck(ByVal TableName)
     strCheckName = "房屋基本信息面积汇总逻辑检查"
     CheckmodelName = "自定义脚本检查类->房屋基本信息面积汇总逻辑检查"
     strDescription = TableName & "的【JZZMJ】与FWDSDXZMJHZXX表的【SCDSZJZMJ】和【SCDXZJZMJ】之和不相等"
-
+    
     '获取总建筑面积 JZZMJ
     SqlStr = "Select " & TableName & ".ID,JZZMJ From " & TableName & " Inner Join GeoAreaTB On " & TableName & ".ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 "
     GetSQLRecordAll SqlStr,TotalAreaArr,SearchCount
     
-    If SearchCount = 1 Then
+    If SearchCount > 1 Then
         ZDArr = Split(TotalAreaArr(0),",", - 1,1)
         JZZMJ = Transform(ZDArr(1))
     Else
@@ -65,12 +65,22 @@ Function JzZmjCheck(ByVal TableName)
     '获取总地上建筑面积 SCDSZMJ
     SqlStr = "Select Sum(FWDSDXZMJHZXX.SCDSZJZMJ) From FWDSDXZMJHZXX WHERE FWDSDXZMJHZXX.ID > 0"
     GetSQLRecordAll SqlStr,SCDSArr,SearchCount
-    SCDSZMJ = Transform(SCDSArr(0))
+    
+    If SearchCount > 0 Then
+        SCDSZMJ = Transform(SCDSArr(0))
+    Else
+        SCDSZMJ = 0
+    End If
     
     '获取总地下建筑面积 SCDXZMJ
     SqlStr = "Select Sum(FWDSDXZMJHZXX.SCDXZJZMJ) From FWDSDXZMJHZXX WHERE FWDSDXZMJHZXX.ID > 0"
     GetSQLRecordAll SqlStr,SCDXArr,SearchCount
-    SCDXZMJ = Transform(SCDXArr(0))
+    
+    If SearchCount > 0 Then
+        SCDXZMJ = Transform(SCDXArr(0))
+    Else
+        SCDXZMJ = 0
+    End If
     
     SumArea = SCDSZMJ + SCDXZMJ
     
@@ -83,7 +93,7 @@ Function JzZmjCheck(ByVal TableName)
         End If
         
     End If
-
+    
 End Function' JzZmjCheck 
 
 '实测地下建筑总面积检查
@@ -97,21 +107,31 @@ Function DxJzzMjCheck()
     strCheckName = "房屋基本信息面积汇总逻辑检查"
     CheckmodelName = "自定义脚本检查类->房屋基本信息面积汇总逻辑检查"
     strDescription = "实测地下总建筑与其他部分和人防部分面积之和不等"
-
+    
     '获取地下总面积 SCDXZMJ
     SqlStr = "Select Sum(FWDSDXZMJHZXX.SCDXZJZMJ) From FWDSDXZMJHZXX WHERE FWDSDXZMJHZXX.ID > 0"
     GetSQLRecordAll SqlStr,SCDXArr,SearchCount
-    SCDXZMJ = Transform(SCDXArr(0))
+    
+    If SearchCount > 0 Then
+        SCDXZMJ = Transform(SCDXArr(0))
+    Else
+        SCDXZMJ = 0
+    End If
     
     '地下其他部分面积和人防部分面积 QTMJ
     SqlStr = "Select Sum(FWLXMJHZXX.SCJZMJ) From FWLXMJHZXX WHERE FWLXMJHZXX.ID > 0 And FWLXMJHZXX.KJWZ = '地下' "
     GetSQLRecordAll SqlStr,QTArr,SearchCount
-    QTMJ = Transform(QTArr(0))
+    
+    If SearchCount > 0 Then
+        QTMJ = Transform(QTArr(0))
+    Else
+        QTMJ = 0
+    End If
     
     If SCDXZMJ - QTMJ <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
- 
+    
 End Function' DxJzzMjCheck
 
 '实测地上建筑总面积检查
@@ -125,21 +145,31 @@ Function DsJzzMjCheck()
     strCheckName = "房屋基本信息面积汇总逻辑检查"
     CheckmodelName = "自定义脚本检查类->房屋基本信息面积汇总逻辑检查"
     strDescription = "实测地下总建筑与其他部分和人防部分面积之和不等"
-
+    
     '获取地下总面积 SCDSZMJ
     SqlStr = "Select Sum(FWDSDXZMJHZXX.SCDSZJZMJ) From FWDSDXZMJHZXX WHERE FWDSDXZMJHZXX.ID > 0"
     GetSQLRecordAll SqlStr,SCDXArr,SearchCount
-    SCDSZMJ = Transform(SCDXArr(0))
+    
+    If SearchCount > 0 Then
+        SCDSZMJ = Transform(SCDXArr(0))
+    Else
+        SCDSZMJ = 0
+    End If
     
     '地下其他部分面积和人防部分面积 QTMJ
     SqlStr = "Select Sum(FWLXMJHZXX.SCJZMJ) From FWLXMJHZXX WHERE FWLXMJHZXX.ID > 0 And FWLXMJHZXX.KJWZ = '地上' "
     GetSQLRecordAll SqlStr,QTArr,SearchCount
-    QTMJ = Transform(QTArr(0))
+    
+    If SearchCount > 0 Then
+        QTMJ = Transform(QTArr(0))
+    Else
+        QTMJ = 0
+    End If
     
     If SCDSZMJ - QTMJ <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
-
+    
 End Function' DsJzzMjCheck
 
 'H表地上检查
@@ -154,24 +184,34 @@ Function HDSCheck()
     strCheckName = "房屋基本信息面积汇总逻辑检查"
     CheckmodelName = "自定义脚本检查类->房屋基本信息面积汇总逻辑检查"
     strDescription = "房屋类型面积汇总值与户表统计面积值不一致"
-
+    
     '获取所有的房屋类型名称 FWLXMCArr
     SqlStr = "Select DISTINCT FWLXMJHZXX.FWLXMC From FWLXMJHZXX Where FWLXMJHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,FWLXMCArr,FWLXMCCount
     
-    If FWLXMCCount > 1 Then
+    If FWLXMCCount > 0 Then
         '获取对应的实测地上建筑面积
         For CurrentCount = 0 To UBound(FWLXMCArr)
             If FWLXMCArr(CurrentCount) <> "" Then
                 
-                SqlStr = "Select Sum(FWLXMJHZXX.SCJZMJ) Where FWLXMJHZXX.ID > 0 And FWLXMJHZXX.FWLXMC = " & "'" & FWLXMCArr(CurrentCount) & "' And " & "FWLXMJHZXX.KJWZ = '地上' "
+                SqlStr = "Select Sum(FWLXMJHZXX.SCJZMJ) From FWLXMJHZXX Where FWLXMJHZXX.ID > 0 And FWLXMJHZXX.FWLXMC = " & "'" & FWLXMCArr(CurrentCount) & "' And " & "FWLXMJHZXX.KJWZ = '地上' "
                 GetSQLRecordAll SqlStr,SCJZMJArr,SearchCount
-                SCJZMJ = Transform(SCJZMJArr(0))
                 
-                SqlStr = "Select Sum(H.SCJZMJ) Where H.ID > 0 And H.FWLXMC = " & "'" & FWLXMCArr(CurrentCount) & "' And " & "H.KJWZ = '地上' And H.SJCS > 0 "
+                If SearchCount > 0 Then
+                    SCJZMJ = Transform(SCJZMJArr(0))
+                Else
+                    SCJZMJ = 0
+                End If
+                
+                SqlStr = "Select Sum(H.SCJZMJ) From H Where H.ID > 0 And H.FWLXMC = " & "'" & FWLXMCArr(CurrentCount) & "' And " & "H.KJWZ = '地上' And H.SJCS > 0 "
                 
                 GetSQLRecordAll SqlStr,HSCJZMJArr,SearchCount
-                HSCJZMJ = Transform(HSCJZMJArr(0))
+                
+                If SearchCount > 0 Then
+                    HSCJZMJ = Transform(HSCJZMJArr(0))
+                Else
+                    HSCJZMJ = 0
+                End If
                 
                 If SCJZMJ - HSCJZMJ <> 0 Then
                     SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
@@ -180,7 +220,7 @@ Function HDSCheck()
             End If
         Next 'CurrentCount
     End If
-
+    
 End Function' HDSCheck
 
 'H表地下检查
@@ -195,23 +235,33 @@ Function HDXCheck()
     strCheckName = "房屋基本信息面积汇总逻辑检查"
     CheckmodelName = "自定义脚本检查类->房屋基本信息面积汇总逻辑检查"
     strDescription = "房屋类型面积汇总值与户表统计面积值不一致"
-
+    
     '获取所有的房屋类型名称 FWLXMCArr
     SqlStr = "Select DISTINCT FWLXMJHZXX.FWLXMC From FWLXMJHZXX Where FWLXMJHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,FWLXMCArr,FWLXMCCount
     
-    If FWLXMCCount > 1 Then
+    If FWLXMCCount > 0 Then
         '获取对应的实测地上建筑面积
         For CurrentCount = 0 To UBound(FWLXMCArr)
             If FWLXMCArr(CurrentCount) <> "" Then
                 
-                SqlStr = "Select Sum(FWLXMJHZXX.SCJZMJ) Where FWLXMJHZXX.ID > 0 And FWLXMJHZXX.FWLXMC = " & "'" & FWLXMCArr(CurrentCount) & "' And " & "FWLXMJHZXX.KJWZ = '地下' "
+                SqlStr = "Select Sum(FWLXMJHZXX.SCJZMJ) From FWLXMJHZXX Where FWLXMJHZXX.ID > 0 And FWLXMJHZXX.FWLXMC = " & "'" & FWLXMCArr(CurrentCount) & "' And " & "FWLXMJHZXX.KJWZ = '地下' "
                 GetSQLRecordAll SqlStr,SCJZMJArr,SearchCount
-                SCJZMJ = Transform(SCJZMJArr(0))
                 
-                SqlStr = "Select Sum(H.SCJZMJ) Where H.ID > 0 And H.FWLXMC = " & "'" & FWLXMCArr(CurrentCount) & "' And " & "H.KJWZ = '地下' And H.SJCS > 0 "
+                If SearchCount > 0 Then
+                    SCJZMJ = Transform(SCJZMJArr(0))
+                Else
+                    SCJZMJ = 0
+                End If
+                
+                SqlStr = "Select Sum(H.SCJZMJ) From H Where H.ID > 0 And H.FWLXMC = " & "'" & FWLXMCArr(CurrentCount) & "' And " & "H.KJWZ = '地下' And H.SJCS > 0 "
                 GetSQLRecordAll SqlStr,HSCJZMJArr,SearchCount
-                HSCJZMJ = Transform(HSCJZMJArr(0))
+                
+                If SearchCount > 0 Then
+                    HSCJZMJ = Transform(HSCJZMJArr(0))
+                Else
+                    HSCJZMJ = 0
+                End If
                 
                 If SCJZMJ <> HSCJZMJ Then
                     SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
@@ -219,7 +269,7 @@ Function HDXCheck()
             End If
         Next 'CurrentCount
     End If
-
+    
 End Function' HDXCheck
 
 '======================================================工具类函数====================================================
@@ -234,6 +284,17 @@ Function ShowCheckRecord()
     SSProcess.ShowCheckOutput
     SSProcess.SaveCheckRecord
 End Function' ShowCheckRecord
+
+'判断表是否存在记录
+Function RecordExist(ByVal TableName,ByRef RecordBool)
+    SqlStr = "Select * From " & TableName
+    GetSQLRecordAll SqlStr,RecordArr,RecordCount
+    If RecordCount > 0 Then
+        RecordBool = True
+    Else
+        RecordBool = False
+    End If
+End Function ' RecordExist
 
 '获取所有记录
 Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)

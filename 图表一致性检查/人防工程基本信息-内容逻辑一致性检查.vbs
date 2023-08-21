@@ -47,7 +47,12 @@ Function FHDYGSCheck()
     '获取防护单元个数 FHDYGS
     SqlStr = "Select RFPROJECTINFO.FHDYGS From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 "
     GetSQLRecordAll SqlStr,FHDYGSArr,FHDYGSCount
-    FHDYGS = Transform(FHDYGSArr(0))
+
+    If FHDYGSCount > 0 Then
+        FHDYGS = Transform(FHDYGSArr(0))
+    Else
+        FHDYGS = 0
+    End If
     
     '获取图上范围线个数 YSCount
     SSProcess.ClearSelection
@@ -77,12 +82,22 @@ Function RFJZMJCheck()
     '人防建筑面积 RFJZMJ
     SqlStr = "Select RFPROJECTINFO.RFJZMJ From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 "
     GetSQLRecordAll SqlStr,RFJZMJArr,RFJZCount
-    RFJZMJ = Transform(RFJZMJArr(0))
+
+    If RFJZCount > 0 Then
+        RFJZMJ = Transform(RFJZMJArr(0))
+    Else
+        RFJZMJ = 0
+    End If
     
     '人防功能区面积汇总值 SumArea
-    SqlStr = "Select Sum(RF_人防功能区属性表.JZMJ) Form RF_人防功能区属性表 Inner Join GeoAreaTB On RF_人防功能区属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0"
+    SqlStr = "Select Sum(RF_人防功能区属性表.JZMJ) From RF_人防功能区属性表 Inner Join GeoAreaTB On RF_人防功能区属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0"
     GetSQLRecordAll SqlStr,SumAreaArr,SumCount
-    SumArea = Transform(SumAreaArr(0))
+
+    If SumCount > 0 Then
+        SumArea = Transform(SumAreaArr(0))
+    Else
+        SumArea = 0
+    End If
     
     If RFJZMJ - SumArea <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
@@ -105,12 +120,22 @@ Function YBQCheck()
     '掩蔽区面积 YBQMJ
     SqlStr = "Select RFPROJECTINFO.YBQMJ From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 "
     GetSQLRecordAll SqlStr,YBQMJArr,YBQCount
-    YBQMJ = Transform(YBQMJArr(0))
+
+    If YBQCount > 0 Then
+        YBQMJ = Transform(YBQMJArr(0))
+    Else
+        YBQMJ = 0
+    End If
     
     '人防功能区（掩蔽区）面积汇总值 SumArea
-    SqlStr = "Select Sum(RF_人防功能区属性表.JZMJ) Form RF_人防功能区属性表 Inner Join GeoAreaTB On RF_人防功能区属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And RF_人防功能区属性表.YSDM = '" & "600301'"
+    SqlStr = "Select Sum(RF_人防功能区属性表.JZMJ) From RF_人防功能区属性表 Inner Join GeoAreaTB On RF_人防功能区属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And RF_人防功能区属性表.YSDM = '" & "600301'"
     GetSQLRecordAll SqlStr,SumAreaArr,SumCount
-    SumArea = Transform(SumAreaArr(0))
+
+    If SumCount > 0 Then
+        SumArea = Transform(SumAreaArr(0))
+    Else
+        SumArea = 0
+    End If
     
     If YBQMJ - SumArea <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""

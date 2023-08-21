@@ -45,7 +45,7 @@ Function FWCheck()
     
     For i = 0 To YTCount - 1
         
-        SqlStr = "Select Sum(JG_规划功能区属性表.JZMJ) Form JG_规划功能区属性表 Inner Join GeoAreaTB On JG_规划功能区属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And JG_规划功能区属性表.YT = '" & YTArr(i) & "'"
+        SqlStr = "Select Sum(JG_规划功能区属性表.JZMJ) From JG_规划功能区属性表 Inner Join GeoAreaTB On JG_规划功能区属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And JG_规划功能区属性表.YT = '" & YTArr(i) & "'"
         GetSQLRecordAll SqlStr,SumAreaArr,SumCount
         SumArea = SumAreaArr(0)
         
