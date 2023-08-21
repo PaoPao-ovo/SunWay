@@ -20,7 +20,7 @@ Sub OnClick()
     
     ClearCheckRecord
     
-    FWCheck
+    DDFWCheck
     
     ShowCheckRecord
 
@@ -28,37 +28,41 @@ End Sub' OnClick
 
 '===================================================检查函数=======================================================
 
-'房屋用途与功能区用途面积汇总值是否一致（所有幢）
-Function FWCheck()
+'房屋用途与功能区用途面积汇总值是否一致（按单幢）
+Function DDFWCheck()
     
-    ' 1：主要经济指标面积汇总信息表(ZYJJZBMJHZB)中的每个【YT】：例如：住宅 面积【SCJZMJ】
-    ' 2：规划功能区（GHGNQ）表中的【YT】 = “住宅”的所有面积值。
+    ' 1：实测楼栋面积汇总信息表（SCLDMJHZXX）表中【LD】=“1#”且【YT】=“住宅”的【JZMJ】
+    ' 2：规划功能区（GHGNQ）表中的【SSZRZ】=“1#”且【YT】=“住宅”的【JZMJ】的值的累加值。
     
     '检查记录配置
     strGroupName = "图表一致性检查"
-    strCheckName = "房屋用途与功能区用途面积汇总值一致性检查"
-    CheckmodelName = "自定义脚本检查类->房屋用途与功能区用途面积汇总值一致性检查"
+    strCheckName = "房屋用途与功能区用途面积汇总值一致性检查（按单幢）"
+    CheckmodelName = "自定义脚本检查类->房屋用途与功能区用途面积汇总值一致性检查（按单幢）"
     strDescription = "房屋用途与功能区用途面积汇总值不一致"
 
-    SqlStr = "Select DISTINCT ZYJJZBMJHZB.YT From ZYJJZBMJHZB Where ZYJJZBMJHZB.ID > 0"
-    GetSQLRecordAll SqlStr,YTArr,YTCount
+    '所有的楼栋
+    SqlStr = "Select DISTINCT SCLDMJHZXX.LD From SCLDMJHZXX Where SCLDMJHZXX.ID > 0 "
+    GetSQLRecordAll SqlStr,LDArr,LDCount
     
-    For i = 0 To YTCount - 1
-        
-        SqlStr = "Select Sum(JG_规划功能区属性表.JZMJ) Form JG_规划功能区属性表 Inner Join GeoAreaTB On JG_规划功能区属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And JG_规划功能区属性表.YT = '" & YTArr(i) & "'"
-        GetSQLRecordAll SqlStr,SumAreaArr,SumCount
-        SumArea = SumAreaArr(0)
-        
-        SqlStr = "Select ZYJJZBMJHZB.SCJZMJ From ZYJJZBMJHZB Where ZYJJZBMJHZB.ID > 0 And ZYJJZBMJHZB.YT = '" & YTArr(i) & "'"
-        GetSQLRecordAll SqlStr,SCJZMJArr,SearchCount
-        SCJZMJ = SCJZMJArr(0)
-        
-        If SumArea - SCJZMJ <> 0 Then
-            SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
-        End If
+    For i = 0 To LDCount - 1
+        SqlStr = "Select DISTINCT SCLDMJHZXX.YT From SCLDMJHZXX Where SCLDMJHZXX.ID > 0 And SCLDMJHZXX.LD = '" & LDArr(i) & "'"
+        GetSQLRecordAll SqlStr,YTArr,YTCount
+        For j = 0 To YTCount - 1
+            SqlStr = "Select Sum(JG_规划功能区属性表.JZMJ) Form JG_规划功能区属性表 Inner Join GeoAreaTB On JG_规划功能区属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And JG_规划功能区属性表.SSZRZ = '" & LDArr(i) & "' And JG_规划功能区属性表.YT = '" & YTArr(j) & "'"
+            GetSQLRecordAll SqlStr,SumAreaArr,SumCount
+            SumArea = Transform(SumAreaArr(0))
+            
+            SqlStr = "Select SCLDMJHZXX.JZMJ Where SCLDMJHZXX.LD = '" & LDArr(i) & "' And SCLDMJHZXX.YT = '" & YTArr(j) & "'"
+            GetSQLRecordAll SqlStr,JZMJArr,SearchCount
+            JZMJ = Transform(JZMJArr(0))
+            
+            If JZMJ - SumArea <> 0 Then
+                SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
+            End If
+        Next 'j
     Next 'i
 
-End Function' FWCheck
+End Function' DDFWCheck
 
 '======================================================工具类函数====================================================
 
