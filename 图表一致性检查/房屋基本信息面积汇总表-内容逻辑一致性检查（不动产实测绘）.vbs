@@ -285,17 +285,6 @@ Function ShowCheckRecord()
     SSProcess.SaveCheckRecord
 End Function' ShowCheckRecord
 
-'判断表是否存在记录
-Function RecordExist(ByVal TableName,ByRef RecordBool)
-    SqlStr = "Select * From " & TableName
-    GetSQLRecordAll SqlStr,RecordArr,RecordCount
-    If RecordCount > 0 Then
-        RecordBool = True
-    Else
-        RecordBool = False
-    End If
-End Function ' RecordExist
-
 '获取所有记录
 Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)
     ProJectName = SSProcess.GetProjectFileName
