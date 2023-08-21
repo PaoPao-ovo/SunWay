@@ -645,8 +645,8 @@ End Function' JZLDCheck
 '登高场地个数与登高场地面个数是否一致
 Function DGCDCheck()
     
-    ' 1：规划实测汇总信息表(JGSCHZXX)表中【RFZMJ】
-    ' 2：人防功能区属性表（RFGNQ）中【JZMJ】值累加和
+    ' 1：规划实测汇总信息表(JGSCHZXX)表中【DGCDGS】
+    ' 2：【GH_消防要素面属性表】要素个数
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -654,6 +654,28 @@ Function DGCDCheck()
     CheckmodelName = "自定义脚本检查类->登高场地个数与登高场地面个数一致性检查"
     strDescription = "登高场地个数与登高场地面个数不一致"
     
+    '获取人防总面积 DGCDGS
+    SqlStr = "Select JGSCHZXX.DGCDGS From JGSCHZXX Where JGSCHZXX.ID > 0 "
+    GetSQLRecordAll SqlStr,DGCDGSArr,DGCDGSCount
+    
+    If DGCDGSCount > 0 Then
+        DGCDGS = Transform(DGCDGSArr(0))
+    Else
+        DGCDGS = 0
+    End If
+    
+    '获取消防要素面个数 XFMGS
+    SqlStr = "Select GH_消防要素面属性表.ID From GH_消防要素面属性表 Inner Join GeoAreaTB On GH_消防要素面属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0"
+    GetSQLRecordAll SqlStr,XFMGSArr,XFMGSCount
+    If XFMGSCount > 0 Then
+        XFMGS = Transform(XFMGSCount)
+    Else
+        XFMGS = 0
+    End If
+    
+    If DGCDGS - XFMGS <> 0 Then
+        SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
+    End If
 End Function' DGCDCheck
 
 '人防总面积与人防功能区面积汇总值是否一致
