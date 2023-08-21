@@ -221,6 +221,8 @@ Function ConstractDensityCheck()
     If YDMJ <> 0 Then
         Density = (JDMJ / YDMJ) * 100
     Else
+        MsgBox "基底面积为空或零"
+        Exit Function
         Density = 100
     End If
     
@@ -278,6 +280,8 @@ Function LHPercrntCheck()
     If YDMJ <> 0 Then
         RealDensity = (LDMJ / YDMJ) * 100
     Else
+        MsgBox "用地面积为空或零"
+        Exit Function
         RealDensity = 100
     End If
     
@@ -667,7 +671,7 @@ Function RFMJCheck()
     '获取人防总面积 RFZMJ
     SqlStr = "Select JGSCHZXX.RFZMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,RFZMJArr,JZLDCount
-
+    
     If JZLDCount > 0 Then
         RFZMJ = Transform(RFZMJArr(0))
     Else
@@ -678,7 +682,7 @@ Function RFMJCheck()
     '汇总人防面积 SumArea
     SqlStr = "Select Sum(RF_人防功能区属性表.JZMJ) From RF_人防功能区属性表 Inner Join GeoAreaTB On RF_人防功能区属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 "
     GetSQLRecordAll SqlStr,SumAreaArr,SumCount
-
+    
     If SumCount > 0 Then
         SumArea = Transform(SumAreaArr(0))
     Else
