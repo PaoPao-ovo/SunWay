@@ -20,7 +20,7 @@ Sub OnClick()
 
     ClearCheckRecord
 
-    FildsEmptyCheck "ZYJJZBMJHZB","KJWZ,YT,JZMJ,GHJZMJ","信息表"
+    FildsEmptyCheck "SCLDMJHZXX","LD,YT,JZMJ","信息表"
 
     ShowCheckRecord
 
