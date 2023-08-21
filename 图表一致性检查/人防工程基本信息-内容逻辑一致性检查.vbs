@@ -45,7 +45,7 @@ Function FHDYGSCheck()
     strDescription = "防护单元个数与防护单元范围线个数不一致"
 
     '获取防护单元个数 FHDYGS
-    SqlStr = "Select RFPROJECTINFO.FHDYGS From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 "
+    SqlStr = "Select RFPROJECTINFO.Value From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 And RFPROJECTINFO.Key = '防护单元个数' "
     GetSQLRecordAll SqlStr,FHDYGSArr,FHDYGSCount
 
     If FHDYGSCount > 0 Then
@@ -80,7 +80,7 @@ Function RFJZMJCheck()
     strDescription = "人防建筑面积与人防功能区面积汇总值不一致"
 
     '人防建筑面积 RFJZMJ
-    SqlStr = "Select RFPROJECTINFO.RFJZMJ From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 "
+    SqlStr = "Select RFPROJECTINFO.Value From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 And RFPROJECTINFO.Key = '人防建筑面积' "
     GetSQLRecordAll SqlStr,RFJZMJArr,RFJZCount
 
     If RFJZCount > 0 Then
@@ -118,7 +118,7 @@ Function YBQCheck()
     strDescription = "掩蔽区面积与人防功能区（掩蔽区）面积汇总值不一致"
 
     '掩蔽区面积 YBQMJ
-    SqlStr = "Select RFPROJECTINFO.YBQMJ From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 "
+    SqlStr = "Select RFPROJECTINFO.Value From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 And RFPROJECTINFO.Key = '掩蔽区面积' "
     GetSQLRecordAll SqlStr,YBQMJArr,YBQCount
 
     If YBQCount > 0 Then
