@@ -50,6 +50,7 @@ Function JzZmjCheck(ByVal TableName)
     '获取总建筑面积 JZZMJ
     SqlStr = "Select " & TableName & ".ID,JZZMJ From " & TableName & " Inner Join GeoAreaTB On " & TableName & ".ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 "
     GetSQLRecordAll SqlStr,TotalAreaArr,SearchCount
+    
     If SearchCount = 1 Then
         ZDArr = Split(TotalAreaArr(0),",", - 1,1)
         JZZMJ = Transform(ZDArr(1))
