@@ -17,8 +17,15 @@ Dim strDescription
 
 '检查入口
 Sub OnClick()
-    CheckFilds = X,Y,GC '检查字段
-    AccuracyCheck KZDZBCGXXB,CheckFilds,3
+
+    ClearCheckRecord
+
+    CheckFilds = "X,Y,GC" '检查字段
+
+    AccuracyCheck "KZDZBCGXXB",CheckFilds,3
+
+    ShowCheckRecord
+    
 End Sub' OnClick
 
 '=====================================================检查函数======================================================
@@ -32,7 +39,7 @@ Function AccuracyCheck(ByVal TableName,ByVal FildsStr,ByVal CheckBits) 'TableNam
     CheckmodelName = "自定义脚本检查类->控制点坐标表小数位规范性检查"
     
     '查询字段值
-    SqlStr = "Select " & TableName & "." & "objectid," & FildsStr & " From " & TableName & "Where " & TableName & ".ID > 0"
+    SqlStr = "Select " & TableName & "." & "DH," & FildsStr & " From " & TableName
     GetSQLRecordAll SqlStr,ValArr,SearchCount  'ValArr = [(值1,值2,值3....)(值1,值2,值3....)]
     
     '字段名称数组
@@ -42,21 +49,27 @@ Function AccuracyCheck(ByVal TableName,ByVal FildsStr,ByVal CheckBits) 'TableNam
     For i = 0 To SearchCount - 1
         CurrentValArr = Split(ValArr(i),",", - 1,1)
         For j = 1 To UBound(CurrentValArr)
-            DecimalJudgment CurrentValArr(j),CheckBits,ErrorBool
+            DecimalJudgment Transform(CurrentValArr(j)),CheckBits,ErrorBool
             If ErrorBool Then
-                strDescription = TableName & "表，ObjectId为" & CurrentValArr(0) & "字段：" & FildsNameArr(j) & "小数位数大于三"
+                strDescription = "控制点坐标成果表【" & TableName & "】，DH为【" & CurrentValArr(0) & "】的" & "【" & FildsNameArr(j - 1) & "】字段" & "小数位数大于三"
                 SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,0,0,""
             End If
         Next 'j
     Next 'i
 End Function' AccuracyCheck
 
-'字段空值检查
-Function FildsEmptyCheck(ByVal TableName,ByVal FildsStr)
-    
-End Function ' FildsEmptyCheck
-
 '======================================================工具类函数====================================================
+
+'清空缓存的所有检查记录
+Function ClearCheckRecord()
+    SSProcess.RemoveCheckRecord strGroupName, strCheckName
+End Function' ClearCheckRecord
+
+'显示所有检查记录
+Function ShowCheckRecord()
+    SSProcess.ShowCheckOutput
+    SSProcess.SaveCheckRecord
+End Function' ShowCheckRecord
 
 '获取所有记录
 Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)
@@ -87,7 +100,7 @@ Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecord
 End Function
 
 '小数位数判断
-Function DecimalJudgment(ByVal Num,ByVal CheckBits,ByVal ErrorBool) 'Num = 检查数,CheckBits = 检查位数,ErrorBool = 是否错误,错误返回True
+Function DecimalJudgment(ByVal Num,ByVal CheckBits,ByRef ErrorBool) 'Num = 检查数,CheckBits = 检查位数,ErrorBool = 是否错误,错误返回True
     
     ErrorBool = False
     
@@ -107,5 +120,16 @@ Function DecimalJudgment(ByVal Num,ByVal CheckBits,ByVal ErrorBool) 'Num = 检�
     Else
         ErrorBool = True
     End If
-    
 End Function' DecimalJudgment
+
+'数据类型转换
+Function Transform(ByVal Values)
+    If Values <> "" Then
+        If IsNumeric(Values) = True Then
+            Values = CDbl(Values)
+        End If
+    Else
+        Values = 0
+    End If
+    Transform = Values
+End Function'Transform
