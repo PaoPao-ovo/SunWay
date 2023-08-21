@@ -18,47 +18,47 @@ Dim strDescription
 '检查入口
 Sub OnClick()
     
-    'ZhuangCheck
+    ZhuangCheck
     
-    'BasementCheck
+    BasementCheck
     
-    'LvAreaCheck
+    LvAreaCheck
     
-    ' ConstractDensityCheck
+    ConstractDensityCheck
     
-    ' LHPercrntCheck
+    LHPercrntCheck
     
-    ' DSJDCCheck
+    DSJDCCheck
     
-    ' DXJDCCheck
+    DXJDCCheck
     
-    ' DSFJDCWCheck
+    DSFJDCWCheck
     
-    ' DSFJDCHES
+    DSFJDCHES
     
-    ' DXFJDCWCheck
+    DXFJDCWCheck
     
-    ' DXFJDCHES
+    DXFJDCHES
     
-    ' LvDAreaCheck
+    LvDAreaCheck
     
-    ' DKLVCheck
+    DKLVCheck
     
-    ' JZLDCheck
+    JZLDCheck
     
-    ' DGCDCheck
+    DGCDCheck
     
-    ' RFMJCheck
+    RFMJCheck
     
-    ' FWCheck
+    FWCheck
     
     DDFWCheck
     
-    ' FHDYGSCheck
+    FHDYGSCheck
     
-    ' RFJZMJCheck
+    RFJZMJCheck
     
-    ' YBQCheck
+    YBQCheck
     
 End Sub' OnClick
 
@@ -70,13 +70,13 @@ Function ZhuangCheck()
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【JZMJ】
     ' 2:自然幢（JG_自然幢属性表）表中【JZMJ】累计汇总。
     
-    ClearCheckRecord
-    
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "总体指标表面积逻辑检查"
     CheckmodelName = "自定义脚本检查类->总体指标表面积逻辑检查"
     strDescription = "建筑面积值与幢面积汇总值不一致"
+    
+    ClearCheckRecord
     
     '获取总建筑面积 JZMJ
     SqlStr = "Select Sum(JGSCHZXX.JZMJ) From JGSCHZXX Where JGSCHZXX.ID > 0 "
@@ -110,13 +110,13 @@ Function BasementCheck()
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【JZJDMJ】
     ' 2: 基底_面(JG_建筑物基底面属性表)属性表中的【JDMJ】的所有记录的累加和
     
-    ClearCheckRecord
-    
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "建筑基地面积与基地面汇总值一致性检查"
     CheckmodelName = "自定义脚本检查类->建筑基地面积与基地面汇总值一致性检查"
     strDescription = "建筑基地面积与基地面汇总值不一致"
+    
+    ClearCheckRecord
     
     '获取总面积 JDMJ
     SqlStr = "Select Sum(JGSCHZXX.JZJDMJ) From JGSCHZXX Where JGSCHZXX.ID > 0 "
@@ -150,13 +150,13 @@ Function LvAreaCheck()
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【LDMJ】
     ' 2:绿化要素属性表(LHYS)中【LHMJ】的所有记录的累加和
     
-    ClearCheckRecord
-    
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "绿地面积与绿地范围线面积汇总值一致性检查"
     CheckmodelName = "自定义脚本检查类->绿地面积与绿地范围线面积汇总值一致性检查"
     strDescription = "绿地面积与绿地范围线面积汇总值不一致"
+    
+    ClearCheckRecord
     
     '绿地总面积 LDMJ
     SqlStr = "Select Sum(JGSCHZXX.LDMJ) From JGSCHZXX Where JGSCHZXX.ID > 0 "
@@ -191,14 +191,14 @@ Function ConstractDensityCheck()
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【JZMD】
     ' 2：规划实测汇总信息表(JGSCHZXX)表中【JZJDMJ】/【YDMJ】
     
-    ClearCheckRecord
-    
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "建筑密度与基地面积除用地面积一致性检查"
     CheckmodelName = "自定义脚本检查类->建筑密度与基地面积除用地面积一致性检查"
     strDescription = "建筑密度与基地面积除用地面积不一致"
     
+    ClearCheckRecord
+
     '获取建筑密度 JZMD
     SqlStr = "Select JGSCHZXX.JZMD From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,JZMDArr,SearchCount
@@ -244,14 +244,14 @@ Function LHPercrntCheck()
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【LVL】
     ' 2：规划实测汇总信息表(JGSCHZXX)表中【LDMJ】/【YDMJ】
     
-    ClearCheckRecord
-    
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "绿化率值与绿地面积除以用地面积一致性检查"
     CheckmodelName = "自定义脚本检查类->绿化率值与绿地面积除以用地面积一致性检查"
     strDescription = "绿化率值与绿地面积除以用地面积不一致"
     
+    ClearCheckRecord
+
     '获取绿化率 LVL
     SqlStr = "Select JGSCHZXX.LVL From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,LVLArr,SearchCount
@@ -288,14 +288,14 @@ Function DSJDCCheck()
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【DSJDCWGS】
     ' 2：室外车位属性表（SWCW）表中【CWLX】<> “非机动车位” ，按照【ZSXS】值进行统计汇总（面积*折算系数算出个数，汇总）
     
-    ClearCheckRecord
-    
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "地上机动车位个数与地上停车位个数一致性检查"
     CheckmodelName = "自定义脚本检查类->地上机动车位个数与地上停车位个数一致性检查"
     strDescription = "地上机动车位个数与地上停车位个数不一致"
     
+    ClearCheckRecord
+
     '获取地上机动车车位个数 DSJDCWGS
     SqlStr = "Select JGSCHZXX.DSJDCWGS From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,DSJDCWGSArr,SearchCount
@@ -325,14 +325,14 @@ Function DXJDCCheck()
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【DXJDCWGS】
     ' 2：室内车位属性表（SNCW）表中【CWLX】 <> “非机动车位“ ，按照【ZSXS】值进行汇总（面积 * 折算系数算出个数，汇总）
     
-    ClearCheckRecord
-    
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "地下机动车位个数与地下停车位个数一致性检查"
     CheckmodelName = "自定义脚本检查类->地下机动车位个数与地下停车位个数一致性检查"
     strDescription = "地下机动车位个数与地下停车位个数不一致"
     
+    ClearCheckRecord
+
     '获取地下机动车车位个数 DXJDCWGS
     SqlStr = "Select JGSCHZXX.DXJDCWGS From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,DXJDCWGSArr,SearchCount
@@ -362,14 +362,14 @@ Function DSFJDCWCheck()
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【DSFJDCWGS】
     ' 2：室外车位属性表（SWCW）表中【CWLX】=“非机动车位“ ，按照【ZSXS】值进行统计汇总（面积*折算系数算出个数，汇总）
     
-    ClearCheckRecord
-    
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "地上非机动车位个数与地上非机动车位个数一致性检查"
     CheckmodelName = "自定义脚本检查类->地上非机动车位个数与地上非机动车位个数一致性检查"
     strDescription = "地上非机动车位个数与地上非机动车位个数不一致"
     
+    ClearCheckRecord
+
     '获取地下机动车车位个数 DSFJDCWGS
     SqlStr = "Select JGSCHZXX.DXJDCWGS From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,DSFJDCWGSArr,SearchCount
@@ -397,8 +397,7 @@ End Function' DSFJDCWCheck
 Function DSFJDCHES()
     
     ' 1：室外车位属性表（SWCW）表中【CWLX】=“非机动车位“ ，面积【MJ】*折算系数【ZSXS】是否等于车位个数【CWGS】
-    
-    ClearCheckRecord
+
     
     '检查记录配置
     strGroupName = "图表一致性检查"
@@ -406,6 +405,8 @@ Function DSFJDCHES()
     CheckmodelName = "自定义脚本检查类->地上非机动车位核实数量检查"
     strDescription = "地上非机动车位核实数量不一致"
     
+    ClearCheckRecord
+
     SqlStr = "Select GH_室外车位属性表.ID From GH_室外车位属性表 Inner Join GeoAreaTB On GH_室外车位属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_室外车位属性表.CWLX = '非机动车位' "
     GetSQLRecordAll SqlStr,IDArr,IDCount
     
@@ -428,14 +429,14 @@ Function DXFJDCWCheck()
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【DXFJDCWGS】
     ' 2：室内车位属性表（SNCW）表中【CWLX】=“非机动车位“ ，按照【ZSXS】值进行汇总（面积*折算系数算出个数，汇总）
     
-    ClearCheckRecord
-    
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "地下非机动车位个数与地下非机动车位个数一致性检查"
     CheckmodelName = "自定义脚本检查类->地下非机动车位个数与地下非机动车位个数一致性检查"
     strDescription = "地下非机动车位个数与地下非机动车位个数不一致"
     
+    ClearCheckRecord
+
     '获取地下机动车车位个数 DXFJDCWGS
     SqlStr = "Select JGSCHZXX.DXJDCWGS From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,DXFJDCWGSArr,SearchCount
@@ -464,14 +465,14 @@ Function DXFJDCHES()
     
     ' 1：室内车位属性表（SNCW）表中【CWLX】=“非机动车位“ ，面积【MJ】*折算系数【ZSXS】是否等于车位个数【CWGS】
     
-    ClearCheckRecord
-    
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "地下非机动车位核实数量检查"
     CheckmodelName = "自定义脚本检查类->地下非机动车位核实数量检查"
     strDescription = "地下非机动车位核实数量不一致"
     
+    ClearCheckRecord
+
     SqlStr = "Select GH_室内车位属性表.ID From GH_室内车位属性表 Inner Join GeoAreaTB On GH_室内车位属性表.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_室内车位属性表.CWLX = '非机动车位' "
     GetSQLRecordAll SqlStr,IDArr,IDCount
     
@@ -493,14 +494,14 @@ Function LvDAreaCheck()
     
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【LDZMJ】=【JZLDMJ】+【DKLDMJ】
     
-    ClearCheckRecord
-    
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "绿地总面积检查"
     CheckmodelName = "自定义脚本检查类->绿地总面积检查"
     strDescription = "绿地总面积与集中绿地和单块绿地面积之和不一致"
     
+    ClearCheckRecord
+
     '获取绿地总面积 LDZMJ
     SqlStr = "Select JGSCHZXX.LDZMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,LDZMJArr,LDCount
@@ -530,15 +531,15 @@ Function DKLVCheck()
     
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【DKLDMJ】
     ' 2：绿化划分信息表（LHHF）其中的【MC】=单块绿地，并通过【ID_LDK】绿地块ID与绿化要素属性表（LHYS）中的【ID_LDK】取【LHMJ】的汇总值
-    
-    ClearCheckRecord
-    
+
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "单块绿地面积与单块绿地范围面面积汇总值一致性检查"
     CheckmodelName = "自定义脚本检查类->单块绿地面积与单块绿地范围面面积汇总值一致性检查"
     strDescription = "单块绿地面积与单块绿地范围面面积汇总值不一致"
     
+    ClearCheckRecord
+
     '单块绿地总面积 DKLDMJ
     SqlStr = "Select JGSCHZXX.DKLDMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,DKLDMJArr,JZLDCount
@@ -565,15 +566,15 @@ Function JZLDCheck()
     
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【JZLDMJ】
     ' 2：绿化划分信息表（LHHF）其中的【MC】=集中绿地，并通过【ID_LDK】绿地块ID与绿化要素属性表（LHYS）中的【ID_LDK】取【LHMJ】的汇总值
-    
-    ClearCheckRecord
-    
+
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "集中绿地面积与集中绿地范围面面积汇总值一致性检查"
     CheckmodelName = "自定义脚本检查类->集中绿地面积与集中绿地范围面面积汇总值一致性检查"
     strDescription = "集中绿地面积与集中绿地范围面面积汇总值不一致"
     
+    ClearCheckRecord
+
     '集中绿地面积 JZLDMJ
     SqlStr = "Select JGSCHZXX.JZLDMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,JZLDMJArr,JZLDCount
@@ -600,15 +601,15 @@ Function DGCDCheck()
     
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【RFZMJ】
     ' 2：人防功能区属性表（RFGNQ）中【JZMJ】值累加和
-    
-    ClearCheckRecord
-    
+
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "登高场地个数与登高场地面个数一致性检查"
     CheckmodelName = "自定义脚本检查类->登高场地个数与登高场地面个数一致性检查"
     strDescription = "登高场地个数与登高场地面个数不一致"
     
+    ClearCheckRecord
+
     ShowCheckRecord
     
 End Function' DGCDCheck
@@ -618,15 +619,15 @@ Function RFMJCheck()
     
     ' 1：规划实测汇总信息表(JGSCHZXX)表中【RFZMJ】
     ' 2：人防功能区属性表（RFGNQ）中【JZMJ】值累加和
-    
-    ClearCheckRecord
-    
+
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "人防总面积与人防功能区面积汇总值一致性检查"
     CheckmodelName = "自定义脚本检查类->人防总面积与人防功能区面积汇总值一致性检查"
     strDescription = "人防总面积与人防功能区面积汇总值不一致"
     
+    ClearCheckRecord
+
     '获取人防总面积 RFZMJ
     SqlStr = "Select JGSCHZXX.RFZMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,RFZMJArr,JZLDCount
@@ -650,15 +651,15 @@ Function FWCheck()
     
     ' 1：主要经济指标面积汇总信息表(ZYJJZBMJHZB)中的每个【YT】：例如：住宅 面积【SCJZMJ】
     ' 2：规划功能区（GHGNQ）表中的【YT】 = “住宅”的所有面积值。
-    
-    ClearCheckRecord
-    
+
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "房屋用途与功能区用途面积汇总值一致性检查"
     CheckmodelName = "自定义脚本检查类->房屋用途与功能区用途面积汇总值一致性检查"
     strDescription = "房屋用途与功能区用途面积汇总值不一致"
     
+    ClearCheckRecord
+
     SqlStr = "Select DISTINCT ZYJJZBMJHZB.YT From ZYJJZBMJHZB Where ZYJJZBMJHZB.ID > 0"
     GetSQLRecordAll SqlStr,YTArr,YTCount
     
@@ -686,15 +687,15 @@ Function DDFWCheck()
     
     ' 1：实测楼栋面积汇总信息表（SCLDMJHZXX）表中【LD】=“1#”且【YT】=“住宅”的【JZMJ】
     ' 2：规划功能区（GHGNQ）表中的【SSZRZ】=“1#”且【YT】=“住宅”的【JZMJ】的值的累加值。
-    
-    ClearCheckRecord
-    
+
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "房屋用途与功能区用途面积汇总值一致性检查（按单幢）"
     CheckmodelName = "自定义脚本检查类->房屋用途与功能区用途面积汇总值一致性检查（按单幢）"
     strDescription = "房屋用途与功能区用途面积汇总值不一致"
     
+    ClearCheckRecord
+
     '所有的楼栋
     SqlStr = "Select DISTINCT SCLDMJHZXX.LD From SCLDMJHZXX Where SCLDMJHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,LDArr,LDCount
@@ -726,15 +727,15 @@ Function FHDYGSCheck()
     
     ' 1：人防项目信息表（RFPROJECTINFO）中的【FHDYGS】的值
     ' 2:人防防护单元范围线（RFFHDYFW）要素个数。
-    
-    ClearCheckRecord
-    
+
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "防护单元个数与防护单元范围线个数一致性检查"
     CheckmodelName = "自定义脚本检查类->防护单元个数与防护单元范围线个数一致性检查"
     strDescription = "防护单元个数与防护单元范围线个数不一致"
     
+    ClearCheckRecord
+
     '获取防护单元个数 FHDYGS
     SqlStr = "Select RFPROJECTINFO.FHDYGS From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 "
     GetSQLRecordAll SqlStr,FHDYGSArr,FHDYGSCount
@@ -760,15 +761,15 @@ Function RFJZMJCheck()
     
     ' 1：人防项目信息表（RFPROJECTINFO）中的【RFJZMJ】的值
     ' 2:人防功能区（RFGNQ）中的【JZMJ】的所有汇总值
-    
-    ClearCheckRecord
-    
+
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "人防建筑面积与人防功能区面积汇总值一致性检查"
     CheckmodelName = "自定义脚本检查类->人防建筑面积与人防功能区面积汇总值一致性检查"
     strDescription = "人防建筑面积与人防功能区面积汇总值不一致"
     
+    ClearCheckRecord
+
     '人防建筑面积 RFJZMJ
     SqlStr = "Select RFPROJECTINFO.RFJZMJ From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 "
     GetSQLRecordAll SqlStr,RFJZMJArr,RFJZCount
@@ -792,14 +793,14 @@ Function YBQCheck()
     
     ' 1：人防项目信息表（RFPROJECTINFO）中的【YBQMJ】的值
     ' 2:人防功能区（RFGNQ）中的【YSDM】=“600301”的【JZMJ】的所有汇总值
-    
-    ClearCheckRecord
-    
+
     '检查记录配置
     strGroupName = "图表一致性检查"
     strCheckName = "掩蔽区面积与人防功能区（掩蔽区）面积汇总值一致性检查"
     CheckmodelName = "自定义脚本检查类->掩蔽区面积与人防功能区（掩蔽区）面积汇总值一致性检查"
     strDescription = "掩蔽区面积与人防功能区（掩蔽区）面积汇总值不一致"
+    
+    ClearCheckRecord
     
     '掩蔽区面积 YBQMJ
     SqlStr = "Select RFPROJECTINFO.YBQMJ From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 "
