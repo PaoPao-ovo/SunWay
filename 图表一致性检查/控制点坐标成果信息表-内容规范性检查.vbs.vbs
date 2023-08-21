@@ -17,10 +17,15 @@ Dim strDescription
 
 '检查入口
 Sub OnClick()
+
     ClearCheckRecord
+
     CheckFilds = "X,Y,GC" '检查字段
+
     AccuracyCheck "KZDZBCGXXB",CheckFilds,3
+
     ShowCheckRecord
+    
 End Sub' OnClick
 
 '=====================================================检查函数======================================================

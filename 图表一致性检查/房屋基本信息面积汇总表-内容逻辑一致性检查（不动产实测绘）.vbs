@@ -18,6 +18,8 @@ Dim strDescription
 '检查入口
 Sub OnClick()
     
+    ClearCheckRecord
+
     JzZmjCheck "ZD_宗地基本信息属性表"
     
     DxJzzMjCheck
@@ -28,6 +30,8 @@ Sub OnClick()
     
     HDXCheck
 
+    ShowCheckRecord
+    
 End Sub' OnClick
 
 '===================================================检查函数=======================================================
@@ -44,9 +48,7 @@ Function JzZmjCheck(ByVal TableName)
     strCheckName = "房屋基本信息面积汇总逻辑检查"
     CheckmodelName = "自定义脚本检查类->房屋基本信息面积汇总逻辑检查"
     strDescription = TableName & "的【JZZMJ】与FWDSDXZMJHZXX表的【SCDSZJZMJ】和【SCDXZJZMJ】之和不相等"
-    
-    ClearCheckRecord
-    
+
     '获取总建筑面积 JZZMJ
     SqlStr = "Select " & TableName & ".ID,JZZMJ From " & TableName & " Inner Join GeoAreaTB On " & TableName & ".ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 "
     GetSQLRecordAll SqlStr,TotalAreaArr,SearchCount
@@ -81,9 +83,7 @@ Function JzZmjCheck(ByVal TableName)
         End If
         
     End If
-    
-    ShowCheckRecord
-    
+
 End Function' JzZmjCheck 
 
 '实测地下建筑总面积检查
@@ -97,9 +97,7 @@ Function DxJzzMjCheck()
     strCheckName = "房屋基本信息面积汇总逻辑检查"
     CheckmodelName = "自定义脚本检查类->房屋基本信息面积汇总逻辑检查"
     strDescription = "实测地下总建筑与其他部分和人防部分面积之和不等"
-    
-    ClearCheckRecord
-    
+
     '获取地下总面积 SCDXZMJ
     SqlStr = "Select Sum(FWDSDXZMJHZXX.SCDXZJZMJ) From FWDSDXZMJHZXX WHERE FWDSDXZMJHZXX.ID > 0"
     GetSQLRecordAll SqlStr,SCDXArr,SearchCount
@@ -113,9 +111,7 @@ Function DxJzzMjCheck()
     If SCDXZMJ - QTMJ <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
-    
-    ShowCheckRecord
-    
+ 
 End Function' DxJzzMjCheck
 
 '实测地上建筑总面积检查
@@ -129,9 +125,7 @@ Function DsJzzMjCheck()
     strCheckName = "房屋基本信息面积汇总逻辑检查"
     CheckmodelName = "自定义脚本检查类->房屋基本信息面积汇总逻辑检查"
     strDescription = "实测地下总建筑与其他部分和人防部分面积之和不等"
-    
-    ClearCheckRecord
-    
+
     '获取地下总面积 SCDSZMJ
     SqlStr = "Select Sum(FWDSDXZMJHZXX.SCDSZJZMJ) From FWDSDXZMJHZXX WHERE FWDSDXZMJHZXX.ID > 0"
     GetSQLRecordAll SqlStr,SCDXArr,SearchCount
@@ -145,9 +139,7 @@ Function DsJzzMjCheck()
     If SCDSZMJ - QTMJ <> 0 Then
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,2,0,""
     End If
-    
-    ShowCheckRecord
-    
+
 End Function' DsJzzMjCheck
 
 'H表地上检查
@@ -162,9 +154,7 @@ Function HDSCheck()
     strCheckName = "房屋基本信息面积汇总逻辑检查"
     CheckmodelName = "自定义脚本检查类->房屋基本信息面积汇总逻辑检查"
     strDescription = "房屋类型面积汇总值与户表统计面积值不一致"
-    
-    ClearCheckRecord
-    
+
     '获取所有的房屋类型名称 FWLXMCArr
     SqlStr = "Select DISTINCT FWLXMJHZXX.FWLXMC From FWLXMJHZXX Where FWLXMJHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,FWLXMCArr,FWLXMCCount
@@ -190,9 +180,7 @@ Function HDSCheck()
             End If
         Next 'CurrentCount
     End If
-    
-    ShowCheckRecord
-    
+
 End Function' HDSCheck
 
 'H表地下检查
@@ -207,9 +195,7 @@ Function HDXCheck()
     strCheckName = "房屋基本信息面积汇总逻辑检查"
     CheckmodelName = "自定义脚本检查类->房屋基本信息面积汇总逻辑检查"
     strDescription = "房屋类型面积汇总值与户表统计面积值不一致"
-    
-    ClearCheckRecord
-    
+
     '获取所有的房屋类型名称 FWLXMCArr
     SqlStr = "Select DISTINCT FWLXMJHZXX.FWLXMC From FWLXMJHZXX Where FWLXMJHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,FWLXMCArr,FWLXMCCount
@@ -233,9 +219,7 @@ Function HDXCheck()
             End If
         Next 'CurrentCount
     End If
-    
-    ShowCheckRecord
-    
+
 End Function' HDXCheck
 
 '======================================================工具类函数====================================================
