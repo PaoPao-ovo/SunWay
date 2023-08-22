@@ -18,7 +18,7 @@ Dim strDescription
 '检查入口
 Sub OnClick()
     
-    ClearCheckRecord
+    
     
     JzZmjCheck "ZD_宗地基本信息属性表"
     

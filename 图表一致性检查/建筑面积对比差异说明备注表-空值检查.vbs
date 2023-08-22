@@ -18,8 +18,6 @@ Dim strDescription
 '检查入口
 Sub OnClick()
 
-    ClearCheckRecord
-
     FildsEmptyCheck "JZMJDBCYSM","CYYY","信息表"
 
     ShowCheckRecord

@@ -18,8 +18,6 @@ Dim strDescription
 '检查入口
 Sub OnClick()
     
-    ClearCheckRecord
-    
     FildsEmptyCheck "RFPROJECTINFO","建筑结构,住宅户数,地上建筑面积(㎡),地上住宅建筑面积(㎡),地上其他建筑面积(㎡),地上层数,地下平时功能,地下建筑面积(㎡),地下层数,互联互通面积,防空警报控制室面积,外墙最薄掩体厚度(小于10米时填写),板坪高差 (顶板底面高出室外时填写),编制人,检查人,人防建筑面积,掩蔽区面积,防护单元个数","信息表"
     
     ShowCheckRecord

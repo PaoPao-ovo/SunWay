@@ -18,8 +18,6 @@ Dim strDescription
 '¼ì²éÈë¿Ú
 Sub OnClick()
     
-    ClearCheckRecord
-    
     ZhuangCheck
     
     BasementCheck
