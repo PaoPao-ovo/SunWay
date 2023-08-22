@@ -272,14 +272,27 @@ Function VBS_preMap3(MSGID,mapName,selectID)
 		SSProcess.OpenAccessMdb  mdbName
 		sql = "select VALUE from PROJECTINFO where KEY='项目名称'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		XMMC=arSeletionRecord(0)
+		If nSeletionCount>0 Then
+			XMMC=arSeletionRecord(0)
+		Else
+			XMMC=""
+		End If
+		
 		sql = "select VALUE from PROJECTINFO where KEY='测量人员'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		HTRY=arSeletionRecord(0)
+		If nSeletionCount>0 Then
+			HTRY=arSeletionRecord(0)
+		Else
+			HTRY=""
+		End If
+
 		sql = "select VALUE from PROJECTINFO where KEY='检查人员'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		JCRY=arSeletionRecord(0)
-
+		If nSeletionCount>0 Then
+			JCRY=arSeletionRecord(0)
+		Else
+			JCRY=""
+		End If
 
 		strtemp = XMMC&","& HTRY &","&JCRY
 		SSProcess.CloseAccessMdb mdbName 
@@ -353,11 +366,14 @@ Function VBS_postMap3(MSGID,mapName,selectID)
 
 		ids = SSProcess.SearchInnerObjIDs(id, 2, "9420025", 0)
 
-		
-		idsList=split(ids,",")
-		strtemp = SSProcess.GetObjectAttr (idsList(0), "SSObj_DataMark")
-		artemp = split(strtemp,",")
-		
+		If ids<>"" Then
+			idsList=split(ids,",")
+			strtemp = SSProcess.GetObjectAttr(idsList(0), "SSObj_DataMark")
+			artemp = split(strtemp,",")
+		Else
+			strtemp = ",,"
+			artemp = split(strtemp,",")
+		End If
 
 		SSProcess.SetObjectAttr id, "[XiangMMC]", artemp(0)
 		SSProcess.SetObjectAttr id, "[HuiTY]", artemp(1)
@@ -948,16 +964,37 @@ Function VBS_preMap9(MSGID,mapName,selectID)
 		SSProcess.OpenAccessMdb  mdbName
 		sql = "select VALUE from PROJECTINFO where KEY='项目名称'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		XMMC=arSeletionRecord(0)
+
+		If nSeletionCount>0 Then
+			XMMC=arSeletionRecord(0)
+		Else
+			XMMC = ""
+		End If
+		
+
 		sql = "select VALUE from PROJECTINFO where KEY='测量人员'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		HTRY=arSeletionRecord(0)
+		If nSeletionCount>0 Then
+			HTRY=arSeletionRecord(0)
+		Else
+			HTRY = ""
+		End If
+
 		sql = "select VALUE from PROJECTINFO where KEY='检查人员'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		JCRY=arSeletionRecord(0)
+		If nSeletionCount>0 Then
+			JCRY=arSeletionRecord(0)
+		Else
+			JCRY = ""
+		End If
+	
 		sql = "select VALUE from PROJECTINFO where KEY='测绘单位'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		CLDW=arSeletionRecord(0)
+		If nSeletionCount>0 Then
+			CLDW=arSeletionRecord(0)
+		Else
+			CLDW = ""
+		End If
 
 		strtemp = XMMC&","& HTRY &","&JCRY&","&CLDW
 		SSProcess.CloseAccessMdb mdbName 
@@ -1024,12 +1061,15 @@ Function VBS_postMap9(MSGID,mapName,selectID)
 
 		ids = SSProcess.SearchInnerObjIDs(id, 1, "9410001", 0)
 
+		If ids<>"" Then
+			idsList=split(ids,",")
+			strtemp = SSProcess.GetObjectAttr(idsList(0), "SSObj_DataMark")
+			artemp = split(strtemp,",")
+		Else
+			strtemp = ",,,"
+			artemp = split(strtemp,",")
+		End If
 		
-		idsList=split(ids,",")
-		strtemp = SSProcess.GetObjectAttr (idsList(0), "SSObj_DataMark")
-		artemp = split(strtemp,",")
-
-
 		SSProcess.SetObjectAttr id, "[XiangMMC]", artemp(0)
 		SSProcess.SetObjectAttr id, "[HuiTY]", artemp(1)
 		SSProcess.SetObjectAttr id, "[JianCY]", artemp(2)
@@ -1077,20 +1117,45 @@ Function VBS_preMap10(MSGID,mapName,selectID)
 		SSProcess.OpenAccessMdb  mdbName
 		sql = "select VALUE from PROJECTINFO where KEY='项目名称'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		XMMC=arSeletionRecord(0)
+		If nSeletionCount>0 Then
+			XMMC=arSeletionRecord(0)
+		Else
+			XMMC=""
+		End If
+		
 		sql = "select VALUE from PROJECTINFO where KEY='测量人员'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		HTRY=arSeletionRecord(0)
+		If nSeletionCount>0 Then
+			HTRY=arSeletionRecord(0)
+		Else
+			HTRY=""
+		End If
+
 		sql = "select VALUE from PROJECTINFO where KEY='检查人员'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		JCRY=arSeletionRecord(0)
+		If nSeletionCount>0 Then
+			JCRY=arSeletionRecord(0)
+		Else
+			JCRY=""
+		End If
+
 		sql = "select VALUE from PROJECTINFO where KEY='测绘单位'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		CLDW=arSeletionRecord(0)
+		If nSeletionCount>0 Then
+			CLDW=arSeletionRecord(0)
+		Else
+			CLDW=""
+		End If
+
 
 		sql = "select VALUE from PROJECTINFO where KEY='审核人员'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		SHRY=arSeletionRecord(0)
+		If nSeletionCount>0 Then
+			SHRY=arSeletionRecord(0)
+		Else
+			SHRY=""
+		End If
+
 
 		strtemp = XMMC&","& HTRY &","&JCRY&","&CLDW&","&SHRY
 		SSProcess.CloseAccessMdb mdbName 
@@ -1155,10 +1220,14 @@ Function VBS_postMap10(MSGID,mapName,selectID)
 
 		ids = SSProcess.SearchInnerObjIDs(id, 1, "9410001", 0)
 
-		idsList=split(ids,",")
-		strtemp = SSProcess.GetObjectAttr (idsList(0), "SSObj_DataMark")
-		artemp = split(strtemp,",")
-
+		If ids<>"" Then
+			idsList=split(ids,",")
+			strtemp = SSProcess.GetObjectAttr (idsList(0), "SSObj_DataMark")
+			artemp = split(strtemp,",")
+		Else
+			strtemp = ",,,,"
+			artemp = split(strtemp,",")
+		End If
 
 		SSProcess.SetObjectAttr id, "[XiangMMC]", artemp(0)
 		SSProcess.SetObjectAttr id, "[HuiTY]", artemp(1)
@@ -1208,19 +1277,43 @@ Function VBS_preMap11(MSGID,mapName,selectID)
 		SSProcess.OpenAccessMdb  mdbName
 		sql = "select VALUE from PROJECTINFO where KEY='项目名称'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		XMMC=arSeletionRecord(0)
+		If nSeletionCount>0 Then
+			XMMC=arSeletionRecord(0)
+		Else
+			XMMC=""
+		End If
+		
 		sql = "select VALUE from PROJECTINFO where KEY='测量人员'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		HTRY=arSeletionRecord(0)
+		If nSeletionCount>0 Then
+			HTRY=arSeletionRecord(0)
+		Else
+			HTRY=""
+		End If
+		
 		sql = "select VALUE from PROJECTINFO where KEY='检查人员'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		JCRY=arSeletionRecord(0)
+		If nSeletionCount>0 Then
+			JCRY=arSeletionRecord(0)
+		Else
+			JCRY=""
+		End If
+		
 		sql = "select VALUE from PROJECTINFO where KEY='测绘单位'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		CLDW=arSeletionRecord(0)
+		If nSeletionCount>0 Then
+			CLDW=arSeletionRecord(0)
+		Else
+			CLDW=""
+		End If
+		
 		sql = "select VALUE from PROJECTINFO where KEY='审核人员'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		SHRY=arSeletionRecord(0)
+		If nSeletionCount>0 Then
+			SHRY=arSeletionRecord(0)
+		Else
+			SHRY=""
+		End If
 
 		strtemp = XMMC&","& HTRY &","&JCRY&","&CLDW&","&SHRY
 		SSProcess.CloseAccessMdb mdbName 
@@ -1289,10 +1382,16 @@ Function VBS_postMap11(MSGID,mapName,selectID)
 
 		ids = SSProcess.SearchInnerObjIDs(id, 1, "9410001", 0)
 
+		If ids<>"" Then
+			idsList=split(ids,",")
+			strtemp = SSProcess.GetObjectAttr (idsList(0), "SSObj_DataMark")
+			artemp = split(strtemp,",")
+		Else
+			strtemp = ",,,,"
+			artemp = split(strtemp,",")
+		End If
+
 		
-		idsList=split(ids,",")
-		strtemp = SSProcess.GetObjectAttr (idsList(0), "SSObj_DataMark")
-		artemp = split(strtemp,",")
 
 
 		SSProcess.SetObjectAttr id, "[XiangMMC]", artemp(0)
@@ -2085,15 +2184,28 @@ function TKFZ1
 		SSProcess.OpenAccessMdb  mdbName
 		sql = "select VALUE from PROJECTINFO where KEY='项目名称'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		XMMC=arSeletionRecord(0)
+		If nSeletionCount > 0 Then
+			XMMC=arSeletionRecord(0)
+		Else
+			XMMC=""
+		End If
+		
 		sql = "select VALUE from PROJECTINFO where KEY='测量人员'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		HTRY=arSeletionRecord(0)
+		If nSeletionCount > 0 Then
+			HTRY=arSeletionRecord(0)
+		Else
+			HTRY=""
+		End If
+		
 		sql = "select VALUE from PROJECTINFO where KEY='检查人员'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
-		JCRY=arSeletionRecord(0)
-
-
+		If nSeletionCount > 0 Then
+			JCRY=arSeletionRecord(0)
+		Else
+			JCRY=""
+		End If
+		
 		strtemp = XMMC&","& HTRY &","&JCRY
 		SSProcess.CloseAccessMdb mdbName 
 
@@ -2113,6 +2225,7 @@ function TKFZ2(byref mark)
 		id = SSProcess.GetSelGeoValue(i, "SSObj_ID")	
 
 		ids = SSProcess.SearchInnerObjIDs(id, 2, "9420004", 0)
+
 		FWJG = SSProcess.GetObjectAttr (ids, "[FWJG]")
 		ZRZH = SSProcess.GetObjectAttr (ids, "[ZRZH]")
 		ZCS = SSProcess.GetObjectAttr (ids, "[ZCS]")
@@ -2122,7 +2235,12 @@ function TKFZ2(byref mark)
 		if ubound(idsList)>0 then msgbox "出图位置有重叠自然幢，请确认数据是否正确！":mark=false:exit function
 		strtemp = SSProcess.GetObjectAttr (ids, "SSObj_DataMark")
 		artemp = split(strtemp,",")
-
+		If UBound(artemp)<0 Then
+			ReDim artemp(2)
+			artemp(0) = ""
+			artemp(1) = ""
+			artemp(2) = ""
+		End If
 		SSProcess.SetObjectAttr id, "[FWJG]", FWJG
 		SSProcess.SetObjectAttr id, "[ZRZH]", ZRZH
 		SSProcess.SetObjectAttr id, "[ZCS]", ZCS

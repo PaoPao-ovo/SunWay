@@ -1,42 +1,42 @@
 
-'===================================================æ£€æŸ¥å‚æ•°å®šä¹‰==================================================
+'===================================================¼ì²é²ÎÊı¶¨Òå==================================================
 
-'æ£€æŸ¥ç»„åç§°
+'¼ì²é×éÃû³Æ
 Dim strGroupName
 
-'æ£€æŸ¥é¡¹åç§°
+'¼ì²éÏîÃû³Æ
 Dim strCheckName
 
-'æ£€æŸ¥æ¨¡å‹åç§°
+'¼ì²éÄ£ĞÍÃû³Æ
 Dim CheckmodelName
 
-'æ£€æŸ¥æè¿°
+'¼ì²éÃèÊö
 Dim strDescription
 
-'====================================================å…¥å£=========================================================
+'====================================================Èë¿Ú=========================================================
 
-'æ£€æŸ¥å…¥å£
+'¼ì²éÈë¿Ú
 Sub OnClick()
     
     ClearCheckRecord
     
-    FildsEmptyCheck "PROJECTINFO","æµ‹ç»˜å•ä½åœ°å€,å§”æ‰˜å•ä½,é¡¹ç›®åç§°,é¡¹ç›®ç¼–å·,é¡¹ç›®åœ°å€,æ€»ç”¨åœ°é¢ç§¯(mÂ²),æ€»å»ºç­‘é¢ç§¯(mÂ²),åœ°ä¸‹å»ºç­‘é¢ç§¯(mÂ²),å®¹ç§¯ç‡,å»ºç­‘åŸºåº•é¢ç§¯(mÂ²),å»ºç­‘å¯†åº¦(%),ç»¿åœ°ç‡(%),è§„åˆ’è®¸å¯è¯ç¼–å·,æµ‹é‡å¼€å§‹æ—¶é—´,æµ‹é‡å®Œæˆæ—¶é—´,çº¦å®šå®Œæˆæ—¶é—´,æµ‹ç»˜ç›®çš„,é¡¹ç›®ç±»åˆ«,å·²æœ‰èµ„æ–™æƒ…å†µ,æ§åˆ¶æµ‹é‡,ä½œä¸šå†…å®¹,è´¨é‡æ§åˆ¶,æˆæœå†…å®¹è¯´æ˜,åœ°ä¸Šå»ºç­‘é¢ç§¯(mÂ²),è£…é…å¼å»ºç­‘é¢ç§¯(mÂ²),æµ‹ç»˜å•ä½,æµ‹ç»˜å•ä½èµ„è´¨ç­‰çº§,æµ‹ç»˜èµ„è´¨è¯ä¹¦ç¼–å·,æµ‹ç»˜å•ä½ç”µè¯,ç¼–åˆ¶äººå‘˜,å®¡æ ¸äººå‘˜,ä½œä¸šä¾æ®,å®æµ‹ä½å®…æˆ·æ•°,è§„åˆ’ä½å®…æˆ·æ•°,å•å—ç»¿åœ°é¢ç§¯,é›†ä¸­ç»¿åœ°é¢ç§¯,ç™»é«˜åœºåœ°ä¸ªæ•°","ä¿¡æ¯è¡¨"
+    FildsEmptyCheck "PROJECTINFO","²â»æµ¥Î»µØÖ·,Î¯ÍĞµ¥Î»,ÏîÄ¿Ãû³Æ,ÏîÄ¿±àºÅ,ÏîÄ¿µØÖ·,×ÜÓÃµØÃæ»ı(m?),×Ü½¨ÖşÃæ»ı(m?),µØÏÂ½¨ÖşÃæ»ı(m?),Èİ»ıÂÊ,½¨Öş»ùµ×Ãæ»ı(m?),½¨ÖşÃÜ¶È(%),ÂÌµØÂÊ(%),¹æ»®Ğí¿ÉÖ¤±àºÅ,²âÁ¿¿ªÊ¼Ê±¼ä,²âÁ¿Íê³ÉÊ±¼ä,Ô¼¶¨Íê³ÉÊ±¼ä,²â»æÄ¿µÄ,ÏîÄ¿Àà±ğ,ÒÑÓĞ×ÊÁÏÇé¿ö,¿ØÖÆ²âÁ¿,×÷ÒµÄÚÈİ,ÖÊÁ¿¿ØÖÆ,³É¹ûÄÚÈİËµÃ÷,µØÉÏ½¨ÖşÃæ»ı(m?),×°ÅäÊ½½¨ÖşÃæ»ı(m?),²â»æµ¥Î»,²â»æµ¥Î»×ÊÖÊµÈ¼¶,²â»æ×ÊÖÊÖ¤Êé±àºÅ,²â»æµ¥Î»µç»°,±àÖÆÈËÔ±,ÉóºËÈËÔ±,×÷ÒµÒÀ¾İ,Êµ²â×¡Õ¬»§Êı,¹æ»®×¡Õ¬»§Êı,µ¥¿éÂÌµØÃæ»ı,¼¯ÖĞÂÌµØÃæ»ı,µÇ¸ß³¡µØ¸öÊı","ĞÅÏ¢±í"
     
     ShowCheckRecord
     
 End Sub' OnClick
 
-'===================================================æ£€æŸ¥å‡½æ•°=======================================================
+'===================================================¼ì²éº¯Êı=======================================================
 
-'è¡¨å­—æ®µç©ºå€¼æ£€æŸ¥
+'±í×Ö¶Î¿ÕÖµ¼ì²é
 Function FildsEmptyCheck(ByVal TableName,ByVal FildsStr,ByVal TableType)
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = TableName & "ç©ºå€¼æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->" & strCheckName
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = TableName & "¿ÕÖµ¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->" & strCheckName
     
-    If TableType = "ä¿¡æ¯è¡¨" Then
+    If TableType = "ĞÅÏ¢±í" Then
         
         FildsArr = Split(FildsStr,",", - 1,1)
         For i = 0 To UBound(FildsArr)
@@ -44,7 +44,7 @@ Function FildsEmptyCheck(ByVal TableName,ByVal FildsStr,ByVal TableType)
             SqlStr = "Select " & TableName & ".ID " & "From " & TableName & " Where " & TableName & ".Key = " & "'" & FildsArr(i) & "'"
             GetSQLRecordAll SqlStr,KeyArr,KeyCount
             If KeyCount < 1 Then
-                strDescription = "ã€" & TableName & "ã€‘çš„ã€Keyã€‘ä¸ºã€" & FildsArr(i) & "ã€‘ç¼ºå¤±"
+                strDescription = "¡¾" & TableName & "¡¿µÄ¡¾Key¡¿Îª¡¾" & FildsArr(i) & "¡¿È±Ê§"
                 SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,0,0,""
             Else
                 SqlStr = "Select " & TableName & ".Value " & "From " & TableName & " Where Key = " & "'" & FildsArr(i) & "'"  & " And (" & "Value" & " = '' " & " Or " & "Value" & " = '*' Or " & "Value" & " IS NULL)"
@@ -52,7 +52,7 @@ Function FildsEmptyCheck(ByVal TableName,ByVal FildsStr,ByVal TableType)
                 GetSQLRecordAll SqlStr,ValueArr,ValueCount
                 
                 If ValueCount > 0  Then
-                    strDescription = "ã€" & TableName & "ã€‘çš„ã€Valueã€‘ä¸º" & "ã€" & FildsArr(i) & "ã€‘" & "ä¸ºç©ºå€¼"
+                    strDescription = "¡¾" & TableName & "¡¿µÄ¡¾Value¡¿Îª" & "¡¾" & FildsArr(i) & "¡¿" & "Îª¿ÕÖµ"
                     SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,0,0,""
                 End If
             End If
@@ -61,25 +61,25 @@ Function FildsEmptyCheck(ByVal TableName,ByVal FildsStr,ByVal TableType)
     
 End Function' FildsEmptyCheck
 
-'======================================================å·¥å…·ç±»å‡½æ•°====================================================
+'======================================================¹¤¾ßÀàº¯Êı====================================================
 
-'æ¸…ç©ºç¼“å­˜çš„æ‰€æœ‰æ£€æŸ¥è®°å½•
+'Çå¿Õ»º´æµÄËùÓĞ¼ì²é¼ÇÂ¼
 Function ClearCheckRecord()
     SSProcess.RemoveCheckRecord strGroupName, strCheckName
 End Function' ClearCheckRecord
 
-'æ˜¾ç¤ºæ‰€æœ‰æ£€æŸ¥è®°å½•
+'ÏÔÊ¾ËùÓĞ¼ì²é¼ÇÂ¼
 Function ShowCheckRecord()
     SSProcess.ShowCheckOutput
     SSProcess.SaveCheckRecord
 End Function' ShowCheckRecord
 
-'è·å–æ‰€æœ‰è®°å½•
+'»ñÈ¡ËùÓĞ¼ÇÂ¼
 Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)
     ProJectName = SSProcess.GetProjectFileName
     SSProcess.OpenAccessMdb ProJectName
     If StrSqlStatement = "" Then
-        MsgBox "æŸ¥è¯¢è¯­å¥ä¸ºç©ºï¼Œæ“ä½œåœæ­¢ï¼",48
+        MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
     End If
     iRecordCount =  - 1
     SSProcess.OpenAccessRecordset ProJectName, StrSqlStatement
@@ -103,7 +103,7 @@ Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecord
 End Function
 
 
-'æ•°æ®ç±»å‹è½¬æ¢
+'Êı¾İÀàĞÍ×ª»»
 Function Transform(ByVal Values)
     If Values <> "" Then
         If IsNumeric(Values) = True Then

@@ -1,21 +1,21 @@
 
-'===================================================æ£€æŸ¥å‚æ•°å®šä¹‰==================================================
+'===================================================¼ì²é²ÎÊı¶¨Òå==================================================
 
-'æ£€æŸ¥ç»„åç§°
+'¼ì²é×éÃû³Æ
 Dim strGroupName
 
-'æ£€æŸ¥é¡¹åç§°
+'¼ì²éÏîÃû³Æ
 Dim strCheckName
 
-'æ£€æŸ¥æ¨¡å‹åç§°
+'¼ì²éÄ£ĞÍÃû³Æ
 Dim CheckmodelName
 
-'æ£€æŸ¥æè¿°
+'¼ì²éÃèÊö
 Dim strDescription
 
-'====================================================å…¥å£=========================================================
+'====================================================Èë¿Ú=========================================================
 
-'æ£€æŸ¥å…¥å£
+'¼ì²éÈë¿Ú
 Sub OnClick()
     
     ClearCheckRecord
@@ -26,16 +26,16 @@ Sub OnClick()
     
 End Sub' OnClick
 
-'===================================================æ£€æŸ¥å‡½æ•°=======================================================
+'===================================================¼ì²éº¯Êı=======================================================
 
-'åˆ¤æ–­è¡¨æ˜¯å¦å­˜åœ¨è®°å½•
+'ÅĞ¶Ï±íÊÇ·ñ´æÔÚ¼ÇÂ¼
 Function RecordExist(ByVal TableName)
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "æˆ¿å±‹åŸºæœ¬ä¿¡æ¯é¢ç§¯æ±‡æ€»è®°å½•æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->æˆ¿å±‹åŸºæœ¬ä¿¡æ¯é¢ç§¯æ±‡æ€»è®°å½•æ£€æŸ¥"
-    strDescription = "ã€" & TableName & "ã€‘è¡¨æ²¡æœ‰è®°å½•"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "·¿Îİ»ù±¾ĞÅÏ¢Ãæ»ı»ã×Ü¼ÇÂ¼¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->·¿Îİ»ù±¾ĞÅÏ¢Ãæ»ı»ã×Ü¼ÇÂ¼¼ì²é"
+    strDescription = "¡¾" & TableName & "¡¿±íÃ»ÓĞ¼ÇÂ¼"
     
     SqlStr = "Select * From " & TableName
     GetSQLRecordAll SqlStr,RecordArr,RecordCount
@@ -46,25 +46,25 @@ Function RecordExist(ByVal TableName)
 
 End Function' RecordExist
 
-'======================================================å·¥å…·ç±»å‡½æ•°====================================================
+'======================================================¹¤¾ßÀàº¯Êı====================================================
 
-'æ¸…ç©ºç¼“å­˜çš„æ‰€æœ‰æ£€æŸ¥è®°å½•
+'Çå¿Õ»º´æµÄËùÓĞ¼ì²é¼ÇÂ¼
 Function ClearCheckRecord()
     SSProcess.RemoveCheckRecord strGroupName, strCheckName
 End Function' ClearCheckRecord
 
-'æ˜¾ç¤ºæ‰€æœ‰æ£€æŸ¥è®°å½•
+'ÏÔÊ¾ËùÓĞ¼ì²é¼ÇÂ¼
 Function ShowCheckRecord()
     SSProcess.ShowCheckOutput
     SSProcess.SaveCheckRecord
 End Function' ShowCheckRecord
 
-'è·å–æ‰€æœ‰è®°å½•
+'»ñÈ¡ËùÓĞ¼ÇÂ¼
 Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)
     ProJectName = SSProcess.GetProjectFileName
     SSProcess.OpenAccessMdb ProJectName
     If StrSqlStatement = "" Then
-        MsgBox "æŸ¥è¯¢è¯­å¥ä¸ºç©ºï¼Œæ“ä½œåœæ­¢ï¼",48
+        MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
     End If
     iRecordCount =  - 1
     SSProcess.OpenAccessRecordset ProJectName, StrSqlStatement

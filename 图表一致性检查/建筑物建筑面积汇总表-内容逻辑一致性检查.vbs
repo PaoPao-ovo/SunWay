@@ -1,21 +1,21 @@
 
-'===================================================æ£€æŸ¥å‚æ•°å®šä¹‰==================================================
+'===================================================¼ì²é²ÎÊı¶¨Òå==================================================
 
-'æ£€æŸ¥ç»„åç§°
+'¼ì²é×éÃû³Æ
 Dim strGroupName
 
-'æ£€æŸ¥é¡¹åç§°
+'¼ì²éÏîÃû³Æ
 Dim strCheckName
 
-'æ£€æŸ¥æ¨¡å‹åç§°
+'¼ì²éÄ£ĞÍÃû³Æ
 Dim CheckmodelName
 
-'æ£€æŸ¥æè¿°
+'¼ì²éÃèÊö
 Dim strDescription
 
-'====================================================å…¥å£=========================================================
+'====================================================Èë¿Ú=========================================================
 
-'æ£€æŸ¥å…¥å£
+'¼ì²éÈë¿Ú
 Sub OnClick()
     
     ClearCheckRecord
@@ -26,21 +26,21 @@ Sub OnClick()
     
 End Sub' OnClick
 
-'===================================================æ£€æŸ¥å‡½æ•°=======================================================
+'===================================================¼ì²éº¯Êı=======================================================
 
-'æˆ¿å±‹ç”¨é€”ä¸åŠŸèƒ½åŒºç”¨é€”é¢ç§¯æ±‡æ€»å€¼æ˜¯å¦ä¸€è‡´ï¼ˆæŒ‰å•å¹¢ï¼‰
+'·¿ÎİÓÃÍ¾Óë¹¦ÄÜÇøÓÃÍ¾Ãæ»ı»ã×ÜÖµÊÇ·ñÒ»ÖÂ£¨°´µ¥´±£©
 Function DDFWCheck()
     
-    ' 1ï¼šå®æµ‹æ¥¼æ ‹é¢ç§¯æ±‡æ€»ä¿¡æ¯è¡¨ï¼ˆSCLDMJHZXXï¼‰è¡¨ä¸­ã€LDã€‘=â€œ1#â€ä¸”ã€YTã€‘=â€œä½å®…â€çš„ã€JZMJã€‘
-    ' 2ï¼šè§„åˆ’åŠŸèƒ½åŒºï¼ˆGHGNQï¼‰è¡¨ä¸­çš„ã€SSZRZã€‘=â€œ1#â€ä¸”ã€YTã€‘=â€œä½å®…â€çš„ã€JZMJã€‘çš„å€¼çš„ç´¯åŠ å€¼ã€‚
+    ' 1£ºÊµ²âÂ¥¶°Ãæ»ı»ã×ÜĞÅÏ¢±í£¨SCLDMJHZXX£©±íÖĞ¡¾LD¡¿=¡°1#¡±ÇÒ¡¾YT¡¿=¡°×¡Õ¬¡±µÄ¡¾JZMJ¡¿
+    ' 2£º¹æ»®¹¦ÄÜÇø£¨GHGNQ£©±íÖĞµÄ¡¾SSZRZ¡¿=¡°1#¡±ÇÒ¡¾YT¡¿=¡°×¡Õ¬¡±µÄ¡¾JZMJ¡¿µÄÖµµÄÀÛ¼ÓÖµ¡£
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "æˆ¿å±‹ç”¨é€”ä¸åŠŸèƒ½åŒºç”¨é€”é¢ç§¯æ±‡æ€»å€¼ä¸€è‡´æ€§æ£€æŸ¥ï¼ˆæŒ‰å•å¹¢ï¼‰"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->æˆ¿å±‹ç”¨é€”ä¸åŠŸèƒ½åŒºç”¨é€”é¢ç§¯æ±‡æ€»å€¼ä¸€è‡´æ€§æ£€æŸ¥ï¼ˆæŒ‰å•å¹¢ï¼‰"
-    strDescription = "æˆ¿å±‹ç”¨é€”ä¸åŠŸèƒ½åŒºç”¨é€”é¢ç§¯æ±‡æ€»å€¼ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "·¿ÎİÓÃÍ¾Óë¹¦ÄÜÇøÓÃÍ¾Ãæ»ı»ã×ÜÖµÒ»ÖÂĞÔ¼ì²é£¨°´µ¥´±£©"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->·¿ÎİÓÃÍ¾Óë¹¦ÄÜÇøÓÃÍ¾Ãæ»ı»ã×ÜÖµÒ»ÖÂĞÔ¼ì²é£¨°´µ¥´±£©"
+    strDescription = "·¿ÎİÓÃÍ¾Óë¹¦ÄÜÇøÓÃÍ¾Ãæ»ı»ã×ÜÖµ²»Ò»ÖÂ"
     
-    'æ‰€æœ‰çš„æ¥¼æ ‹
+    'ËùÓĞµÄÂ¥¶°
     SqlStr = "Select DISTINCT SCLDMJHZXX.LD From SCLDMJHZXX Where SCLDMJHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,LDArr,LDCount
     
@@ -52,7 +52,7 @@ Function DDFWCheck()
             
             For j = 0 To YTCount - 1
                 
-                SqlStr = "Select Sum(JG_è§„åˆ’åŠŸèƒ½åŒºå±æ€§è¡¨.JZMJ) From JG_è§„åˆ’åŠŸèƒ½åŒºå±æ€§è¡¨ Inner Join GeoAreaTB On JG_è§„åˆ’åŠŸèƒ½åŒºå±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And JG_è§„åˆ’åŠŸèƒ½åŒºå±æ€§è¡¨.SSZRZ = '" & LDArr(i) & "' And JG_è§„åˆ’åŠŸèƒ½åŒºå±æ€§è¡¨.YT = '" & YTArr(j) & "'"
+                SqlStr = "Select Sum(JG_¹æ»®¹¦ÄÜÇøÊôĞÔ±í.JZMJ) From JG_¹æ»®¹¦ÄÜÇøÊôĞÔ±í Inner Join GeoAreaTB On JG_¹æ»®¹¦ÄÜÇøÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And JG_¹æ»®¹¦ÄÜÇøÊôĞÔ±í.SSZRZ = '" & LDArr(i) & "' And JG_¹æ»®¹¦ÄÜÇøÊôĞÔ±í.YT = '" & YTArr(j) & "'"
                 GetSQLRecordAll SqlStr,SumAreaArr,SumCount
                 SumArea = Transform(SumAreaArr(0))
                 
@@ -71,25 +71,25 @@ Function DDFWCheck()
     
 End Function' DDFWCheck
 
-'======================================================å·¥å…·ç±»å‡½æ•°====================================================
+'======================================================¹¤¾ßÀàº¯Êı====================================================
 
-'æ¸…ç©ºç¼“å­˜çš„æ‰€æœ‰æ£€æŸ¥è®°å½•
+'Çå¿Õ»º´æµÄËùÓĞ¼ì²é¼ÇÂ¼
 Function ClearCheckRecord()
     SSProcess.RemoveCheckRecord strGroupName, strCheckName
 End Function' ClearCheckRecord
 
-'æ˜¾ç¤ºæ‰€æœ‰æ£€æŸ¥è®°å½•
+'ÏÔÊ¾ËùÓĞ¼ì²é¼ÇÂ¼
 Function ShowCheckRecord()
     SSProcess.ShowCheckOutput
     SSProcess.SaveCheckRecord
 End Function' ShowCheckRecord
 
-'è·å–æ‰€æœ‰è®°å½•
+'»ñÈ¡ËùÓĞ¼ÇÂ¼
 Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)
     ProJectName = SSProcess.GetProjectFileName
     SSProcess.OpenAccessMdb ProJectName
     If StrSqlStatement = "" Then
-        MsgBox "æŸ¥è¯¢è¯­å¥ä¸ºç©ºï¼Œæ“ä½œåœæ­¢ï¼",48
+        MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
     End If
     iRecordCount =  - 1
     SSProcess.OpenAccessRecordset ProJectName, StrSqlStatement
@@ -112,7 +112,7 @@ Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecord
     SSProcess.CloseAccessMdb ProJectName
 End Function
 
-'æ•°æ®ç±»å‹è½¬æ¢
+'Êı¾İÀàĞÍ×ª»»
 Function Transform(ByVal Values)
     If Values <> "" Then
         If IsNumeric(Values) = True Then

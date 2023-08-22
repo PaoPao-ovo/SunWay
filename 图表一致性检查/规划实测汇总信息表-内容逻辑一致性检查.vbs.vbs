@@ -1,21 +1,21 @@
 
-'===================================================æ£€æŸ¥å‚æ•°å®šä¹‰==================================================
+'===================================================¼ì²é²ÎÊı¶¨Òå==================================================
 
-'æ£€æŸ¥ç»„åç§°
+'¼ì²é×éÃû³Æ
 Dim strGroupName
 
-'æ£€æŸ¥é¡¹åç§°
+'¼ì²éÏîÃû³Æ
 Dim strCheckName
 
-'æ£€æŸ¥æ¨¡å‹åç§°
+'¼ì²éÄ£ĞÍÃû³Æ
 Dim CheckmodelName
 
-'æ£€æŸ¥æè¿°
+'¼ì²éÃèÊö
 Dim strDescription
 
-'====================================================å…¥å£=========================================================
+'====================================================Èë¿Ú=========================================================
 
-'æ£€æŸ¥å…¥å£
+'¼ì²éÈë¿Ú
 Sub OnClick()
     
     ClearCheckRecord
@@ -56,21 +56,21 @@ Sub OnClick()
     
 End Sub' OnClick
 
-'===================================================æ£€æŸ¥å‡½æ•°=======================================================
+'===================================================¼ì²éº¯Êı=======================================================
 
-'å»ºç­‘é¢ç§¯å€¼ä¸å¹¢é¢ç§¯æ±‡æ€»å€¼æ˜¯å¦ä¸€è‡´
+'½¨ÖşÃæ»ıÖµÓë´±Ãæ»ı»ã×ÜÖµÊÇ·ñÒ»ÖÂ
 Function ZhuangCheck()
     
-    ' 1ï¼šè§„åˆ’å®æµ‹æ±‡æ€»ä¿¡æ¯è¡¨(JGSCHZXX)è¡¨ä¸­ã€JZMJã€‘
-    ' 2:è‡ªç„¶å¹¢ï¼ˆJG_è‡ªç„¶å¹¢å±æ€§è¡¨ï¼‰è¡¨ä¸­ã€JZMJã€‘ç´¯è®¡æ±‡æ€»ã€‚
+    ' 1£º¹æ»®Êµ²â»ã×ÜĞÅÏ¢±í(JGSCHZXX)±íÖĞ¡¾JZMJ¡¿
+    ' 2:×ÔÈ»´±£¨JG_×ÔÈ»´±ÊôĞÔ±í£©±íÖĞ¡¾JZMJ¡¿ÀÛ¼Æ»ã×Ü¡£
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "æ€»ä½“æŒ‡æ ‡è¡¨é¢ç§¯é€»è¾‘æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->æ€»ä½“æŒ‡æ ‡è¡¨é¢ç§¯é€»è¾‘æ£€æŸ¥"
-    strDescription = "å»ºç­‘é¢ç§¯å€¼ä¸å¹¢é¢ç§¯æ±‡æ€»å€¼ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "×ÜÌåÖ¸±ê±íÃæ»ıÂß¼­¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->×ÜÌåÖ¸±ê±íÃæ»ıÂß¼­¼ì²é"
+    strDescription = "½¨ÖşÃæ»ıÖµÓë´±Ãæ»ı»ã×ÜÖµ²»Ò»ÖÂ"
     
-    'è·å–æ€»å»ºç­‘é¢ç§¯ JZMJ
+    '»ñÈ¡×Ü½¨ÖşÃæ»ı JZMJ
     SqlStr = "Select Sum(JGSCHZXX.JZMJ) From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,JZMJArr,SearchCount
     
@@ -81,8 +81,8 @@ Function ZhuangCheck()
     End If
     
     
-    'è·å–è‡ªç„¶å¹¢æ€»é¢ç§¯ SumArea
-    SqlStr = "Select Sum(FC_è‡ªç„¶å¹¢ä¿¡æ¯å±æ€§è¡¨.JZMJ) From FC_è‡ªç„¶å¹¢ä¿¡æ¯å±æ€§è¡¨ Inner Join GeoAreaTB On FC_è‡ªç„¶å¹¢ä¿¡æ¯å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0"
+    '»ñÈ¡×ÔÈ»´±×ÜÃæ»ı SumArea
+    SqlStr = "Select Sum(FC_×ÔÈ»´±ĞÅÏ¢ÊôĞÔ±í.JZMJ) From FC_×ÔÈ»´±ĞÅÏ¢ÊôĞÔ±í Inner Join GeoAreaTB On FC_×ÔÈ»´±ĞÅÏ¢ÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0"
     GetSQLRecordAll SqlStr,SumAreaArr,SumCount
     
     If SumCount > 0 Then
@@ -97,19 +97,19 @@ Function ZhuangCheck()
     
 End Function' ZhuangCheck
 
-'å»ºç­‘åŸºåœ°é¢ç§¯ä¸åŸºåœ°é¢æ±‡æ€»å€¼æ˜¯å¦ä¸€è‡´
+'½¨Öş»ùµØÃæ»ıÓë»ùµØÃæ»ã×ÜÖµÊÇ·ñÒ»ÖÂ
 Function BasementCheck()
     
-    ' 1ï¼šè§„åˆ’å®æµ‹æ±‡æ€»ä¿¡æ¯è¡¨(JGSCHZXX)è¡¨ä¸­ã€JZJDMJã€‘
-    ' 2: åŸºåº•_é¢(JG_å»ºç­‘ç‰©åŸºåº•é¢å±æ€§è¡¨)å±æ€§è¡¨ä¸­çš„ã€JDMJã€‘çš„æ‰€æœ‰è®°å½•çš„ç´¯åŠ å’Œ
+    ' 1£º¹æ»®Êµ²â»ã×ÜĞÅÏ¢±í(JGSCHZXX)±íÖĞ¡¾JZJDMJ¡¿
+    ' 2: »ùµ×_Ãæ(JG_½¨ÖşÎï»ùµ×ÃæÊôĞÔ±í)ÊôĞÔ±íÖĞµÄ¡¾JDMJ¡¿µÄËùÓĞ¼ÇÂ¼µÄÀÛ¼ÓºÍ
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "å»ºç­‘åŸºåœ°é¢ç§¯ä¸åŸºåœ°é¢æ±‡æ€»å€¼ä¸€è‡´æ€§æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->å»ºç­‘åŸºåœ°é¢ç§¯ä¸åŸºåœ°é¢æ±‡æ€»å€¼ä¸€è‡´æ€§æ£€æŸ¥"
-    strDescription = "å»ºç­‘åŸºåœ°é¢ç§¯ä¸åŸºåœ°é¢æ±‡æ€»å€¼ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "½¨Öş»ùµØÃæ»ıÓë»ùµØÃæ»ã×ÜÖµÒ»ÖÂĞÔ¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->½¨Öş»ùµØÃæ»ıÓë»ùµØÃæ»ã×ÜÖµÒ»ÖÂĞÔ¼ì²é"
+    strDescription = "½¨Öş»ùµØÃæ»ıÓë»ùµØÃæ»ã×ÜÖµ²»Ò»ÖÂ"
     
-    'è·å–æ€»é¢ç§¯ JDMJ
+    '»ñÈ¡×ÜÃæ»ı JDMJ
     SqlStr = "Select Sum(JGSCHZXX.JZJDMJ) From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,JDMJArr,SearchCount
     
@@ -119,8 +119,8 @@ Function BasementCheck()
         JDMJ = 0
     End If
     
-    'è·å–åŸºåœ°é¢ç§¯ä¹‹å’Œ SumArea
-    SqlStr = "Select Sum(JG_å»ºç­‘ç‰©åŸºåº•é¢å±æ€§è¡¨.JDMJ) From JG_å»ºç­‘ç‰©åŸºåº•é¢å±æ€§è¡¨ Inner Join GeoAreaTB On JG_å»ºç­‘ç‰©åŸºåº•é¢å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And JG_å»ºç­‘ç‰©åŸºåº•é¢å±æ€§è¡¨.ID > 0"
+    '»ñÈ¡»ùµØÃæ»ıÖ®ºÍ SumArea
+    SqlStr = "Select Sum(JG_½¨ÖşÎï»ùµ×ÃæÊôĞÔ±í.JDMJ) From JG_½¨ÖşÎï»ùµ×ÃæÊôĞÔ±í Inner Join GeoAreaTB On JG_½¨ÖşÎï»ùµ×ÃæÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And JG_½¨ÖşÎï»ùµ×ÃæÊôĞÔ±í.ID > 0"
     GetSQLRecordAll SqlStr,SumAreaArr,SumCount
     
     If SumCount > 0 Then
@@ -135,19 +135,19 @@ Function BasementCheck()
     
 End Function' BasementCheck
 
-'ç»¿åœ°é¢ç§¯ä¸ç»¿åœ°èŒƒå›´çº¿é¢ç§¯æ±‡æ€»å€¼æ˜¯å¦ä¸€è‡´æ€§
+'ÂÌµØÃæ»ıÓëÂÌµØ·¶Î§ÏßÃæ»ı»ã×ÜÖµÊÇ·ñÒ»ÖÂĞÔ
 Function LvAreaCheck()
     
-    ' 1ï¼šè§„åˆ’å®æµ‹æ±‡æ€»ä¿¡æ¯è¡¨(JGSCHZXX)è¡¨ä¸­ã€LDMJã€‘
-    ' 2:ç»¿åŒ–è¦ç´ å±æ€§è¡¨(LHYS)ä¸­ã€LHMJã€‘çš„æ‰€æœ‰è®°å½•çš„ç´¯åŠ å’Œ
+    ' 1£º¹æ»®Êµ²â»ã×ÜĞÅÏ¢±í(JGSCHZXX)±íÖĞ¡¾LDMJ¡¿
+    ' 2:ÂÌ»¯ÒªËØÊôĞÔ±í(LHYS)ÖĞ¡¾LHMJ¡¿µÄËùÓĞ¼ÇÂ¼µÄÀÛ¼ÓºÍ
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "ç»¿åœ°é¢ç§¯ä¸ç»¿åœ°èŒƒå›´çº¿é¢ç§¯æ±‡æ€»å€¼ä¸€è‡´æ€§æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->ç»¿åœ°é¢ç§¯ä¸ç»¿åœ°èŒƒå›´çº¿é¢ç§¯æ±‡æ€»å€¼ä¸€è‡´æ€§æ£€æŸ¥"
-    strDescription = "ç»¿åœ°é¢ç§¯ä¸ç»¿åœ°èŒƒå›´çº¿é¢ç§¯æ±‡æ€»å€¼ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "ÂÌµØÃæ»ıÓëÂÌµØ·¶Î§ÏßÃæ»ı»ã×ÜÖµÒ»ÖÂĞÔ¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->ÂÌµØÃæ»ıÓëÂÌµØ·¶Î§ÏßÃæ»ı»ã×ÜÖµÒ»ÖÂĞÔ¼ì²é"
+    strDescription = "ÂÌµØÃæ»ıÓëÂÌµØ·¶Î§ÏßÃæ»ı»ã×ÜÖµ²»Ò»ÖÂ"
     
-    'ç»¿åœ°æ€»é¢ç§¯ LDMJ
+    'ÂÌµØ×ÜÃæ»ı LDMJ
     SqlStr = "Select Sum(JGSCHZXX.LDMJ) From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,LDMJArr,SearchCount
     
@@ -157,8 +157,8 @@ Function LvAreaCheck()
         LDMJ = 0
     End If
     
-    'ç»¿åŒ–è¦ç´ é¢ç§¯ä¹‹å’Œ SumLhArea
-    SqlStr = "Select Sum(GH_ç»¿åŒ–è¦ç´ å±æ€§è¡¨.LHMJ) From GH_ç»¿åŒ–è¦ç´ å±æ€§è¡¨ Inner Join GeoAreaTB On GH_ç»¿åŒ–è¦ç´ å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_ç»¿åŒ–è¦ç´ å±æ€§è¡¨.ID > 0"
+    'ÂÌ»¯ÒªËØÃæ»ıÖ®ºÍ SumLhArea
+    SqlStr = "Select Sum(GH_ÂÌ»¯ÒªËØÊôĞÔ±í.LHMJ) From GH_ÂÌ»¯ÒªËØÊôĞÔ±í Inner Join GeoAreaTB On GH_ÂÌ»¯ÒªËØÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_ÂÌ»¯ÒªËØÊôĞÔ±í.ID > 0"
     GetSQLRecordAll SqlStr,LHMJArr,LHCount
     
     If LHCount > 0 Then
@@ -173,20 +173,20 @@ Function LvAreaCheck()
     
 End Function' LvAreaCheck
 
-'å»ºç­‘å¯†åº¦ä¸åŸºåœ°é¢ç§¯é™¤ç”¨åœ°é¢ç§¯çš„å€¼æ˜¯å¦ä¸€è‡´
+'½¨ÖşÃÜ¶ÈÓë»ùµØÃæ»ı³ıÓÃµØÃæ»ıµÄÖµÊÇ·ñÒ»ÖÂ
 Function ConstractDensityCheck()
     
     
-    ' 1ï¼šè§„åˆ’å®æµ‹æ±‡æ€»ä¿¡æ¯è¡¨(JGSCHZXX)è¡¨ä¸­ã€JZMDã€‘
-    ' 2ï¼šè§„åˆ’å®æµ‹æ±‡æ€»ä¿¡æ¯è¡¨(JGSCHZXX)è¡¨ä¸­ã€JZJDMJã€‘/ã€YDMJã€‘
+    ' 1£º¹æ»®Êµ²â»ã×ÜĞÅÏ¢±í(JGSCHZXX)±íÖĞ¡¾JZMD¡¿
+    ' 2£º¹æ»®Êµ²â»ã×ÜĞÅÏ¢±í(JGSCHZXX)±íÖĞ¡¾JZJDMJ¡¿/¡¾YDMJ¡¿
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "å»ºç­‘å¯†åº¦ä¸åŸºåœ°é¢ç§¯é™¤ç”¨åœ°é¢ç§¯ä¸€è‡´æ€§æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->å»ºç­‘å¯†åº¦ä¸åŸºåœ°é¢ç§¯é™¤ç”¨åœ°é¢ç§¯ä¸€è‡´æ€§æ£€æŸ¥"
-    strDescription = "å»ºç­‘å¯†åº¦ä¸åŸºåœ°é¢ç§¯é™¤ç”¨åœ°é¢ç§¯ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "½¨ÖşÃÜ¶ÈÓë»ùµØÃæ»ı³ıÓÃµØÃæ»ıÒ»ÖÂĞÔ¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->½¨ÖşÃÜ¶ÈÓë»ùµØÃæ»ı³ıÓÃµØÃæ»ıÒ»ÖÂĞÔ¼ì²é"
+    strDescription = "½¨ÖşÃÜ¶ÈÓë»ùµØÃæ»ı³ıÓÃµØÃæ»ı²»Ò»ÖÂ"
     
-    'è·å–å»ºç­‘å¯†åº¦ JZMD
+    '»ñÈ¡½¨ÖşÃÜ¶È JZMD
     SqlStr = "Select JGSCHZXX.JZMD From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,JZMDArr,SearchCount
     
@@ -197,7 +197,7 @@ Function ConstractDensityCheck()
     End If
     
     
-    'è·å–åŸºåº•é¢ç§¯ JDMJ
+    '»ñÈ¡»ùµ×Ãæ»ı JDMJ
     SqlStr = "Select JGSCHZXX.JZJDMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,JDMJArr,SearchCount
     
@@ -207,7 +207,7 @@ Function ConstractDensityCheck()
         JDMJ = 0
     End If
     
-    'è·å–ç”¨åœ°é¢ç§¯ YDMJ
+    '»ñÈ¡ÓÃµØÃæ»ı YDMJ
     SqlStr = "Select JGSCHZXX.YDMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,YDMJArr,SearchCount
     
@@ -217,11 +217,11 @@ Function ConstractDensityCheck()
         YDMJ = 0
     End If
     
-    'è®¡ç®—å¯†åº¦ Density
+    '¼ÆËãÃÜ¶È Density
     If YDMJ <> 0 Then
         Density = (JDMJ / YDMJ) * 100
     Else
-        MsgBox "åŸºåº•é¢ç§¯ä¸ºç©ºæˆ–é›¶"
+        MsgBox "»ùµ×Ãæ»ıÎª¿Õ»òÁã"
         Exit Function
         Density = 100
     End If
@@ -232,19 +232,19 @@ Function ConstractDensityCheck()
     
 End Function' ConstractDensityCheck
 
-'ç»¿åŒ–ç‡å€¼ä¸ç»¿åœ°é¢ç§¯é™¤ä»¥ç”¨åœ°é¢ç§¯å€¼æ˜¯å¦ä¸€è‡´
+'ÂÌ»¯ÂÊÖµÓëÂÌµØÃæ»ı³ıÒÔÓÃµØÃæ»ıÖµÊÇ·ñÒ»ÖÂ
 Function LHPercrntCheck()
     
-    ' 1ï¼šè§„åˆ’å®æµ‹æ±‡æ€»ä¿¡æ¯è¡¨(JGSCHZXX)è¡¨ä¸­ã€LVLã€‘
-    ' 2ï¼šè§„åˆ’å®æµ‹æ±‡æ€»ä¿¡æ¯è¡¨(JGSCHZXX)è¡¨ä¸­ã€LDMJã€‘/ã€YDMJã€‘
+    ' 1£º¹æ»®Êµ²â»ã×ÜĞÅÏ¢±í(JGSCHZXX)±íÖĞ¡¾LVL¡¿
+    ' 2£º¹æ»®Êµ²â»ã×ÜĞÅÏ¢±í(JGSCHZXX)±íÖĞ¡¾LDMJ¡¿/¡¾YDMJ¡¿
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "ç»¿åŒ–ç‡å€¼ä¸ç»¿åœ°é¢ç§¯é™¤ä»¥ç”¨åœ°é¢ç§¯ä¸€è‡´æ€§æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->ç»¿åŒ–ç‡å€¼ä¸ç»¿åœ°é¢ç§¯é™¤ä»¥ç”¨åœ°é¢ç§¯ä¸€è‡´æ€§æ£€æŸ¥"
-    strDescription = "ç»¿åŒ–ç‡å€¼ä¸ç»¿åœ°é¢ç§¯é™¤ä»¥ç”¨åœ°é¢ç§¯ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "ÂÌ»¯ÂÊÖµÓëÂÌµØÃæ»ı³ıÒÔÓÃµØÃæ»ıÒ»ÖÂĞÔ¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->ÂÌ»¯ÂÊÖµÓëÂÌµØÃæ»ı³ıÒÔÓÃµØÃæ»ıÒ»ÖÂĞÔ¼ì²é"
+    strDescription = "ÂÌ»¯ÂÊÖµÓëÂÌµØÃæ»ı³ıÒÔÓÃµØÃæ»ı²»Ò»ÖÂ"
     
-    'è·å–ç»¿åŒ–ç‡ LVL
+    '»ñÈ¡ÂÌ»¯ÂÊ LVL
     SqlStr = "Select JGSCHZXX.LVL From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,LVLArr,SearchCount
     
@@ -255,7 +255,7 @@ Function LHPercrntCheck()
     End If
     
     
-    'è·å–ç»¿åœ°é¢ç§¯ LDMJ
+    '»ñÈ¡ÂÌµØÃæ»ı LDMJ
     SqlStr = "Select JGSCHZXX.LDMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,LDMJArr,SearchCount
     
@@ -265,7 +265,7 @@ Function LHPercrntCheck()
         LDMJ = 0
     End If
     
-    'è·å–ç”¨åœ°é¢ç§¯ YDMJ
+    '»ñÈ¡ÓÃµØÃæ»ı YDMJ
     SqlStr = "Select JGSCHZXX.YDMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,YDMJArr,SearchCount
     
@@ -276,11 +276,11 @@ Function LHPercrntCheck()
         YDMJ = 0
     End If
     
-    'å®é™…å¯†åº¦ RealDensity
+    'Êµ¼ÊÃÜ¶È RealDensity
     If YDMJ <> 0 Then
         RealDensity = (LDMJ / YDMJ) * 100
     Else
-        MsgBox "ç”¨åœ°é¢ç§¯ä¸ºç©ºæˆ–é›¶"
+        MsgBox "ÓÃµØÃæ»ıÎª¿Õ»òÁã"
         Exit Function
         RealDensity = 100
     End If
@@ -291,19 +291,19 @@ Function LHPercrntCheck()
     
 End Function' LHPercrntCheck
 
-'åœ°ä¸ŠæœºåŠ¨è½¦ä½ä¸ªæ•°ä¸åœ°ä¸Šåœè½¦ä½ä¸ªæ•°æ˜¯å¦ä¸€è‡´
+'µØÉÏ»ú¶¯³µÎ»¸öÊıÓëµØÉÏÍ£³µÎ»¸öÊıÊÇ·ñÒ»ÖÂ
 Function DSJDCCheck()
     
-    ' 1ï¼šè§„åˆ’å®æµ‹æ±‡æ€»ä¿¡æ¯è¡¨(JGSCHZXX)è¡¨ä¸­ã€DSJDCWGSã€‘
-    ' 2ï¼šå®¤å¤–è½¦ä½å±æ€§è¡¨ï¼ˆSWCWï¼‰è¡¨ä¸­ã€CWLXã€‘<> â€œéæœºåŠ¨è½¦ä½â€ ï¼ŒæŒ‰ç…§ã€ZSXSã€‘å€¼è¿›è¡Œç»Ÿè®¡æ±‡æ€»ï¼ˆé¢ç§¯*æŠ˜ç®—ç³»æ•°ç®—å‡ºä¸ªæ•°ï¼Œæ±‡æ€»ï¼‰
+    ' 1£º¹æ»®Êµ²â»ã×ÜĞÅÏ¢±í(JGSCHZXX)±íÖĞ¡¾DSJDCWGS¡¿
+    ' 2£ºÊÒÍâ³µÎ»ÊôĞÔ±í£¨SWCW£©±íÖĞ¡¾CWLX¡¿<> ¡°·Ç»ú¶¯³µÎ»¡± £¬°´ÕÕ¡¾ZSXS¡¿Öµ½øĞĞÍ³¼Æ»ã×Ü£¨Ãæ»ı*ÕÛËãÏµÊıËã³ö¸öÊı£¬»ã×Ü£©
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "åœ°ä¸ŠæœºåŠ¨è½¦ä½ä¸ªæ•°ä¸åœ°ä¸Šåœè½¦ä½ä¸ªæ•°ä¸€è‡´æ€§æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->åœ°ä¸ŠæœºåŠ¨è½¦ä½ä¸ªæ•°ä¸åœ°ä¸Šåœè½¦ä½ä¸ªæ•°ä¸€è‡´æ€§æ£€æŸ¥"
-    strDescription = "åœ°ä¸ŠæœºåŠ¨è½¦ä½ä¸ªæ•°ä¸åœ°ä¸Šåœè½¦ä½ä¸ªæ•°ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "µØÉÏ»ú¶¯³µÎ»¸öÊıÓëµØÉÏÍ£³µÎ»¸öÊıÒ»ÖÂĞÔ¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->µØÉÏ»ú¶¯³µÎ»¸öÊıÓëµØÉÏÍ£³µÎ»¸öÊıÒ»ÖÂĞÔ¼ì²é"
+    strDescription = "µØÉÏ»ú¶¯³µÎ»¸öÊıÓëµØÉÏÍ£³µÎ»¸öÊı²»Ò»ÖÂ"
     
-    'è·å–åœ°ä¸ŠæœºåŠ¨è½¦è½¦ä½ä¸ªæ•° DSJDCWGS
+    '»ñÈ¡µØÉÏ»ú¶¯³µ³µÎ»¸öÊı DSJDCWGS
     SqlStr = "Select JGSCHZXX.DSJDCWGS From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,DSJDCWGSArr,SearchCount
     
@@ -314,8 +314,8 @@ Function DSJDCCheck()
     End If
     
     
-    'è·å–å®¤å¤–æœºåŠ¨è½¦ä¸ªæ•° SWCWGS
-    SqlStr = "Select GH_å®¤å¤–è½¦ä½å±æ€§è¡¨.ID From GH_å®¤å¤–è½¦ä½å±æ€§è¡¨ Inner Join GeoAreaTB On GH_å®¤å¤–è½¦ä½å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_å®¤å¤–è½¦ä½å±æ€§è¡¨.CWLX <> 'éæœºåŠ¨è½¦ä½' "
+    '»ñÈ¡ÊÒÍâ»ú¶¯³µ¸öÊı SWCWGS
+    SqlStr = "Select GH_ÊÒÍâ³µÎ»ÊôĞÔ±í.ID From GH_ÊÒÍâ³µÎ»ÊôĞÔ±í Inner Join GeoAreaTB On GH_ÊÒÍâ³µÎ»ÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_ÊÒÍâ³µÎ»ÊôĞÔ±í.CWLX <> '·Ç»ú¶¯³µÎ»' "
     GetSQLRecordAll SqlStr,IDArr,IDCount
     
     If IDCount > 0 Then
@@ -334,19 +334,19 @@ Function DSJDCCheck()
     
 End Function' DSJDCCheck
 
-'åœ°ä¸‹æœºåŠ¨è½¦ä½ä¸ªæ•°ä¸åœ°ä¸‹åœè½¦ä½ä¸ªæ•°æ˜¯å¦ä¸€è‡´
+'µØÏÂ»ú¶¯³µÎ»¸öÊıÓëµØÏÂÍ£³µÎ»¸öÊıÊÇ·ñÒ»ÖÂ
 Function DXJDCCheck()
     
-    ' 1ï¼šè§„åˆ’å®æµ‹æ±‡æ€»ä¿¡æ¯è¡¨(JGSCHZXX)è¡¨ä¸­ã€DXJDCWGSã€‘
-    ' 2ï¼šå®¤å†…è½¦ä½å±æ€§è¡¨ï¼ˆSNCWï¼‰è¡¨ä¸­ã€CWLXã€‘ <> â€œéæœºåŠ¨è½¦ä½â€œ ï¼ŒæŒ‰ç…§ã€ZSXSã€‘å€¼è¿›è¡Œæ±‡æ€»ï¼ˆé¢ç§¯ * æŠ˜ç®—ç³»æ•°ç®—å‡ºä¸ªæ•°ï¼Œæ±‡æ€»ï¼‰
+    ' 1£º¹æ»®Êµ²â»ã×ÜĞÅÏ¢±í(JGSCHZXX)±íÖĞ¡¾DXJDCWGS¡¿
+    ' 2£ºÊÒÄÚ³µÎ»ÊôĞÔ±í£¨SNCW£©±íÖĞ¡¾CWLX¡¿ <> ¡°·Ç»ú¶¯³µÎ»¡° £¬°´ÕÕ¡¾ZSXS¡¿Öµ½øĞĞ»ã×Ü£¨Ãæ»ı * ÕÛËãÏµÊıËã³ö¸öÊı£¬»ã×Ü£©
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "åœ°ä¸‹æœºåŠ¨è½¦ä½ä¸ªæ•°ä¸åœ°ä¸‹åœè½¦ä½ä¸ªæ•°ä¸€è‡´æ€§æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->åœ°ä¸‹æœºåŠ¨è½¦ä½ä¸ªæ•°ä¸åœ°ä¸‹åœè½¦ä½ä¸ªæ•°ä¸€è‡´æ€§æ£€æŸ¥"
-    strDescription = "åœ°ä¸‹æœºåŠ¨è½¦ä½ä¸ªæ•°ä¸åœ°ä¸‹åœè½¦ä½ä¸ªæ•°ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "µØÏÂ»ú¶¯³µÎ»¸öÊıÓëµØÏÂÍ£³µÎ»¸öÊıÒ»ÖÂĞÔ¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->µØÏÂ»ú¶¯³µÎ»¸öÊıÓëµØÏÂÍ£³µÎ»¸öÊıÒ»ÖÂĞÔ¼ì²é"
+    strDescription = "µØÏÂ»ú¶¯³µÎ»¸öÊıÓëµØÏÂÍ£³µÎ»¸öÊı²»Ò»ÖÂ"
     
-    'è·å–åœ°ä¸‹æœºåŠ¨è½¦è½¦ä½ä¸ªæ•° DXJDCWGS
+    '»ñÈ¡µØÏÂ»ú¶¯³µ³µÎ»¸öÊı DXJDCWGS
     SqlStr = "Select JGSCHZXX.DXJDCWGS From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,DXJDCWGSArr,SearchCount
     
@@ -356,8 +356,8 @@ Function DXJDCCheck()
         DXJDCWGS = 0
     End If
     
-    'è·å–å®¤å¤–æœºåŠ¨è½¦ä¸ªæ•° SNCWGS
-    SqlStr = "Select GH_å®¤å†…è½¦ä½å±æ€§è¡¨.ID From GH_å®¤å†…è½¦ä½å±æ€§è¡¨ Inner Join GeoAreaTB On GH_å®¤å†…è½¦ä½å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_å®¤å†…è½¦ä½å±æ€§è¡¨.CWLX <> 'éæœºåŠ¨è½¦ä½' "
+    '»ñÈ¡ÊÒÍâ»ú¶¯³µ¸öÊı SNCWGS
+    SqlStr = "Select GH_ÊÒÄÚ³µÎ»ÊôĞÔ±í.ID From GH_ÊÒÄÚ³µÎ»ÊôĞÔ±í Inner Join GeoAreaTB On GH_ÊÒÄÚ³µÎ»ÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_ÊÒÄÚ³µÎ»ÊôĞÔ±í.CWLX <> '·Ç»ú¶¯³µÎ»' "
     GetSQLRecordAll SqlStr,IDArr,IDCount
     
     If IDCount > 0 Then
@@ -376,19 +376,19 @@ Function DXJDCCheck()
     
 End Function' DXJDCCheck
 
-'åœ°ä¸ŠéæœºåŠ¨è½¦ä½ä¸ªæ•°ä¸åœ°ä¸ŠéæœºåŠ¨è½¦ä½ä¸ªæ•°æ˜¯å¦ä¸€è‡´
+'µØÉÏ·Ç»ú¶¯³µÎ»¸öÊıÓëµØÉÏ·Ç»ú¶¯³µÎ»¸öÊıÊÇ·ñÒ»ÖÂ
 Function DSFJDCWCheck()
     
-    ' 1ï¼šè§„åˆ’å®æµ‹æ±‡æ€»ä¿¡æ¯è¡¨(JGSCHZXX)è¡¨ä¸­ã€DSFJDCWGSã€‘
-    ' 2ï¼šå®¤å¤–è½¦ä½å±æ€§è¡¨ï¼ˆSWCWï¼‰è¡¨ä¸­ã€CWLXã€‘=â€œéæœºåŠ¨è½¦ä½â€œ ï¼ŒæŒ‰ç…§ã€ZSXSã€‘å€¼è¿›è¡Œç»Ÿè®¡æ±‡æ€»ï¼ˆé¢ç§¯*æŠ˜ç®—ç³»æ•°ç®—å‡ºä¸ªæ•°ï¼Œæ±‡æ€»ï¼‰
+    ' 1£º¹æ»®Êµ²â»ã×ÜĞÅÏ¢±í(JGSCHZXX)±íÖĞ¡¾DSFJDCWGS¡¿
+    ' 2£ºÊÒÍâ³µÎ»ÊôĞÔ±í£¨SWCW£©±íÖĞ¡¾CWLX¡¿=¡°·Ç»ú¶¯³µÎ»¡° £¬°´ÕÕ¡¾ZSXS¡¿Öµ½øĞĞÍ³¼Æ»ã×Ü£¨Ãæ»ı*ÕÛËãÏµÊıËã³ö¸öÊı£¬»ã×Ü£©
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "åœ°ä¸ŠéæœºåŠ¨è½¦ä½ä¸ªæ•°ä¸åœ°ä¸ŠéæœºåŠ¨è½¦ä½ä¸ªæ•°ä¸€è‡´æ€§æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->åœ°ä¸ŠéæœºåŠ¨è½¦ä½ä¸ªæ•°ä¸åœ°ä¸ŠéæœºåŠ¨è½¦ä½ä¸ªæ•°ä¸€è‡´æ€§æ£€æŸ¥"
-    strDescription = "åœ°ä¸ŠéæœºåŠ¨è½¦ä½ä¸ªæ•°ä¸åœ°ä¸ŠéæœºåŠ¨è½¦ä½ä¸ªæ•°ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "µØÉÏ·Ç»ú¶¯³µÎ»¸öÊıÓëµØÉÏ·Ç»ú¶¯³µÎ»¸öÊıÒ»ÖÂĞÔ¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->µØÉÏ·Ç»ú¶¯³µÎ»¸öÊıÓëµØÉÏ·Ç»ú¶¯³µÎ»¸öÊıÒ»ÖÂĞÔ¼ì²é"
+    strDescription = "µØÉÏ·Ç»ú¶¯³µÎ»¸öÊıÓëµØÉÏ·Ç»ú¶¯³µÎ»¸öÊı²»Ò»ÖÂ"
     
-    'è·å–åœ°ä¸‹æœºåŠ¨è½¦è½¦ä½ä¸ªæ•° DSFJDCWGS
+    '»ñÈ¡µØÏÂ»ú¶¯³µ³µÎ»¸öÊı DSFJDCWGS
     SqlStr = "Select JGSCHZXX.DXJDCWGS From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,DSFJDCWGSArr,SearchCount
     
@@ -398,8 +398,8 @@ Function DSFJDCWCheck()
         DSFJDCWGS = 0
     End If
     
-    'è·å–å®¤å¤–è½¦ä½ä¸ªæ•° SWCWGS
-    SqlStr = "Select GH_å®¤å¤–è½¦ä½å±æ€§è¡¨.ID From GH_å®¤å¤–è½¦ä½å±æ€§è¡¨ Inner Join GeoAreaTB On GH_å®¤å¤–è½¦ä½å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_å®¤å¤–è½¦ä½å±æ€§è¡¨.CWLX = 'éæœºåŠ¨è½¦ä½' "
+    '»ñÈ¡ÊÒÍâ³µÎ»¸öÊı SWCWGS
+    SqlStr = "Select GH_ÊÒÍâ³µÎ»ÊôĞÔ±í.ID From GH_ÊÒÍâ³µÎ»ÊôĞÔ±í Inner Join GeoAreaTB On GH_ÊÒÍâ³µÎ»ÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_ÊÒÍâ³µÎ»ÊôĞÔ±í.CWLX = '·Ç»ú¶¯³µÎ»' "
     GetSQLRecordAll SqlStr,IDArr,IDCount
     
     If IDCount > 0 Then
@@ -418,19 +418,19 @@ Function DSFJDCWCheck()
     
 End Function' DSFJDCWCheck
 
-'åœ°ä¸ŠéæœºåŠ¨è½¦ä½æ ¸å®æ•°é‡æ£€æŸ¥
+'µØÉÏ·Ç»ú¶¯³µÎ»ºËÊµÊıÁ¿¼ì²é
 Function DSFJDCHES()
     
-    ' 1ï¼šå®¤å¤–è½¦ä½å±æ€§è¡¨ï¼ˆSWCWï¼‰è¡¨ä¸­ã€CWLXã€‘=â€œéæœºåŠ¨è½¦ä½â€œ ï¼Œé¢ç§¯ã€MJã€‘*æŠ˜ç®—ç³»æ•°ã€ZSXSã€‘æ˜¯å¦ç­‰äºè½¦ä½ä¸ªæ•°ã€CWGSã€‘
+    ' 1£ºÊÒÍâ³µÎ»ÊôĞÔ±í£¨SWCW£©±íÖĞ¡¾CWLX¡¿=¡°·Ç»ú¶¯³µÎ»¡° £¬Ãæ»ı¡¾MJ¡¿*ÕÛËãÏµÊı¡¾ZSXS¡¿ÊÇ·ñµÈÓÚ³µÎ»¸öÊı¡¾CWGS¡¿
     
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "åœ°ä¸ŠéæœºåŠ¨è½¦ä½æ ¸å®æ•°é‡æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->åœ°ä¸ŠéæœºåŠ¨è½¦ä½æ ¸å®æ•°é‡æ£€æŸ¥"
-    strDescription = "åœ°ä¸ŠéæœºåŠ¨è½¦ä½æ ¸å®æ•°é‡ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "µØÉÏ·Ç»ú¶¯³µÎ»ºËÊµÊıÁ¿¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->µØÉÏ·Ç»ú¶¯³µÎ»ºËÊµÊıÁ¿¼ì²é"
+    strDescription = "µØÉÏ·Ç»ú¶¯³µÎ»ºËÊµÊıÁ¿²»Ò»ÖÂ"
     
-    SqlStr = "Select GH_å®¤å¤–è½¦ä½å±æ€§è¡¨.ID From GH_å®¤å¤–è½¦ä½å±æ€§è¡¨ Inner Join GeoAreaTB On GH_å®¤å¤–è½¦ä½å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_å®¤å¤–è½¦ä½å±æ€§è¡¨.CWLX = 'éæœºåŠ¨è½¦ä½' "
+    SqlStr = "Select GH_ÊÒÍâ³µÎ»ÊôĞÔ±í.ID From GH_ÊÒÍâ³µÎ»ÊôĞÔ±í Inner Join GeoAreaTB On GH_ÊÒÍâ³µÎ»ÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_ÊÒÍâ³µÎ»ÊôĞÔ±í.CWLX = '·Ç»ú¶¯³µÎ»' "
     GetSQLRecordAll SqlStr,IDArr,IDCount
     
     For i = 0 To IDCount - 1
@@ -444,19 +444,19 @@ Function DSFJDCHES()
     
 End Function' DSFJDCHES
 
-'åœ°ä¸‹éæœºåŠ¨è½¦ä½ä¸ªæ•°ä¸åœ°ä¸‹éæœºåŠ¨è½¦ä½ä¸ªæ˜¯å¦ä¸€è‡´
+'µØÏÂ·Ç»ú¶¯³µÎ»¸öÊıÓëµØÏÂ·Ç»ú¶¯³µÎ»¸öÊÇ·ñÒ»ÖÂ
 Function DXFJDCWCheck()
     
-    ' 1ï¼šè§„åˆ’å®æµ‹æ±‡æ€»ä¿¡æ¯è¡¨(JGSCHZXX)è¡¨ä¸­ã€DXFJDCWGSã€‘
-    ' 2ï¼šå®¤å†…è½¦ä½å±æ€§è¡¨ï¼ˆSNCWï¼‰è¡¨ä¸­ã€CWLXã€‘=â€œéæœºåŠ¨è½¦ä½â€œ ï¼ŒæŒ‰ç…§ã€ZSXSã€‘å€¼è¿›è¡Œæ±‡æ€»ï¼ˆé¢ç§¯*æŠ˜ç®—ç³»æ•°ç®—å‡ºä¸ªæ•°ï¼Œæ±‡æ€»ï¼‰
+    ' 1£º¹æ»®Êµ²â»ã×ÜĞÅÏ¢±í(JGSCHZXX)±íÖĞ¡¾DXFJDCWGS¡¿
+    ' 2£ºÊÒÄÚ³µÎ»ÊôĞÔ±í£¨SNCW£©±íÖĞ¡¾CWLX¡¿=¡°·Ç»ú¶¯³µÎ»¡° £¬°´ÕÕ¡¾ZSXS¡¿Öµ½øĞĞ»ã×Ü£¨Ãæ»ı*ÕÛËãÏµÊıËã³ö¸öÊı£¬»ã×Ü£©
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "åœ°ä¸‹éæœºåŠ¨è½¦ä½ä¸ªæ•°ä¸åœ°ä¸‹éæœºåŠ¨è½¦ä½ä¸ªæ•°ä¸€è‡´æ€§æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->åœ°ä¸‹éæœºåŠ¨è½¦ä½ä¸ªæ•°ä¸åœ°ä¸‹éæœºåŠ¨è½¦ä½ä¸ªæ•°ä¸€è‡´æ€§æ£€æŸ¥"
-    strDescription = "åœ°ä¸‹éæœºåŠ¨è½¦ä½ä¸ªæ•°ä¸åœ°ä¸‹éæœºåŠ¨è½¦ä½ä¸ªæ•°ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "µØÏÂ·Ç»ú¶¯³µÎ»¸öÊıÓëµØÏÂ·Ç»ú¶¯³µÎ»¸öÊıÒ»ÖÂĞÔ¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->µØÏÂ·Ç»ú¶¯³µÎ»¸öÊıÓëµØÏÂ·Ç»ú¶¯³µÎ»¸öÊıÒ»ÖÂĞÔ¼ì²é"
+    strDescription = "µØÏÂ·Ç»ú¶¯³µÎ»¸öÊıÓëµØÏÂ·Ç»ú¶¯³µÎ»¸öÊı²»Ò»ÖÂ"
     
-    'è·å–åœ°ä¸‹æœºåŠ¨è½¦è½¦ä½ä¸ªæ•° DXFJDCWGS
+    '»ñÈ¡µØÏÂ»ú¶¯³µ³µÎ»¸öÊı DXFJDCWGS
     SqlStr = "Select JGSCHZXX.DXJDCWGS From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,DXFJDCWGSArr,SearchCount
     
@@ -466,8 +466,8 @@ Function DXFJDCWCheck()
         DXFJDCWGS = 0
     End If
     
-    'è·å–å®¤å¤–è½¦ä½ä¸ªæ•° SNCWGS
-    SqlStr = "Select GH_å®¤å†…è½¦ä½å±æ€§è¡¨.ID From GH_å®¤å†…è½¦ä½å±æ€§è¡¨ Inner Join GeoAreaTB On GH_å®¤å†…è½¦ä½å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_å®¤å†…è½¦ä½å±æ€§è¡¨.CWLX = 'éæœºåŠ¨è½¦ä½' "
+    '»ñÈ¡ÊÒÍâ³µÎ»¸öÊı SNCWGS
+    SqlStr = "Select GH_ÊÒÄÚ³µÎ»ÊôĞÔ±í.ID From GH_ÊÒÄÚ³µÎ»ÊôĞÔ±í Inner Join GeoAreaTB On GH_ÊÒÄÚ³µÎ»ÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_ÊÒÄÚ³µÎ»ÊôĞÔ±í.CWLX = '·Ç»ú¶¯³µÎ»' "
     GetSQLRecordAll SqlStr,IDArr,IDCount
     
     If IDCount > 0 Then
@@ -486,18 +486,18 @@ Function DXFJDCWCheck()
     
 End Function' DXFJDCWCheck
 
-'åœ°ä¸‹éæœºåŠ¨è½¦ä½æ ¸å®æ•°é‡æ£€æŸ¥
+'µØÏÂ·Ç»ú¶¯³µÎ»ºËÊµÊıÁ¿¼ì²é
 Function DXFJDCHES()
     
-    ' 1ï¼šå®¤å†…è½¦ä½å±æ€§è¡¨ï¼ˆSNCWï¼‰è¡¨ä¸­ã€CWLXã€‘=â€œéæœºåŠ¨è½¦ä½â€œ ï¼Œé¢ç§¯ã€MJã€‘*æŠ˜ç®—ç³»æ•°ã€ZSXSã€‘æ˜¯å¦ç­‰äºè½¦ä½ä¸ªæ•°ã€CWGSã€‘
+    ' 1£ºÊÒÄÚ³µÎ»ÊôĞÔ±í£¨SNCW£©±íÖĞ¡¾CWLX¡¿=¡°·Ç»ú¶¯³µÎ»¡° £¬Ãæ»ı¡¾MJ¡¿*ÕÛËãÏµÊı¡¾ZSXS¡¿ÊÇ·ñµÈÓÚ³µÎ»¸öÊı¡¾CWGS¡¿
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "åœ°ä¸‹éæœºåŠ¨è½¦ä½æ ¸å®æ•°é‡æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->åœ°ä¸‹éæœºåŠ¨è½¦ä½æ ¸å®æ•°é‡æ£€æŸ¥"
-    strDescription = "åœ°ä¸‹éæœºåŠ¨è½¦ä½æ ¸å®æ•°é‡ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "µØÏÂ·Ç»ú¶¯³µÎ»ºËÊµÊıÁ¿¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->µØÏÂ·Ç»ú¶¯³µÎ»ºËÊµÊıÁ¿¼ì²é"
+    strDescription = "µØÏÂ·Ç»ú¶¯³µÎ»ºËÊµÊıÁ¿²»Ò»ÖÂ"
     
-    SqlStr = "Select GH_å®¤å†…è½¦ä½å±æ€§è¡¨.ID From GH_å®¤å†…è½¦ä½å±æ€§è¡¨ Inner Join GeoAreaTB On GH_å®¤å†…è½¦ä½å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_å®¤å†…è½¦ä½å±æ€§è¡¨.CWLX = 'éæœºåŠ¨è½¦ä½' "
+    SqlStr = "Select GH_ÊÒÄÚ³µÎ»ÊôĞÔ±í.ID From GH_ÊÒÄÚ³µÎ»ÊôĞÔ±í Inner Join GeoAreaTB On GH_ÊÒÄÚ³µÎ»ÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And GH_ÊÒÄÚ³µÎ»ÊôĞÔ±í.CWLX = '·Ç»ú¶¯³µÎ»' "
     GetSQLRecordAll SqlStr,IDArr,IDCount
     
     If IDCount > 0 Then
@@ -513,18 +513,18 @@ Function DXFJDCHES()
     
 End Function' DXFJDCHES
 
-'ç»¿åœ°æ€»é¢ç§¯æ˜¯å¦ç­‰äºé›†ä¸­ç»¿åœ°é¢ç§¯+å•å—ç»¿åœ°é¢ç§¯é¢ç§¯å’Œ
+'ÂÌµØ×ÜÃæ»ıÊÇ·ñµÈÓÚ¼¯ÖĞÂÌµØÃæ»ı+µ¥¿éÂÌµØÃæ»ıÃæ»ıºÍ
 Function LvDAreaCheck()
     
-    ' 1ï¼šè§„åˆ’å®æµ‹æ±‡æ€»ä¿¡æ¯è¡¨(JGSCHZXX)è¡¨ä¸­ã€LDZMJã€‘=ã€JZLDMJã€‘+ã€DKLDMJã€‘
+    ' 1£º¹æ»®Êµ²â»ã×ÜĞÅÏ¢±í(JGSCHZXX)±íÖĞ¡¾LDZMJ¡¿=¡¾JZLDMJ¡¿+¡¾DKLDMJ¡¿
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "ç»¿åœ°æ€»é¢ç§¯æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->ç»¿åœ°æ€»é¢ç§¯æ£€æŸ¥"
-    strDescription = "ç»¿åœ°æ€»é¢ç§¯ä¸é›†ä¸­ç»¿åœ°å’Œå•å—ç»¿åœ°é¢ç§¯ä¹‹å’Œä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "ÂÌµØ×ÜÃæ»ı¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->ÂÌµØ×ÜÃæ»ı¼ì²é"
+    strDescription = "ÂÌµØ×ÜÃæ»ıÓë¼¯ÖĞÂÌµØºÍµ¥¿éÂÌµØÃæ»ıÖ®ºÍ²»Ò»ÖÂ"
     
-    'è·å–ç»¿åœ°æ€»é¢ç§¯ LDZMJ
+    '»ñÈ¡ÂÌµØ×ÜÃæ»ı LDZMJ
     SqlStr = "Select JGSCHZXX.LDZMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,LDZMJArr,LDCount
     
@@ -534,7 +534,7 @@ Function LvDAreaCheck()
         LDZMJ = 0
     End If
     
-    'è·å–é›†ä¸­ç»¿åœ°å’Œå•å—ç»¿åœ°é¢ç§¯ä¹‹å’Œ SumArea
+    '»ñÈ¡¼¯ÖĞÂÌµØºÍµ¥¿éÂÌµØÃæ»ıÖ®ºÍ SumArea
     SqlStr = "Select JGSCHZXX.JZLDMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,JZLDMJArr,JZLDCount
     
@@ -561,19 +561,19 @@ Function LvDAreaCheck()
     
 End Function' LvDAreaCheck
 
-'å•å—ç»¿åœ°é¢ç§¯ä¸å•å—ç»¿åœ°èŒƒå›´é¢é¢ç§¯æ±‡æ€»å€¼æ˜¯å¦ä¸€è‡´
+'µ¥¿éÂÌµØÃæ»ıÓëµ¥¿éÂÌµØ·¶Î§ÃæÃæ»ı»ã×ÜÖµÊÇ·ñÒ»ÖÂ
 Function DKLVCheck()
     
-    ' 1ï¼šè§„åˆ’å®æµ‹æ±‡æ€»ä¿¡æ¯è¡¨(JGSCHZXX)è¡¨ä¸­ã€DKLDMJã€‘
-    ' 2ï¼šç»¿åŒ–åˆ’åˆ†ä¿¡æ¯è¡¨ï¼ˆLHHFï¼‰å…¶ä¸­çš„ã€MCã€‘=å•å—ç»¿åœ°ï¼Œå¹¶é€šè¿‡ã€ID_LDKã€‘ç»¿åœ°å—IDä¸ç»¿åŒ–è¦ç´ å±æ€§è¡¨ï¼ˆLHYSï¼‰ä¸­çš„ã€ID_LDKã€‘å–ã€LHMJã€‘çš„æ±‡æ€»å€¼
+    ' 1£º¹æ»®Êµ²â»ã×ÜĞÅÏ¢±í(JGSCHZXX)±íÖĞ¡¾DKLDMJ¡¿
+    ' 2£ºÂÌ»¯»®·ÖĞÅÏ¢±í£¨LHHF£©ÆäÖĞµÄ¡¾MC¡¿=µ¥¿éÂÌµØ£¬²¢Í¨¹ı¡¾ID_LDK¡¿ÂÌµØ¿éIDÓëÂÌ»¯ÒªËØÊôĞÔ±í£¨LHYS£©ÖĞµÄ¡¾ID_LDK¡¿È¡¡¾LHMJ¡¿µÄ»ã×ÜÖµ
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "å•å—ç»¿åœ°é¢ç§¯ä¸å•å—ç»¿åœ°èŒƒå›´é¢é¢ç§¯æ±‡æ€»å€¼ä¸€è‡´æ€§æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->å•å—ç»¿åœ°é¢ç§¯ä¸å•å—ç»¿åœ°èŒƒå›´é¢é¢ç§¯æ±‡æ€»å€¼ä¸€è‡´æ€§æ£€æŸ¥"
-    strDescription = "å•å—ç»¿åœ°é¢ç§¯ä¸å•å—ç»¿åœ°èŒƒå›´é¢é¢ç§¯æ±‡æ€»å€¼ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "µ¥¿éÂÌµØÃæ»ıÓëµ¥¿éÂÌµØ·¶Î§ÃæÃæ»ı»ã×ÜÖµÒ»ÖÂĞÔ¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->µ¥¿éÂÌµØÃæ»ıÓëµ¥¿éÂÌµØ·¶Î§ÃæÃæ»ı»ã×ÜÖµÒ»ÖÂĞÔ¼ì²é"
+    strDescription = "µ¥¿éÂÌµØÃæ»ıÓëµ¥¿éÂÌµØ·¶Î§ÃæÃæ»ı»ã×ÜÖµ²»Ò»ÖÂ"
     
-    'å•å—ç»¿åœ°æ€»é¢ç§¯ DKLDMJ
+    'µ¥¿éÂÌµØ×ÜÃæ»ı DKLDMJ
     SqlStr = "Select JGSCHZXX.DKLDMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,DKLDMJArr,JZLDCount
     
@@ -583,8 +583,8 @@ Function DKLVCheck()
         DKLDMJ = 0
     End If
     
-    'æ±‡æ€»ç»¿åŒ–é¢ç§¯ SumArea
-    SqlStr = "Select LHHF.ID_LDK From LHHF Where LHHF.MC = 'å•å—ç»¿åœ°' "
+    '»ã×ÜÂÌ»¯Ãæ»ı SumArea
+    SqlStr = "Select LHHF.ID_LDK From LHHF Where LHHF.MC = 'µ¥¿éÂÌµØ' "
     GetSQLRecordAll SqlStr,IDArr,IDCount
     
     If IDCount > 0 Then
@@ -602,19 +602,19 @@ Function DKLVCheck()
     
 End Function' DKLVCheck
 
-'é›†ä¸­ç»¿åœ°é¢ç§¯ä¸é›†ä¸­ç»¿åœ°èŒƒå›´é¢é¢ç§¯æ±‡æ€»å€¼æ˜¯å¦ä¸€è‡´
+'¼¯ÖĞÂÌµØÃæ»ıÓë¼¯ÖĞÂÌµØ·¶Î§ÃæÃæ»ı»ã×ÜÖµÊÇ·ñÒ»ÖÂ
 Function JZLDCheck()
     
-    ' 1ï¼šè§„åˆ’å®æµ‹æ±‡æ€»ä¿¡æ¯è¡¨(JGSCHZXX)è¡¨ä¸­ã€JZLDMJã€‘
-    ' 2ï¼šç»¿åŒ–åˆ’åˆ†ä¿¡æ¯è¡¨ï¼ˆLHHFï¼‰å…¶ä¸­çš„ã€MCã€‘=é›†ä¸­ç»¿åœ°ï¼Œå¹¶é€šè¿‡ã€ID_LDKã€‘ç»¿åœ°å—IDä¸ç»¿åŒ–è¦ç´ å±æ€§è¡¨ï¼ˆLHYSï¼‰ä¸­çš„ã€ID_LDKã€‘å–ã€LHMJã€‘çš„æ±‡æ€»å€¼
+    ' 1£º¹æ»®Êµ²â»ã×ÜĞÅÏ¢±í(JGSCHZXX)±íÖĞ¡¾JZLDMJ¡¿
+    ' 2£ºÂÌ»¯»®·ÖĞÅÏ¢±í£¨LHHF£©ÆäÖĞµÄ¡¾MC¡¿=¼¯ÖĞÂÌµØ£¬²¢Í¨¹ı¡¾ID_LDK¡¿ÂÌµØ¿éIDÓëÂÌ»¯ÒªËØÊôĞÔ±í£¨LHYS£©ÖĞµÄ¡¾ID_LDK¡¿È¡¡¾LHMJ¡¿µÄ»ã×ÜÖµ
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "é›†ä¸­ç»¿åœ°é¢ç§¯ä¸é›†ä¸­ç»¿åœ°èŒƒå›´é¢é¢ç§¯æ±‡æ€»å€¼ä¸€è‡´æ€§æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->é›†ä¸­ç»¿åœ°é¢ç§¯ä¸é›†ä¸­ç»¿åœ°èŒƒå›´é¢é¢ç§¯æ±‡æ€»å€¼ä¸€è‡´æ€§æ£€æŸ¥"
-    strDescription = "é›†ä¸­ç»¿åœ°é¢ç§¯ä¸é›†ä¸­ç»¿åœ°èŒƒå›´é¢é¢ç§¯æ±‡æ€»å€¼ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "¼¯ÖĞÂÌµØÃæ»ıÓë¼¯ÖĞÂÌµØ·¶Î§ÃæÃæ»ı»ã×ÜÖµÒ»ÖÂĞÔ¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->¼¯ÖĞÂÌµØÃæ»ıÓë¼¯ÖĞÂÌµØ·¶Î§ÃæÃæ»ı»ã×ÜÖµÒ»ÖÂĞÔ¼ì²é"
+    strDescription = "¼¯ÖĞÂÌµØÃæ»ıÓë¼¯ÖĞÂÌµØ·¶Î§ÃæÃæ»ı»ã×ÜÖµ²»Ò»ÖÂ"
     
-    'é›†ä¸­ç»¿åœ°é¢ç§¯ JZLDMJ
+    '¼¯ÖĞÂÌµØÃæ»ı JZLDMJ
     SqlStr = "Select JGSCHZXX.JZLDMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,JZLDMJArr,JZLDCount
     
@@ -624,8 +624,8 @@ Function JZLDCheck()
         JZLDMJ = 0
     End If
     
-    'æ±‡æ€»ç»¿åŒ–é¢ç§¯ SumArea
-    SqlStr = "Select LHHF.ID_LDK From LHHF Where LHHF.MC = 'é›†ä¸­ç»¿åœ°' "
+    '»ã×ÜÂÌ»¯Ãæ»ı SumArea
+    SqlStr = "Select LHHF.ID_LDK From LHHF Where LHHF.MC = '¼¯ÖĞÂÌµØ' "
     GetSQLRecordAll SqlStr,IDArr,IDCount
     
     If IDCount > 0 Then
@@ -642,19 +642,19 @@ Function JZLDCheck()
     
 End Function' JZLDCheck
 
-'ç™»é«˜åœºåœ°ä¸ªæ•°ä¸ç™»é«˜åœºåœ°é¢ä¸ªæ•°æ˜¯å¦ä¸€è‡´
+'µÇ¸ß³¡µØ¸öÊıÓëµÇ¸ß³¡µØÃæ¸öÊıÊÇ·ñÒ»ÖÂ
 Function DGCDCheck()
     
-    ' 1ï¼šè§„åˆ’å®æµ‹æ±‡æ€»ä¿¡æ¯è¡¨(JGSCHZXX)è¡¨ä¸­ã€DGCDGSã€‘
-    ' 2ï¼šã€GH_æ¶ˆé˜²è¦ç´ é¢å±æ€§è¡¨ã€‘è¦ç´ ä¸ªæ•°
+    ' 1£º¹æ»®Êµ²â»ã×ÜĞÅÏ¢±í(JGSCHZXX)±íÖĞ¡¾DGCDGS¡¿
+    ' 2£º¡¾GH_Ïû·ÀÒªËØÃæÊôĞÔ±í¡¿ÒªËØ¸öÊı
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "ç™»é«˜åœºåœ°ä¸ªæ•°ä¸ç™»é«˜åœºåœ°é¢ä¸ªæ•°ä¸€è‡´æ€§æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->ç™»é«˜åœºåœ°ä¸ªæ•°ä¸ç™»é«˜åœºåœ°é¢ä¸ªæ•°ä¸€è‡´æ€§æ£€æŸ¥"
-    strDescription = "ç™»é«˜åœºåœ°ä¸ªæ•°ä¸ç™»é«˜åœºåœ°é¢ä¸ªæ•°ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "µÇ¸ß³¡µØ¸öÊıÓëµÇ¸ß³¡µØÃæ¸öÊıÒ»ÖÂĞÔ¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->µÇ¸ß³¡µØ¸öÊıÓëµÇ¸ß³¡µØÃæ¸öÊıÒ»ÖÂĞÔ¼ì²é"
+    strDescription = "µÇ¸ß³¡µØ¸öÊıÓëµÇ¸ß³¡µØÃæ¸öÊı²»Ò»ÖÂ"
     
-    'è·å–äººé˜²æ€»é¢ç§¯ DGCDGS
+    '»ñÈ¡ÈË·À×ÜÃæ»ı DGCDGS
     SqlStr = "Select JGSCHZXX.DGCDGS From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,DGCDGSArr,DGCDGSCount
     
@@ -664,8 +664,8 @@ Function DGCDCheck()
         DGCDGS = 0
     End If
     
-    'è·å–æ¶ˆé˜²è¦ç´ é¢ä¸ªæ•° XFMGS
-    SqlStr = "Select GH_æ¶ˆé˜²è¦ç´ é¢å±æ€§è¡¨.ID From GH_æ¶ˆé˜²è¦ç´ é¢å±æ€§è¡¨ Inner Join GeoAreaTB On GH_æ¶ˆé˜²è¦ç´ é¢å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0"
+    '»ñÈ¡Ïû·ÀÒªËØÃæ¸öÊı XFMGS
+    SqlStr = "Select GH_Ïû·ÀÒªËØÃæÊôĞÔ±í.ID From GH_Ïû·ÀÒªËØÃæÊôĞÔ±í Inner Join GeoAreaTB On GH_Ïû·ÀÒªËØÃæÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0"
     GetSQLRecordAll SqlStr,XFMGSArr,XFMGSCount
     If XFMGSCount > 0 Then
         XFMGS = Transform(XFMGSCount)
@@ -678,19 +678,19 @@ Function DGCDCheck()
     End If
 End Function' DGCDCheck
 
-'äººé˜²æ€»é¢ç§¯ä¸äººé˜²åŠŸèƒ½åŒºé¢ç§¯æ±‡æ€»å€¼æ˜¯å¦ä¸€è‡´
+'ÈË·À×ÜÃæ»ıÓëÈË·À¹¦ÄÜÇøÃæ»ı»ã×ÜÖµÊÇ·ñÒ»ÖÂ
 Function RFMJCheck()
     
-    ' 1ï¼šè§„åˆ’å®æµ‹æ±‡æ€»ä¿¡æ¯è¡¨(JGSCHZXX)è¡¨ä¸­ã€RFZMJã€‘
-    ' 2ï¼šäººé˜²åŠŸèƒ½åŒºå±æ€§è¡¨ï¼ˆRFGNQï¼‰ä¸­ã€JZMJã€‘å€¼ç´¯åŠ å’Œ
+    ' 1£º¹æ»®Êµ²â»ã×ÜĞÅÏ¢±í(JGSCHZXX)±íÖĞ¡¾RFZMJ¡¿
+    ' 2£ºÈË·À¹¦ÄÜÇøÊôĞÔ±í£¨RFGNQ£©ÖĞ¡¾JZMJ¡¿ÖµÀÛ¼ÓºÍ
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "äººé˜²æ€»é¢ç§¯ä¸äººé˜²åŠŸèƒ½åŒºé¢ç§¯æ±‡æ€»å€¼ä¸€è‡´æ€§æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->äººé˜²æ€»é¢ç§¯ä¸äººé˜²åŠŸèƒ½åŒºé¢ç§¯æ±‡æ€»å€¼ä¸€è‡´æ€§æ£€æŸ¥"
-    strDescription = "äººé˜²æ€»é¢ç§¯ä¸äººé˜²åŠŸèƒ½åŒºé¢ç§¯æ±‡æ€»å€¼ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "ÈË·À×ÜÃæ»ıÓëÈË·À¹¦ÄÜÇøÃæ»ı»ã×ÜÖµÒ»ÖÂĞÔ¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->ÈË·À×ÜÃæ»ıÓëÈË·À¹¦ÄÜÇøÃæ»ı»ã×ÜÖµÒ»ÖÂĞÔ¼ì²é"
+    strDescription = "ÈË·À×ÜÃæ»ıÓëÈË·À¹¦ÄÜÇøÃæ»ı»ã×ÜÖµ²»Ò»ÖÂ"
     
-    'è·å–äººé˜²æ€»é¢ç§¯ RFZMJ
+    '»ñÈ¡ÈË·À×ÜÃæ»ı RFZMJ
     SqlStr = "Select JGSCHZXX.RFZMJ From JGSCHZXX Where JGSCHZXX.ID > 0 "
     GetSQLRecordAll SqlStr,RFZMJArr,JZLDCount
     
@@ -701,8 +701,8 @@ Function RFMJCheck()
     End If
     
     
-    'æ±‡æ€»äººé˜²é¢ç§¯ SumArea
-    SqlStr = "Select Sum(RF_äººé˜²åŠŸèƒ½åŒºå±æ€§è¡¨.JZMJ) From RF_äººé˜²åŠŸèƒ½åŒºå±æ€§è¡¨ Inner Join GeoAreaTB On RF_äººé˜²åŠŸèƒ½åŒºå±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 "
+    '»ã×ÜÈË·ÀÃæ»ı SumArea
+    SqlStr = "Select Sum(RF_ÈË·À¹¦ÄÜÇøÊôĞÔ±í.JZMJ) From RF_ÈË·À¹¦ÄÜÇøÊôĞÔ±í Inner Join GeoAreaTB On RF_ÈË·À¹¦ÄÜÇøÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 "
     GetSQLRecordAll SqlStr,SumAreaArr,SumCount
     
     If SumCount > 0 Then
@@ -717,25 +717,25 @@ Function RFMJCheck()
     
 End Function' RFMJCheck
 
-'======================================================å·¥å…·ç±»å‡½æ•°====================================================
+'======================================================¹¤¾ßÀàº¯Êı====================================================
 
-'æ¸…ç©ºç¼“å­˜çš„æ‰€æœ‰æ£€æŸ¥è®°å½•
+'Çå¿Õ»º´æµÄËùÓĞ¼ì²é¼ÇÂ¼
 Function ClearCheckRecord()
     SSProcess.RemoveCheckRecord strGroupName, strCheckName
 End Function' ClearCheckRecord
 
-'æ˜¾ç¤ºæ‰€æœ‰æ£€æŸ¥è®°å½•
+'ÏÔÊ¾ËùÓĞ¼ì²é¼ÇÂ¼
 Function ShowCheckRecord()
     SSProcess.ShowCheckOutput
     SSProcess.SaveCheckRecord
 End Function' ShowCheckRecord
 
-'è·å–æ‰€æœ‰è®°å½•
+'»ñÈ¡ËùÓĞ¼ÇÂ¼
 Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)
     ProJectName = SSProcess.GetProjectFileName
     SSProcess.OpenAccessMdb ProJectName
     If StrSqlStatement = "" Then
-        MsgBox "æŸ¥è¯¢è¯­å¥ä¸ºç©ºï¼Œæ“ä½œåœæ­¢ï¼",48
+        MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
     End If
     iRecordCount =  - 1
     SSProcess.OpenAccessRecordset ProJectName, StrSqlStatement
@@ -758,7 +758,7 @@ Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecord
     SSProcess.CloseAccessMdb ProJectName
 End Function
 
-'æ•°æ®ç±»å‹è½¬æ¢
+'Êı¾İÀàĞÍ×ª»»
 Function Transform(ByVal Values)
     If Values <> "" Then
         If IsNumeric(Values) = True Then

@@ -1,26 +1,26 @@
 
-'===================================================æ£€æŸ¥å‚æ•°å®šä¹‰==================================================
+'===================================================¼ì²é²ÎÊı¶¨Òå==================================================
 
-'æ£€æŸ¥ç»„åç§°
+'¼ì²é×éÃû³Æ
 Dim strGroupName
 
-'æ£€æŸ¥é¡¹åç§°
+'¼ì²éÏîÃû³Æ
 Dim strCheckName
 
-'æ£€æŸ¥æ¨¡å‹åç§°
+'¼ì²éÄ£ĞÍÃû³Æ
 Dim CheckmodelName
 
-'æ£€æŸ¥æè¿°
+'¼ì²éÃèÊö
 Dim strDescription
 
-'====================================================å…¥å£=========================================================
+'====================================================Èë¿Ú=========================================================
 
-'æ£€æŸ¥å…¥å£
+'¼ì²éÈë¿Ú
 Sub OnClick()
 
     ClearCheckRecord
 
-    CheckFilds = "X,Y,GC" 'æ£€æŸ¥å­—æ®µ
+    CheckFilds = "X,Y,GC" '¼ì²é×Ö¶Î
 
     AccuracyCheck "KZDZBCGXXB",CheckFilds,3
 
@@ -28,55 +28,55 @@ Sub OnClick()
     
 End Sub' OnClick
 
-'=====================================================æ£€æŸ¥å‡½æ•°======================================================
+'=====================================================¼ì²éº¯Êı======================================================
 
-'å°æ•°ä½æ•°ç²¾åº¦æ£€æŸ¥
-Function AccuracyCheck(ByVal TableName,ByVal FildsStr,ByVal CheckBits) 'TableName = è¡¨å,FildsStr = æŸ¥è¯¢çš„å­—æ®µå­—ç¬¦ä¸²,CheckBits = æ£€æŸ¥ä½æ•°
+'Ğ¡ÊıÎ»Êı¾«¶È¼ì²é
+Function AccuracyCheck(ByVal TableName,ByVal FildsStr,ByVal CheckBits) 'TableName = ±íÃû,FildsStr = ²éÑ¯µÄ×Ö¶Î×Ö·û´®,CheckBits = ¼ì²éÎ»Êı
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "æ§åˆ¶ç‚¹åæ ‡è¡¨å°æ•°ä½è§„èŒƒæ€§æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->æ§åˆ¶ç‚¹åæ ‡è¡¨å°æ•°ä½è§„èŒƒæ€§æ£€æŸ¥"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "¿ØÖÆµã×ø±ê±íĞ¡ÊıÎ»¹æ·¶ĞÔ¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->¿ØÖÆµã×ø±ê±íĞ¡ÊıÎ»¹æ·¶ĞÔ¼ì²é"
     
-    'æŸ¥è¯¢å­—æ®µå€¼
+    '²éÑ¯×Ö¶ÎÖµ
     SqlStr = "Select " & TableName & "." & "DH," & FildsStr & " From " & TableName
-    GetSQLRecordAll SqlStr,ValArr,SearchCount  'ValArr = [(å€¼1,å€¼2,å€¼3....)(å€¼1,å€¼2,å€¼3....)]
+    GetSQLRecordAll SqlStr,ValArr,SearchCount  'ValArr = [(Öµ1,Öµ2,Öµ3....)(Öµ1,Öµ2,Öµ3....)]
     
-    'å­—æ®µåç§°æ•°ç»„
+    '×Ö¶ÎÃû³ÆÊı×é
     FildsNameArr = Split(FildsStr,",", - 1,1)
     
-    'éå†å­—æ®µå€¼
+    '±éÀú×Ö¶ÎÖµ
     For i = 0 To SearchCount - 1
         CurrentValArr = Split(ValArr(i),",", - 1,1)
         For j = 1 To UBound(CurrentValArr)
             DecimalJudgment Transform(CurrentValArr(j)),CheckBits,ErrorBool
             If ErrorBool Then
-                strDescription = "æ§åˆ¶ç‚¹åæ ‡æˆæœè¡¨ã€" & TableName & "ã€‘ï¼ŒDHä¸ºã€" & CurrentValArr(0) & "ã€‘çš„" & "ã€" & FildsNameArr(j - 1) & "ã€‘å­—æ®µ" & "å°æ•°ä½æ•°å¤§äºä¸‰"
+                strDescription = "¿ØÖÆµã×ø±ê³É¹û±í¡¾" & TableName & "¡¿£¬DHÎª¡¾" & CurrentValArr(0) & "¡¿µÄ" & "¡¾" & FildsNameArr(j - 1) & "¡¿×Ö¶Î" & "Ğ¡ÊıÎ»Êı´óÓÚÈı"
                 SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,0,0,0,0,0,""
             End If
         Next 'j
     Next 'i
 End Function' AccuracyCheck
 
-'======================================================å·¥å…·ç±»å‡½æ•°====================================================
+'======================================================¹¤¾ßÀàº¯Êı====================================================
 
-'æ¸…ç©ºç¼“å­˜çš„æ‰€æœ‰æ£€æŸ¥è®°å½•
+'Çå¿Õ»º´æµÄËùÓĞ¼ì²é¼ÇÂ¼
 Function ClearCheckRecord()
     SSProcess.RemoveCheckRecord strGroupName, strCheckName
 End Function' ClearCheckRecord
 
-'æ˜¾ç¤ºæ‰€æœ‰æ£€æŸ¥è®°å½•
+'ÏÔÊ¾ËùÓĞ¼ì²é¼ÇÂ¼
 Function ShowCheckRecord()
     SSProcess.ShowCheckOutput
     SSProcess.SaveCheckRecord
 End Function' ShowCheckRecord
 
-'è·å–æ‰€æœ‰è®°å½•
+'»ñÈ¡ËùÓĞ¼ÇÂ¼
 Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)
     ProJectName = SSProcess.GetProjectFileName
     SSProcess.OpenAccessMdb ProJectName
     If StrSqlStatement = "" Then
-        MsgBox "æŸ¥è¯¢è¯­å¥ä¸ºç©ºï¼Œæ“ä½œåœæ­¢ï¼",48
+        MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
     End If
     iRecordCount =  - 1
     SSProcess.OpenAccessRecordset ProJectName, StrSqlStatement
@@ -99,8 +99,8 @@ Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecord
     SSProcess.CloseAccessMdb ProJectName
 End Function
 
-'å°æ•°ä½æ•°åˆ¤æ–­
-Function DecimalJudgment(ByVal Num,ByVal CheckBits,ByRef ErrorBool) 'Num = æ£€æŸ¥æ•°,CheckBits = æ£€æŸ¥ä½æ•°,ErrorBool = æ˜¯å¦é”™è¯¯,é”™è¯¯è¿”å›True
+'Ğ¡ÊıÎ»ÊıÅĞ¶Ï
+Function DecimalJudgment(ByVal Num,ByVal CheckBits,ByRef ErrorBool) 'Num = ¼ì²éÊı,CheckBits = ¼ì²éÎ»Êı,ErrorBool = ÊÇ·ñ´íÎó,´íÎó·µ»ØTrue
     
     ErrorBool = False
     
@@ -122,7 +122,7 @@ Function DecimalJudgment(ByVal Num,ByVal CheckBits,ByRef ErrorBool) 'Num = æ£€æŸ
     End If
 End Function' DecimalJudgment
 
-'æ•°æ®ç±»å‹è½¬æ¢
+'Êı¾İÀàĞÍ×ª»»
 Function Transform(ByVal Values)
     If Values <> "" Then
         If IsNumeric(Values) = True Then

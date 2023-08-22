@@ -1,21 +1,21 @@
 
-'===================================================æ£€æŸ¥å‚æ•°å®šä¹‰==================================================
+'===================================================¼ì²é²ÎÊı¶¨Òå==================================================
 
-'æ£€æŸ¥ç»„åç§°
+'¼ì²é×éÃû³Æ
 Dim strGroupName
 
-'æ£€æŸ¥é¡¹åç§°
+'¼ì²éÏîÃû³Æ
 Dim strCheckName
 
-'æ£€æŸ¥æ¨¡å‹åç§°
+'¼ì²éÄ£ĞÍÃû³Æ
 Dim CheckmodelName
 
-'æ£€æŸ¥æè¿°
+'¼ì²éÃèÊö
 Dim strDescription
 
-'====================================================å…¥å£=========================================================
+'====================================================Èë¿Ú=========================================================
 
-'æ£€æŸ¥å…¥å£
+'¼ì²éÈë¿Ú
 Sub OnClick()
     
     ClearCheckRecord
@@ -30,22 +30,22 @@ Sub OnClick()
 
 End Sub' OnClick
 
-'===================================================æ£€æŸ¥å‡½æ•°=======================================================
+'===================================================¼ì²éº¯Êı=======================================================
 
-'é˜²æŠ¤å•å…ƒä¸ªæ•°ä¸é˜²æŠ¤å•å…ƒèŒƒå›´çº¿ä¸ªæ•°å¦ä¸€è‡´
+'·À»¤µ¥Ôª¸öÊıÓë·À»¤µ¥Ôª·¶Î§Ïß¸öÊı·ñÒ»ÖÂ
 Function FHDYGSCheck()
     
-    ' 1ï¼šäººé˜²é¡¹ç›®ä¿¡æ¯è¡¨ï¼ˆRFPROJECTINFOï¼‰ä¸­çš„ã€FHDYGSã€‘çš„å€¼
-    ' 2:äººé˜²é˜²æŠ¤å•å…ƒèŒƒå›´çº¿ï¼ˆRFFHDYFWï¼‰è¦ç´ ä¸ªæ•°ã€‚
+    ' 1£ºÈË·ÀÏîÄ¿ĞÅÏ¢±í£¨RFPROJECTINFO£©ÖĞµÄ¡¾FHDYGS¡¿µÄÖµ
+    ' 2:ÈË·À·À»¤µ¥Ôª·¶Î§Ïß£¨RFFHDYFW£©ÒªËØ¸öÊı¡£
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "é˜²æŠ¤å•å…ƒä¸ªæ•°ä¸é˜²æŠ¤å•å…ƒèŒƒå›´çº¿ä¸ªæ•°ä¸€è‡´æ€§æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->é˜²æŠ¤å•å…ƒä¸ªæ•°ä¸é˜²æŠ¤å•å…ƒèŒƒå›´çº¿ä¸ªæ•°ä¸€è‡´æ€§æ£€æŸ¥"
-    strDescription = "é˜²æŠ¤å•å…ƒä¸ªæ•°ä¸é˜²æŠ¤å•å…ƒèŒƒå›´çº¿ä¸ªæ•°ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "·À»¤µ¥Ôª¸öÊıÓë·À»¤µ¥Ôª·¶Î§Ïß¸öÊıÒ»ÖÂĞÔ¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->·À»¤µ¥Ôª¸öÊıÓë·À»¤µ¥Ôª·¶Î§Ïß¸öÊıÒ»ÖÂĞÔ¼ì²é"
+    strDescription = "·À»¤µ¥Ôª¸öÊıÓë·À»¤µ¥Ôª·¶Î§Ïß¸öÊı²»Ò»ÖÂ"
 
-    'è·å–é˜²æŠ¤å•å…ƒä¸ªæ•° FHDYGS
-    SqlStr = "Select RFPROJECTINFO.Value From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 And RFPROJECTINFO.Key = 'é˜²æŠ¤å•å…ƒä¸ªæ•°' "
+    '»ñÈ¡·À»¤µ¥Ôª¸öÊı FHDYGS
+    SqlStr = "Select RFPROJECTINFO.Value From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 And RFPROJECTINFO.Key = '·À»¤µ¥Ôª¸öÊı' "
     GetSQLRecordAll SqlStr,FHDYGSArr,FHDYGSCount
 
     If FHDYGSCount > 0 Then
@@ -54,7 +54,7 @@ Function FHDYGSCheck()
         FHDYGS = 0
     End If
     
-    'è·å–å›¾ä¸ŠèŒƒå›´çº¿ä¸ªæ•° YSCount
+    '»ñÈ¡Í¼ÉÏ·¶Î§Ïß¸öÊı YSCount
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
     SSProcess.SetSelectCondition "SSObj_Code", "==", 9450013
@@ -67,20 +67,20 @@ Function FHDYGSCheck()
 
 End Function' FHDYGSCheck
 
-'äººé˜²å»ºç­‘é¢ç§¯ä¸äººé˜²åŠŸèƒ½åŒºé¢ç§¯æ±‡æ€»å€¼æ˜¯å¦ä¸€è‡´
+'ÈË·À½¨ÖşÃæ»ıÓëÈË·À¹¦ÄÜÇøÃæ»ı»ã×ÜÖµÊÇ·ñÒ»ÖÂ
 Function RFJZMJCheck()
     
-    ' 1ï¼šäººé˜²é¡¹ç›®ä¿¡æ¯è¡¨ï¼ˆRFPROJECTINFOï¼‰ä¸­çš„ã€RFJZMJã€‘çš„å€¼
-    ' 2:äººé˜²åŠŸèƒ½åŒºï¼ˆRFGNQï¼‰ä¸­çš„ã€JZMJã€‘çš„æ‰€æœ‰æ±‡æ€»å€¼
+    ' 1£ºÈË·ÀÏîÄ¿ĞÅÏ¢±í£¨RFPROJECTINFO£©ÖĞµÄ¡¾RFJZMJ¡¿µÄÖµ
+    ' 2:ÈË·À¹¦ÄÜÇø£¨RFGNQ£©ÖĞµÄ¡¾JZMJ¡¿µÄËùÓĞ»ã×ÜÖµ
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "äººé˜²å»ºç­‘é¢ç§¯ä¸äººé˜²åŠŸèƒ½åŒºé¢ç§¯æ±‡æ€»å€¼ä¸€è‡´æ€§æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->äººé˜²å»ºç­‘é¢ç§¯ä¸äººé˜²åŠŸèƒ½åŒºé¢ç§¯æ±‡æ€»å€¼ä¸€è‡´æ€§æ£€æŸ¥"
-    strDescription = "äººé˜²å»ºç­‘é¢ç§¯ä¸äººé˜²åŠŸèƒ½åŒºé¢ç§¯æ±‡æ€»å€¼ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "ÈË·À½¨ÖşÃæ»ıÓëÈË·À¹¦ÄÜÇøÃæ»ı»ã×ÜÖµÒ»ÖÂĞÔ¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->ÈË·À½¨ÖşÃæ»ıÓëÈË·À¹¦ÄÜÇøÃæ»ı»ã×ÜÖµÒ»ÖÂĞÔ¼ì²é"
+    strDescription = "ÈË·À½¨ÖşÃæ»ıÓëÈË·À¹¦ÄÜÇøÃæ»ı»ã×ÜÖµ²»Ò»ÖÂ"
 
-    'äººé˜²å»ºç­‘é¢ç§¯ RFJZMJ
-    SqlStr = "Select RFPROJECTINFO.Value From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 And RFPROJECTINFO.Key = 'äººé˜²å»ºç­‘é¢ç§¯' "
+    'ÈË·À½¨ÖşÃæ»ı RFJZMJ
+    SqlStr = "Select RFPROJECTINFO.Value From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 And RFPROJECTINFO.Key = 'ÈË·À½¨ÖşÃæ»ı' "
     GetSQLRecordAll SqlStr,RFJZMJArr,RFJZCount
 
     If RFJZCount > 0 Then
@@ -89,8 +89,8 @@ Function RFJZMJCheck()
         RFJZMJ = 0
     End If
     
-    'äººé˜²åŠŸèƒ½åŒºé¢ç§¯æ±‡æ€»å€¼ SumArea
-    SqlStr = "Select Sum(RF_äººé˜²åŠŸèƒ½åŒºå±æ€§è¡¨.JZMJ) From RF_äººé˜²åŠŸèƒ½åŒºå±æ€§è¡¨ Inner Join GeoAreaTB On RF_äººé˜²åŠŸèƒ½åŒºå±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0"
+    'ÈË·À¹¦ÄÜÇøÃæ»ı»ã×ÜÖµ SumArea
+    SqlStr = "Select Sum(RF_ÈË·À¹¦ÄÜÇøÊôĞÔ±í.JZMJ) From RF_ÈË·À¹¦ÄÜÇøÊôĞÔ±í Inner Join GeoAreaTB On RF_ÈË·À¹¦ÄÜÇøÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0"
     GetSQLRecordAll SqlStr,SumAreaArr,SumCount
 
     If SumCount > 0 Then
@@ -105,20 +105,20 @@ Function RFJZMJCheck()
 
 End Function' RFJZMJCheck
 
-'æ©è”½åŒºé¢ç§¯ä¸äººé˜²åŠŸèƒ½åŒºï¼ˆæ©è”½åŒºï¼‰é¢ç§¯æ±‡æ€»å€¼æ˜¯å¦ä¸€è‡´
+'ÑÚ±ÎÇøÃæ»ıÓëÈË·À¹¦ÄÜÇø£¨ÑÚ±ÎÇø£©Ãæ»ı»ã×ÜÖµÊÇ·ñÒ»ÖÂ
 Function YBQCheck()
     
-    ' 1ï¼šäººé˜²é¡¹ç›®ä¿¡æ¯è¡¨ï¼ˆRFPROJECTINFOï¼‰ä¸­çš„ã€YBQMJã€‘çš„å€¼
-    ' 2:äººé˜²åŠŸèƒ½åŒºï¼ˆRFGNQï¼‰ä¸­çš„ã€YSDMã€‘=â€œ600301â€çš„ã€JZMJã€‘çš„æ‰€æœ‰æ±‡æ€»å€¼
+    ' 1£ºÈË·ÀÏîÄ¿ĞÅÏ¢±í£¨RFPROJECTINFO£©ÖĞµÄ¡¾YBQMJ¡¿µÄÖµ
+    ' 2:ÈË·À¹¦ÄÜÇø£¨RFGNQ£©ÖĞµÄ¡¾YSDM¡¿=¡°600301¡±µÄ¡¾JZMJ¡¿µÄËùÓĞ»ã×ÜÖµ
     
-    'æ£€æŸ¥è®°å½•é…ç½®
-    strGroupName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
-    strCheckName = "æ©è”½åŒºé¢ç§¯ä¸äººé˜²åŠŸèƒ½åŒºï¼ˆæ©è”½åŒºï¼‰é¢ç§¯æ±‡æ€»å€¼ä¸€è‡´æ€§æ£€æŸ¥"
-    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->æ©è”½åŒºé¢ç§¯ä¸äººé˜²åŠŸèƒ½åŒºï¼ˆæ©è”½åŒºï¼‰é¢ç§¯æ±‡æ€»å€¼ä¸€è‡´æ€§æ£€æŸ¥"
-    strDescription = "æ©è”½åŒºé¢ç§¯ä¸äººé˜²åŠŸèƒ½åŒºï¼ˆæ©è”½åŒºï¼‰é¢ç§¯æ±‡æ€»å€¼ä¸ä¸€è‡´"
+    '¼ì²é¼ÇÂ¼ÅäÖÃ
+    strGroupName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+    strCheckName = "ÑÚ±ÎÇøÃæ»ıÓëÈË·À¹¦ÄÜÇø£¨ÑÚ±ÎÇø£©Ãæ»ı»ã×ÜÖµÒ»ÖÂĞÔ¼ì²é"
+    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->ÑÚ±ÎÇøÃæ»ıÓëÈË·À¹¦ÄÜÇø£¨ÑÚ±ÎÇø£©Ãæ»ı»ã×ÜÖµÒ»ÖÂĞÔ¼ì²é"
+    strDescription = "ÑÚ±ÎÇøÃæ»ıÓëÈË·À¹¦ÄÜÇø£¨ÑÚ±ÎÇø£©Ãæ»ı»ã×ÜÖµ²»Ò»ÖÂ"
 
-    'æ©è”½åŒºé¢ç§¯ YBQMJ
-    SqlStr = "Select RFPROJECTINFO.Value From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 And RFPROJECTINFO.Key = 'æ©è”½åŒºé¢ç§¯' "
+    'ÑÚ±ÎÇøÃæ»ı YBQMJ
+    SqlStr = "Select RFPROJECTINFO.Value From RFPROJECTINFO Where RFPROJECTINFO.ID > 0 And RFPROJECTINFO.Key = 'ÑÚ±ÎÇøÃæ»ı' "
     GetSQLRecordAll SqlStr,YBQMJArr,YBQCount
 
     If YBQCount > 0 Then
@@ -127,8 +127,8 @@ Function YBQCheck()
         YBQMJ = 0
     End If
     
-    'äººé˜²åŠŸèƒ½åŒºï¼ˆæ©è”½åŒºï¼‰é¢ç§¯æ±‡æ€»å€¼ SumArea
-    SqlStr = "Select Sum(RF_äººé˜²åŠŸèƒ½åŒºå±æ€§è¡¨.JZMJ) From RF_äººé˜²åŠŸèƒ½åŒºå±æ€§è¡¨ Inner Join GeoAreaTB On RF_äººé˜²åŠŸèƒ½åŒºå±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And RF_äººé˜²åŠŸèƒ½åŒºå±æ€§è¡¨.YSDM = '" & "600301'"
+    'ÈË·À¹¦ÄÜÇø£¨ÑÚ±ÎÇø£©Ãæ»ı»ã×ÜÖµ SumArea
+    SqlStr = "Select Sum(RF_ÈË·À¹¦ÄÜÇøÊôĞÔ±í.JZMJ) From RF_ÈË·À¹¦ÄÜÇøÊôĞÔ±í Inner Join GeoAreaTB On RF_ÈË·À¹¦ÄÜÇøÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2) <> 0 And RF_ÈË·À¹¦ÄÜÇøÊôĞÔ±í.YSDM = '" & "600301'"
     GetSQLRecordAll SqlStr,SumAreaArr,SumCount
 
     If SumCount > 0 Then
@@ -143,25 +143,25 @@ Function YBQCheck()
   
 End Function' YBQCheck
 
-'======================================================å·¥å…·ç±»å‡½æ•°====================================================
+'======================================================¹¤¾ßÀàº¯Êı====================================================
 
-'æ¸…ç©ºç¼“å­˜çš„æ‰€æœ‰æ£€æŸ¥è®°å½•
+'Çå¿Õ»º´æµÄËùÓĞ¼ì²é¼ÇÂ¼
 Function ClearCheckRecord()
     SSProcess.RemoveCheckRecord strGroupName, strCheckName
 End Function' ClearCheckRecord
 
-'æ˜¾ç¤ºæ‰€æœ‰æ£€æŸ¥è®°å½•
+'ÏÔÊ¾ËùÓĞ¼ì²é¼ÇÂ¼
 Function ShowCheckRecord()
     SSProcess.ShowCheckOutput
     SSProcess.SaveCheckRecord
 End Function' ShowCheckRecord
 
-'è·å–æ‰€æœ‰è®°å½•
+'»ñÈ¡ËùÓĞ¼ÇÂ¼
 Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)
     ProJectName = SSProcess.GetProjectFileName
     SSProcess.OpenAccessMdb ProJectName
     If StrSqlStatement = "" Then
-        MsgBox "æŸ¥è¯¢è¯­å¥ä¸ºç©ºï¼Œæ“ä½œåœæ­¢ï¼",48
+        MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
     End If
     iRecordCount =  - 1
     SSProcess.OpenAccessRecordset ProJectName, StrSqlStatement
@@ -184,7 +184,7 @@ Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecord
     SSProcess.CloseAccessMdb ProJectName
 End Function
 
-'æ•°æ®ç±»å‹è½¬æ¢
+'Êı¾İÀàĞÍ×ª»»
 Function Transform(ByVal Values)
     If Values <> "" Then
         If IsNumeric(Values) = True Then
