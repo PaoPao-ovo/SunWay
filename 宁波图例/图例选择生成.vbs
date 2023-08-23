@@ -563,7 +563,7 @@ Function AuxiliaryArea(ByVal X1,ByVal Y1,ByVal X2,ByVal Y2,ByVal X3, ByVal Y3,By
     
     AreaId = SSProcess.GetGeoMaxID()
     
-    IdString = SSProcess.SearchInPolyObjIDs(AreaId,10,"",0,1,1)
+    IdString = SSProcess.   (AreaId,10,"",0,1,1)
     SSProcess.PushUndoMark
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition

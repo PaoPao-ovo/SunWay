@@ -1,17 +1,17 @@
-'ÂÖ®Â±ÄÂèòÈáè
+'»´æ÷±‰¡ø
 Dim vArray(1000)
 
-'Âõæ‰æãÁªòÂà∂ÂáΩÊï∞
+'Õº¿˝ªÊ÷∆∫Ø ˝
 Function DrawTuLi()
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
-    SSProcess.SetSelectCondition "SSObj_Code", "==", 9420037 'ÂõæÂªì
+    SSProcess.SetSelectCondition "SSObj_Code", "==", 9420037 'Õº¿™
     SSProcess.SelectFilter
     GeoCount = SSProcess.GetSelGeoCount()
     If Geocount > 0 Then
         For i = 0 To GeoCount - 1
             ID = SSProcess.GetSelGeoValue( i, "SSObj_ID" )
-            SSProcess.GetObjectPoint ID, 1, x, y, z, pointtype, name 'Âè≥‰∏ãËßíÁÇπ
+            SSProcess.GetObjectPoint ID, 1, x, y, z, pointtype, name '”“œ¬Ω«µ„
         Next
         innerids = SSProcess.SearchInnerObjIDs(ID , 10 ,"9410001,9410011,9310032,9460091,9616201,8202002", 0)
         If innerids <> "" Then
@@ -30,26 +30,75 @@ Function DrawTuLi()
                     If Replace(ZDrawCode,DrawCode,"") = ZDrawCode Then
                         ZDrawCode = ZDrawCode & "," & DrawCode
                         ZDrawColor = ZDrawColor & "," & DrawColor
-                        ZDrawName = ZDrawName & "," & Draw	Name
+                        ZDrawName = ZDrawName & "," & Draw    Name
                     End If
                 End If
             Next
             
-            'ÁªòÂà∂Â§ñÊ°Ü
+            'ªÊ÷∆Õ‚øÚ
             arDrawCode = Split(ZDrawCode,",")
             count = UBound(arDrawCode) + 4
             DrawBorder x,y,0,"RGB(255,255,255)",ID,count
             
-            'ÁªòÂà∂ÂÜÖÈÉ®Âõæ‰æã
-            DrawInner x,y,ID,ZDrawCode,ZDrawColor,ZDrawName
+            CreateWindows ZDrawCode,ZDrawColor,ZDrawName,Code,Color,Name
             
-            'ÁªòÂà∂Âõ∫ÂÆöÁÇπÊ≥®ËÆ∞
-            DrawPoint x - 43,y + 11,"9000001",ID
+            If Code <> "" Then
+                'ªÊ÷∆ƒ⁄≤øÕº¿˝
+                DrawInner x,y,ID,Code,Color,Name
+                
+                'ªÊ÷∆πÃ∂®µ„◊¢º«
+                DrawPoint x - 43,y + 11,"9000001",ID
+            End If
+            
         End If
     End If
 End Function
 
-'ÁªòÂà∂Âõæ‰æã
+'…˙≥…—°‘ÒµØ¥∞,∑µªÿ—°‘ÒµƒCode
+Function CreateWindows(ByVal ZDrawCode,ByVal ZDrawColor,ByVal ZDrawName,ByRef Code,ByRef Color,ByRef Name)
+    
+    ZDrawCodeArr = Split(ZDrawCode,",", - 1,1)
+    ReDim Preserve ZDrawCodeArr(UBound(ZDrawCodeArr) + 1)
+    
+    For i = 0 To UBound(ZDrawCodeArr)
+        If i < UBound(ZDrawCodeArr) Then
+            ZDrawCodeArr(i) = ZDrawCodeArr(i) & "°æ" & SSProcess.GetFeatureCodeInfo(ZDrawCodeArr(i),"ObjectName") & "°ø"
+        Else
+            ZDrawCodeArr(i) = ""
+        End If
+        
+    Next 'i
+    
+    '÷∆ø’
+    Code = ""
+    Color = ""
+    Name = ""
+    
+    RecordShortListCount = UBound(ZDrawCodeArr) + 1
+    ResVal_Dlg = SSFunc.SelectListAttr("—°‘Ò¡–±Ì","¥˝—° ˝æ›¡–±Ì","—°÷– ˝æ›¡–±Ì",ZDrawCodeArr,RecordShortListCount)
+    If ResVal_Dlg = 1 Then
+        If RecordShortListCount > 0 Then
+            Size = UBound(ZDrawCodeArr)
+            If Size > 0 Then
+                For i = 0 To RecordShortListCount - 1
+                    If Code = "" Then
+                        CodeArr = Split(ZDrawCodeArr(i),"°æ", - 1,1)
+                        Code = CodeArr(0)
+                        Color = SSProcess.GetFeatureCodeInfo(Code,"LineColor")
+                        Name = SSProcess.GetFeatureCodeInfo(Code,"ObjectName")
+                    Else
+                        CodeArr = Split(ZDrawCodeArr(i),"°æ", - 1,1)
+                        Code = Code & "," & CodeArr(0)
+                        Color = Color & "," & SSProcess.GetFeatureCodeInfo(CodeArr(0),"LineColor")
+                        Name = Name & "," & SSProcess.GetFeatureCodeInfo(CodeArr(0),"ObjectName")
+                    End If
+                Next 'i
+            End If
+        End If
+    End If
+End Function' CreateWindows
+
+'ªÊ÷∆Õº¿˝
 Function DrawInner(x,y,polygonID,ZDrawCode,ZDrawColor,ZDrawName)
     FountWith = 200
     FountHight = 200
@@ -58,42 +107,42 @@ Function DrawInner(x,y,polygonID,ZDrawCode,ZDrawColor,ZDrawName)
     arDrawName = Split(ZDrawName,",")
     count = UBound(arDrawCode) + 3
     
-    'ÊåâÊï∞ÊçÆÁªòÂà∂Âõæ‰æã
+    '∞¥ ˝æ›ªÊ÷∆Õº¿˝
     For i = 0 To count - 3
         DrawLine x - 20,y + 3 * (count - 3 - i) + 3,x - 15,y + 3 * (count - 3 - i) + 3,arDrawCode(i),arDrawColor(i),polygonID
         DrawNote x - 13,y + 3 * (count - 3 - i) + 3,arDrawCode(i),arDrawColor(i),FountWith,FountHight,arDrawName(i),polygonID
     Next
 End Function
 
-'ÁªòÂà∂ÁÇπË¶ÅÁ¥†
+'ªÊ÷∆µ„“™Àÿ
 Function DrawPoint(x,y,code,polygonID)
     SSProcess.CreateNewObj 0
     SSProcess.SetNewObjValue "SSObj_Code", code
     SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "Á´£Â∑•ÂõæÂªì"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ø¢π§Õº¿™"
     SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
     SSProcess.AddNewObjPoint x, y, 0, 0, ""
     SSProcess.AddNewObjToSaveObjList
     SSProcess.SaveBufferObjToDatabase
 End Function
 
-'Âå∫ÂüüÊ°ÜÁ∫øÁªòÂà∂
+'«¯”ÚøÚœﬂªÊ÷∆
 Function DrawBorder(x,y,code,color,polygonID,count)
     SSProcess.CreateNewObj 2
     SSProcess.SetNewObjValue "SSObj_Code", code
     SSProcess.SetNewObjValue "SSObj_Color", color
     SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
     'SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "Á´£Â∑•ÂõæÂªì"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ø¢π§Õº¿™"
     
-    'ÂÜÖÊ°ÜÁ∫ø
+    'ƒ⁄øÚœﬂ
     SSProcess.AddNewObjPoint x, y, 0, 0, ""
     SSProcess.AddNewObjPoint x, y + 3 * count , 0, 0, ""
     SSProcess.AddNewObjPoint x - 60, y + 3 * count , 0, 0, ""
     SSProcess.AddNewObjPoint x - 60, y , 0, 0, ""
     SSProcess.AddNewObjPoint x, y, 0, 0, ""
     
-    'Â§ñÊ°ÜÁ∫ø
+    'Õ‚øÚœﬂ
     SSProcess.AddNewObjPoint x, y, 0, 0, ""
     SSProcess.AddNewObjPoint x, y + 3 * count + 1 , 0, 0, ""
     SSProcess.AddNewObjPoint x - 61, y + 3 * count + 1 , 0, 0, ""
@@ -102,17 +151,17 @@ Function DrawBorder(x,y,code,color,polygonID,count)
     SSProcess.AddNewObjToSaveObjList
     SSProcess.SaveBufferObjToDatabase
     
-    'ÁªòÂà∂Ê†áÈ¢ò
+    'ªÊ÷∆±ÍÃ‚
     DrawTitle x - 30,y + 3 * count - 2,400,400
 End Function
 
-'ÁªòÂà∂Èù¢Ë¶ÅÁ¥†
+'ªÊ÷∆√Ê“™Àÿ
 Function DrawArea(x1,y1,x2,y2,x3,y3,x4,y4,code,color,polygonID)
     SSProcess.CreateNewObj 2
     SSProcess.SetNewObjValue "SSObj_Code", code
     SSProcess.SetNewObjValue "SSObj_Color", color
     SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "Á´£Â∑•ÂõæÂªì"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ø¢π§Õº¿™"
     SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
     SSProcess.AddNewObjPoint x1, y1, 0, 0, ""
     SSProcess.AddNewObjPoint x2, y2, 0, 0, ""
@@ -123,13 +172,13 @@ Function DrawArea(x1,y1,x2,y2,x3,y3,x4,y4,code,color,polygonID)
     SSProcess.SaveBufferObjToDatabase
 End Function
 
-'ÁªòÂà∂Á∫øË¶ÅÁ¥†
+'ªÊ÷∆œﬂ“™Àÿ
 Function DrawLine(x1,y1,x2,y2,code, color, polygonID)
     SSProcess.CreateNewObj 1
     SSProcess.SetNewObjValue "SSObj_Code", code
     SSProcess.SetNewObjValue "SSObj_Color", color
     SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "Á´£Â∑•ÂõæÂªì"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ø¢π§Õº¿™"
     SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
     SSProcess.AddNewObjPoint x1, y1, 0, 0, ""
     SSProcess.AddNewObjPoint x2, y2, 0, 0, ""
@@ -137,14 +186,14 @@ Function DrawLine(x1,y1,x2,y2,code, color, polygonID)
     SSProcess.SaveBufferObjToDatabase
 End Function
 
-'ÁªòÂà∂Ê≥®ËÆ∞
+'ªÊ÷∆◊¢º«
 Function DrawNote(x, y, code, color, width, height, fontString,polygonID)
     SSProcess.CreateNewObj 3
     SSProcess.SetNewObjValue "SSObj_FontClass", "0"
     SSProcess.SetNewObjValue "SSObj_FontString", fontString
     SSProcess.SetNewObjValue "SSObj_Color", color
     SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "Á´£Â∑•ÂõæÂªì"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ø¢π§Õº¿™"
     SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
     SSProcess.SetNewObjValue "SSObj_FontAlignment", "3"
     SSProcess.SetNewObjValue "SSObj_FontWidth", width
@@ -154,13 +203,13 @@ Function DrawNote(x, y, code, color, width, height, fontString,polygonID)
     SSProcess.SaveBufferObjToDatabase
 End Function
 
-'ÁªòÂà∂Ê†áÈ¢ò
+'ªÊ÷∆±ÍÃ‚
 Function DrawTitle(x, y, width, height)
     SSProcess.CreateNewObj 3
     SSProcess.SetNewObjValue "SSObj_FontClass", "0"
-    SSProcess.SetNewObjValue "SSObj_FontString", "Âõæ ‰æã"
+    SSProcess.SetNewObjValue "SSObj_FontString", "Õº ¿˝"
     SSProcess.SetNewObjValue "SSObj_Color", "RGB(255,255,255)"
-    SSProcess.SetNewObjValue "SSObj_LayerName", "Á´£Â∑•ÂõæÂªì"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ø¢π§Õº¿™"
     SSProcess.SetNewObjValue "SSObj_FontAlignment", "3"
     SSProcess.SetNewObjValue "SSObj_FontWidth", width
     SSProcess.SetNewObjValue "SSObj_FontHeight", height
@@ -170,6 +219,6 @@ Function DrawTitle(x, y, width, height)
 End Function
 
 Sub OnClick()
-    'Ê∑ªÂä†‰ª£Á†Å
+    'ÃÌº”¥˙¬Î
     DrawTuLi
 End Sub
