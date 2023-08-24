@@ -6,7 +6,9 @@ Sub OnInitScript()
     ClearSelection '清空原有系统选择集
     
     Mode = 0 '=0 无参数对话框 =1 有参数对话框
+
     Title = "生成线"
+    
     SSProcess.ShowScriptDlg Mode,Title
     
 End Sub

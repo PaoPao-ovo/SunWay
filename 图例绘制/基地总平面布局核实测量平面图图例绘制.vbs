@@ -13,7 +13,7 @@ Function DrawTuLi()
             ID = SSProcess.GetSelGeoValue( i, "SSObj_ID" )
             SSProcess.GetObjectPoint ID, 1, x, y, z, pointtype, name 'сроб╫г╣Ц
         Next
-        innerids = SSProcess.SearchInnerObjIDs(ID , 10 ,"9410001,9410011,9310032,9460091,9616201,8202002", 0)
+        innerids = SSProcess.SearchInnerObjIDs(ID,10,"9410001,9410011,9310032,9460091,9616201,8202002", 0)
         If innerids <> "" Then
             SSFunc.ScanString innerids, ",", vArray, nCount
             ZDrawCode = ""
@@ -21,7 +21,6 @@ Function DrawTuLi()
                 DrawCode = SSProcess.GetObjectAttr(vArray(j), "SSObj_Code")
                 DrawColor = SSProcess.GetObjectAttr(vArray(j), "SSObj_Color")
                 DrawName = SSProcess.GetFeatureCodeInfo(DrawCode,"ObjectName")
-                'MsgBox DrawName 
                 If ZDrawCode = "" Then
                     ZDrawCode = DrawCode
                     ZDrawColor = DrawColor

@@ -49,6 +49,7 @@ Function DrawTuLi()
                 '绘制固定点注记
                 
                 DrawPoint x - 43,y + 11,"9000001",ID
+                
             End If
         End If
     End If
