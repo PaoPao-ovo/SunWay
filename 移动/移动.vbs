@@ -63,8 +63,6 @@ Sub OnClick()
         End If
     Next 'i
     
-    DrawArea BoderMinX - 1,BoderMinY - 1,BoderMaxX + 1,BoderMinY - 1,BoderMaxX + 1,BoderMaxY + 1,BoderMinX - 1,BoderMaxY + 1
-    
     Path = SSProcess.GetSysPathName(7) & "Pictures\"
     StrBmpFile = Path & "Á¢ÃæÍ¼" & ".wmf"
     Dpi = 300
