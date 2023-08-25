@@ -7,68 +7,101 @@ Sub OnClick()
     
     ZStrArr = Split(ZStr,",", - 1,1)
     
-    For i = 0 To UBound(ZStrArr)
-        If i = 0  Then
-            GetFeatureIdStr ZStrArr(i),IdStr
-            GetFour IdStr,MinX,MinY,MaxX,MaxY
-            RightX = MaxX
-            BottomY = MinY
+    For i = 0 To UBound(ZStrArr) Step 4
+        If i + 3 <= UBound(ZStrArr) Then
+            If ResultIdStr = "" Then
+                ResultIdStr = ZStrArr(i) & "," & ZStrArr(i + 1) & "," & ZStrArr(i + 2) & "," & ZStrArr(i + 3) & ";"
+            Else
+                ResultIdStr = ResultIdStr & ZStrArr(i) & "," & ZStrArr(i + 1) & "," & ZStrArr(i + 2) & "," & ZStrArr(i + 3) & ";"
+            End If
         Else
-            GetFeatureIdStr ZStrArr(i),IdStr
-            GetFour IdStr,MinX,MinY,MaxX,MaxY
-            OffSet IdStr,RightX,BottomY,MinX,MinY,MaxX,NextRigthX
-            RightX = NextRigthX
+            For j = i To UBound(ZStrArr)
+                If ResultIdStr = "" Then
+                    If j < UBound(ZStrArr) Then
+                        ResultIdStr = ZStrArr(j) & ","
+                    Else
+                        ResultIdStr = ResultIdStr & ZStrArr(j) & ";"
+                    End If
+                    
+                Else
+                    If j < UBound(ZStrArr)  Then
+                        ResultIdStr = ResultIdStr & ZStrArr(j) & ","
+                    Else
+                        ResultIdStr = ResultIdStr & ZStrArr(j) & ";"
+                    End If
+                End If
+            Next 'i
         End If
     Next 'i
     
-    BoderMinX = ""
-    BoderMinY = ""
-    BoderMaxX = ""
-    BoderMaxY = ""
+    ResultIdStr = Mid(ResultIdStr,1,Len(ResultIdStr) - 1)
+    AllZStrArr = Split(ResultIdStr,";", - 1,1)
     
-    For i = 0 To UBound(ZStrArr)
-        GetFeatureIdStr ZStrArr(i),IdStr
-        GetFour IdStr,MinX,MinY,MaxX,MaxY
-        If BoderMinX = "" Then
-            BoderMinX = MinX
-            BoderMinY = MinY
-            BoderMaxX = MaxX
-            BoderMaxY = MaxY
-        Else
-            
-            If MinX < BoderMinX Then
+    For i = 0 To UBound(AllZStrArr)
+        CurrentZStrArr = Split(AllZStrArr(i),",", - 1,1)
+        For j = 0 To UBound(CurrentZStrArr)
+            If j = 0  Then
+                GetFeatureIdStr CurrentZStrArr(0),IdStr
+                MsgBox IdStr
+                GetFour IdStr,MinX,MinY,MaxX,MaxY
+                RightX = MaxX
+                BottomY = MinY
+            Else
+                GetFeatureIdStr CurrentZStrArr(j),IdStr
+                GetFour IdStr,MinX,MinY,MaxX,MaxY
+                OffSet IdStr,RightX,BottomY,MinX,MinY,MaxX,NextRigthX
+                RightX = NextRigthX
+            End If
+        Next 'j
+        
+        BoderMinX = ""
+        BoderMinY = ""
+        BoderMaxX = ""
+        BoderMaxY = ""
+        
+        For j = 0 To UBound(CurrentZStrArr)
+            GetFeatureIdStr CurrentZStrArr(j),IdStr
+            GetFour IdStr,MinX,MinY,MaxX,MaxY
+            If BoderMinX = "" Then
                 BoderMinX = MinX
-            Else
-                BoderMinX = BoderMinX
-            End If
-            
-            If MaxX > BoderMaxX Then
+                BoderMinY = MinY
                 BoderMaxX = MaxX
-            Else
-                BoderMaxX = BoderMaxX
-            End If
-            
-            If MinY < BoderMaxX Then
-                BoderMinY = BoderMinY
-            Else
-                BoderMinY = BoderMinY
-            End If
-            
-            If MaxY > BoderMaxY Then
                 BoderMaxY = MaxY
             Else
-                BoderMaxY = BoderMaxY
+                
+                If MinX < BoderMinX Then
+                    BoderMinX = MinX
+                Else
+                    BoderMinX = BoderMinX
+                End If
+                
+                If MaxX > BoderMaxX Then
+                    BoderMaxX = MaxX
+                Else
+                    BoderMaxX = BoderMaxX
+                End If
+                
+                If MinY < BoderMaxX Then
+                    BoderMinY = BoderMinY
+                Else
+                    BoderMinY = BoderMinY
+                End If
+                
+                If MaxY > BoderMaxY Then
+                    BoderMaxY = MaxY
+                Else
+                    BoderMaxY = BoderMaxY
+                End If
+                
             End If
-            
-        End If
+        Next 'j
+        
+        Path = SSProcess.GetSysPathName(4)
+        StrBmpFile = Path & "立面图" & i & ".wmf"
+        Dpi = 300
+        
+        SSFunc.DrawToImage BoderMinX - 1,BoderMinY - 1,BoderMaxX + 1,BoderMaxY + 1,"297X100",Dpi,StrBmpFile
     Next 'i
-    
-    Path = SSProcess.GetSysPathName(7) & "Pictures\"
-    StrBmpFile = Path & "立面图" & ".wmf"
-    Dpi = 300
-    
-    SSFunc.DrawToImage BoderMinX - 1,BoderMinY - 1,BoderMaxX + 1,BoderMaxY + 1,"297X100",Dpi,StrBmpFile
-    
 End Sub' OnClick   
 
 '获取某一幢四至
@@ -154,6 +187,11 @@ Function GetFour(ByVal IdStr,ByRef MinX,ByRef MinY,ByRef MaxX,ByRef MaxY)
         End If
     Next 'i
     
+    MinX = MinX - 2
+    MinY = MinY - 2
+    MaxX = MaxX + 2
+    MaxY = MaxY + 2
+    
 End Function' GetFour
 
 '偏移
@@ -215,7 +253,7 @@ Function GetFeatureIdStr(ByVal ZStr,ByRef IdStr)
     If ZStr <> "" Then
         SSProcess.ClearSelection
         SSProcess.ClearSelectCondition
-        SSProcess.SetSelectCondition "SSObj_Type", "==", "POINT,LINE,NOTE"
+        SSProcess.SetSelectCondition "SSObj_Type", "==", "POINT,LINE"
         SSProcess.SetSelectCondition "[ID_ZRZ]", "==", ZStr
         SSProcess.SelectFilter
         GeoCount = SSProcess.GetSelGeoCount()
@@ -225,6 +263,20 @@ Function GetFeatureIdStr(ByVal ZStr,ByRef IdStr)
                 IdStr = SSProcess.GetSelGeoValue(i,"SSObj_ID")
             Else
                 IdStr = IdStr & "," & SSProcess.GetSelGeoValue(i,"SSObj_ID")
+            End If
+        Next 'i
+        
+        SSProcess.ClearSelection
+        SSProcess.ClearSelectCondition
+        SSProcess.SetSelectCondition "[ID_ZRZ]", "==", ZStr
+        SSProcess.SetSelectCondition "SSObj_LayerName", "==", "立面图线"
+        SSProcess.SetSelectCondition "SSObj_LayerName", "==", "立面图注记"
+        NoteCount = SSProcess.GetSelNoteCount()
+        For i = 0 To NoteCount - 1
+            If IdStr = "" Then
+                IdStr = SSProcess.GetSelNoteValue(i,"SSObj_ID")
+            Else
+                IdStr = IdStr & "," & SSProcess.GetSelNoteValue(i,"SSObj_ID")
             End If
         Next 'i
         

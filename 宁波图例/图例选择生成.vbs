@@ -2,13 +2,13 @@
 '==================================================Í¼ÀªºÍÒªËØµÄ±àÂëÅäÖÃ====================================================
 
 'ÒªËØ±àÂë
-Const CodeStr = "9410001,9410011,9410021,9410031,9410041,9410051,9410061,9410071,9410091,9410101,9410104,9410105;9410021,9410031,9410041,9410051,9410061,9410011,9410001,9430001,9430061,9430051,9430041,9430033,9430023,9430013,9430014,9430015,9430016,9430024,9430071;9470103,9410001,9410011,9410021,9410031,9410041,9410051,9410061,9410071;9460081,9460033,9460003,9450013,9420005,9450014;9410001,9410011,9310032,9460091,9616201,8202002"
+Const CodeStr = "9410001,9410011,9410021,9410031,9410041,9410051,9410061,9410071,9410091,9410101,9410104,9410105,9420005,9420006,9310052,9420006,9430013,9414002;9410001,9410011,9410021,9410031,9410041,9410051,9410061,9410081,9410091,9410011,9410001,9430001,9430061,9430051,9430041,9430033,9430023,9430013,9430014,9430015,9430016,9430024,9430071,9460063,9420005,9310072,9310052,9310082,9310091,9460081,946009;9470103,9410001,9410011,9410021,9410031,9410041,9410051,9410061,9410071;9460081,9460033,9460003,9450013,9420005,9450014,9460091,9460081,9450014,9460003,9460033,9460074;9430023,9430033,9430041,9430061,9430071,9430061,9430051,9430015,9430001.9430013"
 
 'Í¼Àª±àÂë
 Const TKCodeStr = "9420034,9420035;9430093;9470105;9460093;9420037"
 
 '×¢¼Ç·ÖÀàºÅ
-Const NoteCodeStr = "GX002,SY001;GX002,SY001;GX002,SY001;GX002,SY001;GX002,SY001"
+Const NoteCodeStr = "FX002,GN001,JZ009,JZ011;CW001,CW003,FX002;GH001,GH002;CW005,CW001,CW002;FX005"
 
 Sub OnClick()
     
@@ -72,9 +72,12 @@ Function GetExitsCode(ByVal CodeStr,ByVal NoteStr,ByRef ExistsCodeArr(),ByRef Ex
         SSProcess.SelectFilter
         CodeCount = SSProcess.GetSelNoteCount
         If CodeCount > 0 Then
-            ExistsCodeArr(ExistsCount) = SSProcess.GetSelNoteValue(0,"SSObj_LayerName") & "¡¾" & NoteArr(i) & "¡¿" & ":" & "×¢¼Ç"
+
+            ExistsCodeArr(ExistsCount) = SSProcess.GetFontClassInfo(NoteArr(i), "Memo" ) & "¡¾" & NoteArr(i) & "¡¿" & ":" & "×¢¼Ç"      
+            ExistsCodeArr(ExistsCount) = SSProcess.GetFontClassInfo(NoteArr(i), "Memo" ) & "¡¾" & NoteArr(i) & "¡¿" & ":" & "×¢¼Ç"
             ExistsCount = ExistsCount + 1
             ReDim Preserve ExistsCodeArr(ExistsCount)
+            
         End If
     Next 'i
     
@@ -373,7 +376,7 @@ Function DrawTuli(ByVal TKCode,ByVal CodeArr(),ByVal CodeCount,ByVal NoteCount,B
             
         Next
     ElseIf TKCode = "9420037" Then
-    
+        
         For i = 0 To TKCount - 1
             
             TKID = SSProcess.GetSelGeoValue(i,"SSObj_ID")
@@ -478,7 +481,7 @@ Function TCK_ZPT(ByVal x0,ByVal y0,ByVal polygonID,ByVal ZDrawCode,ByVal ZDrawCo
             SSProcess.SetSelectCondition "SSObj_FontClass", "=", arDrawNote(j)
             SSProcess.SelectFilter
             Str = SSProcess.GetSelNoteValue(0,"SSObj_FontString")
-            Name = SSProcess.GetSelNoteValue(0,"SSObj_Name")
+            Name = SSProcess.GetFontClassInfo(arDrawNote(j), "Memo" )
             TCK_Note x0 - 18,y0 + j * 2 + 1.5 + 1,arDrawNote(j),Str,polygonID,Name
         Else
             JG_MakeLine x0 - 20,y0 + j * 2 + 1.5 + 1,x0 - 14,y0 + j * 2 + 1.5 + 1,arDrawCode(j - Count - 1),arDrawColor(j - Count - 1 ),polygonID
@@ -559,7 +562,7 @@ Function JG_ZPT(ByVal x0,ByVal y0,ByVal polygonID,ByVal ZDrawCode,ByVal ZDrawCol
             SSProcess.SetSelectCondition "SSObj_FontClass", "=", arDrawNote(j)
             SSProcess.SelectFilter
             Str = SSProcess.GetSelNoteValue(0,"SSObj_FontString")
-            Name = SSProcess.GetSelNoteValue(0,"SSObj_Name")
+            Name = SSProcess.GetFontClassInfo(arDrawNote(j), "Memo" )
             JG_Note x0 + 3.5,y0 + j * 2 + 1.5,arDrawNote(j),Str,polygonID,Name
         Else
             JG_MakeLine x0 + 1,y0 + j * 2 + 1.5,x0 + 7,y0 + j * 2 + 1.5,arDrawCode(j - Count - 1),arDrawColor(j - Count - 1 ),polygonID
@@ -663,7 +666,7 @@ Function XF_ZPT(ByVal x0,ByVal y0,ByVal polygonID,ByVal ZDrawCode,ByVal ZDrawCol
             SSProcess.SetSelectCondition "SSObj_FontClass", "=", arDrawNote(j)
             SSProcess.SelectFilter
             Str = SSProcess.GetSelNoteValue(0,"SSObj_FontString")
-            Name = SSProcess.GetSelNoteValue(0,"SSObj_Name")
+            Name = SSProcess.GetFontClassInfo(arDrawNote(j), "Memo" )
             XF_Note x0 + 2.75,y0 + j * 2 + 1.5,arDrawNote(j),Str,polygonID,Name
         Else
             CodeType = SSProcess.GetFeatureCodeInfo(arDrawCode(j - Count - 1), "Type")
@@ -757,7 +760,7 @@ Function LD_ZPT(ByVal x0,ByVal y0,ByVal ZGNQMC,ByVal polygonID,ByVal ZDrawCode,B
             SSProcess.SetSelectCondition "SSObj_FontClass", "=", arDrawNote(j)
             SSProcess.SelectFilter
             Str = SSProcess.GetSelNoteValue(0,"SSObj_FontString")
-            Name = SSProcess.GetSelNoteValue(0,"SSObj_Name")
+            Name = SSProcess.GetFontClassInfo(arDrawNote(j), "Memo" )
             XF_Note x0 + 4,y0 + j * 2 + 1.5,arDrawNote(j),Str,polygonID,Name
         Else
             If arDrawCode(j - Count - 1) = "9470103" Then
