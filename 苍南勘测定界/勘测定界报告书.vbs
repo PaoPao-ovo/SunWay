@@ -127,8 +127,8 @@ End Function' OpenProject()
 '绘制图例和指南针
 Function DrawCompass(ByVal EdbScale,ByRef MinX,ByRef MinY,ByRef MaxX,ByRef MaxY)
     If EdbScale = 500 Then
-        makePoint MaxX,MaxY,"9120066",RGB(255,255,255),polygonID  '绘制指南针
-        makePoint MinX,MinY,"9120046",RGB(255,255,255),polygonID  '绘制图例
+        makePoint MaxX - 10,MaxY - 10,"9120066",RGB(255,255,255),polygonID  '绘制指南针
+        makePoint MinX + 10,MinY + 10,"9120046",RGB(255,255,255),polygonID  '绘制图例
     ElseIf EdbScale = 5000 Then
         makePoint MaxX,MaxY,"9120066",RGB(255,255,255),polygonID  '绘制指南针
         makePoint MinX,MinY,"9120047",RGB(255,255,255),polygonID  '绘制图例
@@ -161,15 +161,16 @@ Function InsterPicture(ByVal MinX,ByVal MinY,ByVal MaxX,ByVal MaxY)
     
     Path = SSProcess.GetSysPathName(7) & "Pictures\"
     StrBmpFile = Path & "RFT" & i & ".wmf"
-    Dpi = 100
-    SSFunc.DrawToImage MinX - 1,MinY - 1,MaxX + 1,MaxY + 1,"",Dpi,StrBmpFile
+    Dpi = 300
+
+    SSFunc.DrawToImage MinX,MinY,MaxX,MaxY,"100" & "X" & "100",Dpi,StrBmpFile
     Rotation = 0
     
     Width = 100 * 4.28
     Height = 100 * 4.28
     
-    
     g_docObj.MoveToCell TableIndex,5,0,0
+    
     g_docObj.InsertImage StrBmpFile,Width,Height,Rotation
     
 End Function' InsterPicture
@@ -204,40 +205,10 @@ Function CJCTFWX(ByRef MinX,ByRef MinY,ByRef MaxX,ByRef MaxY)
     Next
     
     '最小框坐标
-    MinX = MinX
-    MaxX = MaxX
-    MinY = MinY
-    MaxY = MaxY
-    
-    '保证缩放
-    Width = MaxX - MinX
-    Height = MaxY - MinY
-    
-    If Height > Width Then
-        Max = Height - Width
-        MinX = MinX - Max / 2
-        MaxX = MaxX + Max / 2
-        MinY = MinY - 70
-        MaxY = MaxY + 70
-    ElseIf Width > Height Then
-        Max = Width - Height
-        If Max / 2 > 70 Then
-            MinY = MinY - Max / 2
-            MaxY = MaxY + Max / 2
-            MinX = MinX - 20
-            MaxX = MaxX + 20
-        Else
-            MinY = MinY - 70
-            MaxY = MaxY + 70
-            MinX = MinX - 20
-            MaxX = MaxX + 20
-        End If
-    Else
-        MinX = MinX
-        MaxX = MaxX
-        MinY = MinY - 70
-        MaxY = MaxY + 70
-    End If
+    MinX = MinX - 10
+    MaxX = MaxX + 10
+    MinY = MinY - 10
+    MaxY = MaxY + 10
     
 End Function
 
