@@ -21,7 +21,6 @@ Function SaveName(ByRef SaveZipName,ByRef Result)
     SSProcess.RefreshView
 End Function' SaveName
 
-
 Function YsFolder(ByVal ZipName)
     SelFolderPath = SSProcess.SelectPathName() '选择的文件夹路径
     SavePath = SSProcess.GetSysPathName(5) & ZipName & ".zip"
