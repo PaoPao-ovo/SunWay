@@ -3,6 +3,8 @@
 
 Sub OnClick()
     
+    DeleteAllImage
+    
     GetAllFildValue ZStr
     
     ZStrArr = Split(ZStr,",", - 1,1)
@@ -33,27 +35,29 @@ Sub OnClick()
             Next 'i
         End If
     Next 'i
-    
     ResultIdStr = Mid(ResultIdStr,1,Len(ResultIdStr) - 1)
     AllZStrArr = Split(ResultIdStr,";", - 1,1)
     
     For i = 0 To UBound(AllZStrArr)
         CurrentZStrArr = Split(AllZStrArr(i),",", - 1,1)
         For j = 0 To UBound(CurrentZStrArr)
-            If j = 0  Then
-                GetFeatureIdStr CurrentZStrArr(0),IdStr
-                MsgBox IdStr
-                GetFour IdStr,MinX,MinY,MaxX,MaxY
-                RightX = MaxX
-                BottomY = MinY
+            If RightX = ""  Then
+                GetFeatureIdStr CurrentZStrArr(j),IdStr
+                If IdStr <> "" Then
+                    GetFour IdStr,MinX,MinY,MaxX,MaxY
+                    RightX = MaxX
+                    BottomY = MinY
+                End If
             Else
                 GetFeatureIdStr CurrentZStrArr(j),IdStr
-                GetFour IdStr,MinX,MinY,MaxX,MaxY
-                OffSet IdStr,RightX,BottomY,MinX,MinY,MaxX,NextRigthX
-                RightX = NextRigthX
+                If idStr <> "" Then
+                    GetFour IdStr,MinX,MinY,MaxX,MaxY
+                    OffSet IdStr,RightX,BottomY,MinX,MinY,MaxX,NextRigthX
+                    RightX = NextRigthX
+                End If
             End If
         Next 'j
-        
+
         BoderMinX = ""
         BoderMinY = ""
         BoderMaxX = ""
@@ -61,48 +65,92 @@ Sub OnClick()
         
         For j = 0 To UBound(CurrentZStrArr)
             GetFeatureIdStr CurrentZStrArr(j),IdStr
-            GetFour IdStr,MinX,MinY,MaxX,MaxY
-            If BoderMinX = "" Then
-                BoderMinX = MinX
-                BoderMinY = MinY
-                BoderMaxX = MaxX
-                BoderMaxY = MaxY
-            Else
-                
-                If MinX < BoderMinX Then
+            If IdStr <> "" Then
+                GetFour IdStr,MinX,MinY,MaxX,MaxY
+                If BoderMinX = "" Then
                     BoderMinX = MinX
-                Else
-                    BoderMinX = BoderMinX
-                End If
-                
-                If MaxX > BoderMaxX Then
+                    BoderMinY = MinY
                     BoderMaxX = MaxX
-                Else
-                    BoderMaxX = BoderMaxX
-                End If
-                
-                If MinY < BoderMaxX Then
-                    BoderMinY = BoderMinY
-                Else
-                    BoderMinY = BoderMinY
-                End If
-                
-                If MaxY > BoderMaxY Then
                     BoderMaxY = MaxY
                 Else
-                    BoderMaxY = BoderMaxY
+                    
+                    If MinX < BoderMinX Then
+                        BoderMinX = MinX
+                    Else
+                        BoderMinX = BoderMinX
+                    End If
+                    
+                    If MaxX > BoderMaxX Then
+                        BoderMaxX = MaxX
+                    Else
+                        BoderMaxX = BoderMaxX
+                    End If
+                    
+                    If MinY < BoderMaxX Then
+                        BoderMinY = BoderMinY
+                    Else
+                        BoderMinY = BoderMinY
+                    End If
+                    
+                    If MaxY > BoderMaxY Then
+                        BoderMaxY = MaxY
+                    Else
+                        BoderMaxY = BoderMaxY
+                    End If
                 End If
-                
             End If
+            
         Next 'j
         
         Path = SSProcess.GetSysPathName(4)
-        StrBmpFile = Path & "立面图" & i & ".wmf"
+        StrBmpFile = Path & "立面图" & i + 1 & ".bmp"
         Dpi = 300
         
-        SSFunc.DrawToImage BoderMinX - 1,BoderMinY - 1,BoderMaxX + 1,BoderMaxY + 1,"297X100",Dpi,StrBmpFile
+        If BoderMinX <> "" Then
+            SSFunc.DrawToImage BoderMinX - 1,BoderMinY - 1,BoderMaxX + 1,BoderMaxY + 1,"297X100",Dpi,StrBmpFile
+        End If
+        
     Next 'i
+    
+    MsgBox "立面图生成完毕！"
+    
 End Sub' OnClick   
+
+'//获取所有文件
+Function GetAllFiles(ByRef pathname, ByRef fileExt, ByRef filecount, ByRef filenames())
+    Dim fso, folder, file, files, subfolder,folder0, fcount
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    If  fso.FolderExists(pathname) Then
+        Set folder = fso.GetFolder(pathname)
+        Set files = folder.Files
+        '查找文件
+        For Each file In files
+            extname = fso.GetExtensionName(file.name)
+            If UCase(extname) = UCase(fileExt) Then
+                filenames(filecount) = pathname & file.name
+                filecount = filecount + 1
+            End If
+        Next
+        '查找子目录
+        Set subfolder = folder.SubFolders
+        For Each folder0 In subfolder
+            GetAllFiles pathname & folder0.name & "\", fileExt, filecount, filenames
+        Next
+    End If
+End Function
+
+'//打印前先删除旧数据
+Function DeleteAllImage
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    filePath = SSProcess.GetSysPathName (4)
+    Dim filenames(10000)
+    GetAllFiles filePath,"bmp",filecount,filenames
+    For i = 0 To filecount - 1
+        projectName = filenames(i)
+        If fso.fileExists(projectName) = True  Then  fso.DeleteFile projectName
+    Next
+    Set fso = Nothing
+End Function
 
 '获取某一幢四至
 Function GetFour(ByVal IdStr,ByRef MinX,ByRef MinY,ByRef MaxX,ByRef MaxY)
@@ -197,7 +245,7 @@ End Function' GetFour
 '偏移
 Function OffSet(ByVal IdStr,ByVal RightX,ByVal BottomY,ByVal MinX,ByVal MinY,ByVal MaxX,ByRef NextRigthX)
     
-    RightX = RightX + 10
+    RightX = RightX + 5
     
     XLength = Sqr((MinX - RightX) ^ 2)
     YLength = Sqr((MinY - BottomY) ^ 2)
@@ -227,7 +275,7 @@ End Function' OffSet
 
 '获取所有的字段名称
 Function GetAllFildValue(ByRef ZStr)
-    SqlStr = "Select DISTINCT JG_立面图线属性表.ID_ZRZ From JG_立面图线属性表 INNER JOIN GeoLineTB ON JG_立面图线属性表.ID = GeoLineTB.ID WHERE ([GeoLineTB].[Mark] Mod 2)<>0"
+    SqlStr = "Select  JG_建设工程建筑单体信息属性表.ID_ZRZ From JG_建设工程建筑单体信息属性表  WHERE JG_建设工程建筑单体信息属性表.ID>0 "
     GetSQLRecordAll SqlStr,ZStrArr,ValCount
     
     If ValCount > 0 Then
@@ -253,7 +301,7 @@ Function GetFeatureIdStr(ByVal ZStr,ByRef IdStr)
     If ZStr <> "" Then
         SSProcess.ClearSelection
         SSProcess.ClearSelectCondition
-        SSProcess.SetSelectCondition "SSObj_Type", "==", "POINT,LINE"
+        SSProcess.SetSelectCondition "SSObj_LayerName", "==", "立面图线,立面图标注"
         SSProcess.SetSelectCondition "[ID_ZRZ]", "==", ZStr
         SSProcess.SelectFilter
         GeoCount = SSProcess.GetSelGeoCount()
@@ -268,9 +316,9 @@ Function GetFeatureIdStr(ByVal ZStr,ByRef IdStr)
         
         SSProcess.ClearSelection
         SSProcess.ClearSelectCondition
-        SSProcess.SetSelectCondition "[ID_ZRZ]", "==", ZStr
-        SSProcess.SetSelectCondition "SSObj_LayerName", "==", "立面图线"
         SSProcess.SetSelectCondition "SSObj_LayerName", "==", "立面图注记"
+        SSProcess.SetSelectCondition "[ID_ZRZ]", "==", ZStr
+        SSProcess.SelectFilter
         NoteCount = SSProcess.GetSelNoteCount()
         For i = 0 To NoteCount - 1
             If IdStr = "" Then
@@ -279,7 +327,6 @@ Function GetFeatureIdStr(ByVal ZStr,ByRef IdStr)
                 IdStr = IdStr & "," & SSProcess.GetSelNoteValue(i,"SSObj_ID")
             End If
         Next 'i
-        
     End If
 End Function' GetFeatureIdStr
 

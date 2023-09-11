@@ -17,7 +17,7 @@ Function XF_Info()
     Next 'i
 End Function' JdAreaInfo
 
-'获取第一边和第二边的边长
+'鑾峰彇绗竴杈瑰拰绗簩杈圭殑杈归暱
 Function GetLineLength(ByVal XFId,ByRef Length1,ByRef Length2,ByRef NoteX1,ByRef NoteY1,ByRef Angle1,ByRef NoteX2,ByRef NoteY2,ByRef Angle2)
     
     SSProcess.GetObjectPoint XFId,0,X0,Y0,Z0,Ptype0,Name0
@@ -34,7 +34,7 @@ Function GetLineLength(ByVal XFId,ByRef Length1,ByRef Length2,ByRef NoteX1,ByRef
     COS1 = Cos(Angle1)
     Angle1 = SSProcess.RadianToDeg(Angle1)
     
-    '确定象限
+    '纭畾璞￠檺
     If Angle1 >= 0 And Angle1 <= 90 Then
         Quadrant1 = 1
     ElseIf Angle1 > 90 And Angle1 <= 180 Then
@@ -54,7 +54,7 @@ Function GetLineLength(ByVal XFId,ByRef Length1,ByRef Length2,ByRef NoteX1,ByRef
     COS2 = Cos(Angle2)
     Angle2 = SSProcess.RadianToDeg(Angle2)
     
-    '确定象限
+    '纭畾璞￠檺
     If Angle2 >= 0 And Angle2 <= 90 Then
         Quadrant2 = 1
     ElseIf Angle2 > 90 And Angle2 <= 180 Then

@@ -1,5 +1,5 @@
 
-'³µÎ»±àÂë
+'è½¦ä½ç¼–ç 
 Dim CodeStr
 CodeStr = "9461053,9461013,9461023,9461033,9461043"
 
@@ -29,8 +29,8 @@ Sub OnClick()
     RFCount = FH_FJDC()
     TotalWXCount = WXC("9461053")
     
-    NoteStr = "µØÏÂ³µÎ»ºÏ¼Æ" & CarCount & "¸ö£¬ÆäÖĞÈË·ÀÇøÓòÄÚ³µÎ»" & RFCount & "¸ö¡£"
-    TipStr = "×¢£ºµØÏÂÊÒÎ¢ĞÍ³µÎ»" & TotalWXCount & "¸ö£¬°´0.7ÕÛËã¡£"
+    NoteStr = "åœ°ä¸‹è½¦ä½åˆè®¡" & CarCount & "ä¸ªï¼Œå…¶ä¸­äººé˜²åŒºåŸŸå†…è½¦ä½" & RFCount & "ä¸ªã€‚"
+    TipStr = "æ³¨ï¼šåœ°ä¸‹å®¤å¾®å‹è½¦ä½" & TotalWXCount & "ä¸ªï¼ŒæŒ‰0.7æŠ˜ç®—ã€‚"
     
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -45,9 +45,9 @@ Sub OnClick()
     End If
 End Sub' OnClick
 
-'================================================ÒµÎñº¯Êı======================================================================
+'================================================ä¸šåŠ¡å‡½æ•°======================================================================
 
-'¼ÆËã»ú¶¯³µ
+'è®¡ç®—æœºåŠ¨è½¦
 Function JDC(ByVal Code)
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -57,7 +57,7 @@ Function JDC(ByVal Code)
     JDC = TotalCount
 End Function' JDC
 
-'¼ÆËãÎ¢ĞÍ³µ
+'è®¡ç®—å¾®å‹è½¦
 Function WXC(ByVal Code)
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -74,7 +74,7 @@ Function WXC(ByVal Code)
     WXC = TotalCount
 End Function' WxC
 
-'¼ÆËã·Ç»ú¶¯³µ
+'è®¡ç®—éæœºåŠ¨è½¦
 Function FJDC(ByVal Code)
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -86,13 +86,13 @@ Function FJDC(ByVal Code)
         For i = 0 To SelCount - 1
             CWLB = SSProcess.GetSelGeoValue(i,"[CheWLB]")
             Select Case CWLB
-                Case "ÊÒÄÚ"
+                Case "å®¤å†…"
                 BLXS = 1.8
                 TotalCount = TotalCount + Int(Transform(SSProcess.GetSelGeoValue(i,"[CheWMJ]")) / BLXS)
-                Case "Â¶Ìì"
+                Case "éœ²å¤©"
                 BLXS = 1.5
                 TotalCount = TotalCount + Int(Transform(SSProcess.GetSelGeoValue(i,"[CheWMJ]")) / BLXS)
-                Case  "Â·±ß"
+                Case  "è·¯è¾¹"
                 BLXS = 1.2
                 TotalCount = TotalCount + Int(Transform(SSProcess.GetSelGeoValue(i,"[CheWMJ]")) / BLXS)
             End Select
@@ -101,7 +101,7 @@ Function FJDC(ByVal Code)
     FJDC = TotalCount
 End Function' FJDC
 
-'¼ÆËã·À»¤µ¥ÔªÄÚ³µÎ»Êı
+'è®¡ç®—é˜²æŠ¤å•å…ƒå†…è½¦ä½æ•°
 Function FH_FJDC()
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -117,11 +117,11 @@ Function FH_FJDC()
     FH_FJDC = TotalCount
 End Function' FH_FJDC
 
-'ÉèÖÃ×¢ÊÍ
+'è®¾ç½®æ³¨é‡Š
 Function DrawNote(ByVal x,ByVal y, ByVal fontString)
     SSProcess.CreateNewObj 3
     SSProcess.SetNewObjValue "SSObj_FontString", fontString
-    SSProcess.SetNewObjValue "SSObj_FontName", "ºÚÌå"
+    SSProcess.SetNewObjValue "SSObj_FontName", "é»‘ä½“"
     SSProcess.SetNewObjValue "SSObj_FontAlignment", 4
     SSProcess.SetNewObjValue "SSObj_Color", RGB(255, 0, 0)
     SSProcess.SetNewObjValue "SSObj_FontWidth", 437
@@ -133,9 +133,9 @@ Function DrawNote(ByVal x,ByVal y, ByVal fontString)
 End Function' DrawNote
 
 
-'=================================================¹¤¾ßÀàº¯Êı==================================================================
+'=================================================å·¥å…·ç±»å‡½æ•°==================================================================
 
-'Êı¾İÀàĞÍ×ª»»
+'æ•°æ®ç±»å‹è½¬æ¢
 Function Transform(ByVal Content)
     If Content <> "" Then
         Content = CDbl(Content)

@@ -270,7 +270,7 @@ Function ExportFrame(ByVal pathName,ByVal filename,ByVal frameCount)
             HeaderStr = "工程名称：" & XMMC
             g_docObj.PageSetup2 0,HeaderStr,"作业单位：" & CHDW & Space(30) & " 制表者：苏世景"
             g_docObj.PageSetup2 1,"","校核者：林培兵" & Space(30) & "日期：" & RQDate
-
+            
         Next
         
         

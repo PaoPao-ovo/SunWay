@@ -1,36 +1,36 @@
 
-'³õÊ¼»¯
+'åˆå§‹åŒ–
 Sub OnInitScript()
     
     
-    ClearSelection 'Çå¿ÕÔ­ÓĞÏµÍ³Ñ¡Ôñ¼¯
+    ClearSelection 'æ¸…ç©ºåŸæœ‰ç³»ç»Ÿé€‰æ‹©é›†
     
-    Mode = 0 '=0 ÎŞ²ÎÊı¶Ô»°¿ò =1 ÓĞ²ÎÊı¶Ô»°¿ò
+    Mode = 0 '=0 æ— å‚æ•°å¯¹è¯æ¡† =1 æœ‰å‚æ•°å¯¹è¯æ¡†
 
-    Title = "Éú³ÉÏß"
+    Title = "ç”Ÿæˆçº¿"
     
     SSProcess.ShowScriptDlg Mode,Title
     
 End Sub
 
-'µã»÷¹Ø±ÕºóÖ´ĞĞ
+'ç‚¹å‡»å…³é—­åæ‰§è¡Œ
 Sub OnExitScript()
-    'Ìí¼Ó´úÂë
+    'æ·»åŠ ä»£ç 
 End Sub
 
-'µã»÷Íê³ÉºóÖ´ĞĞ
+'ç‚¹å‡»å®Œæˆåæ‰§è¡Œ
 Sub OnOK()
     
-    UpdateSelection SelCount,LineIdArr '¸üĞÂÑ¡Ôñ¼¯£¬·µ»ØÑ¡Ôñ¸öÊıºÍÏßIDÊı×é
+    UpdateSelection SelCount,LineIdArr 'æ›´æ–°é€‰æ‹©é›†ï¼Œè¿”å›é€‰æ‹©ä¸ªæ•°å’Œçº¿IDæ•°ç»„
     
     For i = 0 To UBound(LineIdArr)
         
         GXQDDH = SSProcess.GetObjectAttr(LineIdArr(i),"[GXQDDH]")
         GXZDDH = SSProcess.GetObjectAttr(LineIdArr(i),"[GXZDDH]")
         
-        GetPointXY GXQDDH,GXZDDH,StartX,StartY,EndX,EndY '»ñÈ¡Í¬ÃûµÄµãµÄXºÍYÖµ
+        GetPointXY GXQDDH,GXZDDH,StartX,StartY,EndX,EndY 'è·å–åŒåçš„ç‚¹çš„Xå’ŒYå€¼
         
-        SetLineXY LineIdArr(i),StartX,StartY,EndX,EndY 'ĞŞ¸ÄÏßÎ»ÖÃ
+        SetLineXY LineIdArr(i),StartX,StartY,EndX,EndY 'ä¿®æ”¹çº¿ä½ç½®
         
     Next 'i
     
@@ -39,20 +39,20 @@ Sub OnOK()
 End Sub
 
 
-'È¡ÏûºóÖ´ĞĞ
+'å–æ¶ˆåæ‰§è¡Œ
 Sub OnCancel()
-    'Ìí¼Ó´úÂë
+    'æ·»åŠ ä»£ç 
 End Sub
 
-'Çå¿ÕÏµÍ³Ñ¡Ôñ¼¯
+'æ¸…ç©ºç³»ç»Ÿé€‰æ‹©é›†
 Function ClearSelection()
     SSProcess.ClearSysSelection
 End Function' ClearSelection
 
-'½«ÏµÍ³Ñ¡Ôñ¼¯¸üĞÂµ½½Å±¾ÖĞ
+'å°†ç³»ç»Ÿé€‰æ‹©é›†æ›´æ–°åˆ°è„šæœ¬ä¸­
 Function UpdateSelection(ByRef SelCount,ByRef LineIdArr)
     
-    SSProcess.UpdateSysSelection 0 'Ñ¡Ôñ¼¯¸üĞÂ
+    SSProcess.UpdateSysSelection 0 'é€‰æ‹©é›†æ›´æ–°
     SelCount = SSProcess.GetSelGeoCount()
     ReDim LineIdArr(SelCount - 1)
     For i = 0 To SelCount - 1
@@ -61,10 +61,10 @@ Function UpdateSelection(ByRef SelCount,ByRef LineIdArr)
     
 End Function' UpdateSelection
 
-'»ñÈ¡µãµÄ×ø±ê
+'è·å–ç‚¹çš„åæ ‡
 Function GetPointXY(ByVal GXQDDH,ByVal GXZDDH,ByRef StartX,ByRef StartY,ByRef EndX,ByRef EndY)
     
-    SqlStr = "Select µØÏÂ¹ÜÏßµãÊôĞÔ±í.ID From µØÏÂ¹ÜÏßµãÊôĞÔ±í inner join GeoPointTB on µØÏÂ¹ÜÏßµãÊôĞÔ±í.ID = GeoPointTB.ID WHERE (GeoPointTB.Mark Mod 2)<>0 And WTDH = " & "'" & GXQDDH & "'"
+    SqlStr = "Select åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.ID From åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨ inner join GeoPointTB on åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.ID = GeoPointTB.ID WHERE (GeoPointTB.Mark Mod 2)<>0 And WTDH = " & "'" & GXQDDH & "'"
     
     GetSQLRecordAll SqlStr,StartPointArr,Count
     
@@ -73,7 +73,7 @@ Function GetPointXY(ByVal GXQDDH,ByVal GXZDDH,ByRef StartX,ByRef StartY,ByRef En
         StartY = SSProcess.GetObjectAttr(StartPointArr(0),"SSObj_Y")
     End If
     
-    SqlStr = "Select µØÏÂ¹ÜÏßµãÊôĞÔ±í.ID From µØÏÂ¹ÜÏßµãÊôĞÔ±í inner join GeoPointTB on µØÏÂ¹ÜÏßµãÊôĞÔ±í.ID = GeoPointTB.ID WHERE (GeoPointTB.Mark Mod 2)<>0 And WTDH = " & "'" & GXZDDH & "'"
+    SqlStr = "Select åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.ID From åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨ inner join GeoPointTB on åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.ID = GeoPointTB.ID WHERE (GeoPointTB.Mark Mod 2)<>0 And WTDH = " & "'" & GXZDDH & "'"
     
     GetSQLRecordAll SqlStr,StartPointArr,Count
     
@@ -84,7 +84,7 @@ Function GetPointXY(ByVal GXQDDH,ByVal GXZDDH,ByRef StartX,ByRef StartY,ByRef En
     
 End Function' GetPointXY
 
-'ĞŞ¸ÄÏßÎ»ÖÃ
+'ä¿®æ”¹çº¿ä½ç½®
 Function SetLineXY(ByVal LineID,ByVal StartX,ByVal StartY,ByVal EndX,ByVal EndY)
 
     Pointcount = Transform(SSProcess.GetObjectAttr(LineID,"SSObj_PointCount"))
@@ -105,12 +105,12 @@ Function SetLineXY(ByVal LineID,ByVal StartX,ByVal StartY,ByVal EndX,ByVal EndY)
 
 End Function' SetLineXY
 
-'»ñÈ¡ËùÓĞ¼ÇÂ¼
+'è·å–æ‰€æœ‰è®°å½•
 Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)
     ProJectName = SSProcess.GetProjectFileName
     SSProcess.OpenAccessMdb ProJectName
     If StrSqlStatement = "" Then
-        MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
+        MsgBox "æŸ¥è¯¢è¯­å¥ä¸ºç©ºï¼Œæ“ä½œåœæ­¢ï¼",48
     End If
     iRecordCount =  - 1
     SSProcess.OpenAccessRecordset ProJectName, StrSqlStatement
@@ -133,7 +133,7 @@ Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecord
     SSProcess.CloseAccessMdb ProJectName
 End Function
 
-'Êı¾İÀàĞÍ×ª»»
+'æ•°æ®ç±»å‹è½¬æ¢
 Function Transform(ByVal Values)
     If Values <> "" Then
         Values = CDbl(Values)

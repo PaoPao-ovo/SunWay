@@ -1,12 +1,12 @@
-
+Dim  fileName
 Dim xmmc
 Dim arID(1000),arID1(1000),arID2(1000)
+Dim vArray1(2000), vArray2(2000), vArray3(2000)
 Dim cvArray1(2000), cvArray2(2000), cvArray3(2000),vArray(3000)
 Dim dileimc(5000)
 Dim dileibm(5000)
 Dim dlmchbm(5000)
 Dim projectName
-
 Dim X0
 Dim Y0
 Dim sxcd
@@ -21,7 +21,7 @@ Dim RoteAngle
 
 Sub OnClick()
     
-    'å¤šä¸ªå›¾å»“ï¼Œåˆ é™¤å›¾å»“ï¼Œåªä¿ç•™ä¸€ä¸ª
+    '¶à¸öÍ¼Àª£¬É¾³ıÍ¼Àª£¬Ö»±£ÁôÒ»¸ö
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
     SSProcess.SetSelectCondition "SSObj_Code", "==", 8888
@@ -63,13 +63,13 @@ Sub OnClick()
     End If
     
     Dim MapScale
-    ztmc = "é»‘ä½“"
+    ztmc = "ºÚÌå"
     ztdx = 187
     MapScale = SSProcess.GetMapScale
     xs = 1000 / MapScale
     projectName = SSProcess.GetProjectFileName
     
-    sql1 = "Select DISTINCT åœ°ç±»å›¾æ–‘å±æ€§è¡¨.dlmc From åœ°ç±»å›¾æ–‘å±æ€§è¡¨ INNER JOIN GeoAreaTB ON åœ°ç±»å›¾æ–‘å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE ([GeoAreaTB].[Mark] Mod 2)<>0 "
+    sql1 = "Select DISTINCT µØÀàÍ¼°ßÊôĞÔ±í.dlmc From µØÀàÍ¼°ßÊôĞÔ±í INNER JOIN GeoAreaTB ON µØÀàÍ¼°ßÊôĞÔ±í.ID = GeoAreaTB.ID WHERE ([GeoAreaTB].[Mark] Mod 2)<>0 "
     GetSQLRecordAll projectName,sql1,arSQLRecord1,iRecordCount1
     
     tbqcsl = iRecordCount1
@@ -77,72 +77,72 @@ Sub OnClick()
     For i = 0 To iRecordCount1 - 1
         If  arSQLRecord1(i) <> "" Then
             Select Case arSQLRecord1(i)
-                Case "æ°´ç”°"  ,"æ°´æµ‡åœ°","æ—±åœ°"
+                Case "Ë®Ìï"  ,"Ë®½½µØ","ºµµØ"
                 gdsl = gdsl + 1
                 nydsl = nydsl + 1
                 GDMC = GDMC & "," & arSQLRecord1(i)
                 
-                Case "æœå›­" ,"èŒ¶å›­","æ©¡èƒ¶å›­","å…¶ä»–å›­åœ°"
+                Case "¹ûÔ°" ,"²èÔ°","Ïğ½ºÔ°","ÆäËûÔ°µØ"
                 ydsl = ydsl + 1
                 nydsl = nydsl + 1
                 GYMC = GYMC & "," & arSQLRecord1(i)
-                Case "ä¹”æœ¨æ—åœ°","çŒæœ¨æ—åœ°","ç«¹æ—åœ°","çº¢æ ‘æ—åœ°","æ£®æ—æ²¼æ³½","çŒä¸›æ²¼æ³½","å…¶ä»–æ—åœ°"
+                Case "ÇÇÄ¾ÁÖµØ","¹àÄ¾ÁÖµØ","ÖñÁÖµØ","ºìÊ÷ÁÖµØ","É­ÁÖÕÓÔó","¹à´ÔÕÓÔó","ÆäËûÁÖµØ"
                 ldsl = ldsl + 1
                 nydsl = nydsl + 1
                 LDMC = LDMC & "," & arSQLRecord1(i)
-                Case "å¤©ç„¶ç‰§è‰åœ°", "äººå·¥ç‰§è‰åœ°","æ²¼æ³½è‰åœ°","å…¶ä»–è‰åœ°"
+                Case "ÌìÈ»ÄÁ²İµØ", "ÈË¹¤ÄÁ²İµØ","ÕÓÔó²İµØ","ÆäËû²İµØ"
                 cdsl = cdsl + 1
                 nydsl = nydsl + 1
                 CDMC = CDMC & "," & arSQLRecord1(i)
-                Case "å†œæ‘é“è·¯"
+                Case "Å©´åµÀÂ·"
                 ncdlsl = ncdlsl + 1
                 nydsl = nydsl + 1
                 NCDLMC = NCDLMC & "," & arSQLRecord1(i)
-                Case "è®¾æ–½å†œç”¨åœ°", "ç”°å"
+                Case "ÉèÊ©Å©ÓÃµØ", "Ìï¿²"
                 nydqtsl = nydqtsl + 1
                 nydsl = nydsl + 1
                 NYDQTMC = NYDQTMC & "," & arSQLRecord1(i)
-                Case "æ°´åº“æ°´é¢", "å‘å¡˜æ°´é¢", "æ²Ÿæ¸ "
+                Case "Ë®¿âË®Ãæ", "¿ÓÌÁË®Ãæ", "¹µÇş"
                 nydsxsl = nydsxsl + 1
                 nydsl = nydsl + 1
                 NYDSXMC = NYDSXMC & "," & arSQLRecord1(i)
-                Case "å•†ä¸šæœåŠ¡ä¸šè®¾æ–½ç”¨åœ°", "ç‰©æµä»“å‚¨ç”¨åœ°"
+                Case "ÉÌÒµ·şÎñÒµÉèÊ©ÓÃµØ", "ÎïÁ÷²Ö´¢ÓÃµØ"
                 sfsl = sfsl + 1
                 jsydsl = jsydsl + 1
                 SFMC = SFMC & "," & arSQLRecord1(i)
-                Case "å·¥ä¸šç”¨åœ°", "é‡‡çŸ¿ç”¨åœ°", "ç›ç”°"
+                Case "¹¤ÒµÓÃµØ", "²É¿óÓÃµØ", "ÑÎÌï"
                 gkydsl = gkydsl + 1
                 jsydsl = jsydsl + 1
                 GKMC = GKMC & "," & arSQLRecord1(i)
-                Case "åŸé•‡ä½å®…ç”¨åœ°", "å†œæ‘å®…åŸºåœ°"
+                Case "³ÇÕò×¡Õ¬ÓÃµØ", "Å©´åÕ¬»ùµØ"
                 zzydsl = zzydsl + 1
                 jsydsl = jsydsl + 1
                 ZZMC = ZZMC & "," & arSQLRecord1(i)
-                Case "æœºå…³å›¢ä½“æ–°é—»å‡ºç‰ˆç¤¾ç”¨åœ°", "ç§‘æ•™æ–‡å«ç”¨åœ°", "å…¬ç”¨è®¾æ–½ç”¨åœ°", "å…¬å›­ä¸ç»¿åœ°"
+                Case "»ú¹ØÍÅÌåĞÂÎÅ³ö°æÉçÓÃµØ", "¿Æ½ÌÎÄÎÀÓÃµØ", "¹«ÓÃÉèÊ©ÓÃµØ", "¹«Ô°ÓëÂÌµØ"
                 ggglsl = ggglsl + 1
                 jsydsl = jsydsl + 1
                 GYSSMC = GYSSMC & "," & arSQLRecord1(i)
-                Case "ç‰¹æ®Šç”¨åœ°"
+                Case "ÌØÊâÓÃµØ"
                 tsydsl = tsydsl + 1
                 jsydsl = jsydsl + 1
                 TSMC = TSMC & "," & arSQLRecord1(i)
-                Case "é“è·¯ç”¨åœ°", "è½¨é“äº¤é€šç”¨åœ°", "å…¬è·¯ç”¨åœ°", "åŸé•‡æ‘é“è·¯ç”¨åœ°", "äº¤é€šæœåŠ¡åœºç«™ç”¨åœ°", "æœºåœºç”¨åœ°", "æ¸¯å£ç å¤´ç”¨åœ°", "ç®¡é“è¿è¾“ç”¨åœ°"
+                Case "ÌúÂ·ÓÃµØ", "¹ìµÀ½»Í¨ÓÃµØ", "¹«Â·ÓÃµØ", "³ÇÕò´åµÀÂ·ÓÃµØ", "½»Í¨·şÎñ³¡Õ¾ÓÃµØ", "»ú³¡ÓÃµØ", "¸Û¿ÚÂëÍ·ÓÃµØ", "¹ÜµÀÔËÊäÓÃµØ"
                 jtydsl = jtydsl + 1
                 jsydsl = jsydsl + 1
                 JTMC = JTMC & "," & arSQLRecord1(i)
-                Case "æ°´å·¥å»ºç­‘ç”¨åœ°"
+                Case "Ë®¹¤½¨ÖşÓÃµØ"
                 jsslsl = jsslsl + 1
                 jsydsl = jsydsl + 1
                 SGJZMC = SGJZMC & "," & arSQLRecord1(i)
-                Case "ç©ºé—²åœ°"
+                Case "¿ÕÏĞµØ"
                 jsqtsl = jsqtsl + 1
                 jsydsl = jsydsl + 1
                 KXDMC = KXDMC & "," & arSQLRecord1(i)
-                Case "æ²³æµæ°´é¢", "æ¹–æ³Šæ°´é¢", "æ²¿æµ·æ»©æ¶‚", "å†…é™†æ»©æ¶‚", "æ²¼æ³½åœ°", "å†°å·åŠæ°¸ä¹…ç§¯é›ª"
+                Case "ºÓÁ÷Ë®Ãæ", "ºş²´Ë®Ãæ", "ÑØº£Ì²Í¿", "ÄÚÂ½Ì²Í¿", "ÕÓÔóµØ", "±ù´¨¼°ÓÀ¾Ã»ıÑ©"
                 sysl = sysl + 1
                 wlydsl = wlydsl + 1
                 SYMC = SYMC & "," & arSQLRecord1(i)
-                Case "ç›ç¢±åœ°", "æ²™åœ°", "è£¸åœŸåœ°", "è£¸å²©çŸ³ç ¾åœ°"
+                Case "ÑÎ¼îµØ", "É³µØ", "ÂãÍÁµØ", "ÂãÑÒÊ¯ÀùµØ"
                 qttdsl = qttdsl + 1
                 wlydsl = wlydsl + 1
                 QTMC = QTMC & "," & arSQLRecord1(i)
@@ -168,21 +168,21 @@ Sub OnClick()
         tbqcsl = tbqcsl + 2
         gdsl = 2
         nydsl = 2
-        GDMC = ",æ°´ç”°,æ—±åœ°"
+        GDMC = ",Ë®Ìï,ºµµØ"
     End If
     If wlydsl = 0 Then
         count5 = count5 + 1
         tbqcsl = tbqcsl + 1
         sysl = sysl + 1
         wlydsl = 1
-        SYMC = ",æ²³æµæ°´é¢"
+        SYMC = ",ºÓÁ÷Ë®Ãæ"
     End If
     If jsydsl = 0 Then
         count5 = count5 + 1
         tbqcsl = tbqcsl + 1
         zzydsl = 1
         jsydsl = 1
-        ZZMC = ",å†œæ‘å®…åŸºåœ°"
+        ZZMC = ",Å©´åÕ¬»ùµØ"
     End If
     
     
@@ -240,7 +240,7 @@ Sub OnClick()
             Next
             
             
-            'å¤–å›´ç«–æ¡†
+            'ÍâÎ§Êú¿ò
             
             DrawLine x0,y0,x0,y0,x0,y0 + sxcd,RoteAngle,1,"RGB(255,255,255)", 3
             
@@ -252,14 +252,14 @@ Sub OnClick()
             
             DrawLine x0,y0,x0 + hxcd - 12,y0 + 2,x0 + hxcd - 12,y0 + sxcd - 8,RoteAngle,1, "RGB(255,255,255)", 3
             
-            'å†…ç«–æ¡†
+            'ÄÚÊú¿ò
             DrawLine x0,y0,x0 + 18,y0 + 2,x0 + 18,y0 + sxcd - 8,RoteAngle,1,"RGB(255,255,255)", 3
             
             DrawLine x0,y0,x0,y0 + sxcd,x0 + hxcd,y0 + sxcd,RoteAngle,1,"RGB(255,255,255)", 3
             
-            DrawNote TKX0,TKY0,x0 + 10.5,y0 + sxcd - 19.25,RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "åœ°å—åç§°",3,ztmc
+            DrawNote TKX0,TKY0,x0 + 10.5,y0 + sxcd - 19.25,RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "µØ¿éÃû³Æ",3,ztmc
             
-            DrawNote TKX0,TKY0,x0 + hxcd - 2 - 5,y0 + sxcd - 19.25,RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "åˆè®¡",3,ztmc
+            DrawNote TKX0,TKY0,x0 + hxcd - 2 - 5,y0 + sxcd - 19.25,RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "ºÏ¼Æ",3,ztmc
             
             DrawLine x0,y0,x0 + 3,y0 + sxcd - 8,x0 + hxcd - 2,y0 + sxcd - 8,RoteAngle,1, "RGB(255,255,255)", 3
             
@@ -275,21 +275,21 @@ Sub OnClick()
             
             DrawLine x0,y0,x0 + 3,y0 + 2,x0 + hxcd - 2,y0 + 2,RoteAngle,1, "RGB(255,255,255)", 3
             
-            'å†œç”¨åœ°å·¦ç«–çº¿
+            'Å©ÓÃµØ×óÊúÏß
             DrawLine x0,y0,x0 + 18 + nydsl * 10,y0 + 2,x0 + 18 + nydsl * 10,y0 + sxcd - 8,RoteAngle,1, "RGB(255,255,255)", 3
             
             If nydsl <> ""Then
-                DrawNote  x0,y0,x0 + 18 + nydsl * 5,y0 + sxcd - 11.5, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "å†œç”¨åœ°",3,ztmc
+                DrawNote  x0,y0,x0 + 18 + nydsl * 5,y0 + sxcd - 11.5, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "Å©ÓÃµØ",3,ztmc
             End If
             
             If nydsl <> 0 Or wlydsl <> 0 Then DrawLine x0,y0,x0 + hxcd - 12 - wlydsl * 10,y0 + 2,x0 + hxcd - 12 - wlydsl * 10,y0 + sxcd - 8,RoteAngle,1, "RGB(255,255,255)", 3
             
             If wlydsl <> "" Then
-                DrawNote  x0,y0,x0 + hxcd - 12 - wlydsl * 5,y0 + sxcd - 10.5, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "æœªåˆ©",3,ztmc
-                DrawNote  x0,y0,x0 + hxcd - 12 - wlydsl * 5,y0 + sxcd - 13, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "ç”¨åœ°",3,ztmc
+                DrawNote  x0,y0,x0 + hxcd - 12 - wlydsl * 5,y0 + sxcd - 10.5, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "Î´Àû",3,ztmc
+                DrawNote  x0,y0,x0 + hxcd - 12 - wlydsl * 5,y0 + sxcd - 13, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "ÓÃµØ",3,ztmc
             End If
             
-            If jsydsl <> "" Then DrawNote  x0,y0,x0 + hxcd - 12 - wlydsl * 10 - jsydsl * 5,y0 + sxcd - 11.5, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "å»ºè®¾ç”¨åœ°",3,ztmc
+            If jsydsl <> "" Then DrawNote  x0,y0,x0 + hxcd - 12 - wlydsl * 10 - jsydsl * 5,y0 + sxcd - 11.5, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "½¨ÉèÓÃµØ",3,ztmc
             
             For dk = 1 To dkcount + 1
                 
@@ -298,25 +298,25 @@ Sub OnClick()
                     
                     NumberChange dk,hzdk
                     
-                    dkmc = "åœ°å—" & hzdk
+                    dkmc = "µØ¿é" & hzdk
                     
                     DrawNote x0,y0,x0 + 10.5,y0 + sxcd - 30.5 - 4.5 * dk + 2.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs,ztdx * xs, dkmc,3,ztmc
                 Else
-                    DrawNote x0,y0,x0 + 10.5,y0 + sxcd - 30.5 - 4.5 * dk + 2.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "åˆè®¡",3,ztmc
+                    DrawNote x0,y0,x0 + 10.5,y0 + sxcd - 30.5 - 4.5 * dk + 2.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "ºÏ¼Æ",3,ztmc
                 End If
             Next
         Next
         
-        'å›¾æ–‘ç«–çº¿
+        'Í¼°ßÊúÏß
         For l = 1 To tbqcsl
             DrawLine x0,y0,x0 + 18 + l * 10,y0 + 2,x0 + 18 + l * 10,y0 + sxcd - 23,RoteAngle,1, "RGB(255,255,255)", 3
         Next
-        'è€•åœ°è¡Œç«–çº¿
+        '¸ûµØĞĞÊúÏß
         LJS = 0
         js = 1
         If gdsl > 0 Then
             DrawLine x0,y0,x0 + 18 + gdsl * 10,y0 + sxcd - 15.5,x0 + 18 + gdsl * 10,y0 + sxcd - 23,RoteAngle,1, "RGB(255,255,255)", 3
-            DrawNote  x0,y0,x0 + 18 + gdsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "è€•åœ°",3,ztmc
+            DrawNote  x0,y0,x0 + 18 + gdsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "¸ûµØ",3,ztmc
             SUMTBMJ  GDMC,LJS,M2
             LJS = LJS + M2
             
@@ -324,14 +324,14 @@ Sub OnClick()
         m = gdsl
         If ydsl > 0 Then
             DrawLine x0,y0,x0 + 18 + m * 10 + ydsl * 10,y0 + sxcd - 15.5,x0 + 18 + m * 10 + ydsl * 10,y0 + sxcd - 23,RoteAngle,1, "RGB(255,255,255)", 3
-            DrawNote  x0,y0,x0 + 18 + m * 10 + ydsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "å›­åœ°",3,ztmc
+            DrawNote  x0,y0,x0 + 18 + m * 10 + ydsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "Ô°µØ",3,ztmc
             SUMTBMJ  GYMC,LJS,M2
             LJS = LJS + M2
         End If
         m = m + ydsl
         If Ldsl > 0 Then
             DrawLine x0,y0,x0 + 18 + m * 10 + ldsl * 10,y0 + sxcd - 15.5,x0 + 18 + m * 10 + ldsl * 10,y0 + sxcd - 23,RoteAngle,1, "RGB(255,255,255)", 3
-            DrawNote  x0,y0,x0 + 18 + m * 10 + ldsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "æ—åœ°",3,ztmc
+            DrawNote  x0,y0,x0 + 18 + m * 10 + ldsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "ÁÖµØ",3,ztmc
             SUMTBMJ  LDMC,LJS,M2
             LJS = LJS + M2
             
@@ -339,7 +339,7 @@ Sub OnClick()
         m = m + ldsl
         If cdsl > 0 Then
             DrawLine x0,y0,x0 + 18 + m * 10 + cdsl * 10,y0 + sxcd - 15.5,x0 + 18 + m * 10 + cdsl * 10,y0 + sxcd - 23,RoteAngle,1, "RGB(255,255,255)", 3
-            DrawNote  x0,y0,x0 + 18 + m * 10 + cdsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "è‰åœ°",3,ztmc
+            DrawNote  x0,y0,x0 + 18 + m * 10 + cdsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "²İµØ",3,ztmc
             SUMTBMJ  CDMC,LJS,M2
             LJS = LJS + M2
         End If
@@ -347,7 +347,7 @@ Sub OnClick()
         
         If ncdlsl > 0 Then
             DrawLine x0,y0,x0 + 18 + m * 10 + ncdlsl * 10,y0 + sxcd - 15.5,x0 + 18 + m * 10 + ncdlsl * 10,y0 + sxcd - 23,RoteAngle,1, "RGB(255,255,255)", 3
-            DrawNote  x0,y0,x0 + 18 + m * 10 + ncdlsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "å†œæ‘" & "\" & "é“è·¯",3,ztmc
+            DrawNote  x0,y0,x0 + 18 + m * 10 + ncdlsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "Å©´å" & "\" & "µÀÂ·",3,ztmc
             SUMTBMJ  NCDLMC,LJS,M2
             LJS = LJS + M2
             
@@ -356,7 +356,7 @@ Sub OnClick()
         
         If nydqtsl > 0 Then
             DrawLine x0,y0,x0 + 18 + m * 10 + nydqtsl * 10,y0 + sxcd - 15.5,x0 + 18 + m * 10 + nydqtsl * 10,y0 + sxcd - 23,RoteAngle,1, "RGB(255,255,255)", 3
-            DrawNote  x0,y0,x0 + 18 + m * 10 + nydqtsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "å…¶ä»–" & "\" & "åœŸåœ°",3,ztmc
+            DrawNote  x0,y0,x0 + 18 + m * 10 + nydqtsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "ÆäËû" & "\" & "ÍÁµØ",3,ztmc
             SUMTBMJ  NYDQTMC,LJS,M2
             LJS = LJS + M2
             
@@ -365,7 +365,7 @@ Sub OnClick()
         
         If nydsxsl > 0 Then
             DrawLine x0,y0,x0 + 18 + m * 10 + nydsxsl * 10,y0 + sxcd - 15.5,x0 + 18 + m * 10 + nydsxsl * 10,y0 + sxcd - 23,RoteAngle,1, "RGB(255,255,255)", 3
-            DrawNote  x0,y0,x0 + 18 + m * 10 + nydsxsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "æ°´åŸŸæˆ–" & "\" & "æ°´åˆ©è®¾æ–½" & "\" & "ç”¨åœ°",3,ztmc
+            DrawNote  x0,y0,x0 + 18 + m * 10 + nydsxsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "Ë®Óò»ò" & "\" & "Ë®ÀûÉèÊ©" & "\" & "ÓÃµØ",3,ztmc
             SUMTBMJ  NYDSXMC,LJS,M2
             LJS = LJS + M2
             
@@ -374,7 +374,7 @@ Sub OnClick()
         
         If sfsl > 0 Then
             DrawLine x0,y0,x0 + 18 + m * 10 + sfsl * 10,y0 + sxcd - 15.5,x0 + 18 + m * 10 + sfsl * 10,y0 + sxcd - 23,RoteAngle,1, "RGB(255,255,255)", 3
-            DrawNote  x0,y0,x0 + 18 + m * 10 + sfsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "å•†ä¸šæœåŠ¡" & "\" & "ä¸šç”¨åœ°",3,ztmc
+            DrawNote  x0,y0,x0 + 18 + m * 10 + sfsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "ÉÌÒµ·şÎñ" & "\" & "ÒµÓÃµØ",3,ztmc
             SUMTBMJ  SFMC,LJS,M2
             LJS = LJS + M2
             
@@ -383,7 +383,7 @@ Sub OnClick()
         
         If gkydsl > 0 Then
             DrawLine x0,y0,x0 + 18 + m * 10 + gkydsl * 10,y0 + sxcd - 15.5,x0 + 18 + m * 10 + gkydsl * 10,y0 + sxcd - 23,RoteAngle,1, "RGB(255,255,255)", 3
-            DrawNote  x0,y0,x0 + 18 + m * 10 + gkydsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs,  "å·¥çŸ¿" & "\" & "ç”¨åœ°",3,ztmc
+            DrawNote  x0,y0,x0 + 18 + m * 10 + gkydsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs,  "¹¤¿ó" & "\" & "ÓÃµØ",3,ztmc
             SUMTBMJ  GKMC,LJS,M2
             LJS = LJS + M2
         End If
@@ -391,7 +391,7 @@ Sub OnClick()
         
         If zzydsl > 0 Then
             DrawLine x0,y0,x0 + 18 + m * 10 + zzydsl * 10,y0 + sxcd - 15.5,x0 + 18 + m * 10 + zzydsl * 10,y0 + sxcd - 23,RoteAngle,1, "RGB(255,255,255)", 3
-            DrawNote  x0,y0,x0 + 18 + m * 10 + zzydsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "ä½å®…" & "\" & "ç”¨åœ°",3,ztmc
+            DrawNote  x0,y0,x0 + 18 + m * 10 + zzydsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "×¡Õ¬" & "\" & "ÓÃµØ",3,ztmc
             SUMTBMJ  ZZMC,LJS,M2
             LJS = LJS + M2
         End If
@@ -399,7 +399,7 @@ Sub OnClick()
         
         If ggglsl > 0 Then
             DrawLine x0,y0,x0 + 18 + m * 10 + ggglsl * 10,y0 + sxcd - 15.5,x0 + 18 + m * 10 + ggglsl * 10,y0 + sxcd - 23,RoteAngle,1, "RGB(255,255,255)", 3
-            DrawNote  x0,y0,x0 + 18 + m * 10 + ggglsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "å…¬å…±ç®¡ç†" & "\" & "ä¸å…¬å…±" & "\" & "æœåŠ¡ç”¨åœ°",3,ztmc
+            DrawNote  x0,y0,x0 + 18 + m * 10 + ggglsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "¹«¹²¹ÜÀí" & "\" & "Óë¹«¹²" & "\" & "·şÎñÓÃµØ",3,ztmc
             SUMTBMJ  GYSSMC,LJS,M2
             LJS = LJS + M2
             
@@ -408,7 +408,7 @@ Sub OnClick()
         
         If tsydsl > 0 Then
             DrawLine x0,y0,x0 + 18 + m * 10 + tsydsl * 10,y0 + sxcd - 15.5,x0 + 18 + m * 10 + tsydsl * 10,y0 + sxcd - 23,RoteAngle,1, "RGB(255,255,255)", 3
-            DrawNote  x0,y0,x0 + 18 + m * 10 + tsydsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "ç‰¹æ®Š" & "\" & "ç”¨åœ°",3,ztmc
+            DrawNote  x0,y0,x0 + 18 + m * 10 + tsydsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "ÌØÊâ" & "\" & "ÓÃµØ",3,ztmc
             SUMTBMJ  TSMC,LJS,M2
             LJS = LJS + M2
         End If
@@ -416,7 +416,7 @@ Sub OnClick()
         
         If jtydsl > 0 Then
             DrawLine x0,y0,x0 + 18 + m * 10 + jtydsl * 10,y0 + sxcd - 15.5,x0 + 18 + m * 10 + jtydsl * 10,y0 + sxcd - 23,RoteAngle,1, "RGB(255,255,255)", 3
-            DrawNote  x0,y0,x0 + 18 + m * 10 + jtydsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "äº¤é€š" & "\" & "ç”¨åœ°",3,ztmc
+            DrawNote  x0,y0,x0 + 18 + m * 10 + jtydsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "½»Í¨" & "\" & "ÓÃµØ",3,ztmc
             SUMTBMJ  JTMC,LJS,M2
             LJS = LJS + M2
         End If
@@ -424,7 +424,7 @@ Sub OnClick()
         
         If jsslsl > 0 Then
             DrawLine x0,y0,x0 + 18 + m * 10 + jsslsl * 10,y0 + sxcd - 15.5,x0 + 18 + m * 10 + jsslsl * 10,y0 + sxcd - 23,RoteAngle,1, "RGB(255,255,255)", 3
-            DrawNote  x0,y0,x0 + 18 + m * 10 + jsslsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "æ°´åŸŸæˆ–" & "\" & "æ°´åˆ©è®¾æ–½" & "\" & "ç”¨åœ°",3,ztmc
+            DrawNote  x0,y0,x0 + 18 + m * 10 + jsslsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "Ë®Óò»ò" & "\" & "Ë®ÀûÉèÊ©" & "\" & "ÓÃµØ",3,ztmc
             SUMTBMJ  SGJZMC,LJS,M2
             LJS = LJS + M2
             
@@ -433,7 +433,7 @@ Sub OnClick()
         
         If jsqtsl > 0 Then
             DrawLine x0,y0,x0 + 18 + m * 10 + jsqtsl * 10,y0 + sxcd - 15.5,x0 + 18 + m * 10 + jsqtsl * 10,y0 + sxcd - 23,RoteAngle,1, "RGB(255,255,255)", 3
-            DrawNote  x0,y0,x0 + 18 + m * 10 + jsqtsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "å…¶ä»–" & "\" & "åœŸåœ°",3,ztmc
+            DrawNote  x0,y0,x0 + 18 + m * 10 + jsqtsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "ÆäËû" & "\" & "ÍÁµØ",3,ztmc
             SUMTBMJ  KXDMC,LJS,M2
             LJS = LJS + M2
             
@@ -442,7 +442,7 @@ Sub OnClick()
         
         If sysl > 0 Then
             DrawLine x0,y0,x0 + 18 + m * 10 + sysl * 10,y0 + sxcd - 15.5,x0 + 18 + m * 10 + sysl * 10,y0 + sxcd - 23,RoteAngle,1, "RGB(255,255,255)", 3
-            DrawNote  x0,y0,x0 + 18 + m * 10 + sysl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "æ°´åŸŸæˆ–" & "\" & "æ°´åˆ©è®¾æ–½" & "\" & "ç”¨åœ°",3,ztmc
+            DrawNote  x0,y0,x0 + 18 + m * 10 + sysl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "Ë®Óò»ò" & "\" & "Ë®ÀûÉèÊ©" & "\" & "ÓÃµØ",3,ztmc
             SUMTBMJ  SYMC,LJS,M2
             LJS = LJS + M2
         End If
@@ -451,14 +451,14 @@ Sub OnClick()
         
         If qttdsl > 0 Then
             DrawLine x0,y0,x0 + 18 + m * 10 + qttdsl * 10,y0 + sxcd - 15.5,x0 + 18 + m * 10 + qttdsl * 10,y0 + sxcd - 23,RoteAngle,1, "RGB(255,255,255)", 3
-            DrawNote  x0,y0,x0 + 18 + m * 10 + qttdsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "å…¶ä»–" & "\" & "åœŸåœ°",3,ztmc
+            DrawNote  x0,y0,x0 + 18 + m * 10 + qttdsl * 5,y0 + sxcd - 19.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, "ÆäËû" & "\" & "ÍÁµØ",3,ztmc
             SUMTBMJ  QTMC,LJS,M2
             LJS = LJS + M2
         End If
         m = m + qttdsl
         
-        'å¡«å€¼
-        DrawNote x0,y0,x0 + hxcd / 2,y0 + sxcd - 4 , RoteAngle,0, "RGB(255,255,255)", (ztdx + 22) * xs, (ztdx + 22) * xs, "åœŸåœ°åˆ†ç±»æ±‡æ€»è¡¨",3,ztmc
+        'ÌîÖµ
+        DrawNote x0,y0,x0 + hxcd / 2,y0 + sxcd - 4 , RoteAngle,0, "RGB(255,255,255)", (ztdx + 22) * xs, (ztdx + 22) * xs, "ÍÁµØ·ÖÀà»ã×Ü±í",3,ztmc
         
     End If
     
@@ -470,7 +470,7 @@ Sub OnClick()
     dkCount = SSProcess.GetSelGeoCount()
 
     For c = 1 To dkCount
-        sql = "Select SUM (åœ°ç±»å›¾æ–‘å±æ€§è¡¨.tbmj) From åœ°ç±»å›¾æ–‘å±æ€§è¡¨ INNER JOIN GeoAreaTB ON åœ°ç±»å›¾æ–‘å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE  ([GeoAreaTB].[Mark] Mod 2)<>0 and  åœ°ç±»å›¾æ–‘å±æ€§è¡¨.dkh= " & c
+        sql = "Select SUM (µØÀàÍ¼°ßÊôĞÔ±í.tbmj) From µØÀàÍ¼°ßÊôĞÔ±í INNER JOIN GeoAreaTB ON µØÀàÍ¼°ßÊôĞÔ±í.ID = GeoAreaTB.ID WHERE  ([GeoAreaTB].[Mark] Mod 2)<>0 and  µØÀàÍ¼°ßÊôĞÔ±í.dkh= " & c
         GetSQLRecordAll projectName,sql,arSQLRecord,iRecordCount
         If    iRecordCount > 0 Then
             DKZMJ = arSQLRecord(0)
@@ -484,7 +484,7 @@ Sub OnClick()
         MJB4W DKZMJ
         DrawNote  x0,y0,x0 + hxcd - 7,y0 + sxcd - 30.5 - (c - 1) * 4.5 - 2.25, RoteAngle,0, "RGB(255,255,255)", ztdx * xs, ztdx * xs, DKZMJ,3,ztmc
     Next
-    sql = "Select SUM (åœ°ç±»å›¾æ–‘å±æ€§è¡¨.tbmj) From åœ°ç±»å›¾æ–‘å±æ€§è¡¨ INNER JOIN GeoAreaTB ON åœ°ç±»å›¾æ–‘å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE  ([GeoAreaTB].[Mark] Mod 2)<>0 "
+    sql = "Select SUM (µØÀàÍ¼°ßÊôĞÔ±í.tbmj) From µØÀàÍ¼°ßÊôĞÔ±í INNER JOIN GeoAreaTB ON µØÀàÍ¼°ßÊôĞÔ±í.ID = GeoAreaTB.ID WHERE  ([GeoAreaTB].[Mark] Mod 2)<>0 "
     GetSQLRecordAll projectName,sql,arSQLRecord,iRecordCount
     dikuaimj = 0
     dikuaimj = arSQLRecord(0)
@@ -508,7 +508,7 @@ Function makePoint35(x,y,code,color,polygonID,xmmc,zmj)
     SSProcess.SetNewObjValue "SSObj_Color", color
     SSProcess.SetNewObjValue "[xmmc]", xmmc
     SSProcess.SetNewObjValue "[zdmj]", zmj
-    SSProcess.SetNewObjValue "SSObj_LayerName", "ä¹¡é•‡å±æ€§ç‚¹"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ÏçÕòÊôĞÔµã"
     SSProcess.AddNewObjPoint x, y, 0, 0, ""
     SSProcess.AddNewObjToSaveObjList
     SSProcess.SaveBufferObjToDatabase
@@ -522,7 +522,7 @@ Function makePoint45(x,y,code,color,polygonID,qsdw, qydh,zmj)
     SSProcess.SetNewObjValue "[qsdw]", qsdw
     SSProcess.SetNewObjValue "[zdmj]", zmj
     SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "æ‘å±æ€§ç‚¹"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "´åÊôĞÔµã"
     SSProcess.AddNewObjPoint x, y, 0, 0, ""
     SSProcess.AddNewObjToSaveObjList
     SSProcess.SaveBufferObjToDatabase
@@ -577,22 +577,22 @@ Function xmzj
     y = y0 - 20
     x = x0 + 120
     projectName = SSProcess.GetProjectFileName
-    sql = "Select SUM (åœ°ç±»å›¾æ–‘å±æ€§è¡¨.tbmj) From åœ°ç±»å›¾æ–‘å±æ€§è¡¨ INNER JOIN GeoAreaTB ON åœ°ç±»å›¾æ–‘å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE  ([GeoAreaTB].[Mark] Mod 2)<>0 "
+    sql = "Select SUM (µØÀàÍ¼°ßÊôĞÔ±í.tbmj) From µØÀàÍ¼°ßÊôĞÔ±í INNER JOIN GeoAreaTB ON µØÀàÍ¼°ßÊôĞÔ±í.ID = GeoAreaTB.ID WHERE  ([GeoAreaTB].[Mark] Mod 2)<>0 "
     GetSQLRecordAll projectName,sql,arSQLRecord,iRecordCount
     mj1 = arSQLRecord(0)
     MJB4W mj1
     makePoint35 x,y,"510",RGB(255,0,0),4,xmmc,mj1
     
-    sql1 = "Select DISTINCT åœ°ç±»å›¾æ–‘å±æ€§è¡¨.qydh From åœ°ç±»å›¾æ–‘å±æ€§è¡¨ INNER JOIN GeoAreaTB ON åœ°ç±»å›¾æ–‘å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE ([GeoAreaTB].[Mark] Mod 2)<>0 "
+    sql1 = "Select DISTINCT µØÀàÍ¼°ßÊôĞÔ±í.qydh From µØÀàÍ¼°ßÊôĞÔ±í INNER JOIN GeoAreaTB ON µØÀàÍ¼°ßÊôĞÔ±í.ID = GeoAreaTB.ID WHERE ([GeoAreaTB].[Mark] Mod 2)<>0 "
     GetSQLRecordAll projectName,sql1,arSQLRecord1,iRecordCount1
     
     For i = 0 To  iRecordCount1 - 1
-        sql2 = "Select SUM (åœ°ç±»å›¾æ–‘å±æ€§è¡¨.tbmj) From åœ°ç±»å›¾æ–‘å±æ€§è¡¨ INNER JOIN GeoAreaTB ON åœ°ç±»å›¾æ–‘å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE  ([GeoAreaTB].[Mark] Mod 2)<>0 and  åœ°ç±»å›¾æ–‘å±æ€§è¡¨.qydh= '" & arSQLRecord1(i) & "'"
+        sql2 = "Select SUM (µØÀàÍ¼°ßÊôĞÔ±í.tbmj) From µØÀàÍ¼°ßÊôĞÔ±í INNER JOIN GeoAreaTB ON µØÀàÍ¼°ßÊôĞÔ±í.ID = GeoAreaTB.ID WHERE  ([GeoAreaTB].[Mark] Mod 2)<>0 and  µØÀàÍ¼°ßÊôĞÔ±í.qydh= '" & arSQLRecord1(i) & "'"
         GetSQLRecordAll projectName,sql2,arSQLRecord2,iRecordCount2
         mj = arSQLRecord2(0)
         MJB4W     mj
         
-        sql3 = "Select DISTINCT åœ°ç±»å›¾æ–‘å±æ€§è¡¨.qsdw From åœ°ç±»å›¾æ–‘å±æ€§è¡¨ INNER JOIN GeoAreaTB ON åœ°ç±»å›¾æ–‘å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE ([GeoAreaTB].[Mark] Mod 2)<>0 and  åœ°ç±»å›¾æ–‘å±æ€§è¡¨.qydh= '" & arSQLRecord1(i) & "'"
+        sql3 = "Select DISTINCT µØÀàÍ¼°ßÊôĞÔ±í.qsdw From µØÀàÍ¼°ßÊôĞÔ±í INNER JOIN GeoAreaTB ON µØÀàÍ¼°ßÊôĞÔ±í.ID = GeoAreaTB.ID WHERE ([GeoAreaTB].[Mark] Mod 2)<>0 and  µØÀàÍ¼°ßÊôĞÔ±í.qydh= '" & arSQLRecord1(i) & "'"
         GetSQLRecordAll projectName,sql3,arSQLRecord3,iRecordCount3
         qsdw = arSQLRecord3(0)
         makePoint45 x,y - 15 * i * xs - 15 * xs,"511",RGB(255,0,0),4,qsdw,arSQLRecord1(i),mj
@@ -602,7 +602,7 @@ Function xmzj
     
 End Function
 
-'å›¾ä¾‹å¤–æ¡†
+'Í¼ÀıÍâ¿ò
 Function HZBZ
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -612,7 +612,7 @@ Function HZBZ
     If geoCount > 0 Then
         For i = 0 To geoCount - 1
             
-            'æŒ‡å—é’ˆå¤–è½®å»“
+            'Ö¸ÄÏÕëÍâÂÖÀª
             ID = SSProcess.GetSelGeoValue( i, "SSObj_ID" )
             SSProcess.GetObjectPoint ID, 2, X,Y, z1, pointtype1, name1
             X1 = X - 44
@@ -660,7 +660,7 @@ Function huatuli()
             
             DrawDelArea x,y,tlx,tly,9210055,"RGB(255,255,255)",3,RoteAngle
             
-            'åˆ é™¤åœ°å½¢
+            'É¾³ıµØĞÎ
             SSProcess.ClearSelection
             SSProcess.ClearSelectCondition
             SSProcess.SetSelectCondition "SSObj_Code", "==", "9210055"
@@ -715,10 +715,10 @@ Function huatuli()
                 ZDrawColor = ZDrawColor & "," & DrawColor
                 ZDrawName = ZDrawName & "," & DrawName
             Next
-            'é¢ç§¯æ³¨è®°
+            'Ãæ»ı×¢¼Ç
             ZDrawCode = ZDrawCode & "," & "9210053"
             ZDrawColor = ZDrawColor & "," & "RGB(255,0,0)"
-            ZDrawName = ZDrawName & "," & "é¢ç§¯æ³¨è®°"
+            ZDrawName = ZDrawName & "," & "Ãæ»ı×¢¼Ç"
             
             SSProcess.ClearSelection
             SSProcess.ClearSelectCondition
@@ -730,25 +730,25 @@ Function huatuli()
                 DrawColor = SSProcess.GetObjectAttr(cjID, "SSObj_Color")
             End If
             
-            ZDrawName = ZDrawName & "," & "æ‘ç•Œ"
+            ZDrawName = ZDrawName & "," & "´å½ç"
             ZDrawCode = ZDrawCode & "," & "7170"
             ZDrawColor = ZDrawColor & "," & DrawColor
             
             ZDrawCode = ZDrawCode & "," & "3103013"
             ZDrawColor = ZDrawColor & "," & "RGB(255,0,0)"
-            ZDrawName = ZDrawName & "," & "æˆ¿å±‹"
+            ZDrawName = ZDrawName & "," & "·¿Îİ"
             
             ZDrawCode = ZDrawCode & "," & "3802022"
             ZDrawColor = ZDrawColor & "," & "RGB(255,0,0)"
-            ZDrawName = ZDrawName & "," & "æ …æ "
-            'ä¸å¤Ÿå†å¢åŠ 
+            ZDrawName = ZDrawName & "," & "Õ¤À¸"
+            '²»¹»ÔÙÔö¼Ó
             ZDrawCode = ZDrawCode & "," & "4403002"
             ZDrawColor = ZDrawColor & "," & "RGB(255,0,0)"
-            ZDrawName = ZDrawName & "," & "å°è·¯"
+            ZDrawName = ZDrawName & "," & "Ğ¡Â·"
             
             ZDrawCode = ZDrawCode & "," & "10"
             ZDrawColor = ZDrawColor & "," & "RGB(255,0,0)"
-            ZDrawName = ZDrawName & "," & "ç•Œå€åæ ‡"
+            ZDrawName = ZDrawName & "," & "½çÖ·×ø±ê"
         End If
         
         HuiZHItuli tlx + 11.5 + 9.5,tly,TKID,ZDrawCode,ZDrawColor,ZDrawName,y - 11.5
@@ -759,7 +759,7 @@ End Function
 
 Function HuiZHItuli(x0,y0,polygonID,ZDrawCode,ZDrawColor,ZDrawName,y2)
     
-    ztmc = "å®‹ä½“"
+    ztmc = "ËÎÌå"
     ztdx = 250
     MapScale = SSProcess.GetMapScale
     xs = 1000 / MapScale
@@ -774,7 +774,7 @@ Function HuiZHItuli(x0,y0,polygonID,ZDrawCode,ZDrawColor,ZDrawName,y2)
     geoCount = SSProcess.GetSelGeoCount()
     count5 = UBound(arDrawCode) + 2
     
-    DrawNote x0,y0,x0 - 9.5 + 30,y0 - 8 , RoteAngle,0, "RGB(255,255,255)", 500 * xs, 500 * xs, "å›¾ä¾‹",polygonID,ztmc
+    DrawNote x0,y0,x0 - 9.5 + 30,y0 - 8 , RoteAngle,0, "RGB(255,255,255)", 500 * xs, 500 * xs, "Í¼Àı",polygonID,ztmc
     
     For j = 0 To UBound(arDrawCode)
         
@@ -787,11 +787,11 @@ Function HuiZHItuli(x0,y0,polygonID,ZDrawCode,ZDrawColor,ZDrawName,y2)
             
             DrawTuLiNote x0,y0,x0 - 9.5 + 44,y0 - j * 15 - 24, 0, "RGB(255,255,255)", ztdx, ztdx, arDrawName(j),polygonID,ztmc,RoteAngle
             
-            DrawTuLiNote  x0,y0,x0 - 9.5 + 17,y0 - j * 15 - 26,9120016, "RGB(255,0,0)", 220 * xs, 220 * xs, "0.0044",polygonID,"é»‘ä½“",RoteAngle
+            DrawTuLiNote  x0,y0,x0 - 9.5 + 17,y0 - j * 15 - 26,9120016, "RGB(255,0,0)", 220 * xs, 220 * xs, "0.0044",polygonID,"ºÚÌå",RoteAngle
             
-            DrawTuLiNote  x0,y0,x0 - 9.5 + 17,y0 - j * 15 - 22, 9120016, "RGB(255,0,0)", 220 * xs, 220 * xs, "æ°´ç”°ï¼ˆ1ï¼‰",polygonID,"é»‘ä½“",RoteAngle
+            DrawTuLiNote  x0,y0,x0 - 9.5 + 17,y0 - j * 15 - 22, 9120016, "RGB(255,0,0)", 220 * xs, 220 * xs, "Ë®Ìï£¨1£©",polygonID,"ºÚÌå",RoteAngle
             
-            DrawTuLiNote x0,y0,x0 - 9.5 + 10,y0 - j * 15 - 24,9120016, "RGB(255,0,0)", 220 * xs, 220 * xs, "2",polygonID,"é»‘ä½“",RoteAngle
+            DrawTuLiNote x0,y0,x0 - 9.5 + 10,y0 - j * 15 - 24,9120016, "RGB(255,0,0)", 220 * xs, 220 * xs, "2",polygonID,"ºÚÌå",RoteAngle
             
             Case "7170"
             
@@ -799,7 +799,7 @@ Function HuiZHItuli(x0,y0,polygonID,ZDrawCode,ZDrawColor,ZDrawName,y2)
             
             DrawLine_Cj  x0,y0,x0 - 9.5 + 10,y0 - j * 15 - 24,x0 - 9.5 + 24,y0 - j * 15 - 24,9107150, "RGB(0,0,255)", polygonID,RoteAngle
             
-            DrawNote x0,y0,x0 - 9.5 + 44,y0 - j * 15 - 24,RoteAngle,0, "RGB(255,255,255)", ztdx, ztdx, "æ‘ç•Œ",polygonID,ztmc
+            DrawNote x0,y0,x0 - 9.5 + 44,y0 - j * 15 - 24,RoteAngle,0, "RGB(255,255,255)", ztdx, ztdx, "´å½ç",polygonID,ztmc
             
             Case "1234"
             
@@ -825,7 +825,7 @@ Function HuiZHItuli(x0,y0,polygonID,ZDrawCode,ZDrawColor,ZDrawName,y2)
 
             DrawArea  x0,y0,x0 - 9.5 + 10,y0 - j * 15 - 22,x0 - 9.5 + 24,y0 - j * 15 - 22,x0 - 9.5 + 24,y0 - j * 15 - 26,x0 - 9.5 + 10,y0 - j * 15 - 26,arDrawCode(j), arDrawColor(j), polygonID,RoteAngle
 
-            DrawNote  x0,y0,x0 - 9.5 + 17,y0 - j * 15 - 24,RoteAngle,0,"RGB(255,255,255)", ztdx, ztdx, "ç –2",polygonID,ztmc
+            DrawNote  x0,y0,x0 - 9.5 + 17,y0 - j * 15 - 24,RoteAngle,0,"RGB(255,255,255)", ztdx, ztdx, "×©2",polygonID,ztmc
 
             DrawNote  x0,y0,x0 - 9.5 + 44,y0 - j * 15 - 24,RoteAngle,0,"RGB(255,255,255)", ztdx, ztdx, arDrawName(j),polygonID,ztmc
 
@@ -847,9 +847,9 @@ Function HuiZHItuli(x0,y0,polygonID,ZDrawCode,ZDrawColor,ZDrawName,y2)
 
             DrawLine x0,y0,x0 - 9.5 + 9.5,y0 - j * 15 - (28 - 4.1),x0 - 9.5 + 25,y0 - j * 15 - (28 - 4.1),RoteAngle,"1",  "RGB(255,255,255)", polygonID
 
-            DrawTuLiNote  x0,y0,x0 - 9.5 + 17,y0 - j * 15 - 26,0, "RGB(255,255,255)", 220 * xs, 220 * xs, "Y= 542241.12",polygonID,"é»‘ä½“",RoteAngle
+            DrawTuLiNote  x0,y0,x0 - 9.5 + 17,y0 - j * 15 - 26,0, "RGB(255,255,255)", 220 * xs, 220 * xs, "Y= 542241.12",polygonID,"ºÚÌå",RoteAngle
 
-            DrawTuLiNote  x0,y0,x0 - 9.5 + 17,y0 - j * 15 - 22, 0, "RGB(255,255,255)", 220 * xs, 220 * xs, "X=3046669.81",polygonID,"é»‘ä½“",RoteAngle
+            DrawTuLiNote  x0,y0,x0 - 9.5 + 17,y0 - j * 15 - 22, 0, "RGB(255,255,255)", 220 * xs, 220 * xs, "X=3046669.81",polygonID,"ºÚÌå",RoteAngle
 
             DrawNote  x0,y0,x0 - 9.5 + 44,y0 - j * 15 - 24,RoteAngle,0,"RGB(255,255,255)", ztdx, ztdx, arDrawName(j),polygonID,ztmc
 
@@ -871,7 +871,7 @@ End Function
 
 Function Getdlmc(dileimc(),dileibm(),tbqcsl)
     projectName = SSProcess.GetProjectFileName
-    sql = "Select DISTINCT åœ°ç±»å›¾æ–‘å±æ€§è¡¨.dlmc,dlbm From åœ°ç±»å›¾æ–‘å±æ€§è¡¨ INNER JOIN GeoAreaTB ON åœ°ç±»å›¾æ–‘å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE ([GeoAreaTB].[Mark] Mod 2)<>0 "
+    sql = "Select DISTINCT µØÀàÍ¼°ßÊôĞÔ±í.dlmc,dlbm From µØÀàÍ¼°ßÊôĞÔ±í INNER JOIN GeoAreaTB ON µØÀàÍ¼°ßÊôĞÔ±í.ID = GeoAreaTB.ID WHERE ([GeoAreaTB].[Mark] Mod 2)<>0 "
     GetSQLRecordAll projectName,sql,arSQLRecord,iRecordCount
     tbqcsl = iRecordCount
     
@@ -885,7 +885,7 @@ Function Getdlmc(dileimc(),dileibm(),tbqcsl)
     
 End Function
 
-'å°æ•°ç‚¹å˜4ä½
+'Ğ¡Êıµã±ä4Î»
 Function MJB4W(MIANJI)
     WZ = InStr(MIANJI,".")
     CHANGDU = Len(MIANJI)
@@ -918,7 +918,7 @@ Function SUMTBMJ(GDMC,HLJS,SL)
     CFMC = Split(GDMC,",")
     
     For Z = 1 To UBound(CFMC)
-        'æŒ‰é•¿åº¦åˆ†è§£å­—ç¬¦ä¸²
+        '°´³¤¶È·Ö½â×Ö·û´®
         ZFCCD = Len(CFMC(Z))
         Select Case ZFCCD
             Case 2
@@ -972,7 +972,7 @@ Function SUMTBMJ(GDMC,HLJS,SL)
         End Select
         zongmj = 0
         For B = 1 To dkCount
-            sql8 = "Select SUM (åœ°ç±»å›¾æ–‘å±æ€§è¡¨.tbmj) From åœ°ç±»å›¾æ–‘å±æ€§è¡¨ INNER JOIN GeoAreaTB ON åœ°ç±»å›¾æ–‘å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE åœ°ç±»å›¾æ–‘å±æ€§è¡¨.DLMC= '" & CFMC(Z) & "' and ([GeoAreaTB].[Mark] Mod 2)<>0 and  åœ°ç±»å›¾æ–‘å±æ€§è¡¨.dkh= " & B
+            sql8 = "Select SUM (µØÀàÍ¼°ßÊôĞÔ±í.tbmj) From µØÀàÍ¼°ßÊôĞÔ±í INNER JOIN GeoAreaTB ON µØÀàÍ¼°ßÊôĞÔ±í.ID = GeoAreaTB.ID WHERE µØÀàÍ¼°ßÊôĞÔ±í.DLMC= '" & CFMC(Z) & "' and ([GeoAreaTB].[Mark] Mod 2)<>0 and  µØÀàÍ¼°ßÊôĞÔ±í.dkh= " & B
             GetSQLRecordAll projectName,sql8,arSQLRecord8,iRecordCount8
             If    iRecordCount8 > 0 Then
                 MIANJI = arSQLRecord8(0)
@@ -1003,10 +1003,10 @@ Function SUMTBMJ(GDMC,HLJS,SL)
     
 End Function
 
-'è·å–åœ°ç±»åç§°å”¯ä¸€åœ°ç±»å›¾æ–‘æ•°é‡åŠåç§°ç¼–ç 
+'»ñÈ¡µØÀàÃû³ÆÎ¨Ò»µØÀàÍ¼°ßÊıÁ¿¼°Ãû³Æ±àÂë
 Function Getdlmc(dileimc(),dileibm(),tbqcsl)
     projectName = SSProcess.GetProjectFileName
-    sql = "Select DISTINCT åœ°ç±»å›¾æ–‘å±æ€§è¡¨.dlmc,dlbm From åœ°ç±»å›¾æ–‘å±æ€§è¡¨ INNER JOIN GeoAreaTB ON åœ°ç±»å›¾æ–‘å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE ([GeoAreaTB].[Mark] Mod 2)<>0 "
+    sql = "Select DISTINCT µØÀàÍ¼°ßÊôĞÔ±í.dlmc,dlbm From µØÀàÍ¼°ßÊôĞÔ±í INNER JOIN GeoAreaTB ON µØÀàÍ¼°ßÊôĞÔ±í.ID = GeoAreaTB.ID WHERE ([GeoAreaTB].[Mark] Mod 2)<>0 "
     GetSQLRecordAll projectName,sql,arSQLRecord,iRecordCount
     tbqcsl = iRecordCount
     'msgbox iRecordCount
@@ -1025,28 +1025,28 @@ Function GetSQLRecordAll(ByRef mdbName, ByRef StrSqlStatement, ByRef arSQLRecord
     SSProcess.OpenAccessMdb mdbName
     iRecordCount =  - 1
     sql = StrSqlStatement
-    'æ‰“å¼€è®°å½•é›†
+    '´ò¿ª¼ÇÂ¼¼¯
     SSProcess.OpenAccessRecordset mdbName, sql
-    'è·å–è®°å½•æ€»æ•°
+    '»ñÈ¡¼ÇÂ¼×ÜÊı
     RecordCount = SSProcess.GetAccessRecordCount (mdbName, sql)
     If RecordCount > 0 Then
         iRecordCount = 0
         ReDim arSQLRecord(RecordCount)
-        'å°†è®°å½•æ¸¸æ ‡ç§»åˆ°ç¬¬ä¸€è¡Œ
+        '½«¼ÇÂ¼ÓÎ±êÒÆµ½µÚÒ»ĞĞ
         SSProcess.AccessMoveFirst mdbName, sql
-        'æµè§ˆè®°å½•
+        'ä¯ÀÀ¼ÇÂ¼
         While SSProcess.AccessIsEOF (mdbName, sql) = 0
             fields = ""
             values = ""
-            'è·å–å½“å‰è®°å½•å†…å®¹
+            '»ñÈ¡µ±Ç°¼ÇÂ¼ÄÚÈİ
             SSProcess.GetAccessRecord mdbName, sql, fields, values
-            arSQLRecord(iRecordCount) = values                                        'æŸ¥è¯¢è®°å½•
-            iRecordCount = iRecordCount + 1                                                    'æŸ¥è¯¢è®°å½•æ•°
-            'ç§»åŠ¨è®°å½•æ¸¸æ ‡
+            arSQLRecord(iRecordCount) = values                                        '²éÑ¯¼ÇÂ¼
+            iRecordCount = iRecordCount + 1                                                    '²éÑ¯¼ÇÂ¼Êı
+            'ÒÆ¶¯¼ÇÂ¼ÓÎ±ê
             SSProcess.AccessMoveNext mdbName, sql
         WEnd
     End If
-    'å…³é—­è®°å½•é›†
+    '¹Ø±Õ¼ÇÂ¼¼¯
     SSProcess.CloseAccessRecordset mdbName, sql
     SSProcess.CloseAccessMdb mdbName
 End Function
@@ -1054,7 +1054,7 @@ End Function
 Function NumberChange(Number,BigNumber)
     number = CStr(number)
     strNumer = "1,2,3,4,5,6,7,8,9,0"
-    strBigNumber = "ä¸€,äºŒ,ä¸‰,å››,äº”,å…­,ä¸ƒ,å…«,ä¹,å"
+    strBigNumber = "Ò»,¶ş,Èı,ËÄ,Îå,Áù,Æß,°Ë,¾Å,Ê®"
     CD = Len (Number)
     If CD = 1 Then
         artempNumber = Split(strNumer,",")
@@ -1082,15 +1082,15 @@ Function NumberChange(Number,BigNumber)
         Select Case leftz
             Case "1"
             If LEFTR = 0 Then
-                BigNumber = "å"
+                BigNumber = "Ê®"
             Else
-                BigNumber = "å" & TWO
+                BigNumber = "Ê®" & TWO
             End If
             Case Else
             If LEFTR = 0 Then
                 BigNumber = ONE & TWO
             Else
-                BigNumber = ONE & "å" & TWO
+                BigNumber = ONE & "Ê®" & TWO
             End If
         End Select
     End If
@@ -1120,13 +1120,13 @@ Function tukuoshuxing
         For i = 0 To geoCount - 1
             id = SSProcess.GetSelGeoValue (i,"SSObj_ID")
             SSProcess.SetObjectAttr id,"[xmmc]",xmmc
-            SSProcess.SetObjectAttr id,"[ctff]",xmsj & "ä¿®ç¼–æˆå›¾ã€‚"
+            SSProcess.SetObjectAttr id,"[ctff]",xmsj & "ĞŞ±à³ÉÍ¼¡£"
             SSProcess.SetObjectAttr id,"[blc]",MapScale
         Next
     End If
 End Function
 
-'è·å–ç¬¬äºŒç‚¹åæ ‡
+'»ñÈ¡µÚ¶şµã×ø±ê
 Function GetXYOffset(ByVal X0,ByVal Y0,ByVal Angle,ByVal Length, ByRef X3 , ByRef Y3)
     
     SinVal = Sin(Angle)
@@ -1137,7 +1137,7 @@ Function GetXYOffset(ByVal X0,ByVal Y0,ByVal Angle,ByVal Length, ByRef X3 , ByRe
     
 End Function' GetXYOffset
 
-'çº¿æ—‹è½¬
+'ÏßĞı×ª
 Function DrawLine(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal X2,ByVal Y2,ByVal Angle,ByVal Code,ByVal Color,ByVal PolygonID)
     
     SinVal = Sin(Angle)
@@ -1154,7 +1154,7 @@ Function DrawLine(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal X2,ByVal Y2,ByVal An
     SSProcess.SetNewObjValue "SSObj_Code", Code
     SSProcess.SetNewObjValue "SSObj_Color", Color
     SSProcess.SetNewObjValue "SSObj_DataMark", PolygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "å‹˜æµ‹å®šç•Œå›¾å»“"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "¿±²â¶¨½çÍ¼Àª"
     SSProcess.AddNewObjPoint X3, Y3, 0, 0, ""
     SSProcess.AddNewObjPoint X4, Y4, 0, 0, ""
 
@@ -1163,7 +1163,7 @@ Function DrawLine(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal X2,ByVal Y2,ByVal An
     
 End Function' DrawLine
 
-'æ³¨è®°æ—‹è½¬(å¯¹åº”MakeNoteã€MakeNote1ã€MakeNote2)
+'×¢¼ÇĞı×ª(¶ÔÓ¦MakeNote¡¢MakeNote1¡¢MakeNote2)
 Function DrawNote(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal Angle,ByVal Code,ByVal Color,ByVal Width,ByVal Height,ByVal FontString,ByVal PolygonID,ByVal ZtMc)
     
     SinVal = Sin(Angle)
@@ -1184,7 +1184,7 @@ Function DrawNote(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal Angle,ByVal Code,ByV
     SSProcess.SetNewObjValue "SSObj_Color", Color
     SSProcess.SetNewObjValue "SSObj_DataMark", PolygonID
     SSProcess.SetNewObjValue "SSObj_FontName", ZtMc
-    SSProcess.SetNewObjValue "SSObj_LayerName", "å‹˜æµ‹å®šç•Œå›¾å»“"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "¿±²â¶¨½çÍ¼Àª"
     SSProcess.SetNewObjValue "SSObj_FontInterval", "20"
     SSProcess.SetNewObjValue "SSObj_FontAlignment", "0"
     SSProcess.SetNewObjValue "SSObj_FontWidth",Width
@@ -1196,7 +1196,7 @@ Function DrawNote(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal Angle,ByVal Code,ByV
     
 End Function' DrawNote
 
-'é¢æ—‹è½¬
+'ÃæĞı×ª
 Function DrawArea(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal X2,ByVal Y2,ByVal X3,ByVal Y3,ByVal X4,ByVal Y4,ByVal Code,ByVal Color,ByVal PolygonID,ByVal Angle)
     
     SinVal = Sin(Angle)
@@ -1218,7 +1218,7 @@ Function DrawArea(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal X2,ByVal Y2,ByVal X3
 
     SSProcess.SetNewObjValue "SSObj_Code", Code
     SSProcess.SetNewObjValue "SSObj_Color", Color
-    SSProcess.SetNewObjValue "SSObj_LayerName", "å‹˜æµ‹å®šç•Œå›¾å»“"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "¿±²â¶¨½çÍ¼Àª"
     SSProcess.AddNewObjPoint ResultX1,ResultY1, 0, 0, ""
     SSProcess.AddNewObjPoint ResultX2,ResultY2, 0, 0, ""
     SSProcess.AddNewObjPoint ResultX3,ResultY3, 0, 0, ""
@@ -1230,7 +1230,7 @@ Function DrawArea(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal X2,ByVal Y2,ByVal X3
     
 End Function' DrawArea
 
-'ç‚¹æ—‹è½¬
+'µãĞı×ª
 Function DrawPoiot(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal Code,ByVal Color,ByVal PolygonID,ByVal Angle)
     
     
@@ -1249,14 +1249,14 @@ Function DrawPoiot(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal Code,ByVal Color,By
     SSProcess.SetNewObjValue "SSObj_Color", Color
     SSProcess.SetNewObjValue "SSObj_DataMark", PolygonID
     SSProcess.SetNewObjValue "SSObj_Angle", Angle
-    SSProcess.SetNewObjValue "SSObj_LayerName", "å‹˜æµ‹å®šç•Œå›¾å»“"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "¿±²â¶¨½çÍ¼Àª"
     SSProcess.AddNewObjPoint ResultX1,ResultY1,0,0,""
     SSProcess.AddNewObjToSaveObjList
     SSProcess.SaveBufferObjToDatabase
     
 End Function' DrawPoiot
 
-'å›¾ä¾‹èŒƒå›´æ¡†
+'Í¼Àı·¶Î§¿ò
 Function DrawDelArea(ByVal RotationX1,ByVal RotationY1,ByVal RotationX2,ByVal RotationY2,ByVal Code,ByVal Color,ByVal PolygonID,ByVal Angle)
     
     SinVal = Sin(Angle)
@@ -1278,7 +1278,7 @@ Function DrawDelArea(ByVal RotationX1,ByVal RotationY1,ByVal RotationX2,ByVal Ro
 
     SSProcess.SetNewObjValue "SSObj_Code", Code
     SSProcess.SetNewObjValue "SSObj_Color", Color
-    SSProcess.SetNewObjValue "SSObj_LayerName", "å‹˜æµ‹å®šç•Œå›¾å»“"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "¿±²â¶¨½çÍ¼Àª"
     SSProcess.AddNewObjPoint ResultX1,ResultY1, 0, 0, ""
     SSProcess.AddNewObjPoint ResultX2,ResultY2, 0, 0, ""
     SSProcess.AddNewObjPoint ResultX3,ResultY3, 0, 0, ""
@@ -1290,7 +1290,7 @@ Function DrawDelArea(ByVal RotationX1,ByVal RotationY1,ByVal RotationX2,ByVal Ro
     
 End Function' DrawDelArea
 
-'å›¾ä¾‹æ³¨è®°Note(å¯¹åº”MakeNote3)
+'Í¼Àı×¢¼ÇNote(¶ÔÓ¦MakeNote3)
 Function DrawTuLiNote(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal Code,ByVal Color,ByVal Width,ByVal Height,ByVal FontString,ByVal PolygonID,ByVal ZtMc,ByVal Angle)
     
     SinVal = Sin(Angle)
@@ -1310,7 +1310,7 @@ Function DrawTuLiNote(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal Code,ByVal Color
     SSProcess.SetNewObjValue "SSObj_Color", Color
     SSProcess.SetNewObjValue "SSObj_DataMark", PolygonID
     SSProcess.SetNewObjValue "SSObj_FontName", ZtMc
-    SSProcess.SetNewObjValue "SSObj_LayerName", "é¢ç§¯æ³¨è®°"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "Ãæ»ı×¢¼Ç"
     SSProcess.SetNewObjValue "SSObj_FontAlignment", "0"
     SSProcess.SetNewObjValue "SSObj_FontWidth",Width
     SSProcess.SetNewObjValue "SSObj_FontHeight", Height
@@ -1322,7 +1322,7 @@ Function DrawTuLiNote(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal Code,ByVal Color
 End Function' DrawTuLiNote
 
 
-'å›¾æ–‘ç‚¹æ—‹è½¬(å¯¹åº”MakePointtb)
+'Í¼°ßµãĞı×ª(¶ÔÓ¦MakePointtb)
 Function DrawTbPoint(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal Code,ByVal Color,ByVal PolygonID,ByVal JzDh,ByVal Angle)
     
     SinVal = Sin(Angle)
@@ -1336,7 +1336,7 @@ Function DrawTbPoint(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal Code,ByVal Color,
     SSProcess.SetNewObjValue "SSObj_Code", Code
     SSProcess.SetNewObjValue "SSObj_Color", Color
     SSProcess.SetNewObjValue "SSObj_DataMark", PolygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "å‹˜æµ‹å®šç•Œå›¾å»“"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "¿±²â¶¨½çÍ¼Àª"
     SSProcess.SetNewObjValue "[jzdh]",jzdh
     SSProcess.AddNewObjPoint ResultX1, ResultY1, 0, 0, ""
 
@@ -1345,7 +1345,7 @@ Function DrawTbPoint(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal Code,ByVal Color,
 
 End Function ' DrawTbPoint
 
-'æ‘ç•Œçº¿æ—‹è½¬(å¯¹åº”MakeLinecj)
+'´å½çÏßĞı×ª(¶ÔÓ¦MakeLinecj)
 Function DrawLine_Cj(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal X2,ByVal Y2,ByVal Code,ByVal Color,ByVal PolygonID,ByVal Angle)
 
     SinVal = Sin(Angle)
@@ -1361,7 +1361,7 @@ Function DrawLine_Cj(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal X2,ByVal Y2,ByVal
     SSProcess.SetNewObjValue "SSObj_Code", Code
     SSProcess.SetNewObjValue "SSObj_Color", Color
     SSProcess.SetNewObjValue "SSObj_DataMark", PolygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "å‹˜æµ‹æ‘ç•Œå›¾ä¾‹"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "¿±²â´å½çÍ¼Àı"
     SSProcess.AddNewObjPoint X3, Y3, 0, 0, ""
     SSProcess.AddNewObjPoint X4, Y4, 0, 0, ""
 
@@ -1370,7 +1370,7 @@ Function DrawLine_Cj(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal X2,ByVal Y2,ByVal
 
 End Function ' DrawLine_Cj
 
-'åœ°ç±»å›¾æ–‘é¢æ—‹è½¬(å¯¹åº”MakeAreatb)
+'µØÀàÍ¼°ßÃæĞı×ª(¶ÔÓ¦MakeAreatb)
 Function DrawArea_Tb(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal X2,ByVal Y2,ByVal X3,ByVal Y3,ByVal X4,ByVal Y4,ByVal Code,ByVal Color,ByVal PolygonID,ByVal tbdlbm,ByVal tbdlmc,ByVal Angle)
     
     SinVal = Sin(Angle)
@@ -1393,7 +1393,7 @@ Function DrawArea_Tb(ByVal X0,ByVal Y0,ByVal X1,ByVal Y1,ByVal X2,ByVal Y2,ByVal
     SSProcess.SetNewObjValue "SSObj_Code", Code
     SSProcess.SetNewObjValue "SSObj_Color", Color
     SSProcess.SetNewObjValue "SSObj_DataMark", PolygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "åœ°ç±»å›¾æ–‘å›¾ä¾‹"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "µØÀàÍ¼°ßÍ¼Àı"
     SSProcess.SetNewObjValue "[dlbm]",tbdlbm
     SSProcess.SetNewObjValue "[dlmc]",tbdlmc
 
