@@ -1,5 +1,5 @@
 
-'=============================================================¹¦ÄÜÈë¿Ú=======================================================================
+'=============================================================åŠŸèƒ½å…¥å£=======================================================================
 
 Sub OnClick()
     
@@ -35,7 +35,9 @@ Sub OnClick()
             Next 'i
         End If
     Next 'i
+    
     ResultIdStr = Mid(ResultIdStr,1,Len(ResultIdStr) - 1)
+    
     AllZStrArr = Split(ResultIdStr,";", - 1,1)
     
     For i = 0 To UBound(AllZStrArr)
@@ -57,7 +59,10 @@ Sub OnClick()
                 End If
             End If
         Next 'j
-
+    Next 'i
+    
+    For i = 0 To UBound(AllZStrArr)
+        CurrentZStrArr = Split(AllZStrArr(i),",", - 1,1)
         BoderMinX = ""
         BoderMinY = ""
         BoderMaxX = ""
@@ -103,27 +108,25 @@ Sub OnClick()
         Next 'j
         
         Path = SSProcess.GetSysPathName(4)
-        StrBmpFile = Path & "Á¢ÃæÍ¼" & i + 1 & ".bmp"
+        StrBmpFile = Path & "ç«‹é¢å›¾" & i + 1 & ".bmp"
         Dpi = 300
         
         If BoderMinX <> "" Then
             SSFunc.DrawToImage BoderMinX - 1,BoderMinY - 1,BoderMaxX + 1,BoderMaxY + 1,"297X100",Dpi,StrBmpFile
         End If
-        
     Next 'i
-    
-    MsgBox "Á¢ÃæÍ¼Éú³ÉÍê±Ï£¡"
+    MsgBox "ç«‹é¢å›¾ç”Ÿæˆå®Œæ¯•ï¼"
     
 End Sub' OnClick   
 
-'//»ñÈ¡ËùÓĞÎÄ¼ş
+'//è·å–æ‰€æœ‰æ–‡ä»¶
 Function GetAllFiles(ByRef pathname, ByRef fileExt, ByRef filecount, ByRef filenames())
     Dim fso, folder, file, files, subfolder,folder0, fcount
     Set fso = CreateObject("Scripting.FileSystemObject")
     If  fso.FolderExists(pathname) Then
         Set folder = fso.GetFolder(pathname)
         Set files = folder.Files
-        '²éÕÒÎÄ¼ş
+        'æŸ¥æ‰¾æ–‡ä»¶
         For Each file In files
             extname = fso.GetExtensionName(file.name)
             If UCase(extname) = UCase(fileExt) Then
@@ -131,7 +134,7 @@ Function GetAllFiles(ByRef pathname, ByRef fileExt, ByRef filecount, ByRef filen
                 filecount = filecount + 1
             End If
         Next
-        '²éÕÒ×ÓÄ¿Â¼
+        'æŸ¥æ‰¾å­ç›®å½•
         Set subfolder = folder.SubFolders
         For Each folder0 In subfolder
             GetAllFiles pathname & folder0.name & "\", fileExt, filecount, filenames
@@ -139,7 +142,7 @@ Function GetAllFiles(ByRef pathname, ByRef fileExt, ByRef filecount, ByRef filen
     End If
 End Function
 
-'//´òÓ¡Ç°ÏÈÉ¾³ı¾ÉÊı¾İ
+'//æ‰“å°å‰å…ˆåˆ é™¤æ—§æ•°æ®
 Function DeleteAllImage
     Set fso = CreateObject("Scripting.FileSystemObject")
     filePath = SSProcess.GetSysPathName (4)
@@ -152,7 +155,7 @@ Function DeleteAllImage
     Set fso = Nothing
 End Function
 
-'»ñÈ¡Ä³Ò»´±ËÄÖÁ
+'è·å–æŸä¸€å¹¢å››è‡³
 Function GetFour(ByVal IdStr,ByRef MinX,ByRef MinY,ByRef MaxX,ByRef MaxY)
     
     MinX = ""
@@ -242,7 +245,7 @@ Function GetFour(ByVal IdStr,ByRef MinX,ByRef MinY,ByRef MaxX,ByRef MaxY)
     
 End Function' GetFour
 
-'Æ«ÒÆ
+'åç§»
 Function OffSet(ByVal IdStr,ByVal RightX,ByVal BottomY,ByVal MinX,ByVal MinY,ByVal MaxX,ByRef NextRigthX)
     
     RightX = RightX + 5
@@ -273,9 +276,9 @@ Function OffSet(ByVal IdStr,ByVal RightX,ByVal BottomY,ByVal MinX,ByVal MinY,ByV
     
 End Function' OffSet
 
-'»ñÈ¡ËùÓĞµÄ×Ö¶ÎÃû³Æ
+'è·å–æ‰€æœ‰çš„å­—æ®µåç§°
 Function GetAllFildValue(ByRef ZStr)
-    SqlStr = "Select  JG_½¨Éè¹¤³Ì½¨Öşµ¥ÌåĞÅÏ¢ÊôĞÔ±í.ID_ZRZ From JG_½¨Éè¹¤³Ì½¨Öşµ¥ÌåĞÅÏ¢ÊôĞÔ±í  WHERE JG_½¨Éè¹¤³Ì½¨Öşµ¥ÌåĞÅÏ¢ÊôĞÔ±í.ID>0 "
+    SqlStr = "Select  JG_å»ºè®¾å·¥ç¨‹å»ºç­‘å•ä½“ä¿¡æ¯å±æ€§è¡¨.ID_ZRZ From JG_å»ºè®¾å·¥ç¨‹å»ºç­‘å•ä½“ä¿¡æ¯å±æ€§è¡¨  WHERE JG_å»ºè®¾å·¥ç¨‹å»ºç­‘å•ä½“ä¿¡æ¯å±æ€§è¡¨.ID>0 "
     GetSQLRecordAll SqlStr,ZStrArr,ValCount
     
     If ValCount > 0 Then
@@ -293,7 +296,7 @@ Function GetAllFildValue(ByRef ZStr)
     End If
 End Function' GetAllFildValue
 
-'»ñÈ¡Ä³Ò»´±ËùÓĞÒªËØID
+'è·å–æŸä¸€å¹¢æ‰€æœ‰è¦ç´ ID
 Function GetFeatureIdStr(ByVal ZStr,ByRef IdStr)
     
     IdStr = ""
@@ -301,7 +304,7 @@ Function GetFeatureIdStr(ByVal ZStr,ByRef IdStr)
     If ZStr <> "" Then
         SSProcess.ClearSelection
         SSProcess.ClearSelectCondition
-        SSProcess.SetSelectCondition "SSObj_LayerName", "==", "Á¢ÃæÍ¼Ïß,Á¢ÃæÍ¼±ê×¢"
+        SSProcess.SetSelectCondition "SSObj_LayerName", "==", "ç«‹é¢å›¾çº¿,ç«‹é¢å›¾æ ‡æ³¨"
         SSProcess.SetSelectCondition "[ID_ZRZ]", "==", ZStr
         SSProcess.SelectFilter
         GeoCount = SSProcess.GetSelGeoCount()
@@ -316,7 +319,7 @@ Function GetFeatureIdStr(ByVal ZStr,ByRef IdStr)
         
         SSProcess.ClearSelection
         SSProcess.ClearSelectCondition
-        SSProcess.SetSelectCondition "SSObj_LayerName", "==", "Á¢ÃæÍ¼×¢¼Ç"
+        SSProcess.SetSelectCondition "SSObj_LayerName", "==", "ç«‹é¢å›¾æ³¨è®°"
         SSProcess.SetSelectCondition "[ID_ZRZ]", "==", ZStr
         SSProcess.SelectFilter
         NoteCount = SSProcess.GetSelNoteCount()
@@ -331,7 +334,7 @@ Function GetFeatureIdStr(ByVal ZStr,ByRef IdStr)
 End Function' GetFeatureIdStr
 
 
-'ÅĞ¶ÏÎÄ¼şÊÇ·ñ´æÔÚ
+'åˆ¤æ–­æ–‡ä»¶æ˜¯å¦å­˜åœ¨
 Function IsFileExist(ByVal FilePath)
     
     IsFileExist = False
@@ -342,14 +345,14 @@ Function IsFileExist(ByVal FilePath)
     
 End Function' FileExists
 
-'É¾³ıÎÄ¼ş
+'åˆ é™¤æ–‡ä»¶
 Function DeleteFile(ByVal FilePath)
     
     FileSysObj.DeleteFile FilePath
     
 End Function
 
-'Êı¾İÀàĞÍ×ª»»
+'æ•°æ®ç±»å‹è½¬æ¢
 Function Transform(ByVal Values)
     If Values <> "" Then
         If IsNumeric(Values) = True Then
@@ -361,12 +364,12 @@ Function Transform(ByVal Values)
     Transform = Values
 End Function'Transform
 
-'»ñÈ¡ËùÓĞ¼ÇÂ¼
+'è·å–æ‰€æœ‰è®°å½•
 Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)
     ProJectName = SSProcess.GetProjectFileName
     SSProcess.OpenAccessMdb ProJectName
     If StrSqlStatement = "" Then
-        MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
+        MsgBox "æŸ¥è¯¢è¯­å¥ä¸ºç©ºï¼Œæ“ä½œåœæ­¢ï¼",48
     End If
     iRecordCount =  - 1
     SSProcess.OpenAccessRecordset ProJectName, StrSqlStatement
@@ -389,7 +392,7 @@ Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecord
     SSProcess.CloseAccessMdb ProJectName
 End Function
 
-'»æÖÆÃæÒªËØ
+'ç»˜åˆ¶é¢è¦ç´ 
 Function DrawArea(ByVal X1,ByVal Y1,ByVal X2,ByVal Y2,ByVal X3,ByVal Y3,ByVal X4,ByVal Y4)
     SSProcess.CreateNewObj 2
     SSProcess.SetNewObjValue "SSObj_Code",2
