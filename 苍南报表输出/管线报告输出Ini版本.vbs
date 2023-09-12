@@ -1,30 +1,30 @@
 
-    '========================================================Doc²Ù×÷¶ÔÏóºÍÎÄ¼şÂ·¾¶²Ù×÷¶ÔÏó================================================================
+    '========================================================Docæ“ä½œå¯¹è±¡å’Œæ–‡ä»¶è·¯å¾„æ“ä½œå¯¹è±¡================================================================
 
-    'DocÈ«¾Ö¶ÔÏó
+    'Docå…¨å±€å¯¹è±¡
     Dim Global_Word
     Set Global_Word = CreateObject ("asposewordscom.asposewordshelper")
 
-    'Â·¾¶²Ù×÷¶ÔÏó
+    'è·¯å¾„æ“ä½œå¯¹è±¡
     Dim FileSysObj
     Set FileSysObj = CreateObject("Scripting.FileSystemObject")
 
-    '============================================================×Ö¶Î&Ìæ»»×Ö¶ÎÅäÖÃ====================================================
+    '============================================================å­—æ®µ&æ›¿æ¢å­—æ®µé…ç½®====================================================
 
-    KeyStr = "±àºÅ,ÏîÄ¿Ãû³Æ,ÏîÄ¿µØÖ·,Éè¼Æµ¥Î»,½¨Éèµ¥Î»,Î¯ÍĞµ¥Î»,²â»æµ¥Î»,ÍâÒµÊ±¼ä,µã×î´ó½Ï²îÖµ,¸ß³Ì×î´ó½Ï²îÖµ,Éî¶È×î´ó½Ï²îÖµ"
+    KeyStr = "ç¼–å·,é¡¹ç›®åç§°,é¡¹ç›®åœ°å€,è®¾è®¡å•ä½,å»ºè®¾å•ä½,å§”æ‰˜å•ä½,æµ‹ç»˜å•ä½,å¤–ä¸šæ—¶é—´,ç‚¹æœ€å¤§è¾ƒå·®å€¼,é«˜ç¨‹æœ€å¤§è¾ƒå·®å€¼,æ·±åº¦æœ€å¤§è¾ƒå·®å€¼"
     TemplateVal = "BH,XMMC,XMDZ,SJDW,JSDW,WTDW,CHDW,WYSJ,MaxPoi,MaxHei,MaxDeep"
 
     ReplaceVal = "CHSJ,CGTMC"
 
-    '===========================================¹¦ÄÜÈë¿Ú========================================================
+    '===========================================åŠŸèƒ½å…¥å£========================================================
 
-    '×ÜÈë¿Ú
+    'æ€»å…¥å£
     Sub OnClick()
         
         If  TypeName (Global_Word) = "AsposeWordsHelper" Then
-            Global_Word.CreateDocumentByTemplate  SSProcess.GetSysPathName (7) & "Êä³öÄ£°å\" & "¹ÜÏßÊä³öÄ£°å.doc"
+            Global_Word.CreateDocumentByTemplate  SSProcess.GetSysPathName (7) & "è¾“å‡ºæ¨¡æ¿\" & "ç®¡çº¿è¾“å‡ºæ¨¡æ¿.doc"
         Else
-            MsgBox "ÇëÏÈ×¢²áAspose.Word²å¼ş"
+            MsgBox "è¯·å…ˆæ³¨å†ŒAspose.Wordæ’ä»¶"
             Exit Sub
         End If
         
@@ -42,70 +42,70 @@
         
         InnerHj 3,1,HjRow
         
-        Global_Word.SaveEx  SSProcess.GetSysPathName(5) & "¹ÜÏß±¨¸æ.doc"
+        Global_Word.SaveEx  SSProcess.GetSysPathName(5) & "ç®¡çº¿æŠ¥å‘Š.doc"
         
-        'UpDateCatalog SSProcess.GetSysPathName(5) & "¹ÜÏß±¨¸æ.doc"
+        'UpDateCatalog SSProcess.GetSysPathName(5) & "ç®¡çº¿æŠ¥å‘Š.doc"
         
         Ending
         
     End Sub' OnClick
 
-    '===========================================ĞÅÏ¢Â¼Èë======================================================
+    '===========================================ä¿¡æ¯å½•å…¥======================================================
 
-    '´°¿ÚĞÅÏ¢Â¼Èëº¯Êı
-    Function InputInfo(ByVal FildsStr,ByVal ShowCount,ByVal WriteCount,ByRef ExportFormat) 'FildsStr ×Ö¶ÎÃû³Æ,ShowCount ÏÔÊ¾×Ö¶ÎÊı,WriteCount ĞŞ¸Äini×Ö¶ÎÊı,ExportFormat ±¨¸æÊä³ö¸ñÊ½(·µ»ØÖµ)
+    'çª—å£ä¿¡æ¯å½•å…¥å‡½æ•°
+    Function InputInfo(ByVal FildsStr,ByVal ShowCount,ByVal WriteCount,ByRef ExportFormat) 'FildsStr å­—æ®µåç§°,ShowCount æ˜¾ç¤ºå­—æ®µæ•°,WriteCount ä¿®æ”¹iniå­—æ®µæ•°,ExportFormat æŠ¥å‘Šè¾“å‡ºæ ¼å¼(è¿”å›å€¼)
         SSProcess.ClearInputParameter
-        SSProcess.AddInputParameter "±¨¸æÊä³ö¸ñÊ½","¶şÎ¬³¤¶È",0,"¶şÎ¬³¤¶È,ÈıÎ¬³¤¶È","¹ÜÏß³¤¶ÈÍ³¼Æ·½Ê½"
+        SSProcess.AddInputParameter "æŠ¥å‘Šè¾“å‡ºæ ¼å¼","äºŒç»´é•¿åº¦",0,"äºŒç»´é•¿åº¦,ä¸‰ç»´é•¿åº¦","ç®¡çº¿é•¿åº¦ç»Ÿè®¡æ–¹å¼"
         FildsArr = Split(FildsStr,",", - 1,1)
         For i = 0 To ShowCount - 1
-            SSProcess.AddInputParameter FildsArr(i) , SSProcess.ReadEpsIni("¹ÜÏß±¨¸æĞÅÏ¢", FildsArr(i) ,"") , 0 , "" , ""
+            SSProcess.AddInputParameter FildsArr(i) , SSProcess.ReadEpsIni("ç®¡çº¿æŠ¥å‘Šä¿¡æ¯", FildsArr(i) ,"") , 0 , "" , ""
         Next 'i
-        ShowBoolen = SSProcess.ShowInputParameterDlg ("¹ÜÏß±¨¸æĞÅÏ¢Â¼Èë")
+        ShowBoolen = SSProcess.ShowInputParameterDlg ("ç®¡çº¿æŠ¥å‘Šä¿¡æ¯å½•å…¥")
         For i = 0 To WriteCount - 1
-            SSProcess.WriteEpsIni "¹ÜÏß±¨¸æĞÅÏ¢", FildsArr(i) ,SSProcess.GetInputParameter(FildsArr(i))
+            SSProcess.WriteEpsIni "ç®¡çº¿æŠ¥å‘Šä¿¡æ¯", FildsArr(i) ,SSProcess.GetInputParameter(FildsArr(i))
         Next 'i
-        ExportFormat = SSProcess.GetInputParameter("±¨¸æÊä³ö¸ñÊ½")
+        ExportFormat = SSProcess.GetInputParameter("æŠ¥å‘Šè¾“å‡ºæ ¼å¼")
     End Function' InputInfo
 
-    '==========================================================»ñÈ¡Ğ¡ÀàÃû³Æ&ÌîĞ´±í¸ñ=======================================================
+    '==========================================================è·å–å°ç±»åç§°&å¡«å†™è¡¨æ ¼=======================================================
 
     EngStr = "CD,CT,CY,CQ,CS,QT,BM,FQ,DL,GD,LD,DC,XH,TX,DX,YD,LT,JX,JK,EX,DS,BZ,JS,XF,PS,YS,WS,FS,RQ,MQ,TR,YH,RL,RS,ZQ,SY,GS"
 
-    CheStr = "³¤ÊäÊäµç,³¤ÊäÍ¨ĞÅ,ÓÍÖ÷¹ÜµÀ,ÌìÈ»ÆøÖ÷¹ÜµÀ,Ë®Ö÷¹ÜµÀ,ÆäËûÖ÷¹ÜµÀ,²»Ã÷,·ÏÆú,µçÁ¦,¹©µç,Â·µÆ,µç³µ,½»Í¨ĞÅºÅ,×Û ºÏ,µçĞÅ,ÒÆ¶¯,ÁªÍ¨,¾üÓÃ,¼à¿Ø,µçÁ¦Í¨Ñ¶,¹ã²¥µçÊÓ,±£ÃÜ×¨ÓÃ,Éú»î¹¤ÒµÓÃË®,Ïû·ÀË®,ÅÅË®,ÓêË®,ÎÛË®,Éú»î·ÏË®,È¼Æø,ÃºÆø,ÌìÈ»Æø,Òº»¯Æø,ÈÈÁ¦,ÈÈË®,ÕôÆû,Ê¯ÓÍ,¹¤Òµ·ÏË®"
+    CheStr = "é•¿è¾“è¾“ç”µ,é•¿è¾“é€šä¿¡,æ²¹ä¸»ç®¡é“,å¤©ç„¶æ°”ä¸»ç®¡é“,æ°´ä¸»ç®¡é“,å…¶ä»–ä¸»ç®¡é“,ä¸æ˜,åºŸå¼ƒ,ç”µåŠ›,ä¾›ç”µ,è·¯ç¯,ç”µè½¦,äº¤é€šä¿¡å·,ç»¼ åˆ,ç”µä¿¡,ç§»åŠ¨,è”é€š,å†›ç”¨,ç›‘æ§,ç”µåŠ›é€šè®¯,å¹¿æ’­ç”µè§†,ä¿å¯†ä¸“ç”¨,ç”Ÿæ´»å·¥ä¸šç”¨æ°´,æ¶ˆé˜²æ°´,æ’æ°´,é›¨æ°´,æ±¡æ°´,ç”Ÿæ´»åºŸæ°´,ç‡ƒæ°”,ç…¤æ°”,å¤©ç„¶æ°”,æ¶²åŒ–æ°”,çƒ­åŠ›,çƒ­æ°´,è’¸æ±½,çŸ³æ²¹,å·¥ä¸šåºŸæ°´"
 
-    'ÌîĞ´¹ÜÏß²â»æÈ¡Éá±ê×¼±í
-    Function InnerGXTable(ByVal TableIndex,ByVal StartRow) 'TableIndex ±í¸ñË÷Òı,StartRow ÆğÊ¼ĞĞÊı
-        StrString = "Select DISTINCT GXLX From µØÏÂ¹ÜÏßµãÊôĞÔ±í inner join GeoPointTB on µØÏÂ¹ÜÏßµãÊôĞÔ±í.ID = GeoPointTB.ID WHERE (GeoPointTB.Mark Mod 2)<>0 And µØÏÂ¹ÜÏßµãÊôĞÔ±í.GXLX <>'*' And µØÏÂ¹ÜÏßµãÊôĞÔ±í.GXLX <>''"
+    'å¡«å†™ç®¡çº¿æµ‹ç»˜å–èˆæ ‡å‡†è¡¨
+    Function InnerGXTable(ByVal TableIndex,ByVal StartRow) 'TableIndex è¡¨æ ¼ç´¢å¼•,StartRow èµ·å§‹è¡Œæ•°
+        StrString = "Select DISTINCT GXLX From åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨ inner join GeoPointTB on åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.ID = GeoPointTB.ID WHERE (GeoPointTB.Mark Mod 2)<>0 And åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.GXLX <>'*' And åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.GXLX <>''"
         GetSQLRecordAll StrString,LxArr,LxCount
         If LxCount > 1 Then
             Global_Word.CloneTableRow TableIndex,StartRow,1,LxCount - 1,False
             For i = 0 To LxCount - 1
                 Global_Word.SetCellText TableIndex,i + StartRow,0,ToChinese(LxArr(i)),True,False
-                If ToChinese(LxArr(i)) = "Éú»î¹¤ÒµÓÃË®" Then
-                    Global_Word.SetCellText TableIndex,i + StartRow,1,"¹Ü¾¶¡İ50mm",True,False
-                ElseIf ToChinese(LxArr(i)) = "ÅÅË®" Then
-                    Global_Word.SetCellText TableIndex,i + StartRow,1,"¹Ü¾¶¡İ200mm»ò·½¹µ¡İ400mm¡Á400mm",True,False
+                If ToChinese(LxArr(i)) = "ç”Ÿæ´»å·¥ä¸šç”¨æ°´" Then
+                    Global_Word.SetCellText TableIndex,i + StartRow,1,"ç®¡å¾„â‰¥50mm",True,False
+                ElseIf ToChinese(LxArr(i)) = "æ’æ°´" Then
+                    Global_Word.SetCellText TableIndex,i + StartRow,1,"ç®¡å¾„â‰¥200mmæˆ–æ–¹æ²Ÿâ‰¥400mmÃ—400mm",True,False
                 ElseIf ToChinese(LxArr(i)) <> "" Then
-                    Global_Word.SetCellText TableIndex,i + StartRow,1,"È«²â",True,False
+                    Global_Word.SetCellText TableIndex,i + StartRow,1,"å…¨æµ‹",True,False
                 End If
             Next 'i
         Else
             For i = 0 To LxCount - 1
                 Global_Word.SetCellText TableIndex,i + StartRow,0,ToChinese(LxArr(i)),True,False
-                If ToChinese(LxArr(i)) = "Éú»î¹¤ÒµÓÃË®" Then
-                    Global_Word.SetCellText TableIndex,i + StartRow,1,"¹Ü¾¶¡İ50mm",True,False
-                ElseIf ToChinese(LxArr(i)) = "ÅÅË®" Then
-                    Global_Word.SetCellText TableIndex,i + StartRow,1,"¹Ü¾¶¡İ200mm»ò·½¹µ¡İ400mm¡Á400mm",True,False
+                If ToChinese(LxArr(i)) = "ç”Ÿæ´»å·¥ä¸šç”¨æ°´" Then
+                    Global_Word.SetCellText TableIndex,i + StartRow,1,"ç®¡å¾„â‰¥50mm",True,False
+                ElseIf ToChinese(LxArr(i)) = "æ’æ°´" Then
+                    Global_Word.SetCellText TableIndex,i + StartRow,1,"ç®¡å¾„â‰¥200mmæˆ–æ–¹æ²Ÿâ‰¥400mmÃ—400mm",True,False
                 ElseIf ToChinese(LxArr(i)) <> "" Then
-                    Global_Word.SetCellText TableIndex,i + StartRow,1,"È«²â",True,False
+                    Global_Word.SetCellText TableIndex,i + StartRow,1,"å…¨æµ‹",True,False
                 End If
             Next 'i
         End If
     End Function' InnerGXTable
 
-    'ÌîĞ´¸÷×¨Òµ¹ÜÏß¹¤×÷Á¿Í³¼Æ±í
-    Function InnerGZTable(ByVal TableIndex,ByVal StartRow,ByRef HjRow,ByVal LenTypes) 'TableIndex ±í¸ñË÷Òı,StartRow ÆğÊ¼ĞĞÊı,HjRow ºÏ¼ÆĞĞÊıÖµ(·µ»ØÖµ),LenTypes ³¤¶ÈÀàĞÍ
-        StrString = "Select DISTINCT GXLX From µØÏÂ¹ÜÏßÏßÊôĞÔ±í inner join GeoLineTB on µØÏÂ¹ÜÏßÏßÊôĞÔ±í.ID = GeoLineTB.ID WHERE (GeoLineTB.Mark Mod 2)<>0 And µØÏÂ¹ÜÏßÏßÊôĞÔ±í.GXLX <>'*' And µØÏÂ¹ÜÏßÏßÊôĞÔ±í.GXLX <>''"
+    'å¡«å†™å„ä¸“ä¸šç®¡çº¿å·¥ä½œé‡ç»Ÿè®¡è¡¨
+    Function InnerGZTable(ByVal TableIndex,ByVal StartRow,ByRef HjRow,ByVal LenTypes) 'TableIndex è¡¨æ ¼ç´¢å¼•,StartRow èµ·å§‹è¡Œæ•°,HjRow åˆè®¡è¡Œæ•°å€¼(è¿”å›å€¼),LenTypes é•¿åº¦ç±»å‹
+        StrString = "Select DISTINCT GXLX From åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨ inner join GeoLineTB on åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.ID = GeoLineTB.ID WHERE (GeoLineTB.Mark Mod 2)<>0 And åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.GXLX <>'*' And åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.GXLX <>''"
         GetSQLRecordAll StrString,LxArr,LxCount
         HjRow = StartRow + LxCount
         If LxCount > 1 Then
@@ -124,9 +124,9 @@
         End If
     End Function' InnerGZTable
 
-    'ÌîĞ´Ã÷ÏÔµãºÍÒş±Îµã¸öÊı
-    Function InnerPoiCount(ByVal GxName,ByVal TableIndex,ByVal InsertRow) 'GxName ¹ÜÏßÀàĞÍÃû³Æ,TableIndex ±íË÷Òı,InsertRow Ö¸¶¨²åÈëĞĞ
-        StrString = "Select FSW From µØÏÂ¹ÜÏßµãÊôĞÔ±í inner join GeoPointTB on µØÏÂ¹ÜÏßµãÊôĞÔ±í.ID = GeoPointTB.ID WHERE (GeoPointTB.Mark Mod 2)<>0 And µØÏÂ¹ÜÏßµãÊôĞÔ±í.GXLX =" & "'" & GxName & "'"
+    'å¡«å†™æ˜æ˜¾ç‚¹å’Œéšè”½ç‚¹ä¸ªæ•°
+    Function InnerPoiCount(ByVal GxName,ByVal TableIndex,ByVal InsertRow) 'GxName ç®¡çº¿ç±»å‹åç§°,TableIndex è¡¨ç´¢å¼•,InsertRow æŒ‡å®šæ’å…¥è¡Œ
+        StrString = "Select FSW From åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨ inner join GeoPointTB on åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.ID = GeoPointTB.ID WHERE (GeoPointTB.Mark Mod 2)<>0 And åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.GXLX =" & "'" & GxName & "'"
         GetSQLRecordAll StrString,FswArr,PoiCount
         OuterPoiCount = 0
         InnerPoiCount = 0
@@ -146,14 +146,14 @@
         Global_Word.SetCellText TableIndex,InsertRow,3,PoiCount,True,False
     End Function' InnerPoiCount
 
-    'ÌîĞ´¹ÜÏß³¤¶È
-    Function InnerLineLen(ByVal GxName,ByVal TableIndex,ByVal InsertRow,ByVal LenTypes) 'GxName ¹ÜÏßÀàĞÍÃû³Æ,TableIndex ±íË÷Òı,InsertRow Ö¸¶¨²åÈëĞĞ,LenTypes ³¤¶ÈÀàĞÍ
+    'å¡«å†™ç®¡çº¿é•¿åº¦
+    Function InnerLineLen(ByVal GxName,ByVal TableIndex,ByVal InsertRow,ByVal LenTypes) 'GxName ç®¡çº¿ç±»å‹åç§°,TableIndex è¡¨ç´¢å¼•,InsertRow æŒ‡å®šæ’å…¥è¡Œ,LenTypes é•¿åº¦ç±»å‹
         SelFeatures GxName,LineCount,LineArr
-        If LenTypes = "¶şÎ¬³¤¶È" Then
+        If LenTypes = "äºŒç»´é•¿åº¦" Then
             For i = 0 To LineCount - 1
                 TotalLength = TotalLength + Round(Transform(SSProcess.GetObjectAttr(LineArr(i),"SSObj_Length")),0)
             Next 'i
-        ElseIf LenTypes = "ÈıÎ¬³¤¶È" Then
+        ElseIf LenTypes = "ä¸‰ç»´é•¿åº¦" Then
             For i = 0 To LineCount - 1
                 TotalLength = TotalLength + Round(Transform(SSProcess.GetObjectAttr(LineArr(i),"SSObj_3DLength")),0)
             Next 'i
@@ -161,8 +161,8 @@
         Global_Word.SetCellText TableIndex,InsertRow,4,TotalLength,True,False
     End Function' InnerLineLen
 
-    'ÌîĞ´ºÏ¼ÆÊı
-    Function InnerHj(ByVal TableIndex,ByVal StartRow,ByVal HjRow) 'TableIndex ±íË÷Òı,StartRow ÆğÊ¼ĞĞÊı,HjRow ºÏ¼ÆĞĞ
+    'å¡«å†™åˆè®¡æ•°
+    Function InnerHj(ByVal TableIndex,ByVal StartRow,ByVal HjRow) 'TableIndex è¡¨ç´¢å¼•,StartRow èµ·å§‹è¡Œæ•°,HjRow åˆè®¡è¡Œ
         MxCount = 0
         YbCount = 0
         ZCount = 0
@@ -179,8 +179,8 @@
         Global_Word.SetCellText TableIndex,HjRow,4,LineLen,True,False
     End Function' InnerHj
 
-    '²ãÃû×ª»¯ÎªÖĞÎÄ
-    Function ToChinese(ByVal EngLayerName) 'EngLayerName Í¼²ãÃû³Æ(Ó¢ÎÄ)
+    'å±‚åè½¬åŒ–ä¸ºä¸­æ–‡
+    Function ToChinese(ByVal EngLayerName) 'EngLayerName å›¾å±‚åç§°(è‹±æ–‡)
         EngArr = Split(EngStr,",", - 1,1)
         CheArr = Split(CheStr,",", - 1,1)
         ToChinese = ""
@@ -191,23 +191,23 @@
         Next 'i
     End Function' ToChinese
 
-    '=========================================================×Ö·û´®Ìæ»»=======================================================
+    '=========================================================å­—ç¬¦ä¸²æ›¿æ¢=======================================================
 
-    ' [¹ÜÏß±¨¸æĞÅÏ¢]
-    ' ±àºÅ = ""
-    ' ÏîÄ¿Ãû³Æ = ""
-    ' ÏîÄ¿µØÖ· = ""
-    ' Éè¼Æµ¥Î» = ""
-    ' ½¨Éèµ¥Î» = ""
-    ' Î¯ÍĞµ¥Î» = ""
-    ' ÍâÒµÊ±¼ä = ""
-    ' ²â»æÊ±¼ä = ""
-    ' µã×î´ó½Ï²îÖµ = ""
-    ' ¸ß³Ì×î´ó½Ï²îÖµ = ""
-    ' Éî¶È×î´ó½Ï²îÖµ = ""
+    ' [ç®¡çº¿æŠ¥å‘Šä¿¡æ¯]
+    ' ç¼–å· = ""
+    ' é¡¹ç›®åç§° = ""
+    ' é¡¹ç›®åœ°å€ = ""
+    ' è®¾è®¡å•ä½ = ""
+    ' å»ºè®¾å•ä½ = ""
+    ' å§”æ‰˜å•ä½ = ""
+    ' å¤–ä¸šæ—¶é—´ = ""
+    ' æµ‹ç»˜æ—¶é—´ = ""
+    ' ç‚¹æœ€å¤§è¾ƒå·®å€¼ = ""
+    ' é«˜ç¨‹æœ€å¤§è¾ƒå·®å€¼ = ""
+    ' æ·±åº¦æœ€å¤§è¾ƒå·®å€¼ = ""
 
-    '×Ö·ûÌæ»»º¯Êı
-    Function ReplaceValue(ByVal ReplaceStr,ByVal OriginVal,ByRef DelCount,ByRef DelNodeRow) 'ReplaceStr Ìæ»»×Ö¶ÎÃû³Æ OriginVal Ä£°åÌæ»»Öµ
+    'å­—ç¬¦æ›¿æ¢å‡½æ•°
+    Function ReplaceValue(ByVal ReplaceStr,ByVal OriginVal,ByRef DelCount,ByRef DelNodeRow) 'ReplaceStr æ›¿æ¢å­—æ®µåç§° OriginVal æ¨¡æ¿æ›¿æ¢å€¼
         
         DelCount = 0
         DelNodeRow = ""
@@ -215,11 +215,11 @@
         OriginArr = Split(OriginVal,",", - 1,1)
         
         For i = 0 To UBound(ReplaceArr)
-            Global_Word.Replace "{" & OriginArr(i) & "}",SSProcess.ReadEpsIni("¹ÜÏß±¨¸æĞÅÏ¢", ReplaceArr(i) ,""),0
+            Global_Word.Replace "{" & OriginArr(i) & "}",SSProcess.ReadEpsIni("ç®¡çº¿æŠ¥å‘Šä¿¡æ¯", ReplaceArr(i) ,""),0
         Next 'i
 
         For i = 3 To 6
-            Val = SSProcess.ReadEpsIni("¹ÜÏß±¨¸æĞÅÏ¢", ReplaceArr(i) ,"")
+            Val = SSProcess.ReadEpsIni("ç®¡çº¿æŠ¥å‘Šä¿¡æ¯", ReplaceArr(i) ,"")
             If Val = "" Then
                 DelCount = DelCount + 1
                 If DelNodeRow = "" Then
@@ -230,11 +230,11 @@
             End If
         Next 'i
         
-        StrString = "Select DISTINCT GXLX From µØÏÂ¹ÜÏßÏßÊôĞÔ±í inner join GeoLineTB on µØÏÂ¹ÜÏßÏßÊôĞÔ±í.ID = GeoLineTB.ID WHERE (GeoLineTB.Mark Mod 2)<>0"
+        StrString = "Select DISTINCT GXLX From åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨ inner join GeoLineTB on åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.ID = GeoLineTB.ID WHERE (GeoLineTB.Mark Mod 2)<>0"
         GetSQLRecordAll StrString,LxArr,LxCount
         For i = 0 To LxCount - 1
             If LxArr(i) <> "*" Then
-                GXTStr = GXTStr & SSProcess.ReadEpsIni("¹ÜÏß±¨¸æĞÅÏ¢","ÏîÄ¿Ãû³Æ","") & ToChinese(LxArr(i)) & "¹ÜÏßÍ¼" & Chr(13)
+                GXTStr = GXTStr & SSProcess.ReadEpsIni("ç®¡çº¿æŠ¥å‘Šä¿¡æ¯","é¡¹ç›®åç§°","") & ToChinese(LxArr(i)) & "ç®¡çº¿å›¾" & Chr(13)
             End If
         Next 'i
         
@@ -246,7 +246,7 @@
         Next 'i
     End Function' ReplaceValue
 
-    '¸üĞÂÄ¿Â¼
+    'æ›´æ–°ç›®å½•
     Function UpDateCatalog(ByVal FilePath)
         ' Set WordFile = FileSysObj.OpenTextFile(FilePath,2,True)
         ' Set WordFile = FileSysObj.GetFile(FilePath)
@@ -255,9 +255,9 @@
         ' WordFile.Close
     End Function' UpDateCatalog
 
-    '==========================================================¹¤¾ßÀàº¯Êı=======================================================
+    '==========================================================å·¥å…·ç±»å‡½æ•°=======================================================
 
-    '´ò¿ªËùÓĞÍ¼²ã
+    'æ‰“å¼€æ‰€æœ‰å›¾å±‚
     Function AllVisible()
         count = SSProcess.GetLayerCount
         For i = 0 To count - 1
@@ -267,10 +267,10 @@
         SSProcess.RefreshView
     End Function
 
-    'Äê·Ö×ª´óĞ´
+    'å¹´åˆ†è½¬å¤§å†™
     Function YearChange(ByVal YearName)
         Number = "1,2,3,4,5,6,7,8,9,0"
-        BigNumber = "Ò»,¶ş,Èı,ËÄ,Îå,Áù,Æß,°Ë,¾Å,©–"
+        BigNumber = "ä¸€,äºŒ,ä¸‰,å››,äº”,å…­,ä¸ƒ,å…«,ä¹,ã€‡"
         NumberArr = Split(Number,",", - 1,1)
         BigNumberArr = Split(BigNumber,",", - 1,1)
         For i = 1 To 4
@@ -280,37 +280,37 @@
                 End If
             Next 'j
         Next 'i
-        YearChange = YearChange & "Äê"
+        YearChange = YearChange & "å¹´"
     End Function' YearChange
 
-    'ÔÂ·İ×ª´óĞ´
+    'æœˆä»½è½¬å¤§å†™
     Function MonthChange(ByVal MonthName)
         Number = "1,2,3,4,5,6,7,8,9,10,11,12"
-        BigNumber = "Ò»,¶ş,Èı,ËÄ,Îå,Áù,Æß,°Ë,¾Å,Ê®,Ê®Ò»,Ê®¶ş"
+        BigNumber = "ä¸€,äºŒ,ä¸‰,å››,äº”,å…­,ä¸ƒ,å…«,ä¹,å,åä¸€,åäºŒ"
         NumberArr = Split(Number,",", - 1,1)
         BigNumberArr = Split(BigNumber,",", - 1,1)
         For i = 0 To UBound(NumberArr)
             If MonthName = NumberArr(i) Then
-                MonthChange = BigNumberArr(i) & "ÔÂ"
+                MonthChange = BigNumberArr(i) & "æœˆ"
             End If
         Next 'i
     End Function' MonthChange
 
-    'ÈÕÆÚ×ª´óĞ´
+    'æ—¥æœŸè½¬å¤§å†™
     Function ToBigDate(ByVal DateStr)
-        YearMonStr = Split(DateStr,"ÔÂ", - 1,1)
+        YearMonStr = Split(DateStr,"æœˆ", - 1,1)
         YeraName = Left(YearMonStr(0),4)
         MonName = Mid(YearMonStr(0),6)
         ToBigDate = YearChange(YeraName) & MonthChange(MonName)
     End Function
 
-    '»ñÈ¡µ±Ç°ÏµÍ³Ê±¼ä
+    'è·å–å½“å‰ç³»ç»Ÿæ—¶é—´
     Function GetNowTime()
         GetNowTime = FormatDateTime(Now(),1)
     End Function' GetNowTime
 
-    'Ñ¡ÔñÖ¸¶¨µØÎï²¢·µ»Ø¸öÊı
-    Function SelFeatures(ByVal EngLayerName,ByRef Count,ByRef IdArr()) 'EngLayerName Í¼²ãÃû³Æ(Ó¢ÎÄ),Count ¸öÊı(·µ»ØÖµ),IdArr() IdÊı×é(·µ»ØÖµ)
+    'é€‰æ‹©æŒ‡å®šåœ°ç‰©å¹¶è¿”å›ä¸ªæ•°
+    Function SelFeatures(ByVal EngLayerName,ByRef Count,ByRef IdArr()) 'EngLayerName å›¾å±‚åç§°(è‹±æ–‡),Count ä¸ªæ•°(è¿”å›å€¼),IdArr() Idæ•°ç»„(è¿”å›å€¼)
         SSProcess.ClearSelection
         SSProcess.ClearSelectCondition
         SSProcess.SetSelectCondition "SSObj_LayerName", "==", EngLayerName
@@ -323,8 +323,8 @@
         Next 'i
     End Function' SelFeatures
 
-    'É¾³ıÖ¸¶¨ĞĞ
-    Function DelNodeParagraph(ByVal PageIndex,ByVal StartNodePos,ByVal DelCount,ByVal DelNodeRow) 'PageIndex Ò³ÃæË÷Òı,StartNodePos ¹â±êÆğÊ¼Î»ÖÃ×Ö·û´® ,DelCount É¾³ıÊı
+    'åˆ é™¤æŒ‡å®šè¡Œ
+    Function DelNodeParagraph(ByVal PageIndex,ByVal StartNodePos,ByVal DelCount,ByVal DelNodeRow) 'PageIndex é¡µé¢ç´¢å¼•,StartNodePos å…‰æ ‡èµ·å§‹ä½ç½®å­—ç¬¦ä¸² ,DelCount åˆ é™¤æ•°
         If DelCount > 1 Then
             NodePosArr = Split(DelNodeRow,",", - 1,1)
             Count = UBound(NodePosArr)
@@ -349,12 +349,12 @@
         End If
     End Function' DelNodeParagraph
 
-    '»ñÈ¡ËùÓĞ¼ÇÂ¼
+    'è·å–æ‰€æœ‰è®°å½•
     Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)
         ProJectName = SSProcess.GetProjectFileName
         SSProcess.OpenAccessMdb ProJectName
         If StrSqlStatement = "" Then
-            MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
+            MsgBox "æŸ¥è¯¢è¯­å¥ä¸ºç©ºï¼Œæ“ä½œåœæ­¢ï¼",48
         End If
         iRecordCount =  - 1
         SSProcess.OpenAccessRecordset ProJectName, StrSqlStatement
@@ -377,12 +377,12 @@
         SSProcess.CloseAccessMdb ProJectName
     End Function
 
-    '»ñÈ¡µ¥Ôª¸ñÖµ
+    'è·å–å•å…ƒæ ¼å€¼
     Function GetSelCellVal(ByVal CellContent)
         GetSelCellVal = Left(CellContent,Len(CellContent) - 1)
     End Function' GetSelCellVal
 
-    'Êı¾İÀàĞÍ×ª»»
+    'æ•°æ®ç±»å‹è½¬æ¢
     Function Transform(ByVal Values)
         If Values <> "" Then
             Values = CDbl(Values)
@@ -393,8 +393,8 @@
         Transform = Values
     End Function'Transform
 
-    'Íê³ÉÌáÊ¾
+    'å®Œæˆæç¤º
     Function Ending()
-        MsgBox "Êä³öÍê³É"
+        MsgBox "è¾“å‡ºå®Œæˆ"
     End Function' Ending
 
