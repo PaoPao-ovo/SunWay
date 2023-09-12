@@ -1,3 +1,10 @@
+' /*
+'  * @Description: 请填写简介
+'  * @Author: LHY
+'  * @Date: 2023-09-12 14:58:48
+'  * @LastEditors: LHY
+'  * @LastEditTime: 2023-09-12 16:38:09
+'  */
 
 
 DKMBM = "9130223"                                        '宗地面编码
@@ -111,14 +118,14 @@ Sub OnClick()
         ResVal_Dlg = SSFunc.SelectListAttr("选择列表","待选数据列表","选中数据列表",ExistsCodeArr,SelCount)
         If ResVal_Dlg = 1 Then
             If SelCount = 1 Then
-
+                
                 sqltexts = "SELECT [" & strTableZD & "].[" & strKeyFiledName & "],[" & strTableZD & "].[ZDGUID] FROM " & strTableZD & " INNER JOIN GeoAreaTB ON " & strTableZD & ".ID = GeoAreaTB.ID "
                 condition = " WHERE ([GeoAreaTB].[Mark] Mod 2)<>0 And " & strTableZD & ".ZDDM = '" & ExistsCodeArr(0) & "'"
                 strOrderBy = " ORDER BY " & strTableZD & "." & strKeyFiledName
                 sql = sqltexts & " " & condition & " " & strOrderBy
-
+                
                 GetSQLRecordAll mdbName,sql,arRecordShortList,RecordShortListCount
-
+                
                 ReDim arOutRecSelected(RecordShortListCount)                '输出特征记录数组
                 nOutSelectedCount = RecordShortListCount                        '输出记录数量
                 ReDim arOutRecGUIDSelected(RecordShortListCount)            '输出特征记录GUID数组
@@ -420,8 +427,8 @@ Sub OnClick()
     MsgBox "输出完成!"
     
 End Sub
-
 '宗地基本信息表
+
 Function  WriteZDJBXXB (ByVal arZDJBXX_Temp,ByVal arRecordQLR,ByVal nRecordQLRCount,ByVal strZDGUID,strZDMCode)
     
     TableNum = 0
@@ -544,7 +551,6 @@ Function  WriteZDJBXXB (ByVal arZDJBXX_Temp,ByVal arRecordQLR,ByVal nRecordQLRCo
     
     If strPZYT <> "" And strPZYT <> "*" Then
         strPZYTMC = GetTDLYLXMC(strPZYT)
-        
         SetCellValue TableNum,21, 1, strPZYTMC                                       '批准用途名
         SetCellValue TableNum,22, 2, strPZYT                                           '批准用途码
     End If
@@ -562,21 +568,18 @@ Function  WriteZDJBXXB (ByVal arZDJBXX_Temp,ByVal arRecordQLR,ByVal nRecordQLRCo
         SetCellValue TableNum,23, 3, FormatNumber(strZDMJ,2, - 1,0,0)                                           '宗地面积
         ReplaceOneStr "{ZDMJ}",  FormatNumber(strZDMJ,2, - 1,0,0)
     End If
-    'QDSJ ZZSJ
     
-    If strJZZDMJ <> "" And strJZZDMJ > 0.0 and strJZZDMJ<>"*"  Then
-			strJZZDMJ = FormatNumber(strJZZDMJ,2, - 1,0,0)
+    If strJZZDMJ <> "" And strJZZDMJ > 0.0 And strJZZDMJ <> "*"  Then
+        strJZZDMJ = FormatNumber(strJZZDMJ,2, - 1,0,0)
     Else
         strJZZDMJ = 0
-        
-
         SetCellValue TableNum,23, 5, strJZZDMJ                                                           '建筑占地总面积
     End If
-	
+    
     If strJZZMJ <> "" And strJZZMJ > 0.0 Then
         strJZZMJ = FormatNumber(strJZZMJ,2, - 1,0,0)
-		else
-			strJZZMJ=0
+    Else
+        strJZZMJ = 0
         SetCellValue TableNum,24, 5, strJZZMJ                                                           '建筑总面积
         ReplaceOneStr "{JZMJ}",  FormatNumber(strJZZMJ,2, - 1,0,0)
     End If
@@ -595,16 +598,16 @@ Function  WriteZDJBXXB (ByVal arZDJBXX_Temp,ByVal arRecordQLR,ByVal nRecordQLRCo
     Else
         ReplaceOneStr "{主要权属界线走向说明}", "无"
     End If
-    'if strQSDCJS <>"" And strQSDCJS <>"*" then
-    'ReplaceOneStr "{权属调查记事}", strQSDCJS                 '权属调查记事
-    'else
-    'ReplaceOneStr "{权属调查记事}", ""
-    'end if
-    'if strDJCLJS <>"" And strDJCLJS <>"*" then
-    'ReplaceOneStr "{地籍测量记事}", strDJCLJS                 '地籍测量记事
-    'else
-    'ReplaceOneStr "{地籍测量记事}", ""
-    'end if
+    If strQSDCJS <> "" And strQSDCJS <> "*" Then
+        ReplaceOneStr "{权属调查记事}", strQSDCJS                 '权属调查记事
+    Else
+        ReplaceOneStr "{权属调查记事}", ""
+    End If
+    If strDJCLJS <> "" And strDJCLJS <> "*" Then
+        ReplaceOneStr "{地籍测量记事}", strDJCLJS                 '地籍测量记事
+    Else
+        ReplaceOneStr "{地籍测量记事}", ""
+    End If
     If strDJDCJGSHYJ <> "" And strDJDCJGSHYJ <> "*" Then
         ReplaceOneStr "{地籍调查结果审核意见}", strDJDCJGSHYJ     '地籍调查结果审核意见
     Else
@@ -1660,7 +1663,7 @@ Function  IsFolderExists(fldName)
 End Function
 
 Function CreateSavePath
-
+    
     filePath = SSProcess.GetProjectFileName
     path = Left(filePath,InStrRev(filePath,"\"))
     IsFolderExists path
