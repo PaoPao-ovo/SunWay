@@ -6,7 +6,6 @@ fwhTableName = "FC_LPB_户信息表"
 zrzTableName = "ZRZ_LP_信息表"
 'ado 全局变量
 Dim adoConnection
-'Aspose.Word 全局变量
 Dim g_docObj
 Dim ProjectName
 Dim rptPathName
