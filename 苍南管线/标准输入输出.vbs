@@ -1,37 +1,37 @@
 
-'========================================================Excel²Ù×÷¶ÔÏóºÍÎÄ¼şÂ·¾¶²Ù×÷¶ÔÏó======================================================
+'========================================================Excelæ“ä½œå¯¹è±¡å’Œæ–‡ä»¶è·¯å¾„æ“ä½œå¯¹è±¡======================================================
 
-'Â·¾¶²Ù×÷¶ÔÏó
+'è·¯å¾„æ“ä½œå¯¹è±¡
 Dim FileSysObj
 Set FileSysObj = CreateObject("Scripting.FileSystemObject")
 
-'Excel²Ù×÷¶ÔÏó
+'Excelæ“ä½œå¯¹è±¡
 Dim ExcelObj
 Set ExcelObj = CreateObject("Excel.Application")
 
-'±ê×¼Êä³öÄ£°åExcelÎÄ¼şÂ·¾¶
+'æ ‡å‡†è¾“å‡ºæ¨¡æ¿Excelæ–‡ä»¶è·¯å¾„
 Dim TempLateFilePath
-TempLateFilePath = SSProcess.GetSysPathName(7) & "Êä³öÄ£°å\" & "±ê×¼Êä³ö.xls"
+TempLateFilePath = SSProcess.GetSysPathName(7) & "è¾“å‡ºæ¨¡æ¿\" & "æ ‡å‡†è¾“å‡º.xls"
 
-'===========================================¹¦ÄÜÈë¿Ú========================================================
+'===========================================åŠŸèƒ½å…¥å£========================================================
 
-'×ÜÈë¿Ú
+'æ€»å…¥å£
 Sub OnClick()
     
-    '1¡¢´´½¨¿ÕµÄExcelÎÄ¼ş
-    FilePath = SSProcess.GetSysPathName(5) & "±ê×¼Êä³ö.xls"
+    '1ã€åˆ›å»ºç©ºçš„Excelæ–‡ä»¶
+    FilePath = SSProcess.GetSysPathName(5) & "æ ‡å‡†è¾“å‡º.xls"
     FileSysObj.CopyFile TempLateFilePath,FilePath
     
-    '2¡¢ÌîĞ´¹ÜÏßSheet,´ò¿ªEPS¹ÜµãSheet
+    '2ã€å¡«å†™ç®¡çº¿Sheet,æ‰“å¼€EPSç®¡ç‚¹Sheet
     OpenExcel FilePath,ExcelFile,ExcelSheet,1
     
-    '3¡¢»ñÈ¡WTDHºÍX,Y,ZÖµ
-    SqlStr = "Select µØÏÂ¹ÜÏßµãÊôĞÔ±í.ID From µØÏÂ¹ÜÏßµãÊôĞÔ±í INNER JOIN GeoPointTB ON µØÏÂ¹ÜÏßµãÊôĞÔ±í.ID = GeoPointTB.ID WHERE ([GeoPointTB].[Mark] Mod 2)<>0"
+    '3ã€è·å–WTDHå’ŒX,Y,Zå€¼
+    SqlStr = "Select åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.ID From åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨ INNER JOIN GeoPointTB ON åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.ID = GeoPointTB.ID WHERE ([GeoPointTB].[Mark] Mod 2)<>0"
     GetSQLRecordAll SqlStr,PointArr,PointCount
     SearchRow = PointCount + 1
     StartPointRow = PointCount + 1
     
-    '4¡¢ÌîĞ´EPS¹ÜÏßµãSheet
+    '4ã€å¡«å†™EPSç®¡çº¿ç‚¹Sheet
     For i = 0 To PointCount - 1
         ExcelObj.Cells(i + 1,1) = SSProcess.GetObjectAttr(PointArr(i),"[WTDH]")
         ExcelObj.Cells(i + 1,2) = SSProcess.GetObjectAttr(PointArr(i),"SSObj_Y")
@@ -39,15 +39,15 @@ Sub OnClick()
         ExcelObj.Cells(i + 1,4) = SSProcess.GetObjectAttr(PointArr(i),"SSObj_Z")
     Next 'i
     
-    '5¡¢´ò¿ªEPS¹ÜÏßSheet
+    '5ã€æ‰“å¼€EPSç®¡çº¿Sheet
     ChangSheet ExcelFile,ExcelSheet,2
     
-    '6¡¢»ñÈ¡ÏßĞÅÏ¢²¢ÌîÖµ
-    Filds = "ID,GXQDDH,GXZDDH,GJ,GC,WYKS,ZKS,LX,DYZ,D_Dia,SHGL,GXQDMS,GXZDMS,JCNY,FSFS,QSDW,BZ,SJYL" '¶ÔÓ¦ÁĞÊı£º0,1,2,5,6,7,8,9,10,11,12,13,14,15,16,17,19
+    '6ã€è·å–çº¿ä¿¡æ¯å¹¶å¡«å€¼
+    Filds = "ID,GXQDDH,GXZDDH,GJ,GC,WYKS,ZKS,LX,DYZ,D_Dia,SHGL,GXQDMS,GXZDMS,JCNY,FSFS,QSDW,BZ,SJYL" 'å¯¹åº”åˆ—æ•°ï¼š0,1,2,5,6,7,8,9,10,11,12,13,14,15,16,17,19
     ColNum = "0,1,2,5,6,7,8,9,10,11,12,13,14,15,16,17,19,21"
     ColArr = Split(ColNum,",", - 1,1)
     
-    SqlStr = "Select µØÏÂ¹ÜÏßÏßÊôĞÔ±í." & Filds & " From µØÏÂ¹ÜÏßÏßÊôĞÔ±í INNER JOIN GeoLineTB ON µØÏÂ¹ÜÏßÏßÊôĞÔ±í.ID = GeoLineTB.ID WHERE ([GeoLineTB].[Mark] Mod 2)<>0"
+    SqlStr = "Select åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨." & Filds & " From åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨ INNER JOIN GeoLineTB ON åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.ID = GeoLineTB.ID WHERE ([GeoLineTB].[Mark] Mod 2)<>0"
     
     GetSQLRecordAll SqlStr,LineArr,LineCount
     Dim LineIdArr()
@@ -57,7 +57,7 @@ Sub OnClick()
     
     For i = 0 To LineCount - 1
         InfoArr = Split(LineArr(i),",", - 1,1)
-        If InfoArr(16) <> "¾®±ß¿ò" Then
+        If InfoArr(16) <> "äº•è¾¹æ¡†" Then
             LineIdArr(i) = InfoArr(0)
             ArrSize = ArrSize + 1
             ReDim Preserve LineIdArr(ArrSize)
@@ -72,13 +72,13 @@ Sub OnClick()
         End If
     Next 'i
     
-    '7¡¢»ñÈ¡ÌØÕ÷£¬¸½ÊôÎï£¬Æ«ĞÄµã¾®ºÅ£¬µã±¸×¢
+    '7ã€è·å–ç‰¹å¾ï¼Œé™„å±ç‰©ï¼Œåå¿ƒç‚¹äº•å·ï¼Œç‚¹å¤‡æ³¨
     Filds = "TZ,FSW,PXJW,BZ"
     ColNum = "3,4,18,20"
     ColArr_Point = Split(ColNum,",", - 1,1)
     For i = 0 To UBound(LineIdArr) - 1
         WTDH = SSProcess.GetObjectAttr(LineIdArr(i),"[GXQDDH]")
-        SqlStr = "Select µØÏÂ¹ÜÏßµãÊôĞÔ±í." & Filds & " From µØÏÂ¹ÜÏßµãÊôĞÔ±í INNER JOIN GeoPointTB ON µØÏÂ¹ÜÏßµãÊôĞÔ±í.ID = GeoPointTB.ID WHERE ([GeoPointTB].[Mark] Mod 2)<>0 And µØÏÂ¹ÜÏßµãÊôĞÔ±í.WTDH = " & "'" & WTDH & "'"
+        SqlStr = "Select åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨." & Filds & " From åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨ INNER JOIN GeoPointTB ON åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.ID = GeoPointTB.ID WHERE ([GeoPointTB].[Mark] Mod 2)<>0 And åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.WTDH = " & "'" & WTDH & "'"
         GetSQLRecordAll SqlStr,Line_PointArr,PointCount
         Info_PointArr = Split(Line_PointArr(0),",", - 1,1)
         For j = 0 To 3
@@ -86,39 +86,39 @@ Sub OnClick()
         Next 'j
     Next 'i
     
-    '8¡¢Ïß±¸×¢Îª¾®ÄÚÁ¬ÏßµÄÏßµÄÌîÖµÆğÊ¼ĞĞ
+    '8ã€çº¿å¤‡æ³¨ä¸ºäº•å†…è¿çº¿çš„çº¿çš„å¡«å€¼èµ·å§‹è¡Œ
     StartRow = Row + 2
     
-    '9¡¢»ñÈ¡ÏßĞÅÏ¢²¢ÌîÖµ
-    Filds = "ID,GXQDDH,GXZDDH,GJ,GC,WYKS,ZKS,LX,DYZ,D_Dia,SHGL,GXQDMS,GXZDMS,JCNY,FSFS,QSDW,BZ,SJYL" '¶ÔÓ¦ÁĞÊı£º0,1,2,5,6,7,8,9,10,11,12,13,14,15,16,17,19
+    '9ã€è·å–çº¿ä¿¡æ¯å¹¶å¡«å€¼
+    Filds = "ID,GXQDDH,GXZDDH,GJ,GC,WYKS,ZKS,LX,DYZ,D_Dia,SHGL,GXQDMS,GXZDMS,JCNY,FSFS,QSDW,BZ,SJYL" 'å¯¹åº”åˆ—æ•°ï¼š0,1,2,5,6,7,8,9,10,11,12,13,14,15,16,17,19
     ColNum = "0,1,2,5,6,7,8,9,10,11,12,13,14,15,16,17,19,21"
     JNColArr = Split(ColNum,",", - 1,1)
     
-    SqlStr = "Select µØÏÂ¹ÜÏßÏßÊôĞÔ±í." & Filds & " From µØÏÂ¹ÜÏßÏßÊôĞÔ±í INNER JOIN GeoLineTB ON µØÏÂ¹ÜÏßÏßÊôĞÔ±í.ID = GeoLineTB.ID WHERE ([GeoLineTB].[Mark] Mod 2)<>0 And µØÏÂ¹ÜÏßÏßÊôĞÔ±í.BZ = " & "'" & "¾®±ß¿ò" & "'"
+    SqlStr = "Select åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨." & Filds & " From åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨ INNER JOIN GeoLineTB ON åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.ID = GeoLineTB.ID WHERE ([GeoLineTB].[Mark] Mod 2)<>0 And åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.BZ = " & "'" & "äº•è¾¹æ¡†" & "'"
     GetSQLRecordAll SqlStr,JNLineArr,LineCount
     
     Dim JNIdArr()
     ReDim JNIdArr(LineCount - 1)
     
-    '10¡¢ÌîĞ´Ïß±¸×¢Îª¾®ÄÚÁ¬ÏßµÄÏßµÄĞÅÏ¢
+    '10ã€å¡«å†™çº¿å¤‡æ³¨ä¸ºäº•å†…è¿çº¿çš„çº¿çš„ä¿¡æ¯
     For i = 0 To LineCount - 1
         JNInfoArr = Split(JNLineArr(i),",", - 1,1)
         JNIdArr(i) = JNInfoArr(0)
         For j = 1 To UBound(JNColArr)
             If JNInfoArr(j) <> "*" Then
                 ExcelObj.Cells(StartRow + i,Transform(JNColArr(j))) = JNInfoArr(j)
-                ExcelObj.Cells(StartRow + i,3) = "¾®±ßµã"
+                ExcelObj.Cells(StartRow + i,3) = "äº•è¾¹ç‚¹"
                 'ExcelObj.Cells(StartRow + i,4) = ""
                 'ExcelObj.Cells(StartRow + i,18) = ""
-                ExcelObj.Cells(StartRow + i,20) = "¾®±ßµã"
+                ExcelObj.Cells(StartRow + i,20) = "äº•è¾¹ç‚¹"
             End If
         Next 'j
     Next 'i
     
-    '11¡¢ÇĞ»»ÎªEPS¹ÜÏßµãSheet
+    '11ã€åˆ‡æ¢ä¸ºEPSç®¡çº¿ç‚¹Sheet
     ChangSheet ExcelFile,ExcelSheet,1
     
-    '12¡¢ÌîĞ´Ïß½ÚµãµÄX,Y,ZÖµ
+    '12ã€å¡«å†™çº¿èŠ‚ç‚¹çš„X,Y,Zå€¼
     For i = 0 To UBound(JNIdArr)
         PointCount = SSProcess.GetObjectAttr(JNIdArr(i),"SSObj_PointCount")
         GXQDDH = SSProcess.GetObjectAttr(JNIdArr(i),"[GXQDDH]")
@@ -144,7 +144,7 @@ Sub OnClick()
         Next 'j
     Next 'i
     
-    '13¡¢É¾³ıÖØ¸´µÄµã
+    '13ã€åˆ é™¤é‡å¤çš„ç‚¹
     For i = SearchRow To StartPointRow - 2
         For j = i + 1 To StartPointRow - 1
             If ExcelObj.Cells(i,1) = ExcelObj.Cells(j,1) Then
@@ -153,14 +153,14 @@ Sub OnClick()
         Next 'j
     Next 'i
     
-    '14¡¢±£´æ²¢¹Ø±ÕExcel
+    '14ã€ä¿å­˜å¹¶å…³é—­Excel
     CloseExcel ExcelFile
     
 End Sub' OnClick
 
-'=================================================¹¤¾ßÀàº¯Êı=====================================================
+'=================================================å·¥å…·ç±»å‡½æ•°=====================================================
 
-'´ò¿ªExcel±í
+'æ‰“å¼€Excelè¡¨
 Function OpenExcel(ByVal FilePath,ByRef ExcleFile,ByRef ExcelSheet,ByVal Num)
     ExcelObj.Application.Visible = False
     Set ExcleFile = ExcelObj.WorkBooks.Open(FilePath)
@@ -168,25 +168,25 @@ Function OpenExcel(ByVal FilePath,ByRef ExcleFile,ByRef ExcelSheet,ByVal Num)
     ExcelSheet.Activate
 End Function
 
-'ÇĞ»»Sheet
+'åˆ‡æ¢Sheet
 Function ChangSheet(ByVal ExcleFile,ByVal ExcelSheet,ByVal Num)
     Set ExcelSheet = ExcleFile.WorkSheets(Num)
     ExcelSheet.Activate
 End Function' ChangSheet
 
-'±£´æ¹Ø±ÕExcel±í¸ñ
+'ä¿å­˜å…³é—­Excelè¡¨æ ¼
 Function CloseExcel(ByVal ExcelFile)
     ExcelFile.Save
     ExcelFile.Close
     ExcelObj.Quit
 End Function' CloseExcel
 
-'»ñÈ¡ËùÓĞ¼ÇÂ¼
+'è·å–æ‰€æœ‰è®°å½•
 Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)
     ProJectName = SSProcess.GetProjectFileName
     SSProcess.OpenAccessMdb ProJectName
     If StrSqlStatement = "" Then
-        MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
+        MsgBox "æŸ¥è¯¢è¯­å¥ä¸ºç©ºï¼Œæ“ä½œåœæ­¢ï¼",48
     End If
     iRecordCount =  - 1
     SSProcess.OpenAccessRecordset ProJectName, StrSqlStatement
@@ -209,7 +209,7 @@ Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecord
     SSProcess.CloseAccessMdb ProJectName
 End Function
 
-'Êı¾İÀàĞÍ×ª»»
+'æ•°æ®ç±»å‹è½¬æ¢
 Function Transform(ByVal Values)
     If Values <> "" Then
         If IsNumeric(Values) = True Then

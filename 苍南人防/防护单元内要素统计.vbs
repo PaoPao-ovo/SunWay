@@ -10,23 +10,23 @@ Sub OnClick()
     'exit sub
     mdbName = SSProcess.GetProjectFileName
     SSProcess.OpenAccessMdb mdbName
-    sql = "select FHDYBH from ÈË·À·À»¤µ¥ÔªÊôÐÔ±í inner join GeoAreaTB on GeoAreaTB.ID = ÈË·À·À»¤µ¥ÔªÊôÐÔ±í.ID where [GeoAreaTB].[Mark] Mod 2<>0 "
+    sql = "select FHDYBH from ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½Ô±ï¿½ inner join GeoAreaTB on GeoAreaTB.ID = ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½Ô±ï¿½.ID where [GeoAreaTB].[Mark] Mod 2<>0 "
     GetSQLRecordAll mdbName,sql,arSQLRecord,iRecordCount
     If iRecordCount < 0 Then Exit Sub
     For i = 0 To iRecordCount - 1
         FHDYBH = arSQLRecord(i)
-        '»ñÈ¡ÑÚ±Î×ÜÃæ»ý
-        sql1 = "select sum(YBMJ) from ÑÚ±Îµ¥ÔªÊôÐÔ±í inner join GeoAreaTB on GeoAreaTB.ID = ÑÚ±Îµ¥ÔªÊôÐÔ±í.ID where [GeoAreaTB].[Mark] Mod 2<>0 and FHDYBH = '" & FHDYBH & "'"
+        'ï¿½ï¿½È¡ï¿½Ú±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        sql1 = "select sum(YBMJ) from ï¿½Ú±Îµï¿½Ôªï¿½ï¿½ï¿½Ô±ï¿½ inner join GeoAreaTB on GeoAreaTB.ID = ï¿½Ú±Îµï¿½Ôªï¿½ï¿½ï¿½Ô±ï¿½.ID where [GeoAreaTB].[Mark] Mod 2<>0 and FHDYBH = '" & FHDYBH & "'"
         GetSQLRecordAll mdbName,sql1,arYBRecrod,strYBCount
         If strYBCount = 1 Then
-            sql2 = "update ÈË·À·À»¤µ¥ÔªÊôÐÔ±í set YBMJ = " & arYBRecrod(0) & " where FHDYBH = '" & FHDYBH & "'"
+            sql2 = "update ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½Ô±ï¿½ set YBMJ = " & arYBRecrod(0) & " where FHDYBH = '" & FHDYBH & "'"
             SSProcess.ExecuteAccessSql mdbName,sql2
         End If
     Next
     SSProcess.CloseAccessMdb mdbName
-    SSProcess.MapMethod "clearattrbuffer", "ÈË·À·À»¤µ¥ÔªÊôÐÔ±í"
+    SSProcess.MapMethod "clearattrbuffer", "ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½Ô±ï¿½"
     
-    '¼ÆËãÓÐÏµÊýµÄ·Ç»ú¶¯³µÎ»¸öÊý
+    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½Ä·Ç»ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½
     SSProcess.PushUndoMark
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -41,7 +41,7 @@ Sub OnClick()
         SSProcess.SetObjectAttr id, "[CheWGS]", CWSL
     Next
     
-    '½«»ú¶¯/·Ç»ú¶¯³µÎ»¸öÊý»ã×Üµ½·À»¤µ¥ÔªÉÏ
+    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/ï¿½Ç»ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
     SSProcess.SetSelectCondition "SSObj_Code", "=","9530226"
@@ -50,7 +50,7 @@ Sub OnClick()
     FJDCWCount = CWSL
     JDCWCount = 0
     WXCWCount = 0
-    'CW_»ú¶¯³µÍ£³µÎ»ÐÅÏ¢ÊôÐÔ±í
+    'CW_ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½Î»ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ô±ï¿½
     For i = 0 To geocount - 1
         id = SSProcess.GetSelGeoValue(i, "SSObj_ID")
         ids = SSProcess.SearchInnerObjIDs(id, 2, "9461013,9461033,9461053", 0)
@@ -61,7 +61,7 @@ Sub OnClick()
                 If code = 9461013 Or code = 9461033 Then
                     CWLX = SSProcess.GetObjectAttr(strList(i1),"[CheWLX]")
                     ZSXS = CDbl(SSProcess.GetObjectAttr(strList(i1),"[ZSXS]"))
-                    If CWLX = "´óÐÍ³µÎ»" Then
+                    If CWLX = "ï¿½ï¿½ï¿½Í³ï¿½Î»" Then
                         JDCWCount = JDCWCount + ZSXS
                     Else
                         JDCWCount = JDCWCount + 1
@@ -79,37 +79,37 @@ End Sub
 
 Function GetSQLRecordAll(ByRef mdbName, ByRef StrSqlStatement, ByRef arSQLRecord(), ByRef iRecordCount)
     If StrSqlStatement = "" Then
-        MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
+        MsgBox "ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½ï¿½ï¿½Í£Ö¹ï¿½ï¿½",48
     End If
     iRecordCount =  - 1
-    'SQLÓï¾ä
+    'SQLï¿½ï¿½ï¿½
     sql = StrSqlStatement
-    '´ò¿ª¼ÇÂ¼¼¯
+    'ï¿½ò¿ª¼ï¿½Â¼ï¿½ï¿½
     SSProcess.OpenAccessRecordset mdbName, sql
-    '»ñÈ¡¼ÇÂ¼×ÜÊý
+    'ï¿½ï¿½È¡ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
     RecordCount = SSProcess.GetAccessRecordCount (mdbName, sql)
     If RecordCount > 0 Then
         iRecordCount = 0
         ReDim arSQLRecord(RecordCount)
-        '½«¼ÇÂ¼ÓÎ±êÒÆµ½µÚÒ»ÐÐ
+        'ï¿½ï¿½ï¿½ï¿½Â¼ï¿½Î±ï¿½ï¿½Æµï¿½ï¿½ï¿½Ò»ï¿½ï¿½
         SSProcess.AccessMoveFirst mdbName, sql
         iRecordCount = 0
-        'ä¯ÀÀ¼ÇÂ¼
+        'ï¿½ï¿½ï¿½ï¿½ï¿½Â¼
         While SSProcess.AccessIsEOF (mdbName, sql) = 0
             fields = ""
             values = ""
-            '»ñÈ¡µ±Ç°¼ÇÂ¼ÄÚÈÝ
+            'ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
             SSProcess.GetAccessRecord mdbName, sql, fields, values
             arSQLRecord(iRecordCount) = values
             iRecordCount = iRecordCount + 1
-            'ÒÆ¶¯¼ÇÂ¼ÓÎ±ê
+            'ï¿½Æ¶ï¿½ï¿½ï¿½Â¼ï¿½Î±ï¿½
             SSProcess.AccessMoveNext mdbName, sql
         WEnd
     End If
-    '¹Ø±Õ¼ÇÂ¼¼¯
+    'ï¿½Ø±Õ¼ï¿½Â¼ï¿½ï¿½
     SSProcess.CloseAccessRecordset mdbName, sql
 End Function
-'¼ÆËãÈË·Àµ¥Ôª¡¢ÑÚ±ÎÇøÃæ»ý
+'ï¿½ï¿½ï¿½ï¿½ï¿½Ë·ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 Function UPDATEAREA
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -161,14 +161,14 @@ Function dkpx(CODE)
                 If YMAX < DWY(I) Then YMAX = DWY(I)
             End If
         Next
-        '±È½Ïx²îÖµ y²îÖµ
+        'ï¿½È½ï¿½xï¿½ï¿½Öµ yï¿½ï¿½Öµ
         xcz = xmax - xmin
         ycz = ymax - ymin
         
         If xcz > ycz Then
-            '´Ó×óµ½ÓÒ¸³ÖµµØ¿éºÅ
+            'ï¿½ï¿½ï¿½ï¿½ï¿½Ò¸ï¿½Öµï¿½Ø¿ï¿½ï¿½
             For J = 0 To gcount - 1
-                '°´8½¹µãx ¶ÔµØ¿éÅÅÐò
+                'ï¿½ï¿½8ï¿½ï¿½ï¿½ï¿½x ï¿½ÔµØ¿ï¿½ï¿½ï¿½ï¿½ï¿½
                 For k = j + 1 To gcount - 1
                     If DWX(k) < x(j) Then
                         a = DWX(j)
@@ -181,9 +181,9 @@ Function dkpx(CODE)
                 Next
             Next
         Else
-            '´ÓÉÏµ½ÏÂ¸³ÖµµØ¿éºÅ
+            'ï¿½ï¿½ï¿½Ïµï¿½ï¿½Â¸ï¿½Öµï¿½Ø¿ï¿½ï¿½
             For J = 0 To gcount - 1
-                '°´8½¹µãx ¶ÔµØ¿éÅÅÐò
+                'ï¿½ï¿½8ï¿½ï¿½ï¿½ï¿½x ï¿½ÔµØ¿ï¿½ï¿½ï¿½ï¿½ï¿½
                 For k = j + 1 To gcount - 1
                     If DWY(k) > DWY(j) Then
                         a = DWY(j)
@@ -198,11 +198,11 @@ Function dkpx(CODE)
         End If
         If CODE = "9530226" Then
             For J = 0 To gcount - 1
-                SSProcess.SetObjectAttr DKID(j),"[FHDYBH]","·À»¤µ¥Ôª±àºÅ" & j + 1
+                SSProcess.SetObjectAttr DKID(j),"[FHDYBH]","ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½" & j + 1
             Next
         Else
             For J = 0 To gcount - 1
-                SSProcess.SetObjectAttr DKID(j),"[YBDYBH]","ÑÚ±Îµ¥Ôª" & j + 1
+                SSProcess.SetObjectAttr DKID(j),"[YBDYBH]","ï¿½Ú±Îµï¿½Ôª" & j + 1
             Next
         End If
     End If

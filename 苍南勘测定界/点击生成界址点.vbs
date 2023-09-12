@@ -1,23 +1,23 @@
 
 Sub OnInitScript()
-    mode = 0 '=0 ÎŞ²ÎÊı¶Ô»°¿ò =1 ÓĞ²ÎÊı¶Ô»°¿ò
-    title = "µã»÷Éú³É½çÖ·µã"
+    mode = 0 '=0 æ— å‚æ•°å¯¹è¯æ¡† =1 æœ‰å‚æ•°å¯¹è¯æ¡†
+    title = "ç‚¹å‡»ç”Ÿæˆç•Œå€ç‚¹"
     SSProcess.ShowScriptDlg mode,title
-    '×Ô¶¨Òå¶Ô»°¿ò
+    'è‡ªå®šä¹‰å¯¹è¯æ¡†
     'SSProcess.ShowScriptUserDefDlg title, dlgTemplateName, dlgWidth, dlgHeight, colCount, titleWidth, valueWidth
-    'Ìí¼Ó´úÂë
+    'æ·»åŠ ä»£ç 
 End Sub
 
 Sub OnExitScript()
-    'Ìí¼Ó´úÂë
+    'æ·»åŠ ä»£ç 
 End Sub
 
 Sub OnOK()
-    'Ìí¼Ó´úÂë
+    'æ·»åŠ ä»£ç 
 End Sub
 
 Sub OnCancel()
-    'Ìí¼Ó´úÂë
+    'æ·»åŠ ä»£ç 
 End Sub
 
 Function OnLButtonDown(x, y, spx, spy, flags)
@@ -26,11 +26,11 @@ Function OnLButtonDown(x, y, spx, spy, flags)
     Dim jzdid(100)
     ids = SSProcess.SearchNearObjIDs(spx,spy, 0.005, 0, "1234", 0 )
     If ids = "" Then
-        MsgBox "¸½½üÎŞ½çÖ·µã"
+        MsgBox "é™„è¿‘æ— ç•Œå€ç‚¹"
     Else
         SSFunc.ScanString ids,",",jzdid,JZDSL
         If    JZDSL <> 1 Then
-            MsgBox "¸½½üÓĞ¶à¸ö½çÖ·µã£¬µã»÷µÄÎ»ÖÃÀë£¬ËùÑ¡½çÖ·µã¸ü½üÒ»µã"
+            MsgBox "é™„è¿‘æœ‰å¤šä¸ªç•Œå€ç‚¹ï¼Œç‚¹å‡»çš„ä½ç½®ç¦»ï¼Œæ‰€é€‰ç•Œå€ç‚¹æ›´è¿‘ä¸€ç‚¹"
         Else
             jzdh = SSProcess.GetObjectAttr(JZDID(0), "[jzdh]")
             dkh = SSProcess.GetObjectAttr(JZDID(0), "[dkh]")
@@ -65,8 +65,8 @@ Function OnLButtonDown(x, y, spx, spy, flags)
                 If czjzdh < minjzdh Then  minjzdh = czjzdh
                 
             Next
-            'msgbox "×î´ó"& maxjzdh
-            'msgbox  "×îĞ¡"&minjzdh
+            'msgbox "æœ€å¤§"& maxjzdh
+            'msgbox  "æœ€å°"&minjzdh
             Select Case jzdh
                 Case minjzdh
                 getid maxjzdh,dkh,qydid
@@ -102,7 +102,7 @@ Function OnLButtonDown(x, y, spx, spy, flags)
             anglepj = (Abs(angle2 - angle1)) * 0.5 + minang
             PI = 3.1415926535898
             If xs <> 1 Then
-                dist1 = 200 * xs * 0.01 * xs + 3'Êµ¼Ê¾àÀë
+                dist1 = 200 * xs * 0.01 * xs + 3'å®é™…è·ç¦»
             Else
                 dist1 = 2.5
             End If
@@ -147,7 +147,7 @@ Function makeNote(x, y, code, width, height, fontString)
     SSProcess.SetNewObjValue "SSObj_FontString", fontString
     SSProcess.SetNewObjValue "SSObj_Color",  "RGB(255,0,0)"
     SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    'SSProcess.SetNewObjValue "SSObj_LayerName", "¿¢¹¤²âÁ¿³É¹ûÍ¼Í¼ÀªĞÅÏ¢"
+    'SSProcess.SetNewObjValue "SSObj_LayerName", "ç«£å·¥æµ‹é‡æˆæœå›¾å›¾å»“ä¿¡æ¯"
     'SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
     SSProcess.SetNewObjValue "SSObj_FontAlignment", "0"
     SSProcess.SetNewObjValue "SSObj_FontWidth", width
