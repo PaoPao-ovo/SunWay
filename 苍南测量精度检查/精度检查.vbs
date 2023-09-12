@@ -1,56 +1,56 @@
 
-' 1¡¢½«Ä£°å¸´ÖÆµ½µ±Ç°ÏîÄ¿Â·¾¶ÏÂ
-' 2¡¢Í¨¹ıSQL²éÑ¯µØÏÂ¹ÜÏßµãÊôĞÔ±íµÄ¡¾ÎïÌ½µãºÅ¡¿ÓëDEAFULTÍ¼²ã¡¾0¡¿µãµÄµãÃûÏàÍ¬µÄµã
+' 1ã€å°†æ¨¡æ¿å¤åˆ¶åˆ°å½“å‰é¡¹ç›®è·¯å¾„ä¸‹
+' 2ã€é€šè¿‡SQLæŸ¥è¯¢åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨çš„ã€ç‰©æ¢ç‚¹å·ã€‘ä¸DEAFULTå›¾å±‚ã€0ã€‘ç‚¹çš„ç‚¹åç›¸åŒçš„ç‚¹
 
-' [¹ÜÏß±¨¸æĞÅÏ¢]
-' ±àºÅ = ""
-' ÏîÄ¿Ãû³Æ = ""
-' ÏîÄ¿µØÖ· = ""
-' Éè¼Æµ¥Î» = ""
-' ½¨Éèµ¥Î» = ""
-' Î¯ÍĞµ¥Î» = ""
-' ÍâÒµÊ±¼ä = ""
-' ²â»æÊ±¼ä = ""
-' µã×î´ó½Ï²îÖµ = ""
-' ¸ß³Ì×î´ó½Ï²îÖµ = ""
+' [ç®¡çº¿æŠ¥å‘Šä¿¡æ¯]
+' ç¼–å· = ""
+' é¡¹ç›®åç§° = ""
+' é¡¹ç›®åœ°å€ = ""
+' è®¾è®¡å•ä½ = ""
+' å»ºè®¾å•ä½ = ""
+' å§”æ‰˜å•ä½ = ""
+' å¤–ä¸šæ—¶é—´ = ""
+' æµ‹ç»˜æ—¶é—´ = ""
+' ç‚¹æœ€å¤§è¾ƒå·®å€¼ = ""
+' é«˜ç¨‹æœ€å¤§è¾ƒå·®å€¼ = ""
 
-'========================================================Excel²Ù×÷¶ÔÏóºÍÎÄ¼şÂ·¾¶²Ù×÷¶ÔÏó======================================================
+'========================================================Excelæ“ä½œå¯¹è±¡å’Œæ–‡ä»¶è·¯å¾„æ“ä½œå¯¹è±¡======================================================
 
-'Â·¾¶²Ù×÷¶ÔÏó
+'è·¯å¾„æ“ä½œå¯¹è±¡
 Dim FileSysObj
 Set FileSysObj = CreateObject("Scripting.FileSystemObject")
 
-'Excel²Ù×÷¶ÔÏó
+'Excelæ“ä½œå¯¹è±¡
 Dim ExcelObj
 Set ExcelObj = CreateObject("Excel.Application")
 
-'============================================================¼ì²é¼ÇÂ¼ÅäÖÃ====================================================================
+'============================================================æ£€æŸ¥è®°å½•é…ç½®====================================================================
 
-'¼ì²é¼¯ÏîÄ¿Ãû³Æ
+'æ£€æŸ¥é›†é¡¹ç›®åç§°
 Dim strGroupName
-strGroupName = "¹ÜÏß¾«¶È¼ì²é"
+strGroupName = "ç®¡çº¿ç²¾åº¦æ£€æŸ¥"
 
-'¼ì²é¼¯×éÃû³Æ
+'æ£€æŸ¥é›†ç»„åç§°
 Dim strCheckName
-strCheckName = "×ø±ê¾«¶È¼ì²é"
+strCheckName = "åæ ‡ç²¾åº¦æ£€æŸ¥"
 
-'¼ì²éÄ£ĞÍÃû³Æ
+'æ£€æŸ¥æ¨¡å‹åç§°
 Dim CheckmodelName
-CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->×ø±ê¾«¶È¼ì²é"
+CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->åæ ‡ç²¾åº¦æ£€æŸ¥"
 
-'¼ì²éÃèÊö
+'æ£€æŸ¥æè¿°
 Dim strDescription
-strDescription = "×ø±ê¾«¶È³¬±ê"
+strDescription = "åæ ‡ç²¾åº¦è¶…æ ‡"
 
-'=============================================================¹¦ÄÜÈë¿Ú=======================================================================
+'=============================================================åŠŸèƒ½å…¥å£=======================================================================
 
 Sub OnClick()
     
     AllVisible
     
-    FileSysObj.CopyFile  SSProcess.GetSysPathName (7) & "Êä³öÄ£°å\" & "²âÁ¿¾«¶Èµ÷²é±íÄ£°å.xlsx",SSProcess.GetSysPathName(5) & "²âÁ¿¾«¶Èµ÷²é±í.xlsx"
+    FileSysObj.CopyFile  SSProcess.GetSysPathName (7) & "è¾“å‡ºæ¨¡æ¿\" & "æµ‹é‡ç²¾åº¦è°ƒæŸ¥è¡¨æ¨¡æ¿.xlsx",SSProcess.GetSysPathName(5) & "æµ‹é‡ç²¾åº¦è°ƒæŸ¥è¡¨.xlsx"
     
-    OpenExcel SSProcess.GetSysPathName(5) & "²âÁ¿¾«¶Èµ÷²é±í.xlsx",ExcleFile
+    OpenExcel SSProcess.GetSysPathName(5) & "æµ‹é‡ç²¾åº¦è°ƒæŸ¥è¡¨.xlsx",ExcleFile
     
     GetPoiNameZero ZeorCount,ZeroArr,ZeroStr
     
@@ -76,42 +76,42 @@ Sub OnClick()
     
 End Sub' OnClick
 
-'==========================================================ExcelÌîÖµ===================================================================
+'==========================================================Excelå¡«å€¼===================================================================
 
-'ÌîĞ´Í³¼Æ½á¹û
+'å¡«å†™ç»Ÿè®¡ç»“æœ
 Function InsertResult(ByVal ResultRow,ByVal ZeroCount,ByVal OverPoiCount,ByVal OverHeightCount,ByVal AveragePoi,ByVal AverageHeight,ByVal MiddlePoi,ByVal MiddleHei,ByVal OverPercent)
     If ZeroCount < 15 Then
         If OverPoiCount > 0 And OverHeightCount > 0 Then
-            ResultString = "Í³¼Æ½á¹û£º¼ì²éµãÊı£º" & ZeroCount & "¸ö£¬µãÎ»³¬²îµÄµãÊı" & OverPoiCount & "¸ö£¬¸ß³Ì³¬²îµÄ¸öÊı" & OverHeightCount & "¸ö£¬³¬²îµãÎ»Õ¼×ÜµãÊı°Ù·Ö±È" & OverPercent & "%£¬µãÎ»Îó²îÆ½¾ùÖµ£º" & AveragePoi & "£¨M£©£¬¸ß³ÌÎó²îÆ½¾ùÖµ£º" & AverageHeight & "£¨M£©"
+            ResultString = "ç»Ÿè®¡ç»“æœï¼šæ£€æŸ¥ç‚¹æ•°ï¼š" & ZeroCount & "ä¸ªï¼Œç‚¹ä½è¶…å·®çš„ç‚¹æ•°" & OverPoiCount & "ä¸ªï¼Œé«˜ç¨‹è¶…å·®çš„ä¸ªæ•°" & OverHeightCount & "ä¸ªï¼Œè¶…å·®ç‚¹ä½å æ€»ç‚¹æ•°ç™¾åˆ†æ¯”" & OverPercent & "%ï¼Œç‚¹ä½è¯¯å·®å¹³å‡å€¼ï¼š" & AveragePoi & "ï¼ˆMï¼‰ï¼Œé«˜ç¨‹è¯¯å·®å¹³å‡å€¼ï¼š" & AverageHeight & "ï¼ˆMï¼‰"
             ExcelObj.Cells(ResultRow,1) = ResultString
         ElseIf OverPoiCount > 0 And OverHeightCount = 0 Then
-            ResultString = "Í³¼Æ½á¹û£º¼ì²éµãÊı£º" & ZeroCount & "¸ö£¬µãÎ»³¬²îµÄµãÊı" & OverPoiCount & "¸ö£¬³¬²îµãÎ»Õ¼×ÜµãÊı°Ù·Ö±È" & OverPercent & "%£¬µãÎ»Îó²îÆ½¾ùÖµ£º" & AveragePoi & "£¨M£©£¬¸ß³ÌÎó²îÆ½¾ùÖµ£º" & AverageHeight & "£¨M£©"
+            ResultString = "ç»Ÿè®¡ç»“æœï¼šæ£€æŸ¥ç‚¹æ•°ï¼š" & ZeroCount & "ä¸ªï¼Œç‚¹ä½è¶…å·®çš„ç‚¹æ•°" & OverPoiCount & "ä¸ªï¼Œè¶…å·®ç‚¹ä½å æ€»ç‚¹æ•°ç™¾åˆ†æ¯”" & OverPercent & "%ï¼Œç‚¹ä½è¯¯å·®å¹³å‡å€¼ï¼š" & AveragePoi & "ï¼ˆMï¼‰ï¼Œé«˜ç¨‹è¯¯å·®å¹³å‡å€¼ï¼š" & AverageHeight & "ï¼ˆMï¼‰"
             ExcelObj.Cells(ResultRow,1) = ResultString
         ElseIf OverPoiCount = 0 And OverHeightCount > 0 Then
-            ResultString = "Í³¼Æ½á¹û£º¼ì²éµãÊı£º" & ZeroCount & "¸ö" & "¸ß³Ì³¬²îµÄ¸öÊı" & OverHeightCount & "¸ö£¬³¬²îµãÎ»Õ¼×ÜµãÊı°Ù·Ö±È" & OverPercent & "%£¬µãÎ»Îó²îÆ½¾ùÖµ£º" & AveragePoi & "£¨M£©£¬¸ß³ÌÎó²îÆ½¾ùÖµ£º" & AverageHeight & "£¨M£©"
+            ResultString = "ç»Ÿè®¡ç»“æœï¼šæ£€æŸ¥ç‚¹æ•°ï¼š" & ZeroCount & "ä¸ª" & "é«˜ç¨‹è¶…å·®çš„ä¸ªæ•°" & OverHeightCount & "ä¸ªï¼Œè¶…å·®ç‚¹ä½å æ€»ç‚¹æ•°ç™¾åˆ†æ¯”" & OverPercent & "%ï¼Œç‚¹ä½è¯¯å·®å¹³å‡å€¼ï¼š" & AveragePoi & "ï¼ˆMï¼‰ï¼Œé«˜ç¨‹è¯¯å·®å¹³å‡å€¼ï¼š" & AverageHeight & "ï¼ˆMï¼‰"
             ExcelObj.Cells(ResultRow,1) = ResultString
         Else
-            ResultString = "Í³¼Æ½á¹û£º¼ì²éµãÊı£º" & ZeroCount & "¸ö" & "µãÎ»Îó²îÆ½¾ùÖµ£º" & AveragePoi & "£¨M£©£¬¸ß³ÌÎó²îÆ½¾ùÖµ£º" & AverageHeight & "£¨M£©"
+            ResultString = "ç»Ÿè®¡ç»“æœï¼šæ£€æŸ¥ç‚¹æ•°ï¼š" & ZeroCount & "ä¸ª" & "ç‚¹ä½è¯¯å·®å¹³å‡å€¼ï¼š" & AveragePoi & "ï¼ˆMï¼‰ï¼Œé«˜ç¨‹è¯¯å·®å¹³å‡å€¼ï¼š" & AverageHeight & "ï¼ˆMï¼‰"
             ExcelObj.Cells(ResultRow,1) = ResultString
         End If
     ElseIf ZeroCount >= 15 Then
         If OverPoiCount > 0 And OverHeightCount > 0 Then
-            ResultString = "Í³¼Æ½á¹û£º¼ì²éµãÊı£º" & ZeroCount & "¸ö£¬µãÎ»³¬²îµÄµãÊı" & OverPoiCount & "¸ö£¬¸ß³Ì³¬²îµÄ¸öÊı" & OverHeightCount & "¸ö£¬³¬²îµãÎ»Õ¼×ÜµãÊı°Ù·Ö±È" & OverPercent & "%£¬µãÎ»Îó²îÖĞÎó²î£º" & MiddlePoi & "£¨M£©£¬¸ß³ÌÎó²îÖĞÎó²î£º" & MiddleHei & "£¨M£©"
+            ResultString = "ç»Ÿè®¡ç»“æœï¼šæ£€æŸ¥ç‚¹æ•°ï¼š" & ZeroCount & "ä¸ªï¼Œç‚¹ä½è¶…å·®çš„ç‚¹æ•°" & OverPoiCount & "ä¸ªï¼Œé«˜ç¨‹è¶…å·®çš„ä¸ªæ•°" & OverHeightCount & "ä¸ªï¼Œè¶…å·®ç‚¹ä½å æ€»ç‚¹æ•°ç™¾åˆ†æ¯”" & OverPercent & "%ï¼Œç‚¹ä½è¯¯å·®ä¸­è¯¯å·®ï¼š" & MiddlePoi & "ï¼ˆMï¼‰ï¼Œé«˜ç¨‹è¯¯å·®ä¸­è¯¯å·®ï¼š" & MiddleHei & "ï¼ˆMï¼‰"
             ExcelObj.Cells(ResultRow,1) = ResultString
         ElseIf OverPoiCount > 0 And OverHeightCount = 0 Then
-            ResultString = "Í³¼Æ½á¹û£º¼ì²éµãÊı£º" & ZeroCount & "¸ö£¬µãÎ»³¬²îµÄµãÊı" & OverPoiCount & "¸ö£¬³¬²îµãÎ»Õ¼×ÜµãÊı°Ù·Ö±È" & OverPercent & "%£¬µãÎ»Îó²îÖĞÎó²î£º" & MiddlePoi & "£¨M£©£¬¸ß³ÌÎó²îÖĞÎó²î£º" & MiddleHei & "£¨M£©"
+            ResultString = "ç»Ÿè®¡ç»“æœï¼šæ£€æŸ¥ç‚¹æ•°ï¼š" & ZeroCount & "ä¸ªï¼Œç‚¹ä½è¶…å·®çš„ç‚¹æ•°" & OverPoiCount & "ä¸ªï¼Œè¶…å·®ç‚¹ä½å æ€»ç‚¹æ•°ç™¾åˆ†æ¯”" & OverPercent & "%ï¼Œç‚¹ä½è¯¯å·®ä¸­è¯¯å·®ï¼š" & MiddlePoi & "ï¼ˆMï¼‰ï¼Œé«˜ç¨‹è¯¯å·®ä¸­è¯¯å·®ï¼š" & MiddleHei & "ï¼ˆMï¼‰"
             ExcelObj.Cells(ResultRow,1) = ResultString
         ElseIf OverPoiCount = 0 And OverHeightCount > 0 Then
-            ResultString = "Í³¼Æ½á¹û£º¼ì²éµãÊı£º" & ZeroCount & "¸ö£¬¸ß³Ì³¬²îµÄ¸öÊı" & OverHeightCount & "¸ö£¬³¬²îµãÎ»Õ¼×ÜµãÊı°Ù·Ö±È" & OverPercent & "%£¬µãÎ»Îó²îÖĞÎó²î£º" & MiddlePoi & "£¨M£©£¬¸ß³ÌÎó²îÖĞÎó²î£º" & MiddleHei & "£¨M£©"
+            ResultString = "ç»Ÿè®¡ç»“æœï¼šæ£€æŸ¥ç‚¹æ•°ï¼š" & ZeroCount & "ä¸ªï¼Œé«˜ç¨‹è¶…å·®çš„ä¸ªæ•°" & OverHeightCount & "ä¸ªï¼Œè¶…å·®ç‚¹ä½å æ€»ç‚¹æ•°ç™¾åˆ†æ¯”" & OverPercent & "%ï¼Œç‚¹ä½è¯¯å·®ä¸­è¯¯å·®ï¼š" & MiddlePoi & "ï¼ˆMï¼‰ï¼Œé«˜ç¨‹è¯¯å·®ä¸­è¯¯å·®ï¼š" & MiddleHei & "ï¼ˆMï¼‰"
             ExcelObj.Cells(ResultRow,1) = ResultString
         Else
-            ResultString = "Í³¼Æ½á¹û£º¼ì²éµãÊı£º" & ZeroCount & "¸ö" & "µãÎ»Îó²îÖĞÎó²î£º" & MiddlePoi & "£¨M£©£¬¸ß³ÌÎó²îÖĞÎó²î£º" & MiddleHei & "£¨M£©"
+            ResultString = "ç»Ÿè®¡ç»“æœï¼šæ£€æŸ¥ç‚¹æ•°ï¼š" & ZeroCount & "ä¸ª" & "ç‚¹ä½è¯¯å·®ä¸­è¯¯å·®ï¼š" & MiddlePoi & "ï¼ˆMï¼‰ï¼Œé«˜ç¨‹è¯¯å·®ä¸­è¯¯å·®ï¼š" & MiddleHei & "ï¼ˆMï¼‰"
             ExcelObj.Cells(ResultRow,1) = ResultString
         End If
     End If
 End Function' InsertResult
 
-'»ñÈ¡½á¹ûĞÅÏ¢
+'è·å–ç»“æœä¿¡æ¯
 Function GetResultInfo(ByVal ZeroCount,ByVal StartRow,ByVal EndRow,ByRef OverPoiCount,ByRef OverHeightCount,ByRef AveragePoi,ByRef AverageHeight,ByRef MiddlePoi,ByRef MiddleHei,ByRef OverPercent,ByRef OverPoiName,ByRef OverHeiName,ByRef MaxLen,ByRef MaxHei)
     OverPoiCount = 0
     OverHeightCount = 0
@@ -164,12 +164,12 @@ Function GetResultInfo(ByVal ZeroCount,ByVal StartRow,ByVal EndRow,ByRef OverPoi
     MiddleHei = Round(Sqr(SquareHei / ZeroCount),3)
 End Function' GetResultInfo
 
-'»ñÈ¡³¤¶È²î
+'è·å–é•¿åº¦å·®
 Function GetDiffS(x1,y1,x2,y2)
     GetDiffS = Round(Sqr((x1 - x2) ^ 2 + (y1 - y2) ^ 2),3)
 End Function' GetDiffS
 
-'ÌîĞ´¸ß³Ì²îºÍ¾àÀë²î
+'å¡«å†™é«˜ç¨‹å·®å’Œè·ç¦»å·®
 Function InsertDiff(ByVal StartRow,ByVal EndRow)
     For i = StartRow To EndRow
         ExcelObj.Cells(i,10) = GetDiffS(Transform(ExcelObj.Cells(i,3)),Transform(ExcelObj.Cells(i,4)),Transform(ExcelObj.Cells(i,7)),Transform(ExcelObj.Cells(i,8)))
@@ -177,7 +177,7 @@ Function InsertDiff(ByVal StartRow,ByVal EndRow)
     Next 'i
 End Function' InsertDiff
 
-'ÌîĞ´Excel
+'å¡«å†™Excel
 Function InsertExcle(ByVal StartRow,ByRef EndRow,ByVal ZeroCount,ByVal ZeroArr(),ByVal GXDDHArr(),ByVal DhLxCount)
     EndRow = ZeroCount + 2
     If EndRow <= 5  Then
@@ -198,7 +198,7 @@ Function InsertExcle(ByVal StartRow,ByRef EndRow,ByVal ZeroCount,ByVal ZeroArr()
     End If
 End Function' InsertExcle
 
-'ÌîĞ´¹ÜÏßµãÖµ
+'å¡«å†™ç®¡çº¿ç‚¹å€¼
 Function InsertGxPoint(ByVal StartRow,ByVal EndRow,ByVal GXDDHArr,ByVal DhLxCount)
     For i = 0 To DhLxCount
         For j = StartRow To EndRow
@@ -212,14 +212,14 @@ Function InsertGxPoint(ByVal StartRow,ByVal EndRow,ByVal GXDDHArr,ByVal DhLxCoun
     Next 'i
 End Function' InsertGxPoint
 
-'ÌîĞ´0µãµÄXYZÖµµ½Excel±í¸ñÖĞ
+'å¡«å†™0ç‚¹çš„XYZå€¼åˆ°Excelè¡¨æ ¼ä¸­
 Function InsertZeroXYZ(ByVal InsertRow,ByVal Index,ByVal ZeroArr())
     ExcelObj.Cells(InsertRow,7) = Round(Transform(SSProcess.GetObjectAttr(ZeroArr(Index,1),"SSObj_Y")),3)
     ExcelObj.Cells(InsertRow,8) = Round(Transform(SSProcess.GetObjectAttr(ZeroArr(Index,1),"SSObj_X")),3)
     ExcelObj.Cells(InsertRow,9) = Round(Transform(SSProcess.GetObjectAttr(ZeroArr(Index,1),"SSObj_Z")),3)
 End Function' InsertZeroXYZ
 
-'»ñÈ¡ËùÓĞµÄ0µãµÄµãÃûºÍID
+'è·å–æ‰€æœ‰çš„0ç‚¹çš„ç‚¹åå’ŒID
 Function GetPoiNameZero(ByRef ZeorCount,ByRef ZeroArr(),ByRef ZeroStr)
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -249,26 +249,26 @@ Function Transform(ByVal Values)
     Transform = Values
 End Function'Transform
 
-'»ñÈ¡ËùÓĞÂú×ãÌõ¼şµÄÎïÌ½µãºÅµÄID
+'è·å–æ‰€æœ‰æ»¡è¶³æ¡ä»¶çš„ç‰©æ¢ç‚¹å·çš„ID
 Function GetGXDDH(ByRef GXDDHArr(),ByRef DhLxCount,ByVal ZeoStr)
-    SqlString = "Select µØÏÂ¹ÜÏßµãÊôĞÔ±í.ID From µØÏÂ¹ÜÏßµãÊôĞÔ±í Inner Join GeoPointTB on µØÏÂ¹ÜÏßµãÊôĞÔ±í.ID = GeoPointTB.ID WHERE (GeoPointTB.Mark Mod 2)<>0 And µØÏÂ¹ÜÏßµãÊôĞÔ±í.WTDH In " & "(" & ZeoStr & ")"
+    SqlString = "Select åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.ID From åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨ Inner Join GeoPointTB on åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.ID = GeoPointTB.ID WHERE (GeoPointTB.Mark Mod 2)<>0 And åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.WTDH In " & "(" & ZeoStr & ")"
     GetSQLRecordAll SqlString,GXDDHArr,DhLxCount
 End Function' GetGXDDH
 
-'Ìí¼Ó¼ì²é¼ÇÂ¼
+'æ·»åŠ æ£€æŸ¥è®°å½•
 Function AddRecord(ByVal OverPoiName,ByVal OverHeiName)
     If OverPoiName <> "" Then
-        SqlString = "Select µØÏÂ¹ÜÏßµãÊôĞÔ±í.ID From µØÏÂ¹ÜÏßµãÊôĞÔ±í Inner Join GeoPointTB on µØÏÂ¹ÜÏßµãÊôĞÔ±í.ID = GeoPointTB.ID WHERE (GeoPointTB.Mark Mod 2)<>0 And µØÏÂ¹ÜÏßµãÊôĞÔ±í.WTDH In " & "(" & OverPoiName & ")"
+        SqlString = "Select åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.ID From åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨ Inner Join GeoPointTB on åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.ID = GeoPointTB.ID WHERE (GeoPointTB.Mark Mod 2)<>0 And åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.WTDH In " & "(" & OverPoiName & ")"
         GetSQLRecordAll SqlString,OverPoiArr,OverPoiCount
         For i = 0 To OverPoiCount - 1
             SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,SSProcess.GetObjectAttr(OverPoiArr(i),"SSObj_X"),SSProcess.GetObjectAttr(OverPoiArr(i),"SSObj_Y"),0,0,OverPoiArr(i),""
         Next 'i
     End If
-    strCheckName = "¸ß³Ì¾«¶È¼ì²é"
-    CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->¸ß³Ì¾«¶È¼ì²é"
-    strDescription = "¸ß³Ì¾«¶È³¬±ê"
+    strCheckName = "é«˜ç¨‹ç²¾åº¦æ£€æŸ¥"
+    CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->é«˜ç¨‹ç²¾åº¦æ£€æŸ¥"
+    strDescription = "é«˜ç¨‹ç²¾åº¦è¶…æ ‡"
     If OverHeiName <> "" Then
-        SqlString = "Select µØÏÂ¹ÜÏßµãÊôĞÔ±í.ID From µØÏÂ¹ÜÏßµãÊôĞÔ±í Inner Join GeoPointTB on µØÏÂ¹ÜÏßµãÊôĞÔ±í.ID = GeoPointTB.ID WHERE (GeoPointTB.Mark Mod 2)<>0 And µØÏÂ¹ÜÏßµãÊôĞÔ±í.WTDH In " & "(" & OverHeiName & ")"
+        SqlString = "Select åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.ID From åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨ Inner Join GeoPointTB on åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.ID = GeoPointTB.ID WHERE (GeoPointTB.Mark Mod 2)<>0 And åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.WTDH In " & "(" & OverHeiName & ")"
         GetSQLRecordAll SqlString,OverHeiArr,OverHeiCount
         For i = 0 To OverHeiCount - 1
             SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,SSProcess.GetObjectAttr(OverHeiArr(i),"SSObj_X"),SSProcess.GetObjectAttr(OverHeiArr(i),"SSObj_Y"),0,0,OverHeiArr(i),""
@@ -278,17 +278,17 @@ Function AddRecord(ByVal OverPoiName,ByVal OverHeiName)
     SSProcess.SaveCheckRecord
 End Function' AddRecord
 
-'Çå¿Õ¼ì²é¼¯
+'æ¸…ç©ºæ£€æŸ¥é›†
 Function ClearCheckRecord()
     SSProcess.RemoveCheckRecord strGroupName, strCheckName
 End Function' ClearCheckRecord
 
-'»ñÈ¡ËùÓĞ¼ÇÂ¼
+'è·å–æ‰€æœ‰è®°å½•
 Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)
     ProJectName = SSProcess.GetProjectFileName
     SSProcess.OpenAccessMdb ProJectName
     If StrSqlStatement = "" Then
-        MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
+        MsgBox "æŸ¥è¯¢è¯­å¥ä¸ºç©ºï¼Œæ“ä½œåœæ­¢ï¼",48
     End If
     iRecordCount =  - 1
     SSProcess.OpenAccessRecordset ProJectName, StrSqlStatement
@@ -311,22 +311,22 @@ Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecord
     SSProcess.CloseAccessMdb ProJectName
 End Function
 
-'²åÈëÖ¸¶¨ĞĞÊı
+'æ’å…¥æŒ‡å®šè¡Œæ•°
 Function InsertRows(ByVal StartRow,ByVal InsertCount)
     For i = 0 To InsertCount - 1
         ExcelObj.ActiveSheet.Rows(StartRow).Insert
     Next 'i
 End Function' InsertRows
 
-'´ò¿ªExcel±í
+'æ‰“å¼€Excelè¡¨
 Function OpenExcel(ByVal FilePath,ByRef ExcleFile)
     ExcelObj.Application.Visible = True
     Set ExcleFile = ExcelObj.WorkBooks.Open(FilePath)
-    Set ExcelSheet = ExcleFile.WorkSheets("¾«¶Èµ÷²é±í")
+    Set ExcelSheet = ExcleFile.WorkSheets("ç²¾åº¦è°ƒæŸ¥è¡¨")
     ExcelSheet.Activate
 End Function
 
-'´ò¿ªËùÓĞÍ¼²ã
+'æ‰“å¼€æ‰€æœ‰å›¾å±‚
 Function AllVisible()
     count = SSProcess.GetLayerCount
     For i = 0 To count - 1
@@ -336,24 +336,24 @@ Function AllVisible()
     SSProcess.RefreshView
 End Function
 
-'±£´æ¹Ø±ÕExcel±í¸ñ
+'ä¿å­˜å…³é—­Excelè¡¨æ ¼
 Function CloseExcel(ByVal ExcleFile)
     ExcleFile.Save
     ExcelObj.Quit
 End Function' CloseExcel
 
-'É¾³ıÖ¸¶¨µÄÁĞ
+'åˆ é™¤æŒ‡å®šçš„åˆ—
 Function DelSelCol(ByVal ColNum)
     ExcelObj.ActiveSheet.Columns(ColNum).Delete
 End Function' DelSelCol
 
-'Ë¢ĞÂ¶şÎ¬±í
+'åˆ·æ–°äºŒç»´è¡¨
 Function GXEWB(DWZDJC,GCZDJC)
     mdbName = SSProcess.GetProjectFileName
     SSProcess.OpenAccessMdb mdbName
-    sql = "update  ¹ÜÏßÏîÄ¿ĞÅÏ¢±í set DWZDJC = " & DWZDJC & "where ¹ÜÏßÏîÄ¿ĞÅÏ¢±í.ID= 1"
+    sql = "update  ç®¡çº¿é¡¹ç›®ä¿¡æ¯è¡¨ set DWZDJC = " & DWZDJC & "where ç®¡çº¿é¡¹ç›®ä¿¡æ¯è¡¨.ID= 1"
     SSProcess.ExecuteAccessSql  mdbName,sql
-    sql = "update  ¹ÜÏßÏîÄ¿ĞÅÏ¢±í set GCZDJC = " & GCZDJC & "where ¹ÜÏßÏîÄ¿ĞÅÏ¢±í.ID= 1"
+    sql = "update  ç®¡çº¿é¡¹ç›®ä¿¡æ¯è¡¨ set GCZDJC = " & GCZDJC & "where ç®¡çº¿é¡¹ç›®ä¿¡æ¯è¡¨.ID= 1"
     SSProcess.ExecuteAccessSql  mdbName,sql
     SSProcess.CloseAccessMdb mdbName
     SSProcess.RemoveCheckRecord strGroupName, strCheckName

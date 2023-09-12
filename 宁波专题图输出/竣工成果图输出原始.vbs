@@ -3,24 +3,24 @@
 		DIM arID(100000),arID1(100000),arID2(100000)
 		dim vArray1(20000), vArray2(20000), vArray3(20000)
 		dim cvArray1(20000), cvArray2(20000), cvArray3(20000),vArray(30000)
-Rem special:[×ÜÆ½Í¼] ³öÍ¼Ç°£¨³õÊ¼»¯µ÷ÓÃ£©ÓÉ´Ë½øÈë
+Rem special:[æ€»å¹³å›¾] å‡ºå›¾å‰ï¼ˆåˆå§‹åŒ–è°ƒç”¨ï¼‰ç”±æ­¤è¿›å…¥
 Function VBS_preMap0(MSGID,mapName,selectID)
 	  
-	 Rem ±¾º¯Êı¹Ø¼ü²ÎÊı£ºSSParameter.SetParameterINT "printMap", "return", 1
-	 Rem return = 1 Í£Ö¹Êä³ö³É¹ûÍ¼
-	 Rem return = 0 ¼ÌĞøÊä³ö³É¹ûÍ¼£¨ÎŞĞèÉèÖÃ¡¢Ä¬ÈÏÖµÎª0£©
-	 If MSGID = 0 Then '// ĞÂ¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
-		 '// ÉèÖÃ³öÍ¼¹¤³ÌÃû³Æ¡¢±ØĞëµ÷ÓÃ.... 
+	 Rem æœ¬å‡½æ•°å…³é”®å‚æ•°ï¼šSSParameter.SetParameterINT "printMap", "return", 1
+	 Rem return = 1 åœæ­¢è¾“å‡ºæˆæœå›¾
+	 Rem return = 0 ç»§ç»­è¾“å‡ºæˆæœå›¾ï¼ˆæ— éœ€è®¾ç½®ã€é»˜è®¤å€¼ä¸º0ï¼‰
+	 If MSGID = 0 Then '// æ–°å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
+		 '// è®¾ç½®å‡ºå›¾å·¥ç¨‹åç§°ã€å¿…é¡»è°ƒç”¨.... 
 	   strProjectName=SSProcess.GetProjectFileName()
 	   FileFolder=replace(strProjectName,".edb","")
 		if IsfolderExists(FileFolder) = false then CreateFolders FileFolder
-	   fileName= FileFolder & "\¿¢¹¤²â»æ×ÜÆ½ÃæÍ¼.edb"
+	   fileName= FileFolder & "\ç«£å·¥æµ‹ç»˜æ€»å¹³é¢å›¾.edb"
 		SSParameter.SetParameterSTR "printMap","NewedbName",fileName 
 	  
 	  JGZPTKEY	selectID
-	 ElseIf MSGID = 1 Then '// ±¾¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
+	 ElseIf MSGID = 1 Then '// æœ¬å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
 	  
 	 End If 
 	  
@@ -29,28 +29,28 @@ End Function
 
 	  
 	  
-Rem special:[×ÜÆ½Í¼] ³öÍ¼Íê³ÉÓÉ´Ë½øÈë
+Rem special:[æ€»å¹³å›¾] å‡ºå›¾å®Œæˆç”±æ­¤è¿›å…¥
 Function VBS_postMap0(MSGID,mapName,selectID)
 	  
-	 Rem Í¼ÀªID,½Å±¾´¦ÀíÏî¸öÊı
+	 Rem å›¾å»“ID,è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 Dim tk_id,tk_innerids,ScriptChangeCount
-	 Rem ½Å±¾´¦ÀíÏîÃû³Æ,½Å±¾´¦ÀíÏî²ÎÊı,½Å±¾´¦ÀíÏî¸½¼Ó²ÎÊı 
+	 Rem è„šæœ¬å¤„ç†é¡¹åç§°,è„šæœ¬å¤„ç†é¡¹å‚æ•°,è„šæœ¬å¤„ç†é¡¹é™„åŠ å‚æ•° 
 	 Dim str_Name,str_para,str_paraex	  
-	 Rem »ñÈ¡·Ö²ãÍ¼Í¼ÀªIDS,¶à¸öÓ¢ÎÄ¶ººÅÏà¸ô
+	 Rem è·å–åˆ†å±‚å›¾å›¾å»“IDS,å¤šä¸ªè‹±æ–‡é€—å·ç›¸éš”
 	 SSParameter.GetParameterINT "printMap", "TKID", -1, tk_id 
-	 Rem »ñÈ¡Í¼ÀªÄÚµØÎïIDS
+	 Rem è·å–å›¾å»“å†…åœ°ç‰©IDS
 	 SSParameter.GetParameterSTR "printMap", "TKInerobjIDS", "", tk_innerids 
-	 Rem »ñÈ¡½Å±¾´¦ÀíÏî¸öÊı
+	 Rem è·å–è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 SSParameter.GetParameterINT "printMap", "ScriptChangeCount", -1, ScriptChangeCount
 	
-		 '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+		 '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
 
 	SSProcess.SetObjectAttr tk_id,"[XiangMMC]",xmmc
 
 	
- '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+ '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
  	debug_print String(50,"-")
-	debug_print "Êä³öÍê³É¡£"
+	debug_print "è¾“å‡ºå®Œæˆã€‚"
 	debug_print String(50,"-")
 	ViewExtend()
 	SSProcess.SetMapScale "500"
@@ -58,59 +58,59 @@ Function VBS_postMap0(MSGID,mapName,selectID)
 	'DaHui
 	'DeleteFeature "9410091","9420033"
 	'DeleteFeature "9420035","9999403"
-	DeleteFeatureLayerName "DT_POLYGON,DT_LINE,DT_POINT,DT_ZJ,LCGZKJ,LCGZKJZJ,GHFSQLJX,LMT_ZJ,»ùµ××¢¼Ç,TKZSX,TKZSM,DEFAULT"
+	DeleteFeatureLayerName "DT_POLYGON,DT_LINE,DT_POINT,DT_ZJ,LCGZKJ,LCGZKJZJ,GHFSQLJX,LMT_ZJ,åŸºåº•æ³¨è®°,TKZSX,TKZSM,DEFAULT"
 	CreateKEYZPT
 	
-	 Rem ³É¹ûÍ¼Ï¸½Ú·Ö¿ª´¦Àí
+	 Rem æˆæœå›¾ç»†èŠ‚åˆ†å¼€å¤„ç†
 	 For i = 0 to ScriptChangeCount -1
-		 Rem »ñÈ¡´¦ÀíÏîÃû³Æ
+		 Rem è·å–å¤„ç†é¡¹åç§°
 		 SSParameter.GetParameterSTR "printMap", i & "Name", "", str_Name 
-		 Rem »ñÈ¡´¦ÀíÏî²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaString", "", str_para 
-		 Rem »ñÈ¡´¦ÀíÏî¸½¼Ó²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹é™„åŠ å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaStringEX", "", str_paraex 
-		 '// ´Ë´¦ÎŞ´úÂë¡¢ËµÃ÷Ã»ÓĞ½Å±¾´¦ÀíÏî..
+		 '// æ­¤å¤„æ— ä»£ç ã€è¯´æ˜æ²¡æœ‰è„šæœ¬å¤„ç†é¡¹..
 	 Next 
 	  
 End Function 
 
-Rem special:[¶Ô±ÈÍ¼] ³öÍ¼Ç°£¨³õÊ¼»¯µ÷ÓÃ£©ÓÉ´Ë½øÈë
+Rem special:[å¯¹æ¯”å›¾] å‡ºå›¾å‰ï¼ˆåˆå§‹åŒ–è°ƒç”¨ï¼‰ç”±æ­¤è¿›å…¥
 Function VBS_preMap1(MSGID,mapName,selectID)
 	  
-	 Rem ±¾º¯Êı¹Ø¼ü²ÎÊı£ºSSParameter.SetParameterINT "printMap", "return", 1
-	 Rem return = 1 Í£Ö¹Êä³ö³É¹ûÍ¼
-	 Rem return = 0 ¼ÌĞøÊä³ö³É¹ûÍ¼£¨ÎŞĞèÉèÖÃ¡¢Ä¬ÈÏÖµÎª0£©
+	 Rem æœ¬å‡½æ•°å…³é”®å‚æ•°ï¼šSSParameter.SetParameterINT "printMap", "return", 1
+	 Rem return = 1 åœæ­¢è¾“å‡ºæˆæœå›¾
+	 Rem return = 0 ç»§ç»­è¾“å‡ºæˆæœå›¾ï¼ˆæ— éœ€è®¾ç½®ã€é»˜è®¤å€¼ä¸º0ï¼‰
 	  
-	 If MSGID = 0 Then '// ĞÂ¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
-		 '// ÉèÖÃ³öÍ¼¹¤³ÌÃû³Æ¡¢±ØĞëµ÷ÓÃ.... 
+	 If MSGID = 0 Then '// æ–°å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
+		 '// è®¾ç½®å‡ºå›¾å·¥ç¨‹åç§°ã€å¿…é¡»è°ƒç”¨.... 
 		 SSParameter.SetParameterINT "printMap", "return", 1
 		 Dim path_print
 		If CheckReportPath(path_print) = False    Then 
 
-	  		MsgBox "ÎŞ·¨Íê³É³öÍ¼£º³É¹ûÄ¿Â¼Î´´´½¨¡¢ÎŞ·¨Íê³É³öÍ¼"
+	  		MsgBox "æ— æ³•å®Œæˆå‡ºå›¾ï¼šæˆæœç›®å½•æœªåˆ›å»ºã€æ— æ³•å®Œæˆå‡ºå›¾"
 	  		Exit Function 
 	  	End If 
 	  	
 
 	  	If GetXMMC(xmmc) = False Then 
-	  		MsgBox "ÎŞ·¨Íê³É³öÍ¼£ºÇë¼ì²éÏîÄ¿Ãû³ÆÊÇ·ñÕıÈ·£¿"
+	  		MsgBox "æ— æ³•å®Œæˆå‡ºå›¾ï¼šè¯·æ£€æŸ¥é¡¹ç›®åç§°æ˜¯å¦æ­£ç¡®ï¼Ÿ"
 	  		Exit Function 
 	  	End If 
 
 
-	    fileName= path_print & "\" & xmmc & "ËÄÖÁ³ß´ç¶Ô±ÈÍ¼.edb"
+	    fileName= path_print & "\" & xmmc & "å››è‡³å°ºå¯¸å¯¹æ¯”å›¾.edb"
 	    
 	  	If FileExists(fileName) Then 
-	  		MsgBox fileName & "ÎÄ¼şÒÑ´æÔÚ¡¢ÎŞ·¨Íê³ÉÊä³ö¡¢ÇëÊÖ¶¯¼ì²éÉ¾³ıºóÖØÊÔ"
+	  		MsgBox fileName & "æ–‡ä»¶å·²å­˜åœ¨ã€æ— æ³•å®Œæˆè¾“å‡ºã€è¯·æ‰‹åŠ¨æ£€æŸ¥åˆ é™¤åé‡è¯•"
 	  		Exit Function 
 	  	End If 	 
 	  	SSParameter.SetParameterINT "printMap", "return", 0
 		SSParameter.SetParameterSTR "printMap","NewedbName",fileName 
 	  
 	  
-	 ElseIf MSGID = 1 Then '// ±¾¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
+	 ElseIf MSGID = 1 Then '// æœ¬å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
 	  
 	 End If 
 	  
@@ -119,29 +119,29 @@ End Function
 
 	  
 	  
-Rem special:[¶Ô±ÈÍ¼] ³öÍ¼Íê³ÉÓÉ´Ë½øÈë
+Rem special:[å¯¹æ¯”å›¾] å‡ºå›¾å®Œæˆç”±æ­¤è¿›å…¥
 Function VBS_postMap1(MSGID,mapName,selectID)
 	  
-	 Rem Í¼ÀªID,½Å±¾´¦ÀíÏî¸öÊı
+	 Rem å›¾å»“ID,è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 Dim tk_id,tk_innerids,ScriptChangeCount
-	 Rem ½Å±¾´¦ÀíÏîÃû³Æ,½Å±¾´¦ÀíÏî²ÎÊı,½Å±¾´¦ÀíÏî¸½¼Ó²ÎÊı 
+	 Rem è„šæœ¬å¤„ç†é¡¹åç§°,è„šæœ¬å¤„ç†é¡¹å‚æ•°,è„šæœ¬å¤„ç†é¡¹é™„åŠ å‚æ•° 
 	 Dim str_Name,str_para,str_paraex	  
-	 Rem »ñÈ¡·Ö²ãÍ¼Í¼ÀªIDS,¶à¸öÓ¢ÎÄ¶ººÅÏà¸ô
+	 Rem è·å–åˆ†å±‚å›¾å›¾å»“IDS,å¤šä¸ªè‹±æ–‡é€—å·ç›¸éš”
 	 SSParameter.GetParameterINT "printMap", "TKID", -1, tk_id 
-	 Rem »ñÈ¡Í¼ÀªÄÚµØÎïIDS
+	 Rem è·å–å›¾å»“å†…åœ°ç‰©IDS
 	 SSParameter.GetParameterSTR "printMap", "TKInerobjIDS", "", tk_innerids 
-	 Rem »ñÈ¡½Å±¾´¦ÀíÏî¸öÊı
+	 Rem è·å–è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 SSParameter.GetParameterINT "printMap", "ScriptChangeCount", -1, ScriptChangeCount
 	
-		 '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+		 '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
 
 
 	SSProcess.SetObjectAttr tk_id,"[XiangMMC]",xmmc
 
 	
- '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+ '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
  	debug_print String(50,"-")
-	debug_print "Êä³öÍê³É¡£"
+	debug_print "è¾“å‡ºå®Œæˆã€‚"
 	debug_print String(50,"-")
 	ViewExtend()
 
@@ -149,56 +149,56 @@ Function VBS_postMap1(MSGID,mapName,selectID)
 
 		
 	
-	 Rem ³É¹ûÍ¼Ï¸½Ú·Ö¿ª´¦Àí
+	 Rem æˆæœå›¾ç»†èŠ‚åˆ†å¼€å¤„ç†
 	 For i = 0 to ScriptChangeCount -1
-		 Rem »ñÈ¡´¦ÀíÏîÃû³Æ
+		 Rem è·å–å¤„ç†é¡¹åç§°
 		 SSParameter.GetParameterSTR "printMap", i & "Name", "", str_Name 
-		 Rem »ñÈ¡´¦ÀíÏî²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaString", "", str_para 
-		 Rem »ñÈ¡´¦ÀíÏî¸½¼Ó²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹é™„åŠ å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaStringEX", "", str_paraex 
-		 '// ´Ë´¦ÎŞ´úÂë¡¢ËµÃ÷Ã»ÓĞ½Å±¾´¦ÀíÏî..
+		 '// æ­¤å¤„æ— ä»£ç ã€è¯´æ˜æ²¡æœ‰è„šæœ¬å¤„ç†é¡¹..
 	 Next 
 	  
 End Function 
 
-Rem special:[ÍÁµØºËÑé] ³öÍ¼Ç°£¨³õÊ¼»¯µ÷ÓÃ£©ÓÉ´Ë½øÈë
+Rem special:[åœŸåœ°æ ¸éªŒ] å‡ºå›¾å‰ï¼ˆåˆå§‹åŒ–è°ƒç”¨ï¼‰ç”±æ­¤è¿›å…¥
 Function VBS_preMap2(MSGID,mapName,selectID)
 	  
-	 Rem ±¾º¯Êı¹Ø¼ü²ÎÊı£ºSSParameter.SetParameterINT "printMap", "return", 1
-	 Rem return = 1 Í£Ö¹Êä³ö³É¹ûÍ¼
-	 Rem return = 0 ¼ÌĞøÊä³ö³É¹ûÍ¼£¨ÎŞĞèÉèÖÃ¡¢Ä¬ÈÏÖµÎª0£©
+	 Rem æœ¬å‡½æ•°å…³é”®å‚æ•°ï¼šSSParameter.SetParameterINT "printMap", "return", 1
+	 Rem return = 1 åœæ­¢è¾“å‡ºæˆæœå›¾
+	 Rem return = 0 ç»§ç»­è¾“å‡ºæˆæœå›¾ï¼ˆæ— éœ€è®¾ç½®ã€é»˜è®¤å€¼ä¸º0ï¼‰
 	  
-	 If MSGID = 0 Then '// ĞÂ¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
-		 '// ÉèÖÃ³öÍ¼¹¤³ÌÃû³Æ¡¢±ØĞëµ÷ÓÃ.... 
+	 If MSGID = 0 Then '// æ–°å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
+		 '// è®¾ç½®å‡ºå›¾å·¥ç¨‹åç§°ã€å¿…é¡»è°ƒç”¨.... 
 		 SSParameter.SetParameterINT "printMap", "return", 1
 		 Dim path_print
 		If CheckReportPath(path_print) = False    Then 
 
-	  		MsgBox "ÎŞ·¨Íê³É³öÍ¼£º³É¹ûÄ¿Â¼Î´´´½¨¡¢ÎŞ·¨Íê³É³öÍ¼"
+	  		MsgBox "æ— æ³•å®Œæˆå‡ºå›¾ï¼šæˆæœç›®å½•æœªåˆ›å»ºã€æ— æ³•å®Œæˆå‡ºå›¾"
 	  		Exit Function 
 	  	End If 
 	  	
 
 	  	If GetXMMC(xmmc) = False Then 
-	  		MsgBox "ÎŞ·¨Íê³É³öÍ¼£ºÇë¼ì²éÏîÄ¿Ãû³ÆÊÇ·ñÕıÈ·£¿"
+	  		MsgBox "æ— æ³•å®Œæˆå‡ºå›¾ï¼šè¯·æ£€æŸ¥é¡¹ç›®åç§°æ˜¯å¦æ­£ç¡®ï¼Ÿ"
 	  		Exit Function 
 	  	End If 
 
 
-	    fileName= path_print & "\" & xmmc & "ÍÁµØºËÑé²âÁ¿Í¼.edb"
+	    fileName= path_print & "\" & xmmc & "åœŸåœ°æ ¸éªŒæµ‹é‡å›¾.edb"
 	    
 	  	If FileExists(fileName) Then 
-	  		MsgBox fileName & "ÎÄ¼şÒÑ´æÔÚ¡¢ÎŞ·¨Íê³ÉÊä³ö¡¢ÇëÊÖ¶¯¼ì²éÉ¾³ıºóÖØÊÔ"
+	  		MsgBox fileName & "æ–‡ä»¶å·²å­˜åœ¨ã€æ— æ³•å®Œæˆè¾“å‡ºã€è¯·æ‰‹åŠ¨æ£€æŸ¥åˆ é™¤åé‡è¯•"
 	  		Exit Function 
 	  	End If 	 
 	  	SSParameter.SetParameterINT "printMap", "return", 0
 		SSParameter.SetParameterSTR "printMap","NewedbName",fileName 
 	  
 	  
-	 ElseIf MSGID = 1 Then '// ±¾¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
+	 ElseIf MSGID = 1 Then '// æœ¬å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
 	  
 	 End If 
 	  
@@ -207,29 +207,29 @@ End Function
 
 	  
 	  
-Rem special:[ÍÁµØºËÑé] ³öÍ¼Íê³ÉÓÉ´Ë½øÈë
+Rem special:[åœŸåœ°æ ¸éªŒ] å‡ºå›¾å®Œæˆç”±æ­¤è¿›å…¥
 Function VBS_postMap2(MSGID,mapName,selectID)
 	  
-	 Rem Í¼ÀªID,½Å±¾´¦ÀíÏî¸öÊı
+	 Rem å›¾å»“ID,è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 Dim tk_id,tk_innerids,ScriptChangeCount
-	 Rem ½Å±¾´¦ÀíÏîÃû³Æ,½Å±¾´¦ÀíÏî²ÎÊı,½Å±¾´¦ÀíÏî¸½¼Ó²ÎÊı 
+	 Rem è„šæœ¬å¤„ç†é¡¹åç§°,è„šæœ¬å¤„ç†é¡¹å‚æ•°,è„šæœ¬å¤„ç†é¡¹é™„åŠ å‚æ•° 
 	 Dim str_Name,str_para,str_paraex	  
-	 Rem »ñÈ¡·Ö²ãÍ¼Í¼ÀªIDS,¶à¸öÓ¢ÎÄ¶ººÅÏà¸ô
+	 Rem è·å–åˆ†å±‚å›¾å›¾å»“IDS,å¤šä¸ªè‹±æ–‡é€—å·ç›¸éš”
 	 SSParameter.GetParameterINT "printMap", "TKID", -1, tk_id 
-	 Rem »ñÈ¡Í¼ÀªÄÚµØÎïIDS
+	 Rem è·å–å›¾å»“å†…åœ°ç‰©IDS
 	 SSParameter.GetParameterSTR "printMap", "TKInerobjIDS", "", tk_innerids 
-	 Rem »ñÈ¡½Å±¾´¦ÀíÏî¸öÊı
+	 Rem è·å–è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 SSParameter.GetParameterINT "printMap", "ScriptChangeCount", -1, ScriptChangeCount
 	
-		 '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+		 '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
 
 
 	SSProcess.SetObjectAttr tk_id,"[XiangMMC]",xmmc
 
 	
- '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+ '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
  	debug_print String(50,"-")
-	debug_print "Êä³öÍê³É¡£"
+	debug_print "è¾“å‡ºå®Œæˆã€‚"
 	debug_print String(50,"-")
 	ViewExtend()
 
@@ -237,30 +237,30 @@ Function VBS_postMap2(MSGID,mapName,selectID)
 
 		
 	
-	 Rem ³É¹ûÍ¼Ï¸½Ú·Ö¿ª´¦Àí
+	 Rem æˆæœå›¾ç»†èŠ‚åˆ†å¼€å¤„ç†
 	 For i = 0 to ScriptChangeCount -1
-		 Rem »ñÈ¡´¦ÀíÏîÃû³Æ
+		 Rem è·å–å¤„ç†é¡¹åç§°
 		 SSParameter.GetParameterSTR "printMap", i & "Name", "", str_Name 
-		 Rem »ñÈ¡´¦ÀíÏî²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaString", "", str_para 
-		 Rem »ñÈ¡´¦ÀíÏî¸½¼Ó²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹é™„åŠ å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaStringEX", "", str_paraex 
-		 '// ´Ë´¦ÎŞ´úÂë¡¢ËµÃ÷Ã»ÓĞ½Å±¾´¦ÀíÏî..
+		 '// æ­¤å¤„æ— ä»£ç ã€è¯´æ˜æ²¡æœ‰è„šæœ¬å¤„ç†é¡¹..
 	 Next 
 	  
 End Function 
 
-Rem special:[»ùµ×Í¼] ³öÍ¼Ç°£¨³õÊ¼»¯µ÷ÓÃ£©ÓÉ´Ë½øÈë
+Rem special:[åŸºåº•å›¾] å‡ºå›¾å‰ï¼ˆåˆå§‹åŒ–è°ƒç”¨ï¼‰ç”±æ­¤è¿›å…¥
 Function VBS_preMap3(MSGID,mapName,selectID)
 	  
-	 Rem ±¾º¯Êı¹Ø¼ü²ÎÊı£ºSSParameter.SetParameterINT "printMap", "return", 1
-	 Rem return = 1 Í£Ö¹Êä³ö³É¹ûÍ¼
-	 Rem return = 0 ¼ÌĞøÊä³ö³É¹ûÍ¼£¨ÎŞĞèÉèÖÃ¡¢Ä¬ÈÏÖµÎª0£©
+	 Rem æœ¬å‡½æ•°å…³é”®å‚æ•°ï¼šSSParameter.SetParameterINT "printMap", "return", 1
+	 Rem return = 1 åœæ­¢è¾“å‡ºæˆæœå›¾
+	 Rem return = 0 ç»§ç»­è¾“å‡ºæˆæœå›¾ï¼ˆæ— éœ€è®¾ç½®ã€é»˜è®¤å€¼ä¸º0ï¼‰
 	  
-	 If MSGID = 0 Then '// ĞÂ¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
-		 '// ÉèÖÃ³öÍ¼¹¤³ÌÃû³Æ¡¢±ØĞëµ÷ÓÃ.... 
-		'Êä³öµØ¿éÄÚÍ¼°ß×ÜÃæ»ı
+	 If MSGID = 0 Then '// æ–°å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
+		 '// è®¾ç½®å‡ºå›¾å·¥ç¨‹åç§°ã€å¿…é¡»è°ƒç”¨.... 
+		'è¾“å‡ºåœ°å—å†…å›¾æ–‘æ€»é¢ç§¯
 	SSProcess.PushUndoMark
 	SSProcess.ClearSelection 
 	SSProcess.ClearSelectCondition
@@ -273,13 +273,13 @@ Function VBS_preMap3(MSGID,mapName,selectID)
 
 		mdbName = SSProcess.GetProjectFileName 
 		SSProcess.OpenAccessMdb  mdbName
-		sql = "select VALUE from PROJECTINFO where KEY='ÏîÄ¿Ãû³Æ'"
+		sql = "select VALUE from PROJECTINFO where KEY='é¡¹ç›®åç§°'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		XMMC=arSeletionRecord(0)
-		sql = "select VALUE from PROJECTINFO where KEY='²âÁ¿ÈËÔ±'"
+		sql = "select VALUE from PROJECTINFO where KEY='æµ‹é‡äººå‘˜'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		HTRY=arSeletionRecord(0)
-		sql = "select VALUE from PROJECTINFO where KEY='¼ì²éÈËÔ±'"
+		sql = "select VALUE from PROJECTINFO where KEY='æ£€æŸ¥äººå‘˜'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		JCRY=arSeletionRecord(0)
 
@@ -294,15 +294,15 @@ Function VBS_preMap3(MSGID,mapName,selectID)
 			strProjectName=SSProcess.GetProjectFileName()
 			FileFolder=replace(strProjectName,".edb","")
 			if IsfolderExists(FileFolder) = false then CreateFolders FileFolder
-			LiMianCL "½¨Öş»ùµ×Æ½ÃæÊ¾ÒâÍ¼",FileFolder, intCount
-			fileName= FileFolder & "\½¨Öş»ùµ×Æ½ÃæÊ¾ÒâÍ¼"&intCount&".edb"
+			LiMianCL "å»ºç­‘åŸºåº•å¹³é¢ç¤ºæ„å›¾",FileFolder, intCount
+			fileName= FileFolder & "\å»ºç­‘åŸºåº•å¹³é¢ç¤ºæ„å›¾"&intCount&".edb"
 			SSParameter.SetParameterSTR "printMap","NewedbName",fileName 
 
 
 	  
 	  
-	 ElseIf MSGID = 1 Then '// ±¾¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
+	 ElseIf MSGID = 1 Then '// æœ¬å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
 
 	  
 	 End If 
@@ -310,21 +310,21 @@ Function VBS_preMap3(MSGID,mapName,selectID)
 End Function 
 	  
 	  
-Rem special:[»ùµ×Í¼] ³öÍ¼Íê³ÉÓÉ´Ë½øÈë
+Rem special:[åŸºåº•å›¾] å‡ºå›¾å®Œæˆç”±æ­¤è¿›å…¥
 Function VBS_postMap3(MSGID,mapName,selectID)
 	  
-	 Rem Í¼ÀªID,½Å±¾´¦ÀíÏî¸öÊı
+	 Rem å›¾å»“ID,è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 Dim tk_id,tk_innerids,ScriptChangeCount
-	 Rem ½Å±¾´¦ÀíÏîÃû³Æ,½Å±¾´¦ÀíÏî²ÎÊı,½Å±¾´¦ÀíÏî¸½¼Ó²ÎÊı 
+	 Rem è„šæœ¬å¤„ç†é¡¹åç§°,è„šæœ¬å¤„ç†é¡¹å‚æ•°,è„šæœ¬å¤„ç†é¡¹é™„åŠ å‚æ•° 
 	 Dim str_Name,str_para,str_paraex	  
-	 Rem »ñÈ¡·Ö²ãÍ¼Í¼ÀªIDS,¶à¸öÓ¢ÎÄ¶ººÅÏà¸ô
+	 Rem è·å–åˆ†å±‚å›¾å›¾å»“IDS,å¤šä¸ªè‹±æ–‡é€—å·ç›¸éš”
 	 SSParameter.GetParameterINT "printMap", "TKID", -1, tk_id
-	 Rem »ñÈ¡Í¼ÀªÄÚµØÎïIDS
+	 Rem è·å–å›¾å»“å†…åœ°ç‰©IDS
 	 SSParameter.GetParameterSTR "printMap", "TKInerobjIDS", "", tk_innerids 
-	 Rem »ñÈ¡½Å±¾´¦ÀíÏî¸öÊı
+	 Rem è·å–è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 SSParameter.GetParameterINT "printMap", "ScriptChangeCount", -1, ScriptChangeCount
 	
-		 '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+		 '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
     GHXKZGUID = SSProcess.GetObjectAttr (selectID,"[JSGHXKZGUID]")
 	 jzdtguid = SSProcess.GetObjectAttr (selectID,"[JZWMCGUID]")
 	 GHXKZHoutmap = SSProcess.GetObjectAttr (selectID,"[GuiHXKZBH]")
@@ -337,9 +337,9 @@ Function VBS_postMap3(MSGID,mapName,selectID)
 		SSProcess.SetObjectAttr tk_id,"[JianZWMC]",JianZWMC
 		SSProcess.SetObjectAttr tk_id,"[JiDMJ]",JiDMJ
 	
- '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+ '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
  	debug_print String(50,"-")
-	debug_print "Êä³öÍê³É¡£"
+	debug_print "è¾“å‡ºå®Œæˆã€‚"
 	debug_print String(50,"-")
 	ViewExtend()
 	CreateKEYJD()
@@ -366,56 +366,56 @@ Function VBS_postMap3(MSGID,mapName,selectID)
 		SSProcess.SetObjectAttr id, "[HuiTY]", artemp(1)
 		SSProcess.SetObjectAttr id, "[JianCY]", artemp(2)
 		SSProcess.ExecuteSDLFunction "$SDL.SSProject.View.Extend", 0
-		'Í¼ĞÎÖØĞÂÉú³É
+		'å›¾å½¢é‡æ–°ç”Ÿæˆ
 		SSProcess.ExecuteSDLFunction "$SDL.SSProject.Display.RedrawExtend", 0
 	next
 
 	
-	 Rem ³É¹ûÍ¼Ï¸½Ú·Ö¿ª´¦Àí
+	 Rem æˆæœå›¾ç»†èŠ‚åˆ†å¼€å¤„ç†
 	 For i = 0 to ScriptChangeCount -1
-		 Rem »ñÈ¡´¦ÀíÏîÃû³Æ
+		 Rem è·å–å¤„ç†é¡¹åç§°
 		 SSParameter.GetParameterSTR "printMap", i & "Name", "", str_Name 
-		 Rem »ñÈ¡´¦ÀíÏî²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaString", "", str_para 
-		 Rem »ñÈ¡´¦ÀíÏî¸½¼Ó²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹é™„åŠ å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaStringEX", "", str_paraex 
-		 '// ´Ë´¦ÎŞ´úÂë¡¢ËµÃ÷Ã»ÓĞ½Å±¾´¦ÀíÏî..
+		 '// æ­¤å¤„æ— ä»£ç ã€è¯´æ˜æ²¡æœ‰è„šæœ¬å¤„ç†é¡¹..
 	 Next 
 	  
 End Function 
 
 
-Rem special:[·Ö²ãÍ¼] ³öÍ¼Ç°£¨³õÊ¼»¯µ÷ÓÃ£©ÓÉ´Ë½øÈë
+Rem special:[åˆ†å±‚å›¾] å‡ºå›¾å‰ï¼ˆåˆå§‹åŒ–è°ƒç”¨ï¼‰ç”±æ­¤è¿›å…¥
 Function VBS_preMap4(MSGID,mapName,selectID)
 	  
-	 Rem ±¾º¯Êı¹Ø¼ü²ÎÊı£ºSSParameter.SetParameterINT "printMap", "return", 1
-	 Rem return = 1 Í£Ö¹Êä³ö³É¹ûÍ¼
-	 Rem return = 0 ¼ÌĞøÊä³ö³É¹ûÍ¼£¨ÎŞĞèÉèÖÃ¡¢Ä¬ÈÏÖµÎª0£©
+	 Rem æœ¬å‡½æ•°å…³é”®å‚æ•°ï¼šSSParameter.SetParameterINT "printMap", "return", 1
+	 Rem return = 1 åœæ­¢è¾“å‡ºæˆæœå›¾
+	 Rem return = 0 ç»§ç»­è¾“å‡ºæˆæœå›¾ï¼ˆæ— éœ€è®¾ç½®ã€é»˜è®¤å€¼ä¸º0ï¼‰
 	  
-	 If MSGID = 0 Then '// ĞÂ¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
-		 '// ÉèÖÃ³öÍ¼¹¤³ÌÃû³Æ¡¢±ØĞëµ÷ÓÃ.... 
+	 If MSGID = 0 Then '// æ–°å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
+		 '// è®¾ç½®å‡ºå›¾å·¥ç¨‹åç§°ã€å¿…é¡»è°ƒç”¨.... 
 		TKFZ1
 	   strProjectName=SSProcess.GetProjectFileName()
 	   FileFolder=replace(strProjectName,".edb","")
 		if IsfolderExists(FileFolder) = false then CreateFolders FileFolder
 
 		ZRZH = SSProcess.GetObjectAttr (selectID, "[LD]")
-	   fileName= FileFolder &"\"&ZRZH &"½¨Öş¹¦ÄÜ·ÖÇø¿¢¹¤Êµ²âÆ½ÃæÍ¼.edb"
+	   fileName= FileFolder &"\"&ZRZH &"å»ºç­‘åŠŸèƒ½åˆ†åŒºç«£å·¥å®æµ‹å¹³é¢å›¾.edb"
 		SSParameter.SetParameterSTR "printMap","NewedbName",fileName 
 	  
-	 ElseIf MSGID = 1 Then '// ±¾¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
+	 ElseIf MSGID = 1 Then '// æœ¬å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
 		SSParameter.SetParameterINT "printMap", "return", 1	  	
 	  	If GetXMMC(xmmc) = False Then 
-	  		MsgBox "ÎŞ·¨Íê³É³öÍ¼£ºÇë¼ì²éÏîÄ¿Ãû³ÆÊÇ·ñÕıÈ·£¿"
+	  		MsgBox "æ— æ³•å®Œæˆå‡ºå›¾ï¼šè¯·æ£€æŸ¥é¡¹ç›®åç§°æ˜¯å¦æ­£ç¡®ï¼Ÿ"
 	  		Exit Function 
 	  	End If 
-		'SSProcess.WriteEpsIni "ÅúÇ°²âÁ¿·Ö²ãÍ¼", "ÏîÄ¿Ãû³Æ" , xmmc
+		'SSProcess.WriteEpsIni "æ‰¹å‰æµ‹é‡åˆ†å±‚å›¾", "é¡¹ç›®åç§°" , xmmc
 
 	  	dh = SSProcess.GetObjectAttr (selectID,"[JianZWMC]")
 	  	If (dh = "" Or dh = "*") Then 
-	  		MsgBox "ÎŞ·¨Íê³É³öÍ¼£ºÇë¼ì²éÏîÄ¿[½¨ÖşÎïÃû³Æ]ÊÇ·ñºÏ·¨£¿"
+	  		MsgBox "æ— æ³•å®Œæˆå‡ºå›¾ï¼šè¯·æ£€æŸ¥é¡¹ç›®[å»ºç­‘ç‰©åç§°]æ˜¯å¦åˆæ³•ï¼Ÿ"
 	  		Exit Function 
 	  	End If 
 	  	  	SSParameter.SetParameterINT "printMap", "return", 0
@@ -427,92 +427,92 @@ End Function
 
 	  
 	  
-Rem special:[·Ö²ãÍ¼] ³öÍ¼Íê³ÉÓÉ´Ë½øÈë
+Rem special:[åˆ†å±‚å›¾] å‡ºå›¾å®Œæˆç”±æ­¤è¿›å…¥
 Function VBS_postMap4(MSGID,mapName,selectID)
 
-	 Rem Í¼ÀªID,½Å±¾´¦ÀíÏî¸öÊı
+	 Rem å›¾å»“ID,è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 Dim tk_id,tk_innerids,ScriptChangeCount
-	 Rem ½Å±¾´¦ÀíÏîÃû³Æ,½Å±¾´¦ÀíÏî²ÎÊı,½Å±¾´¦ÀíÏî¸½¼Ó²ÎÊı 
+	 Rem è„šæœ¬å¤„ç†é¡¹åç§°,è„šæœ¬å¤„ç†é¡¹å‚æ•°,è„šæœ¬å¤„ç†é¡¹é™„åŠ å‚æ•° 
 	 Dim str_Name,str_para,str_paraex	  
-	 Rem »ñÈ¡·Ö²ãÍ¼Í¼ÀªIDS,¶à¸öÓ¢ÎÄ¶ººÅÏà¸ô
+	 Rem è·å–åˆ†å±‚å›¾å›¾å»“IDS,å¤šä¸ªè‹±æ–‡é€—å·ç›¸éš”
 	 SSParameter.GetParameterSTR "printMap", "TKIDS", -1, tk_ids
-	 Rem »ñÈ¡Í¼ÀªÄÚµØÎïIDS
+	 Rem è·å–å›¾å»“å†…åœ°ç‰©IDS
 	 SSParameter.GetParameterSTR "printMap", "TKInerobjIDS", "", tk_innerids 
-	 Rem »ñÈ¡½Å±¾´¦ÀíÏî¸öÊı
+	 Rem è·å–è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 SSParameter.GetParameterINT "printMap", "ScriptChangeCount", -1, ScriptChangeCount
 	
-		 '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+		 '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
 
 
 
-	 '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+	 '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
 
 
 
- '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+ '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
  	debug_print String(50,"-")
-	debug_print "Êä³öÍê³É¡£"
+	debug_print "è¾“å‡ºå®Œæˆã€‚"
 	debug_print String(50,"-")
 	ViewExtend()
-	'ÖØÖÃ
+	'é‡ç½®
 	reset()
-	'Í¼Àª¸³Öµ
+	'å›¾å»“èµ‹å€¼
 	TKFZ2 mark
 	if mark=true then
-		'·Ö²ãÍ¼
+		'åˆ†å±‚å›¾
 		FChandle()
-		'±ê×¢
+		'æ ‡æ³¨
 		TextEXE()
-		'É¾³ıÂ¥²ã
+		'åˆ é™¤æ¥¼å±‚
 		FCTDeleteLC()
-		'Éú³ÉÍ¼Àı
+		'ç”Ÿæˆå›¾ä¾‹
 		CreateKEY()
 	end if
-	 Rem ³É¹ûÍ¼Ï¸½Ú·Ö¿ª´¦Àí
+	 Rem æˆæœå›¾ç»†èŠ‚åˆ†å¼€å¤„ç†
 	 For i = 0 to ScriptChangeCount -1
-		 Rem »ñÈ¡´¦ÀíÏîÃû³Æ
+		 Rem è·å–å¤„ç†é¡¹åç§°
 		 SSParameter.GetParameterSTR "printMap", i & "Name", "", str_Name 
-		 Rem »ñÈ¡´¦ÀíÏî²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaString", "", str_para 
-		 Rem »ñÈ¡´¦ÀíÏî¸½¼Ó²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹é™„åŠ å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaStringEX", "", str_paraex 
-		 '// ´Ë´¦ÎŞ´úÂë¡¢ËµÃ÷Ã»ÓĞ½Å±¾´¦ÀíÏî..
+		 '// æ­¤å¤„æ— ä»£ç ã€è¯´æ˜æ²¡æœ‰è„šæœ¬å¤„ç†é¡¹..
 	 Next 
 	  
 End Function 
 
-Rem special:[Á¢ÃæÍ¼ ³öÍ¼Ç°£¨³õÊ¼»¯µ÷ÓÃ£©ÓÉ´Ë½øÈë
+Rem special:[ç«‹é¢å›¾ å‡ºå›¾å‰ï¼ˆåˆå§‹åŒ–è°ƒç”¨ï¼‰ç”±æ­¤è¿›å…¥
 Function VBS_preMap5(MSGID,mapName,selectID)
 	  
-	 Rem ±¾º¯Êı¹Ø¼ü²ÎÊı£ºSSParameter.SetParameterINT "printMap", "return", 1
-	 Rem return = 1 Í£Ö¹Êä³ö³É¹ûÍ¼
-	 Rem return = 0 ¼ÌĞøÊä³ö³É¹ûÍ¼£¨ÎŞĞèÉèÖÃ¡¢Ä¬ÈÏÖµÎª0£©
+	 Rem æœ¬å‡½æ•°å…³é”®å‚æ•°ï¼šSSParameter.SetParameterINT "printMap", "return", 1
+	 Rem return = 1 åœæ­¢è¾“å‡ºæˆæœå›¾
+	 Rem return = 0 ç»§ç»­è¾“å‡ºæˆæœå›¾ï¼ˆæ— éœ€è®¾ç½®ã€é»˜è®¤å€¼ä¸º0ï¼‰
 	  
-	 If MSGID = 0 Then '// ĞÂ¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
-		 '// ÉèÖÃ³öÍ¼¹¤³ÌÃû³Æ¡¢±ØĞëµ÷ÓÃ.... 
+	 If MSGID = 0 Then '// æ–°å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
+		 '// è®¾ç½®å‡ºå›¾å·¥ç¨‹åç§°ã€å¿…é¡»è°ƒç”¨.... 
 	   strProjectName=SSProcess.GetProjectFileName()
 	   FileFolder=replace(strProjectName,".edb","")
 		if IsfolderExists(FileFolder) = false then CreateFolders FileFolder
 
-	   fileName= FileFolder &"\"&"Á¢ÃæÍ¼.edb"
+	   fileName= FileFolder &"\"&"ç«‹é¢å›¾.edb"
 		SSParameter.SetParameterSTR "printMap","NewedbName",fileName 
 	  
 	  
-	 ElseIf MSGID = 1 Then '// ±¾¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
+	 ElseIf MSGID = 1 Then '// æœ¬å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
 		SSParameter.SetParameterINT "printMap", "return", 1	  	
 	  	If GetXMMC(xmmc) = False Then 
-	  		MsgBox "ÎŞ·¨Íê³É³öÍ¼£ºÇë¼ì²éÏîÄ¿Ãû³ÆÊÇ·ñÕıÈ·£¿"
+	  		MsgBox "æ— æ³•å®Œæˆå‡ºå›¾ï¼šè¯·æ£€æŸ¥é¡¹ç›®åç§°æ˜¯å¦æ­£ç¡®ï¼Ÿ"
 	  		Exit Function 
 	  	End If 
-		'SSProcess.WriteEpsIni "ÅúÇ°²âÁ¿·Ö²ãÍ¼", "ÏîÄ¿Ãû³Æ" , xmmc
+		'SSProcess.WriteEpsIni "æ‰¹å‰æµ‹é‡åˆ†å±‚å›¾", "é¡¹ç›®åç§°" , xmmc
 
 	  	Dim dh
 	  	dh = SSProcess.GetObjectAttr (selectID,"[JianZWMC]")
 	  	
 	  	If (dh = "" Or dh = "*") Then 
-	  		MsgBox "ÎŞ·¨Íê³É³öÍ¼£ºÇë¼ì²éÏîÄ¿[½¨ÖşÎïÃû³Æ]ÊÇ·ñºÏ·¨£¿"
+	  		MsgBox "æ— æ³•å®Œæˆå‡ºå›¾ï¼šè¯·æ£€æŸ¥é¡¹ç›®[å»ºç­‘ç‰©åç§°]æ˜¯å¦åˆæ³•ï¼Ÿ"
 	  		Exit Function 
 	  	End If 
 	  	  	SSParameter.SetParameterINT "printMap", "return", 0
@@ -521,30 +521,30 @@ Function VBS_preMap5(MSGID,mapName,selectID)
 	  
 End Function 
 
-Rem special:[Á¢ÃæÍ¼] ³öÍ¼Íê³ÉÓÉ´Ë½øÈë
+Rem special:[ç«‹é¢å›¾] å‡ºå›¾å®Œæˆç”±æ­¤è¿›å…¥
 Function VBS_postMap5(MSGID,mapName,selectID)
 	  
-	 Rem Í¼ÀªID,½Å±¾´¦ÀíÏî¸öÊı
+	 Rem å›¾å»“ID,è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 Dim tk_id,tk_innerids,ScriptChangeCount
-	 Rem ½Å±¾´¦ÀíÏîÃû³Æ,½Å±¾´¦ÀíÏî²ÎÊı,½Å±¾´¦ÀíÏî¸½¼Ó²ÎÊı 
+	 Rem è„šæœ¬å¤„ç†é¡¹åç§°,è„šæœ¬å¤„ç†é¡¹å‚æ•°,è„šæœ¬å¤„ç†é¡¹é™„åŠ å‚æ•° 
 	 Dim str_Name,str_para,str_paraex	  
-	 Rem »ñÈ¡·Ö²ãÍ¼Í¼ÀªIDS,¶à¸öÓ¢ÎÄ¶ººÅÏà¸ô
+	 Rem è·å–åˆ†å±‚å›¾å›¾å»“IDS,å¤šä¸ªè‹±æ–‡é€—å·ç›¸éš”
 	 SSParameter.GetParameterINT "printMap", "TKID", -1, tk_id 
-	 Rem »ñÈ¡Í¼ÀªÄÚµØÎïIDS
+	 Rem è·å–å›¾å»“å†…åœ°ç‰©IDS
 	 SSParameter.GetParameterSTR "printMap", "TKInerobjIDS", "", tk_innerids 
-	 Rem »ñÈ¡½Å±¾´¦ÀíÏî¸öÊı
+	 Rem è·å–è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 SSParameter.GetParameterINT "printMap", "ScriptChangeCount", -1, ScriptChangeCount
 	
-		 '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+		 '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
 
 	  	JianZWMC = SSProcess.GetObjectAttr (selectID,"[JianZWMC]")
       GuiHXKZBH=SSProcess.GetObjectAttr (selectID,"[GuiHXKZBH]")
       SSProcess.SetObjectAttr tk_id,"[JianZWMC]",JianZWMC
     SSProcess.SetObjectAttr tk_id,"[GuiHXKZBH]",GuiHXKZBH
 	
- '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+ '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
  	debug_print String(50,"-")
-	debug_print "Êä³öÍê³É¡£"
+	debug_print "è¾“å‡ºå®Œæˆã€‚"
 	debug_print String(50,"-")
 	ViewExtend()
 
@@ -552,57 +552,57 @@ Function VBS_postMap5(MSGID,mapName,selectID)
 
 		
 	
-	 Rem ³É¹ûÍ¼Ï¸½Ú·Ö¿ª´¦Àí
+	 Rem æˆæœå›¾ç»†èŠ‚åˆ†å¼€å¤„ç†
 	 For i = 0 to ScriptChangeCount -1
-		 Rem »ñÈ¡´¦ÀíÏîÃû³Æ
+		 Rem è·å–å¤„ç†é¡¹åç§°
 		 SSParameter.GetParameterSTR "printMap", i & "Name", "", str_Name 
-		 Rem »ñÈ¡´¦ÀíÏî²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaString", "", str_para 
-		 Rem »ñÈ¡´¦ÀíÏî¸½¼Ó²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹é™„åŠ å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaStringEX", "", str_paraex 
-		 '// ´Ë´¦ÎŞ´úÂë¡¢ËµÃ÷Ã»ÓĞ½Å±¾´¦ÀíÏî..
+		 '// æ­¤å¤„æ— ä»£ç ã€è¯´æ˜æ²¡æœ‰è„šæœ¬å¤„ç†é¡¹..
 	 Next 
 	  
 End Function 
 
 
-Rem special:[µØÉÏÍ£³µÎ»] ³öÍ¼Ç°£¨³õÊ¼»¯µ÷ÓÃ£©ÓÉ´Ë½øÈë
+Rem special:[åœ°ä¸Šåœè½¦ä½] å‡ºå›¾å‰ï¼ˆåˆå§‹åŒ–è°ƒç”¨ï¼‰ç”±æ­¤è¿›å…¥
 Function VBS_preMap6(MSGID,mapName,selectID)
 	  
-	 Rem ±¾º¯Êı¹Ø¼ü²ÎÊı£ºSSParameter.SetParameterINT "printMap", "return", 1
-	 Rem return = 1 Í£Ö¹Êä³ö³É¹ûÍ¼
-	 Rem return = 0 ¼ÌĞøÊä³ö³É¹ûÍ¼£¨ÎŞĞèÉèÖÃ¡¢Ä¬ÈÏÖµÎª0£©
+	 Rem æœ¬å‡½æ•°å…³é”®å‚æ•°ï¼šSSParameter.SetParameterINT "printMap", "return", 1
+	 Rem return = 1 åœæ­¢è¾“å‡ºæˆæœå›¾
+	 Rem return = 0 ç»§ç»­è¾“å‡ºæˆæœå›¾ï¼ˆæ— éœ€è®¾ç½®ã€é»˜è®¤å€¼ä¸º0ï¼‰
 	  
-	 If MSGID = 0 Then '// ĞÂ¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
-		 '// ÉèÖÃ³öÍ¼¹¤³ÌÃû³Æ¡¢±ØĞëµ÷ÓÃ.... 
+	 If MSGID = 0 Then '// æ–°å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
+		 '// è®¾ç½®å‡ºå›¾å·¥ç¨‹åç§°ã€å¿…é¡»è°ƒç”¨.... 
 		 SSParameter.SetParameterINT "printMap", "return", 1
 		 Dim path_print
 		If CheckReportPath(path_print) = False    Then 
 
-	  		MsgBox "ÎŞ·¨Íê³É³öÍ¼£º³É¹ûÄ¿Â¼Î´´´½¨¡¢ÎŞ·¨Íê³É³öÍ¼"
+	  		MsgBox "æ— æ³•å®Œæˆå‡ºå›¾ï¼šæˆæœç›®å½•æœªåˆ›å»ºã€æ— æ³•å®Œæˆå‡ºå›¾"
 	  		Exit Function 
 	  	End If 
 	  	
 
 	  	If GetXMMC(xmmc) = False Then 
-	  		MsgBox "ÎŞ·¨Íê³É³öÍ¼£ºÇë¼ì²éÏîÄ¿Ãû³ÆÊÇ·ñÕıÈ·£¿"
+	  		MsgBox "æ— æ³•å®Œæˆå‡ºå›¾ï¼šè¯·æ£€æŸ¥é¡¹ç›®åç§°æ˜¯å¦æ­£ç¡®ï¼Ÿ"
 	  		Exit Function 
 	  	End If 
 
 
-	    fileName= path_print & "\" & xmmc & "µØÉÏÍ£³µÎ»·Ö²¼Í¼.edb"
+	    fileName= path_print & "\" & xmmc & "åœ°ä¸Šåœè½¦ä½åˆ†å¸ƒå›¾.edb"
 	    
 	  	If FileExists(fileName) Then 
-	  		MsgBox fileName & "ÎÄ¼şÒÑ´æÔÚ¡¢ÎŞ·¨Íê³ÉÊä³ö¡¢ÇëÊÖ¶¯¼ì²éÉ¾³ıºóÖØÊÔ"
+	  		MsgBox fileName & "æ–‡ä»¶å·²å­˜åœ¨ã€æ— æ³•å®Œæˆè¾“å‡ºã€è¯·æ‰‹åŠ¨æ£€æŸ¥åˆ é™¤åé‡è¯•"
 	  		Exit Function 
 	  	End If 	 
 	  	SSParameter.SetParameterINT "printMap", "return", 0
 		SSParameter.SetParameterSTR "printMap","NewedbName",fileName 
 	  
 	  
-	 ElseIf MSGID = 1 Then '// ±¾¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
+	 ElseIf MSGID = 1 Then '// æœ¬å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
 	  
 	 End If 
 	  
@@ -611,30 +611,30 @@ End Function
 
 	  
 	  
-Rem special:[µØÉÏÍ£³µÎ»] ³öÍ¼Íê³ÉÓÉ´Ë½øÈë
+Rem special:[åœ°ä¸Šåœè½¦ä½] å‡ºå›¾å®Œæˆç”±æ­¤è¿›å…¥
 Function VBS_postMap6(MSGID,mapName,selectID)
 	  
-	 Rem Í¼ÀªID,½Å±¾´¦ÀíÏî¸öÊı
+	 Rem å›¾å»“ID,è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 Dim tk_id,tk_innerids,ScriptChangeCount
-	 Rem ½Å±¾´¦ÀíÏîÃû³Æ,½Å±¾´¦ÀíÏî²ÎÊı,½Å±¾´¦ÀíÏî¸½¼Ó²ÎÊı 
+	 Rem è„šæœ¬å¤„ç†é¡¹åç§°,è„šæœ¬å¤„ç†é¡¹å‚æ•°,è„šæœ¬å¤„ç†é¡¹é™„åŠ å‚æ•° 
 	 Dim str_Name,str_para,str_paraex	  
-	 Rem »ñÈ¡·Ö²ãÍ¼Í¼ÀªIDS,¶à¸öÓ¢ÎÄ¶ººÅÏà¸ô
+	 Rem è·å–åˆ†å±‚å›¾å›¾å»“IDS,å¤šä¸ªè‹±æ–‡é€—å·ç›¸éš”
 	 SSParameter.GetParameterINT "printMap", "TKID", -1, tk_id 
-	 Rem »ñÈ¡Í¼ÀªÄÚµØÎïIDS
+	 Rem è·å–å›¾å»“å†…åœ°ç‰©IDS
 	 SSParameter.GetParameterSTR "printMap", "TKInerobjIDS", "", tk_innerids 
-	 Rem »ñÈ¡½Å±¾´¦ÀíÏî¸öÊı
+	 Rem è·å–è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 SSParameter.GetParameterINT "printMap", "ScriptChangeCount", -1, ScriptChangeCount
 	
-		 '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+		 '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
 
 
 
 	SSProcess.SetObjectAttr tk_id,"[XiangMMC]",xmmc
 
 	
- '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+ '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
  	debug_print String(50,"-")
-	debug_print "Êä³öÍê³É¡£"
+	debug_print "è¾“å‡ºå®Œæˆã€‚"
 	debug_print String(50,"-")
 	ViewExtend()
 
@@ -642,76 +642,76 @@ Function VBS_postMap6(MSGID,mapName,selectID)
 
 		
 	
-	 Rem ³É¹ûÍ¼Ï¸½Ú·Ö¿ª´¦Àí
+	 Rem æˆæœå›¾ç»†èŠ‚åˆ†å¼€å¤„ç†
 	 For i = 0 to ScriptChangeCount -1
-		 Rem »ñÈ¡´¦ÀíÏîÃû³Æ
+		 Rem è·å–å¤„ç†é¡¹åç§°
 		 SSParameter.GetParameterSTR "printMap", i & "Name", "", str_Name 
-		 Rem »ñÈ¡´¦ÀíÏî²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaString", "", str_para 
-		 Rem »ñÈ¡´¦ÀíÏî¸½¼Ó²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹é™„åŠ å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaStringEX", "", str_paraex 
-		 '// ´Ë´¦ÎŞ´úÂë¡¢ËµÃ÷Ã»ÓĞ½Å±¾´¦ÀíÏî..
+		 '// æ­¤å¤„æ— ä»£ç ã€è¯´æ˜æ²¡æœ‰è„šæœ¬å¤„ç†é¡¹..
 	 Next 
 	  
 End Function 
 
-Rem special:[µØÏÂÍ£³µÎ»] ³öÍ¼Ç°£¨³õÊ¼»¯µ÷ÓÃ£©ÓÉ´Ë½øÈë
+Rem special:[åœ°ä¸‹åœè½¦ä½] å‡ºå›¾å‰ï¼ˆåˆå§‹åŒ–è°ƒç”¨ï¼‰ç”±æ­¤è¿›å…¥
 Function VBS_preMap7(MSGID,mapName,selectID)
 	  
-	 Rem ±¾º¯Êı¹Ø¼ü²ÎÊı£ºSSParameter.SetParameterINT "printMap", "return", 1
-	 Rem return = 1 Í£Ö¹Êä³ö³É¹ûÍ¼
-	 Rem return = 0 ¼ÌĞøÊä³ö³É¹ûÍ¼£¨ÎŞĞèÉèÖÃ¡¢Ä¬ÈÏÖµÎª0£©
+	 Rem æœ¬å‡½æ•°å…³é”®å‚æ•°ï¼šSSParameter.SetParameterINT "printMap", "return", 1
+	 Rem return = 1 åœæ­¢è¾“å‡ºæˆæœå›¾
+	 Rem return = 0 ç»§ç»­è¾“å‡ºæˆæœå›¾ï¼ˆæ— éœ€è®¾ç½®ã€é»˜è®¤å€¼ä¸º0ï¼‰
 	  
-	 If MSGID = 0 Then '// ĞÂ¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
-		 '// ÉèÖÃ³öÍ¼¹¤³ÌÃû³Æ¡¢±ØĞëµ÷ÓÃ.... 
+	 If MSGID = 0 Then '// æ–°å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
+		 '// è®¾ç½®å‡ºå›¾å·¥ç¨‹åç§°ã€å¿…é¡»è°ƒç”¨.... 
 		 SSParameter.SetParameterINT "printMap", "return", 1
 		 Dim path_print
 		If CheckReportPath(path_print) = False    Then 
 
-	  		MsgBox "ÎŞ·¨Íê³É³öÍ¼£º³É¹ûÄ¿Â¼Î´´´½¨¡¢ÎŞ·¨Íê³É³öÍ¼"
+	  		MsgBox "æ— æ³•å®Œæˆå‡ºå›¾ï¼šæˆæœç›®å½•æœªåˆ›å»ºã€æ— æ³•å®Œæˆå‡ºå›¾"
 	  		Exit Function 
 	  	End If 
 	  	
 
 	  	If GetXMMC(xmmc) = False Then 
-	  		MsgBox "ÎŞ·¨Íê³É³öÍ¼£ºÇë¼ì²éÏîÄ¿Ãû³ÆÊÇ·ñÕıÈ·£¿"
+	  		MsgBox "æ— æ³•å®Œæˆå‡ºå›¾ï¼šè¯·æ£€æŸ¥é¡¹ç›®åç§°æ˜¯å¦æ­£ç¡®ï¼Ÿ"
 	  		Exit Function 
 	  	End If 
 
 
-	    fileName= path_print & "\" & xmmc & "µØÏÂÍ£³µÎ»·Ö²¼Í¼.edb"
+	    fileName= path_print & "\" & xmmc & "åœ°ä¸‹åœè½¦ä½åˆ†å¸ƒå›¾.edb"
 	    
 	  	If FileExists(fileName) Then 
-	  		MsgBox fileName & "ÎÄ¼şÒÑ´æÔÚ¡¢ÎŞ·¨Íê³ÉÊä³ö¡¢ÇëÊÖ¶¯¼ì²éÉ¾³ıºóÖØÊÔ"
+	  		MsgBox fileName & "æ–‡ä»¶å·²å­˜åœ¨ã€æ— æ³•å®Œæˆè¾“å‡ºã€è¯·æ‰‹åŠ¨æ£€æŸ¥åˆ é™¤åé‡è¯•"
 	  		Exit Function 
 	  	End If 	 
 	  	SSParameter.SetParameterINT "printMap", "return", 0
 		SSParameter.SetParameterSTR "printMap","NewedbName",fileName 
 	  
 	  
-	 ElseIf MSGID = 1 Then '// ±¾¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
+	 ElseIf MSGID = 1 Then '// æœ¬å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
 	  
 	 End If 
 	  
 End Function 
 
-Rem special:[µØÏÂÍ£³µÎ»Í¼] ³öÍ¼Íê³ÉÓÉ´Ë½øÈë
+Rem special:[åœ°ä¸‹åœè½¦ä½å›¾] å‡ºå›¾å®Œæˆç”±æ­¤è¿›å…¥
 Function VBS_postMap7(MSGID,mapName,selectID)
 	  
-	 Rem Í¼ÀªID,½Å±¾´¦ÀíÏî¸öÊı
+	 Rem å›¾å»“ID,è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 Dim tk_id,tk_innerids,ScriptChangeCount
-	 Rem ½Å±¾´¦ÀíÏîÃû³Æ,½Å±¾´¦ÀíÏî²ÎÊı,½Å±¾´¦ÀíÏî¸½¼Ó²ÎÊı 
+	 Rem è„šæœ¬å¤„ç†é¡¹åç§°,è„šæœ¬å¤„ç†é¡¹å‚æ•°,è„šæœ¬å¤„ç†é¡¹é™„åŠ å‚æ•° 
 	 Dim str_Name,str_para,str_paraex	  
-	 Rem »ñÈ¡·Ö²ãÍ¼Í¼ÀªIDS,¶à¸öÓ¢ÎÄ¶ººÅÏà¸ô
+	 Rem è·å–åˆ†å±‚å›¾å›¾å»“IDS,å¤šä¸ªè‹±æ–‡é€—å·ç›¸éš”
 	 SSParameter.GetParameterSTR "printMap", "TKIDS", -1, tk_ids
-	 Rem »ñÈ¡Í¼ÀªÄÚµØÎïIDS
+	 Rem è·å–å›¾å»“å†…åœ°ç‰©IDS
 	 SSParameter.GetParameterSTR "printMap", "TKInerobjIDS", "", tk_innerids 
-	 Rem »ñÈ¡½Å±¾´¦ÀíÏî¸öÊı
+	 Rem è·å–è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 SSParameter.GetParameterINT "printMap", "ScriptChangeCount", -1, ScriptChangeCount
 	
-		 '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+		 '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
     GHXKZGUID = SSProcess.GetObjectAttr (selectID,"[JSGHXKZGUID]")
 	 jzdtguid = SSProcess.GetObjectAttr (selectID,"[JZWMCGUID]")
 	 GHXKZHoutmap = SSProcess.GetObjectAttr (selectID,"[GuiHXKZBH]")
@@ -719,7 +719,7 @@ Function VBS_postMap7(MSGID,mapName,selectID)
 	 BLC = SSProcess.GetMapScale
 
 'msgbox jzdtguid
-	 '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+	 '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
 	SSProcess.ClearSelection 
 	SSProcess.ClearSelectCondition
 	SSProcess.SetSelectCondition "SSObj_ID", "==", tk_ids
@@ -734,9 +734,9 @@ Function VBS_postMap7(MSGID,mapName,selectID)
 	'	GetCGXX GHXKZHoutmap,JZWMCoutmap,cc,GHCD,SJCG,CMXX,sjcs
 
 		If InStr(cc,"-") = 1 Then
-			DSDXBS = "µØÏÂ"
+			DSDXBS = "åœ°ä¸‹"
 		Else
-			DSDXBS = "µØÉÏ"
+			DSDXBS = "åœ°ä¸Š"
 		End If
 		'If GHCD <> "" Then  SSProcess.SetObjectAttr tk_id,"[PiZCG]",GHCD
 		'If SJCG <> "" Then  SSProcess.SetObjectAttr tk_id,"[ShiCCG]",SJCG
@@ -746,7 +746,7 @@ Function VBS_postMap7(MSGID,mapName,selectID)
 		SSProcess.SetObjectAttr tk_id,"[JSGHXKZGUID]",GHXKZGUID
 		SSProcess.SetObjectAttr tk_id,"[JZWMCGUID]",jzdtguid
 		SSProcess.SetObjectAttr tk_id,"[GuiHXKZBH]",GHXKZHoutmap
-		'SSProcess.SetObjectAttr tk_id,"[BeiZ]","ËµÃ÷£º1¡¢¸Ã²ã½¨ÖşÃæ»ı°´Êµ²â³ß´ç¼ÆËã¡£     \2¡¢Êµ²â³ß´çÒÑÖª¿Û³ıÄ¨»Òºñ¶È£¨Ä¨»Òºñ¶ÈÆ½¾ù0.03m£©¡£"
+		'SSProcess.SetObjectAttr tk_id,"[BeiZ]","è¯´æ˜ï¼š1ã€è¯¥å±‚å»ºç­‘é¢ç§¯æŒ‰å®æµ‹å°ºå¯¸è®¡ç®—ã€‚     \2ã€å®æµ‹å°ºå¯¸å·²çŸ¥æ‰£é™¤æŠ¹ç°åšåº¦ï¼ˆæŠ¹ç°åšåº¦å¹³å‡0.03mï¼‰ã€‚"
 		If InStr(cc,"-") > 0 Then 
 			cc = Split(cc,"+")
 			If UBound(cc) =1 Then 
@@ -760,14 +760,14 @@ Function VBS_postMap7(MSGID,mapName,selectID)
 				else
 					str1 = cc(1)
 				end if 
-				str111 = "µØÏÂ" & str0 & "²ãÖÁ" & str1 & "²ã"
+				str111 = "åœ°ä¸‹" & str0 & "å±‚è‡³" & str1 & "å±‚"
 			ElseIf UBound(cc) = 0 Then 
 				 if instr(cc(0),".") = 0 then 
 					str0 = SSFunc.GetChineseDigit(Abs (cc(0)))
 				else
 					str0 = cc(0)
 				end if 
-				str111  = "µØÏÂ" & str0 & "²ã"
+				str111  = "åœ°ä¸‹" & str0 & "å±‚"
 			End If 
 		Else 
 			SSFunc.ScanString cc, ",", arcc, arccCount
@@ -785,19 +785,19 @@ Function VBS_postMap7(MSGID,mapName,selectID)
 						else
 							str1 = cc(1)
 						end if 
-						str =  str0 & "²ãÖÁ" & str1 & "²ã"
+						str =  str0 & "å±‚è‡³" & str1 & "å±‚"
 					ElseIf UBound(cc) = 0 Then 
 						if instr(cc(0),".") = 0 then 
 							str0 = SSFunc.GetChineseDigit(Abs (cc(0)))
 						else
 							str0 = cc(0)
 						end if 
-						str  =  str0 & "²ã"
+						str  =  str0 & "å±‚"
 					End If 
 				If str111 ="" Then
 					str111 = str
 				Else 
-					str111 = str111&"¡¢"&str
+					str111 = str111&"ã€"&str
 				End If
 				str =""
 			Next
@@ -821,62 +821,62 @@ Function VBS_postMap7(MSGID,mapName,selectID)
 	Next 
 
 
- '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+ '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
  	debug_print String(50,"-")
-	debug_print "Êä³öÍê³É¡£"
+	debug_print "è¾“å‡ºå®Œæˆã€‚"
 	debug_print String(50,"-")
 	ViewExtend()
 		
 	
-	 Rem ³É¹ûÍ¼Ï¸½Ú·Ö¿ª´¦Àí
+	 Rem æˆæœå›¾ç»†èŠ‚åˆ†å¼€å¤„ç†
 	 For i = 0 to ScriptChangeCount -1
-		 Rem »ñÈ¡´¦ÀíÏîÃû³Æ
+		 Rem è·å–å¤„ç†é¡¹åç§°
 		 SSParameter.GetParameterSTR "printMap", i & "Name", "", str_Name 
-		 Rem »ñÈ¡´¦ÀíÏî²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaString", "", str_para 
-		 Rem »ñÈ¡´¦ÀíÏî¸½¼Ó²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹é™„åŠ å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaStringEX", "", str_paraex 
-		 '// ´Ë´¦ÎŞ´úÂë¡¢ËµÃ÷Ã»ÓĞ½Å±¾´¦ÀíÏî..
+		 '// æ­¤å¤„æ— ä»£ç ã€è¯´æ˜æ²¡æœ‰è„šæœ¬å¤„ç†é¡¹..
 	 Next 
 	  
 End Function 
 
-Rem special:[ÂÌµØÍ¼] ³öÍ¼Ç°£¨³õÊ¼»¯µ÷ÓÃ£©ÓÉ´Ë½øÈë
+Rem special:[ç»¿åœ°å›¾] å‡ºå›¾å‰ï¼ˆåˆå§‹åŒ–è°ƒç”¨ï¼‰ç”±æ­¤è¿›å…¥
 Function VBS_preMap8(MSGID,mapName,selectID)
 	  
-	 Rem ±¾º¯Êı¹Ø¼ü²ÎÊı£ºSSParameter.SetParameterINT "printMap", "return", 1
-	 Rem return = 1 Í£Ö¹Êä³ö³É¹ûÍ¼
-	 Rem return = 0 ¼ÌĞøÊä³ö³É¹ûÍ¼£¨ÎŞĞèÉèÖÃ¡¢Ä¬ÈÏÖµÎª0£©
-	 If MSGID = 0 Then '// ĞÂ¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
-		 '// ÉèÖÃ³öÍ¼¹¤³ÌÃû³Æ¡¢±ØĞëµ÷ÓÃ.... 
+	 Rem æœ¬å‡½æ•°å…³é”®å‚æ•°ï¼šSSParameter.SetParameterINT "printMap", "return", 1
+	 Rem return = 1 åœæ­¢è¾“å‡ºæˆæœå›¾
+	 Rem return = 0 ç»§ç»­è¾“å‡ºæˆæœå›¾ï¼ˆæ— éœ€è®¾ç½®ã€é»˜è®¤å€¼ä¸º0ï¼‰
+	 If MSGID = 0 Then '// æ–°å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
+		 '// è®¾ç½®å‡ºå›¾å·¥ç¨‹åç§°ã€å¿…é¡»è°ƒç”¨.... 
 		 SSParameter.SetParameterINT "printMap", "return", 1
 		 Dim path_print
 		If CheckReportPath(path_print) = False    Then 
 
-	  		MsgBox "ÎŞ·¨Íê³É³öÍ¼£º³É¹ûÄ¿Â¼Î´´´½¨¡¢ÎŞ·¨Íê³É³öÍ¼"
+	  		MsgBox "æ— æ³•å®Œæˆå‡ºå›¾ï¼šæˆæœç›®å½•æœªåˆ›å»ºã€æ— æ³•å®Œæˆå‡ºå›¾"
 	  		Exit Function 
 	  	End If 
 	  	
 
 	  	If GetXMMC(xmmc) = False Then 
-	  		MsgBox "ÎŞ·¨Íê³É³öÍ¼£ºÇë¼ì²éÏîÄ¿Ãû³ÆÊÇ·ñÕıÈ·£¿"
+	  		MsgBox "æ— æ³•å®Œæˆå‡ºå›¾ï¼šè¯·æ£€æŸ¥é¡¹ç›®åç§°æ˜¯å¦æ­£ç¡®ï¼Ÿ"
 	  		Exit Function 
 	  	End If 
 
 
-	    fileName= path_print & "\" & xmmc & "ÂÌµØÃæ»ıÍ³¼ÆÍ¼.edb"
+	    fileName= path_print & "\" & xmmc & "ç»¿åœ°é¢ç§¯ç»Ÿè®¡å›¾.edb"
 	    
 	  	If FileExists(fileName) Then 
-	  		MsgBox fileName & "ÎÄ¼şÒÑ´æÔÚ¡¢ÎŞ·¨Íê³ÉÊä³ö¡¢ÇëÊÖ¶¯¼ì²éÉ¾³ıºóÖØÊÔ"
+	  		MsgBox fileName & "æ–‡ä»¶å·²å­˜åœ¨ã€æ— æ³•å®Œæˆè¾“å‡ºã€è¯·æ‰‹åŠ¨æ£€æŸ¥åˆ é™¤åé‡è¯•"
 	  		Exit Function 
 	  	End If 	 
 	  	SSParameter.SetParameterINT "printMap", "return", 0
 		SSParameter.SetParameterSTR "printMap","NewedbName",fileName 
 	  
 	  
-	 ElseIf MSGID = 1 Then '// ±¾¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
+	 ElseIf MSGID = 1 Then '// æœ¬å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
 	  
 	 End If 
 	  
@@ -885,28 +885,28 @@ End Function
 
 	  
 	  
-Rem special:[ÂÌµØÍ¼] ³öÍ¼Íê³ÉÓÉ´Ë½øÈë
+Rem special:[ç»¿åœ°å›¾] å‡ºå›¾å®Œæˆç”±æ­¤è¿›å…¥
 Function VBS_postMap8(MSGID,mapName,selectID)
 	  
-	 Rem Í¼ÀªID,½Å±¾´¦ÀíÏî¸öÊı
+	 Rem å›¾å»“ID,è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 Dim tk_id,tk_innerids,ScriptChangeCount
-	 Rem ½Å±¾´¦ÀíÏîÃû³Æ,½Å±¾´¦ÀíÏî²ÎÊı,½Å±¾´¦ÀíÏî¸½¼Ó²ÎÊı 
+	 Rem è„šæœ¬å¤„ç†é¡¹åç§°,è„šæœ¬å¤„ç†é¡¹å‚æ•°,è„šæœ¬å¤„ç†é¡¹é™„åŠ å‚æ•° 
 	 Dim str_Name,str_para,str_paraex	  
-	 Rem »ñÈ¡·Ö²ãÍ¼Í¼ÀªIDS,¶à¸öÓ¢ÎÄ¶ººÅÏà¸ô
+	 Rem è·å–åˆ†å±‚å›¾å›¾å»“IDS,å¤šä¸ªè‹±æ–‡é€—å·ç›¸éš”
 	 SSParameter.GetParameterINT "printMap", "TKID", -1, tk_id 
-	 Rem »ñÈ¡Í¼ÀªÄÚµØÎïIDS
+	 Rem è·å–å›¾å»“å†…åœ°ç‰©IDS
 	 SSParameter.GetParameterSTR "printMap", "TKInerobjIDS", "", tk_innerids 
-	 Rem »ñÈ¡½Å±¾´¦ÀíÏî¸öÊı
+	 Rem è·å–è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 SSParameter.GetParameterINT "printMap", "ScriptChangeCount", -1, ScriptChangeCount
 	
-		 '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+		 '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
 
 	SSProcess.SetObjectAttr tk_id,"[XiangMMC]",xmmc
 
 	
- '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+ '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
  	debug_print String(50,"-")
-	debug_print "Êä³öÍê³É¡£"
+	debug_print "è¾“å‡ºå®Œæˆã€‚"
 	debug_print String(50,"-")
 	ViewExtend()
 
@@ -914,29 +914,29 @@ Function VBS_postMap8(MSGID,mapName,selectID)
 
 		
 	
-	 Rem ³É¹ûÍ¼Ï¸½Ú·Ö¿ª´¦Àí
+	 Rem æˆæœå›¾ç»†èŠ‚åˆ†å¼€å¤„ç†
 	 For i = 0 to ScriptChangeCount -1
-		 Rem »ñÈ¡´¦ÀíÏîÃû³Æ
+		 Rem è·å–å¤„ç†é¡¹åç§°
 		 SSParameter.GetParameterSTR "printMap", i & "Name", "", str_Name 
-		 Rem »ñÈ¡´¦ÀíÏî²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaString", "", str_para 
-		 Rem »ñÈ¡´¦ÀíÏî¸½¼Ó²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹é™„åŠ å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaStringEX", "", str_paraex 
-		 '// ´Ë´¦ÎŞ´úÂë¡¢ËµÃ÷Ã»ÓĞ½Å±¾´¦ÀíÏî..
+		 '// æ­¤å¤„æ— ä»£ç ã€è¯´æ˜æ²¡æœ‰è„šæœ¬å¤„ç†é¡¹..
 	 Next 
 	  
 End Function 
 
 
-Rem special:[¿¢¹¤Í¼] ³öÍ¼Ç°£¨³õÊ¼»¯µ÷ÓÃ£©ÓÉ´Ë½øÈë
+Rem special:[ç«£å·¥å›¾] å‡ºå›¾å‰ï¼ˆåˆå§‹åŒ–è°ƒç”¨ï¼‰ç”±æ­¤è¿›å…¥
 Function VBS_preMap9(MSGID,mapName,selectID)
 	  
-	 Rem ±¾º¯Êı¹Ø¼ü²ÎÊı£ºSSParameter.SetParameterINT "printMap", "return", 1
-	 Rem return = 1 Í£Ö¹Êä³ö³É¹ûÍ¼
-	 Rem return = 0 ¼ÌĞøÊä³ö³É¹ûÍ¼£¨ÎŞĞèÉèÖÃ¡¢Ä¬ÈÏÖµÎª0£©
-	 If MSGID = 0 Then '// ĞÂ¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
-		 '// ÉèÖÃ³öÍ¼¹¤³ÌÃû³Æ¡¢±ØĞëµ÷ÓÃ.... 
+	 Rem æœ¬å‡½æ•°å…³é”®å‚æ•°ï¼šSSParameter.SetParameterINT "printMap", "return", 1
+	 Rem return = 1 åœæ­¢è¾“å‡ºæˆæœå›¾
+	 Rem return = 0 ç»§ç»­è¾“å‡ºæˆæœå›¾ï¼ˆæ— éœ€è®¾ç½®ã€é»˜è®¤å€¼ä¸º0ï¼‰
+	 If MSGID = 0 Then '// æ–°å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
+		 '// è®¾ç½®å‡ºå›¾å·¥ç¨‹åç§°ã€å¿…é¡»è°ƒç”¨.... 
 	SSProcess.PushUndoMark
 	SSProcess.ClearSelection 
 	SSProcess.ClearSelectCondition
@@ -949,16 +949,16 @@ Function VBS_preMap9(MSGID,mapName,selectID)
 
 		mdbName = SSProcess.GetProjectFileName 
 		SSProcess.OpenAccessMdb  mdbName
-		sql = "select VALUE from PROJECTINFO where KEY='ÏîÄ¿Ãû³Æ'"
+		sql = "select VALUE from PROJECTINFO where KEY='é¡¹ç›®åç§°'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		XMMC=arSeletionRecord(0)
-		sql = "select VALUE from PROJECTINFO where KEY='²âÁ¿ÈËÔ±'"
+		sql = "select VALUE from PROJECTINFO where KEY='æµ‹é‡äººå‘˜'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		HTRY=arSeletionRecord(0)
-		sql = "select VALUE from PROJECTINFO where KEY='¼ì²éÈËÔ±'"
+		sql = "select VALUE from PROJECTINFO where KEY='æ£€æŸ¥äººå‘˜'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		JCRY=arSeletionRecord(0)
-		sql = "select VALUE from PROJECTINFO where KEY='²â»æµ¥Î»'"
+		sql = "select VALUE from PROJECTINFO where KEY='æµ‹ç»˜å•ä½'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		CLDW=arSeletionRecord(0)
 
@@ -971,12 +971,12 @@ Function VBS_preMap9(MSGID,mapName,selectID)
 	   strProjectName=SSProcess.GetProjectFileName()
 	   FileFolder=replace(strProjectName,".edb","")
 		if IsfolderExists(FileFolder) = false then CreateFolders FileFolder
-	   fileName= FileFolder & "\¿¢¹¤Í¼.edb"
+	   fileName= FileFolder & "\ç«£å·¥å›¾.edb"
 		SSParameter.SetParameterSTR "printMap","NewedbName",fileName 
 	  
 	  
-	 ElseIf MSGID = 1 Then '// ±¾¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
+	 ElseIf MSGID = 1 Then '// æœ¬å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
 	  
 	 End If 
 	  
@@ -985,34 +985,34 @@ End Function
 
 	  
 	  
-Rem special:[¿¢¹¤Í¼] ³öÍ¼Íê³ÉÓÉ´Ë½øÈë
+Rem special:[ç«£å·¥å›¾] å‡ºå›¾å®Œæˆç”±æ­¤è¿›å…¥
 Function VBS_postMap9(MSGID,mapName,selectID)
 	  
-	 Rem Í¼ÀªID,½Å±¾´¦ÀíÏî¸öÊı
+	 Rem å›¾å»“ID,è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 Dim tk_id,tk_innerids,ScriptChangeCount
-	 Rem ½Å±¾´¦ÀíÏîÃû³Æ,½Å±¾´¦ÀíÏî²ÎÊı,½Å±¾´¦ÀíÏî¸½¼Ó²ÎÊı 
+	 Rem è„šæœ¬å¤„ç†é¡¹åç§°,è„šæœ¬å¤„ç†é¡¹å‚æ•°,è„šæœ¬å¤„ç†é¡¹é™„åŠ å‚æ•° 
 	 Dim str_Name,str_para,str_paraex	  
-	 Rem »ñÈ¡·Ö²ãÍ¼Í¼ÀªIDS,¶à¸öÓ¢ÎÄ¶ººÅÏà¸ô
+	 Rem è·å–åˆ†å±‚å›¾å›¾å»“IDS,å¤šä¸ªè‹±æ–‡é€—å·ç›¸éš”
 	 SSParameter.GetParameterINT "printMap", "TKID", -1, tk_id 
-	 Rem »ñÈ¡Í¼ÀªÄÚµØÎïIDS
+	 Rem è·å–å›¾å»“å†…åœ°ç‰©IDS
 	 SSParameter.GetParameterSTR "printMap", "TKInerobjIDS", "", tk_innerids 
-	 Rem »ñÈ¡½Å±¾´¦ÀíÏî¸öÊı
+	 Rem è·å–è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 SSParameter.GetParameterINT "printMap", "ScriptChangeCount", -1, ScriptChangeCount
 	
-		 '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+		 '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
 
 	SSProcess.SetObjectAttr tk_id,"[XiangMMC]",xmmc
 
 	
- '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+ '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
  	debug_print String(50,"-")
-	debug_print "Êä³öÍê³É¡£"
+	debug_print "è¾“å‡ºå®Œæˆã€‚"
 	debug_print String(50,"-")
 	ViewExtend()
 
 		'DeleteFeature "9410101","9420032"
 		'DeleteFeature "9420034","9999403"
-		'DeleteFeatureLayerName "DT_POLYGON,DT_LINE,DT_POINT,DT_ZJ,LCGZKJ,LCGZKJZJ,GHFSQLJX,LMT_ZJ,»ùµ××¢¼Ç,TKZSX,TKZSM"
+		'DeleteFeatureLayerName "DT_POLYGON,DT_LINE,DT_POINT,DT_ZJ,LCGZKJ,LCGZKJZJ,GHFSQLJX,LMT_ZJ,åŸºåº•æ³¨è®°,TKZSX,TKZSM"
 		DaHui
 		SSProcess.SetMapScale "500"
 
@@ -1036,36 +1036,36 @@ Function VBS_postMap9(MSGID,mapName,selectID)
 		SSProcess.SetObjectAttr id, "[XiangMMC]", artemp(0)
 		SSProcess.SetObjectAttr id, "[HuiTY]", artemp(1)
 		SSProcess.SetObjectAttr id, "[JianCY]", artemp(2)
-		SSProcess.SetObjectAttr id, "[²âÁ¿µ¥Î»Ãû³Æ]", artemp(3)
+		SSProcess.SetObjectAttr id, "[æµ‹é‡å•ä½åç§°]", artemp(3)
 		SSProcess.ExecuteSDLFunction "$SDL.SSProject.View.Extend", 0
-		'Í¼ĞÎÖØĞÂÉú³É
+		'å›¾å½¢é‡æ–°ç”Ÿæˆ
 		SSProcess.ExecuteSDLFunction "$SDL.SSProject.Display.RedrawExtend", 0
 	next
-	DeleteFeatureLayerName "¹æ»®Ïß,GHX"
+	DeleteFeatureLayerName "è§„åˆ’çº¿,GHX"
 
-	 Rem ³É¹ûÍ¼Ï¸½Ú·Ö¿ª´¦Àí
+	 Rem æˆæœå›¾ç»†èŠ‚åˆ†å¼€å¤„ç†
 	 For i = 0 to ScriptChangeCount -1
-		 Rem »ñÈ¡´¦ÀíÏîÃû³Æ
+		 Rem è·å–å¤„ç†é¡¹åç§°
 		 SSParameter.GetParameterSTR "printMap", i & "Name", "", str_Name 
-		 Rem »ñÈ¡´¦ÀíÏî²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaString", "", str_para 
-		 Rem »ñÈ¡´¦ÀíÏî¸½¼Ó²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹é™„åŠ å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaStringEX", "", str_paraex 
-		 '// ´Ë´¦ÎŞ´úÂë¡¢ËµÃ÷Ã»ÓĞ½Å±¾´¦ÀíÏî..
+		 '// æ­¤å¤„æ— ä»£ç ã€è¯´æ˜æ²¡æœ‰è„šæœ¬å¤„ç†é¡¹..
 	 Next 
 	  
 End Function 
 
 
-Rem special:[¿¢¹¤¹æ»®¸´ºËÍ¼] ³öÍ¼Ç°£¨³õÊ¼»¯µ÷ÓÃ£©ÓÉ´Ë½øÈë
+Rem special:[ç«£å·¥è§„åˆ’å¤æ ¸å›¾] å‡ºå›¾å‰ï¼ˆåˆå§‹åŒ–è°ƒç”¨ï¼‰ç”±æ­¤è¿›å…¥
 Function VBS_preMap10(MSGID,mapName,selectID)
 	  
-	 Rem ±¾º¯Êı¹Ø¼ü²ÎÊı£ºSSParameter.SetParameterINT "printMap", "return", 1
-	 Rem return = 1 Í£Ö¹Êä³ö³É¹ûÍ¼
-	 Rem return = 0 ¼ÌĞøÊä³ö³É¹ûÍ¼£¨ÎŞĞèÉèÖÃ¡¢Ä¬ÈÏÖµÎª0£©
-	 If MSGID = 0 Then '// ĞÂ¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
-		 '// ÉèÖÃ³öÍ¼¹¤³ÌÃû³Æ¡¢±ØĞëµ÷ÓÃ.... 
+	 Rem æœ¬å‡½æ•°å…³é”®å‚æ•°ï¼šSSParameter.SetParameterINT "printMap", "return", 1
+	 Rem return = 1 åœæ­¢è¾“å‡ºæˆæœå›¾
+	 Rem return = 0 ç»§ç»­è¾“å‡ºæˆæœå›¾ï¼ˆæ— éœ€è®¾ç½®ã€é»˜è®¤å€¼ä¸º0ï¼‰
+	 If MSGID = 0 Then '// æ–°å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
+		 '// è®¾ç½®å‡ºå›¾å·¥ç¨‹åç§°ã€å¿…é¡»è°ƒç”¨.... 
 	SSProcess.PushUndoMark
 	SSProcess.ClearSelection 
 	SSProcess.ClearSelectCondition
@@ -1078,20 +1078,20 @@ Function VBS_preMap10(MSGID,mapName,selectID)
 
 		mdbName = SSProcess.GetProjectFileName 
 		SSProcess.OpenAccessMdb  mdbName
-		sql = "select VALUE from PROJECTINFO where KEY='ÏîÄ¿Ãû³Æ'"
+		sql = "select VALUE from PROJECTINFO where KEY='é¡¹ç›®åç§°'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		XMMC=arSeletionRecord(0)
-		sql = "select VALUE from PROJECTINFO where KEY='²âÁ¿ÈËÔ±'"
+		sql = "select VALUE from PROJECTINFO where KEY='æµ‹é‡äººå‘˜'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		HTRY=arSeletionRecord(0)
-		sql = "select VALUE from PROJECTINFO where KEY='¼ì²éÈËÔ±'"
+		sql = "select VALUE from PROJECTINFO where KEY='æ£€æŸ¥äººå‘˜'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		JCRY=arSeletionRecord(0)
-		sql = "select VALUE from PROJECTINFO where KEY='²â»æµ¥Î»'"
+		sql = "select VALUE from PROJECTINFO where KEY='æµ‹ç»˜å•ä½'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		CLDW=arSeletionRecord(0)
 
-		sql = "select VALUE from PROJECTINFO where KEY='ÉóºËÈËÔ±'"
+		sql = "select VALUE from PROJECTINFO where KEY='å®¡æ ¸äººå‘˜'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		SHRY=arSeletionRecord(0)
 
@@ -1103,13 +1103,13 @@ Function VBS_preMap10(MSGID,mapName,selectID)
 	   strProjectName=SSProcess.GetProjectFileName()
 	   FileFolder=replace(strProjectName,".edb","")
 		if IsfolderExists(FileFolder) = false then CreateFolders FileFolder
-	   fileName= FileFolder & "\¿¢¹¤¹æ»®¸´ºËÍ¼.edb"
+	   fileName= FileFolder & "\ç«£å·¥è§„åˆ’å¤æ ¸å›¾.edb"
 	  	
 		SSParameter.SetParameterSTR "printMap","NewedbName",fileName 
 	  
 	  
-	 ElseIf MSGID = 1 Then '// ±¾¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
+	 ElseIf MSGID = 1 Then '// æœ¬å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
 	  
 	 End If 
 	  
@@ -1118,33 +1118,33 @@ End Function
 
 	  
 	  
-Rem special:[¿¢¹¤¹æ»®¸´ºËÍ¼] ³öÍ¼Íê³ÉÓÉ´Ë½øÈë
+Rem special:[ç«£å·¥è§„åˆ’å¤æ ¸å›¾] å‡ºå›¾å®Œæˆç”±æ­¤è¿›å…¥
 Function VBS_postMap10(MSGID,mapName,selectID)
 	  
-	 Rem Í¼ÀªID,½Å±¾´¦ÀíÏî¸öÊı
+	 Rem å›¾å»“ID,è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 Dim tk_id,tk_innerids,ScriptChangeCount
-	 Rem ½Å±¾´¦ÀíÏîÃû³Æ,½Å±¾´¦ÀíÏî²ÎÊı,½Å±¾´¦ÀíÏî¸½¼Ó²ÎÊı 
+	 Rem è„šæœ¬å¤„ç†é¡¹åç§°,è„šæœ¬å¤„ç†é¡¹å‚æ•°,è„šæœ¬å¤„ç†é¡¹é™„åŠ å‚æ•° 
 	 Dim str_Name,str_para,str_paraex	  
-	 Rem »ñÈ¡·Ö²ãÍ¼Í¼ÀªIDS,¶à¸öÓ¢ÎÄ¶ººÅÏà¸ô
+	 Rem è·å–åˆ†å±‚å›¾å›¾å»“IDS,å¤šä¸ªè‹±æ–‡é€—å·ç›¸éš”
 	 SSParameter.GetParameterINT "printMap", "TKID", -1, tk_id 
-	 Rem »ñÈ¡Í¼ÀªÄÚµØÎïIDS
+	 Rem è·å–å›¾å»“å†…åœ°ç‰©IDS
 	 SSParameter.GetParameterSTR "printMap", "TKInerobjIDS", "", tk_innerids 
-	 Rem »ñÈ¡½Å±¾´¦ÀíÏî¸öÊı
+	 Rem è·å–è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 SSParameter.GetParameterINT "printMap", "ScriptChangeCount", -1, ScriptChangeCount
 	
-		 '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+		 '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
 
 	SSProcess.SetObjectAttr tk_id,"[XiangMMC]",xmmc
 
 	
- '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+ '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
  	debug_print String(50,"-")
-	debug_print "Êä³öÍê³É¡£"
+	debug_print "è¾“å‡ºå®Œæˆã€‚"
 	debug_print String(50,"-")
 	ViewExtend()
 
 		'DaHui
-		DeleteFeatureLayerName "DT_POLYGON,DT_LINE,DT_POINT,DT_ZJ,LCGZKJ,LCGZKJZJ,GHFSQLJX,LMT_ZJ,»ùµ××¢¼Ç,TKZSX,TKZSM"
+		DeleteFeatureLayerName "DT_POLYGON,DT_LINE,DT_POINT,DT_ZJ,LCGZKJ,LCGZKJZJ,GHFSQLJX,LMT_ZJ,åŸºåº•æ³¨è®°,TKZSX,TKZSM"
 		SSProcess.SetMapScale "500"
 
 	SSProcess.PushUndoMark
@@ -1166,37 +1166,37 @@ Function VBS_postMap10(MSGID,mapName,selectID)
 		SSProcess.SetObjectAttr id, "[XiangMMC]", artemp(0)
 		SSProcess.SetObjectAttr id, "[HuiTY]", artemp(1)
 		SSProcess.SetObjectAttr id, "[JianCY]", artemp(2)
-		SSProcess.SetObjectAttr id, "[²âÁ¿µ¥Î»Ãû³Æ]", artemp(3)
+		SSProcess.SetObjectAttr id, "[æµ‹é‡å•ä½åç§°]", artemp(3)
 		SSProcess.SetObjectAttr id, "[ShenHY]", artemp(4)
 		SSProcess.ExecuteSDLFunction "$SDL.SSProject.View.Extend", 0
-		'Í¼ĞÎÖØĞÂÉú³É
+		'å›¾å½¢é‡æ–°ç”Ÿæˆ
 		SSProcess.ExecuteSDLFunction "$SDL.SSProject.Display.RedrawExtend", 0
 	next		
 
 		CreateKEYZPT()
 	
-	 Rem ³É¹ûÍ¼Ï¸½Ú·Ö¿ª´¦Àí
+	 Rem æˆæœå›¾ç»†èŠ‚åˆ†å¼€å¤„ç†
 	 For i = 0 to ScriptChangeCount -1
-		 Rem »ñÈ¡´¦ÀíÏîÃû³Æ
+		 Rem è·å–å¤„ç†é¡¹åç§°
 		 SSParameter.GetParameterSTR "printMap", i & "Name", "", str_Name 
-		 Rem »ñÈ¡´¦ÀíÏî²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaString", "", str_para 
-		 Rem »ñÈ¡´¦ÀíÏî¸½¼Ó²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹é™„åŠ å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaStringEX", "", str_paraex 
-		 '// ´Ë´¦ÎŞ´úÂë¡¢ËµÃ÷Ã»ÓĞ½Å±¾´¦ÀíÏî..
+		 '// æ­¤å¤„æ— ä»£ç ã€è¯´æ˜æ²¡æœ‰è„šæœ¬å¤„ç†é¡¹..
 	 Next 
 	  
 End Function 
 
-Rem special:[ÓÃµØ¸´ºËÍ¼] ³öÍ¼Ç°£¨³õÊ¼»¯µ÷ÓÃ£©ÓÉ´Ë½øÈë
+Rem special:[ç”¨åœ°å¤æ ¸å›¾] å‡ºå›¾å‰ï¼ˆåˆå§‹åŒ–è°ƒç”¨ï¼‰ç”±æ­¤è¿›å…¥
 Function VBS_preMap11(MSGID,mapName,selectID)
 	  
-	 Rem ±¾º¯Êı¹Ø¼ü²ÎÊı£ºSSParameter.SetParameterINT "printMap", "return", 1
-	 Rem return = 1 Í£Ö¹Êä³ö³É¹ûÍ¼
-	 Rem return = 0 ¼ÌĞøÊä³ö³É¹ûÍ¼£¨ÎŞĞèÉèÖÃ¡¢Ä¬ÈÏÖµÎª0£©
-	 If MSGID = 0 Then '// ĞÂ¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
-		 '// ÉèÖÃ³öÍ¼¹¤³ÌÃû³Æ¡¢±ØĞëµ÷ÓÃ.... 
+	 Rem æœ¬å‡½æ•°å…³é”®å‚æ•°ï¼šSSParameter.SetParameterINT "printMap", "return", 1
+	 Rem return = 1 åœæ­¢è¾“å‡ºæˆæœå›¾
+	 Rem return = 0 ç»§ç»­è¾“å‡ºæˆæœå›¾ï¼ˆæ— éœ€è®¾ç½®ã€é»˜è®¤å€¼ä¸º0ï¼‰
+	 If MSGID = 0 Then '// æ–°å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
+		 '// è®¾ç½®å‡ºå›¾å·¥ç¨‹åç§°ã€å¿…é¡»è°ƒç”¨.... 
 	SSProcess.PushUndoMark
 	SSProcess.ClearSelection 
 	SSProcess.ClearSelectCondition
@@ -1209,19 +1209,19 @@ Function VBS_preMap11(MSGID,mapName,selectID)
 
 		mdbName = SSProcess.GetProjectFileName 
 		SSProcess.OpenAccessMdb  mdbName
-		sql = "select VALUE from PROJECTINFO where KEY='ÏîÄ¿Ãû³Æ'"
+		sql = "select VALUE from PROJECTINFO where KEY='é¡¹ç›®åç§°'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		XMMC=arSeletionRecord(0)
-		sql = "select VALUE from PROJECTINFO where KEY='²âÁ¿ÈËÔ±'"
+		sql = "select VALUE from PROJECTINFO where KEY='æµ‹é‡äººå‘˜'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		HTRY=arSeletionRecord(0)
-		sql = "select VALUE from PROJECTINFO where KEY='¼ì²éÈËÔ±'"
+		sql = "select VALUE from PROJECTINFO where KEY='æ£€æŸ¥äººå‘˜'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		JCRY=arSeletionRecord(0)
-		sql = "select VALUE from PROJECTINFO where KEY='²â»æµ¥Î»'"
+		sql = "select VALUE from PROJECTINFO where KEY='æµ‹ç»˜å•ä½'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		CLDW=arSeletionRecord(0)
-		sql = "select VALUE from PROJECTINFO where KEY='ÉóºËÈËÔ±'"
+		sql = "select VALUE from PROJECTINFO where KEY='å®¡æ ¸äººå‘˜'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		SHRY=arSeletionRecord(0)
 
@@ -1233,13 +1233,13 @@ Function VBS_preMap11(MSGID,mapName,selectID)
 	   strProjectName=SSProcess.GetProjectFileName()
 	   FileFolder=replace(strProjectName,".edb","")
 		if IsfolderExists(FileFolder) = false then CreateFolders FileFolder
-	   fileName= FileFolder & "\ÓÃµØ¸´ºËÍ¼.edb"
+	   fileName= FileFolder & "\ç”¨åœ°å¤æ ¸å›¾.edb"
 	  	
 		SSParameter.SetParameterSTR "printMap","NewedbName",fileName 
 	  
 	  
-	 ElseIf MSGID = 1 Then '// ±¾¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
+	 ElseIf MSGID = 1 Then '// æœ¬å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
 	  
 	 End If 
 	  
@@ -1248,35 +1248,35 @@ End Function
 
 	  
 	  
-Rem special:[ÓÃµØ¸´ºËÍ¼] ³öÍ¼Íê³ÉÓÉ´Ë½øÈë
+Rem special:[ç”¨åœ°å¤æ ¸å›¾] å‡ºå›¾å®Œæˆç”±æ­¤è¿›å…¥
 Function VBS_postMap11(MSGID,mapName,selectID)
 	  
-	 Rem Í¼ÀªID,½Å±¾´¦ÀíÏî¸öÊı
+	 Rem å›¾å»“ID,è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 Dim tk_id,tk_innerids,ScriptChangeCount
-	 Rem ½Å±¾´¦ÀíÏîÃû³Æ,½Å±¾´¦ÀíÏî²ÎÊı,½Å±¾´¦ÀíÏî¸½¼Ó²ÎÊı 
+	 Rem è„šæœ¬å¤„ç†é¡¹åç§°,è„šæœ¬å¤„ç†é¡¹å‚æ•°,è„šæœ¬å¤„ç†é¡¹é™„åŠ å‚æ•° 
 	 Dim str_Name,str_para,str_paraex	  
-	 Rem »ñÈ¡·Ö²ãÍ¼Í¼ÀªIDS,¶à¸öÓ¢ÎÄ¶ººÅÏà¸ô
+	 Rem è·å–åˆ†å±‚å›¾å›¾å»“IDS,å¤šä¸ªè‹±æ–‡é€—å·ç›¸éš”
 	 SSParameter.GetParameterINT "printMap", "TKID", -1, tk_id 
-	 Rem »ñÈ¡Í¼ÀªÄÚµØÎïIDS
+	 Rem è·å–å›¾å»“å†…åœ°ç‰©IDS
 	 SSParameter.GetParameterSTR "printMap", "TKInerobjIDS", "", tk_innerids 
-	 Rem »ñÈ¡½Å±¾´¦ÀíÏî¸öÊı
+	 Rem è·å–è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 SSParameter.GetParameterINT "printMap", "ScriptChangeCount", -1, ScriptChangeCount
 	
-		 '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+		 '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
 
 	SSProcess.SetObjectAttr tk_id,"[XiangMMC]",xmmc
 
 	
- '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+ '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
  	debug_print String(50,"-")
-	debug_print "Êä³öÍê³É¡£"
+	debug_print "è¾“å‡ºå®Œæˆã€‚"
 	debug_print String(50,"-")
 	ViewExtend()
 
 		DaHui
 		DeleteFeature "9410011","9420035"
 		DeleteFeature "9420037","9999403"
-		DeleteFeatureLayerName "DT_POLYGON,DT_LINE,DT_POINT,DT_ZJ,LCGZKJ,LCGZKJZJ,GHFSQLJX,LMT_ZJ,»ùµ××¢¼Ç,TKZSX,TKZSM"
+		DeleteFeatureLayerName "DT_POLYGON,DT_LINE,DT_POINT,DT_ZJ,LCGZKJ,LCGZKJZJ,GHFSQLJX,LMT_ZJ,åŸºåº•æ³¨è®°,TKZSX,TKZSM"
 
 		JZDSC
 		JZX
@@ -1301,44 +1301,44 @@ Function VBS_postMap11(MSGID,mapName,selectID)
 		SSProcess.SetObjectAttr id, "[XiangMMC]", artemp(0)
 		SSProcess.SetObjectAttr id, "[HuiTY]", artemp(1)
 		SSProcess.SetObjectAttr id, "[JianCY]", artemp(2)
-		SSProcess.SetObjectAttr id, "[²âÁ¿µ¥Î»Ãû³Æ]", artemp(3)
+		SSProcess.SetObjectAttr id, "[æµ‹é‡å•ä½åç§°]", artemp(3)
 		SSProcess.SetObjectAttr id, "[ShenHY]", artemp(4)
 		SSProcess.ExecuteSDLFunction "$SDL.SSProject.View.Extend", 0
-		'Í¼ĞÎÖØĞÂÉú³É
+		'å›¾å½¢é‡æ–°ç”Ÿæˆ
 		SSProcess.ExecuteSDLFunction "$SDL.SSProject.Display.RedrawExtend", 0
 	next		
-	 Rem ³É¹ûÍ¼Ï¸½Ú·Ö¿ª´¦Àí
+	 Rem æˆæœå›¾ç»†èŠ‚åˆ†å¼€å¤„ç†
 	 For i = 0 to ScriptChangeCount -1
-		 Rem »ñÈ¡´¦ÀíÏîÃû³Æ
+		 Rem è·å–å¤„ç†é¡¹åç§°
 		 SSParameter.GetParameterSTR "printMap", i & "Name", "", str_Name 
-		 Rem »ñÈ¡´¦ÀíÏî²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaString", "", str_para 
-		 Rem »ñÈ¡´¦ÀíÏî¸½¼Ó²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹é™„åŠ å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaStringEX", "", str_paraex 
-		 '// ´Ë´¦ÎŞ´úÂë¡¢ËµÃ÷Ã»ÓĞ½Å±¾´¦ÀíÏî..
+		 '// æ­¤å¤„æ— ä»£ç ã€è¯´æ˜æ²¡æœ‰è„šæœ¬å¤„ç†é¡¹..
 	 Next 
 	  
 End Function 
 
-Rem special:[»ùµØ×ÜÆ½Ãæ²¼ÖÃºËÊµ²âÁ¿Æ½ÃæÍ¼] ³öÍ¼Ç°£¨³õÊ¼»¯µ÷ÓÃ£©ÓÉ´Ë½øÈë
+Rem special:[åŸºåœ°æ€»å¹³é¢å¸ƒç½®æ ¸å®æµ‹é‡å¹³é¢å›¾] å‡ºå›¾å‰ï¼ˆåˆå§‹åŒ–è°ƒç”¨ï¼‰ç”±æ­¤è¿›å…¥
 Function VBS_preMap12(MSGID,mapName,selectID)
 	  
-	 Rem ±¾º¯Êı¹Ø¼ü²ÎÊı£ºSSParameter.SetParameterINT "printMap", "return", 1
-	 Rem return = 1 Í£Ö¹Êä³ö³É¹ûÍ¼
-	 Rem return = 0 ¼ÌĞøÊä³ö³É¹ûÍ¼£¨ÎŞĞèÉèÖÃ¡¢Ä¬ÈÏÖµÎª0£©
-	 If MSGID = 0 Then '// ĞÂ¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
-		 '// ÉèÖÃ³öÍ¼¹¤³ÌÃû³Æ¡¢±ØĞëµ÷ÓÃ.... 
+	 Rem æœ¬å‡½æ•°å…³é”®å‚æ•°ï¼šSSParameter.SetParameterINT "printMap", "return", 1
+	 Rem return = 1 åœæ­¢è¾“å‡ºæˆæœå›¾
+	 Rem return = 0 ç»§ç»­è¾“å‡ºæˆæœå›¾ï¼ˆæ— éœ€è®¾ç½®ã€é»˜è®¤å€¼ä¸º0ï¼‰
+	 If MSGID = 0 Then '// æ–°å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
+		 '// è®¾ç½®å‡ºå›¾å·¥ç¨‹åç§°ã€å¿…é¡»è°ƒç”¨.... 
 	   strProjectName=SSProcess.GetProjectFileName()
 	   FileFolder=replace(strProjectName,".edb","")
 		if IsfolderExists(FileFolder) = false then CreateFolders FileFolder
-	   fileName= FileFolder & "\»ùµØ×ÜÆ½Ãæ²¼ÖÃºËÊµ²âÁ¿Æ½ÃæÍ¼.edb"
+	   fileName= FileFolder & "\åŸºåœ°æ€»å¹³é¢å¸ƒç½®æ ¸å®æµ‹é‡å¹³é¢å›¾.edb"
 	  	
 		SSParameter.SetParameterSTR "printMap","NewedbName",fileName 
 	  
 	  
-	 ElseIf MSGID = 1 Then '// ±¾¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
+	 ElseIf MSGID = 1 Then '// æœ¬å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
 	  
 	 End If 
 	  
@@ -1347,70 +1347,70 @@ End Function
 
 	  
 	  
-Rem special:[»ùµØ×ÜÆ½Ãæ²¼ÖÃºËÊµ²âÁ¿Æ½ÃæÍ¼] ³öÍ¼Íê³ÉÓÉ´Ë½øÈë
+Rem special:[åŸºåœ°æ€»å¹³é¢å¸ƒç½®æ ¸å®æµ‹é‡å¹³é¢å›¾] å‡ºå›¾å®Œæˆç”±æ­¤è¿›å…¥
 Function VBS_postMap12(MSGID,mapName,selectID)
 	  
-	 Rem Í¼ÀªID,½Å±¾´¦ÀíÏî¸öÊı
+	 Rem å›¾å»“ID,è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 Dim tk_id,tk_innerids,ScriptChangeCount
-	 Rem ½Å±¾´¦ÀíÏîÃû³Æ,½Å±¾´¦ÀíÏî²ÎÊı,½Å±¾´¦ÀíÏî¸½¼Ó²ÎÊı 
+	 Rem è„šæœ¬å¤„ç†é¡¹åç§°,è„šæœ¬å¤„ç†é¡¹å‚æ•°,è„šæœ¬å¤„ç†é¡¹é™„åŠ å‚æ•° 
 	 Dim str_Name,str_para,str_paraex	  
-	 Rem »ñÈ¡·Ö²ãÍ¼Í¼ÀªIDS,¶à¸öÓ¢ÎÄ¶ººÅÏà¸ô
+	 Rem è·å–åˆ†å±‚å›¾å›¾å»“IDS,å¤šä¸ªè‹±æ–‡é€—å·ç›¸éš”
 	 SSParameter.GetParameterINT "printMap", "TKID", -1, tk_id 
-	 Rem »ñÈ¡Í¼ÀªÄÚµØÎïIDS
+	 Rem è·å–å›¾å»“å†…åœ°ç‰©IDS
 	 SSParameter.GetParameterSTR "printMap", "TKInerobjIDS", "", tk_innerids 
-	 Rem »ñÈ¡½Å±¾´¦ÀíÏî¸öÊı
+	 Rem è·å–è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 SSParameter.GetParameterINT "printMap", "ScriptChangeCount", -1, ScriptChangeCount
 	
-		 '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+		 '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
 
 	SSProcess.SetObjectAttr tk_id,"[XiangMMC]",xmmc
 
 	
- '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+ '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
  	debug_print String(50,"-")
-	debug_print "Êä³öÍê³É¡£"
+	debug_print "è¾“å‡ºå®Œæˆã€‚"
 	debug_print String(50,"-")
 	ViewExtend()
 
 		DaHui
 
-		DeleteFeatureLayerName "DT_POLYGON,DT_LINE,DT_POINT,DT_ZJ,LCGZKJ,LCGZKJZJ,GHFSQLJX,LMT_ZJ,»ùµ××¢¼Ç,TKZSX,TKZSM"
+		DeleteFeatureLayerName "DT_POLYGON,DT_LINE,DT_POINT,DT_ZJ,LCGZKJ,LCGZKJZJ,GHFSQLJX,LMT_ZJ,åŸºåº•æ³¨è®°,TKZSX,TKZSM"
 
 		
 	
-	 Rem ³É¹ûÍ¼Ï¸½Ú·Ö¿ª´¦Àí
+	 Rem æˆæœå›¾ç»†èŠ‚åˆ†å¼€å¤„ç†
 	 For i = 0 to ScriptChangeCount -1
-		 Rem »ñÈ¡´¦ÀíÏîÃû³Æ
+		 Rem è·å–å¤„ç†é¡¹åç§°
 		 SSParameter.GetParameterSTR "printMap", i & "Name", "", str_Name 
-		 Rem »ñÈ¡´¦ÀíÏî²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaString", "", str_para 
-		 Rem »ñÈ¡´¦ÀíÏî¸½¼Ó²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹é™„åŠ å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaStringEX", "", str_paraex 
-		 '// ´Ë´¦ÎŞ´úÂë¡¢ËµÃ÷Ã»ÓĞ½Å±¾´¦ÀíÏî..
+		 '// æ­¤å¤„æ— ä»£ç ã€è¯´æ˜æ²¡æœ‰è„šæœ¬å¤„ç†é¡¹..
 	 Next 
 	  
 End Function 
 
-Rem special:[×ÜÆ½Ãæ²âÁ¿ÂÔÍ¼] ³öÍ¼Ç°£¨³õÊ¼»¯µ÷ÓÃ£©ÓÉ´Ë½øÈë
+Rem special:[æ€»å¹³é¢æµ‹é‡ç•¥å›¾] å‡ºå›¾å‰ï¼ˆåˆå§‹åŒ–è°ƒç”¨ï¼‰ç”±æ­¤è¿›å…¥
 Function VBS_preMap13(MSGID,mapName,selectID)
 	  
-	 Rem ±¾º¯Êı¹Ø¼ü²ÎÊı£ºSSParameter.SetParameterINT "printMap", "return", 1
-	 Rem return = 1 Í£Ö¹Êä³ö³É¹ûÍ¼
-	 Rem return = 0 ¼ÌĞøÊä³ö³É¹ûÍ¼£¨ÎŞĞèÉèÖÃ¡¢Ä¬ÈÏÖµÎª0£©
-	 If MSGID = 0 Then '// ĞÂ¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
-		 '// ÉèÖÃ³öÍ¼¹¤³ÌÃû³Æ¡¢±ØĞëµ÷ÓÃ.... 
+	 Rem æœ¬å‡½æ•°å…³é”®å‚æ•°ï¼šSSParameter.SetParameterINT "printMap", "return", 1
+	 Rem return = 1 åœæ­¢è¾“å‡ºæˆæœå›¾
+	 Rem return = 0 ç»§ç»­è¾“å‡ºæˆæœå›¾ï¼ˆæ— éœ€è®¾ç½®ã€é»˜è®¤å€¼ä¸º0ï¼‰
+	 If MSGID = 0 Then '// æ–°å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
+		 '// è®¾ç½®å‡ºå›¾å·¥ç¨‹åç§°ã€å¿…é¡»è°ƒç”¨.... 
 	   strProjectName=SSProcess.GetProjectFileName()
 	   FileFolder=replace(strProjectName,".edb","")
 		if IsfolderExists(FileFolder) = false then CreateFolders FileFolder
-	   fileName= FileFolder & "\×ÜÆ½Ãæ²âÁ¿ÂÔÍ¼.edb"
+	   fileName= FileFolder & "\æ€»å¹³é¢æµ‹é‡ç•¥å›¾.edb"
 
 
 		SSParameter.SetParameterSTR "printMap","NewedbName",fileName 
 	  
 	  
-	 ElseIf MSGID = 1 Then '// ±¾¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
+	 ElseIf MSGID = 1 Then '// æœ¬å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
 	  
 	 End If 
 	  
@@ -1419,28 +1419,28 @@ End Function
 
 	  
 	  
-Rem special:[×ÜÆ½Ãæ²âÁ¿ÂÔÍ¼] ³öÍ¼Íê³ÉÓÉ´Ë½øÈë
+Rem special:[æ€»å¹³é¢æµ‹é‡ç•¥å›¾] å‡ºå›¾å®Œæˆç”±æ­¤è¿›å…¥
 Function VBS_postMap13(MSGID,mapName,selectID)
 	  
-	 Rem Í¼ÀªID,½Å±¾´¦ÀíÏî¸öÊı
+	 Rem å›¾å»“ID,è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 Dim tk_id,tk_innerids,ScriptChangeCount
-	 Rem ½Å±¾´¦ÀíÏîÃû³Æ,½Å±¾´¦ÀíÏî²ÎÊı,½Å±¾´¦ÀíÏî¸½¼Ó²ÎÊı 
+	 Rem è„šæœ¬å¤„ç†é¡¹åç§°,è„šæœ¬å¤„ç†é¡¹å‚æ•°,è„šæœ¬å¤„ç†é¡¹é™„åŠ å‚æ•° 
 	 Dim str_Name,str_para,str_paraex	  
-	 Rem »ñÈ¡·Ö²ãÍ¼Í¼ÀªIDS,¶à¸öÓ¢ÎÄ¶ººÅÏà¸ô
+	 Rem è·å–åˆ†å±‚å›¾å›¾å»“IDS,å¤šä¸ªè‹±æ–‡é€—å·ç›¸éš”
 	 SSParameter.GetParameterINT "printMap", "TKID", -1, tk_id 
-	 Rem »ñÈ¡Í¼ÀªÄÚµØÎïIDS
+	 Rem è·å–å›¾å»“å†…åœ°ç‰©IDS
 	 SSParameter.GetParameterSTR "printMap", "TKInerobjIDS", "", tk_innerids 
-	 Rem »ñÈ¡½Å±¾´¦ÀíÏî¸öÊı
+	 Rem è·å–è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 SSParameter.GetParameterINT "printMap", "ScriptChangeCount", -1, ScriptChangeCount
 	
-		 '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+		 '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
 
 	SSProcess.SetObjectAttr tk_id,"[XiangMMC]",xmmc
 
 	
- '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+ '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
  	debug_print String(50,"-")
-	debug_print "Êä³öÍê³É¡£"
+	debug_print "è¾“å‡ºå®Œæˆã€‚"
 	debug_print String(50,"-")
 	ViewExtend()
 
@@ -1448,45 +1448,45 @@ Function VBS_postMap13(MSGID,mapName,selectID)
 		DeleteFeature "9410011","9420037"
 		DeleteFeature "9420039","9420108"
 		DeleteFeature "9450013","9999403"
-		DeleteFeatureLayerName "DT_POLYGON,DT_LINE,DT_POINT,DT_ZJ,LCGZKJ,LCGZKJZJ,GHFSQLJX,LMT_ZJ,»ùµ××¢¼Ç,TKZSX,TKZSM"
+		DeleteFeatureLayerName "DT_POLYGON,DT_LINE,DT_POINT,DT_ZJ,LCGZKJ,LCGZKJZJ,GHFSQLJX,LMT_ZJ,åŸºåº•æ³¨è®°,TKZSX,TKZSM"
 
 		
 	
-	 Rem ³É¹ûÍ¼Ï¸½Ú·Ö¿ª´¦Àí
+	 Rem æˆæœå›¾ç»†èŠ‚åˆ†å¼€å¤„ç†
 	 For i = 0 to ScriptChangeCount -1
-		 Rem »ñÈ¡´¦ÀíÏîÃû³Æ
+		 Rem è·å–å¤„ç†é¡¹åç§°
 		 SSParameter.GetParameterSTR "printMap", i & "Name", "", str_Name 
-		 Rem »ñÈ¡´¦ÀíÏî²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaString", "", str_para 
-		 Rem »ñÈ¡´¦ÀíÏî¸½¼Ó²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹é™„åŠ å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaStringEX", "", str_paraex 
-		 '// ´Ë´¦ÎŞ´úÂë¡¢ËµÃ÷Ã»ÓĞ½Å±¾´¦ÀíÏî..
+		 '// æ­¤å¤„æ— ä»£ç ã€è¯´æ˜æ²¡æœ‰è„šæœ¬å¤„ç†é¡¹..
 	 Next 
 	  
 End Function 
 
 
-Rem special:[Á¢ÃæÍ¼] ³öÍ¼Ç°£¨³õÊ¼»¯µ÷ÓÃ£©ÓÉ´Ë½øÈë
+Rem special:[ç«‹é¢å›¾] å‡ºå›¾å‰ï¼ˆåˆå§‹åŒ–è°ƒç”¨ï¼‰ç”±æ­¤è¿›å…¥
 Function VBS_preMap14(MSGID,mapName,selectID)
 	  
-	 Rem ±¾º¯Êı¹Ø¼ü²ÎÊı£ºSSParameter.SetParameterINT "printMap", "return", 1
-	 Rem return = 1 Í£Ö¹Êä³ö³É¹ûÍ¼
-	 Rem return = 0 ¼ÌĞøÊä³ö³É¹ûÍ¼£¨ÎŞĞèÉèÖÃ¡¢Ä¬ÈÏÖµÎª0£©
-	 If MSGID = 0 Then '// ĞÂ¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
-		 '// ÉèÖÃ³öÍ¼¹¤³ÌÃû³Æ¡¢±ØĞëµ÷ÓÃ.... 
+	 Rem æœ¬å‡½æ•°å…³é”®å‚æ•°ï¼šSSParameter.SetParameterINT "printMap", "return", 1
+	 Rem return = 1 åœæ­¢è¾“å‡ºæˆæœå›¾
+	 Rem return = 0 ç»§ç»­è¾“å‡ºæˆæœå›¾ï¼ˆæ— éœ€è®¾ç½®ã€é»˜è®¤å€¼ä¸º0ï¼‰
+	 If MSGID = 0 Then '// æ–°å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
+		 '// è®¾ç½®å‡ºå›¾å·¥ç¨‹åç§°ã€å¿…é¡»è°ƒç”¨.... 
 	   strProjectName=SSProcess.GetProjectFileName()
 	   FileFolder=replace(strProjectName,".edb","")
 		if IsfolderExists(FileFolder) = false then CreateFolders FileFolder
 
-		LiMianCL "Á¢ÃæÍ¼",FileFolder, intCount
-	   fileName= FileFolder & "\Á¢ÃæÍ¼"&intCount&".edb"
+		LiMianCL "ç«‹é¢å›¾",FileFolder, intCount
+	   fileName= FileFolder & "\ç«‹é¢å›¾"&intCount&".edb"
 	  	
 		SSParameter.SetParameterSTR "printMap","NewedbName",fileName 
 	  
 	  
-	 ElseIf MSGID = 1 Then '// ±¾¹¤³Ì³öÍ¼ 
-		 '// Ìí¼ÓÄúµÄ´úÂë.... 
+	 ElseIf MSGID = 1 Then '// æœ¬å·¥ç¨‹å‡ºå›¾ 
+		 '// æ·»åŠ æ‚¨çš„ä»£ç .... 
 	  
 	 End If 
 	  
@@ -1495,42 +1495,42 @@ End Function
 
 	  
 	  
-Rem special:[Á¢ÃæÍ¼] ³öÍ¼Íê³ÉÓÉ´Ë½øÈë
+Rem special:[ç«‹é¢å›¾] å‡ºå›¾å®Œæˆç”±æ­¤è¿›å…¥
 Function VBS_postMap14(MSGID,mapName,selectID)
 	  
-	 Rem Í¼ÀªID,½Å±¾´¦ÀíÏî¸öÊı
+	 Rem å›¾å»“ID,è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 Dim tk_id,tk_innerids,ScriptChangeCount
-	 Rem ½Å±¾´¦ÀíÏîÃû³Æ,½Å±¾´¦ÀíÏî²ÎÊı,½Å±¾´¦ÀíÏî¸½¼Ó²ÎÊı 
+	 Rem è„šæœ¬å¤„ç†é¡¹åç§°,è„šæœ¬å¤„ç†é¡¹å‚æ•°,è„šæœ¬å¤„ç†é¡¹é™„åŠ å‚æ•° 
 	 Dim str_Name,str_para,str_paraex	  
-	 Rem »ñÈ¡·Ö²ãÍ¼Í¼ÀªIDS,¶à¸öÓ¢ÎÄ¶ººÅÏà¸ô
+	 Rem è·å–åˆ†å±‚å›¾å›¾å»“IDS,å¤šä¸ªè‹±æ–‡é€—å·ç›¸éš”
 	 SSParameter.GetParameterINT "printMap", "TKID", -1, tk_id 
-	 Rem »ñÈ¡Í¼ÀªÄÚµØÎïIDS
+	 Rem è·å–å›¾å»“å†…åœ°ç‰©IDS
 	 SSParameter.GetParameterSTR "printMap", "TKInerobjIDS", "", tk_innerids 
-	 Rem »ñÈ¡½Å±¾´¦ÀíÏî¸öÊı
+	 Rem è·å–è„šæœ¬å¤„ç†é¡¹ä¸ªæ•°
 	 SSParameter.GetParameterINT "printMap", "ScriptChangeCount", -1, ScriptChangeCount
 	
-		 '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+		 '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
 
 	SSProcess.SetObjectAttr tk_id,"[XiangMMC]",xmmc
 
 	
- '// Ìí¼ÓÄúµÄ³É¹ûÍ¼´¦Àí´úÂë 
+ '// æ·»åŠ æ‚¨çš„æˆæœå›¾å¤„ç†ä»£ç  
  	debug_print String(50,"-")
-	debug_print "Êä³öÍê³É¡£"
+	debug_print "è¾“å‡ºå®Œæˆã€‚"
 	debug_print String(50,"-")
 	ViewExtend()
 
 	
 	
-	 Rem ³É¹ûÍ¼Ï¸½Ú·Ö¿ª´¦Àí
+	 Rem æˆæœå›¾ç»†èŠ‚åˆ†å¼€å¤„ç†
 	 For i = 0 to ScriptChangeCount -1
-		 Rem »ñÈ¡´¦ÀíÏîÃû³Æ
+		 Rem è·å–å¤„ç†é¡¹åç§°
 		 SSParameter.GetParameterSTR "printMap", i & "Name", "", str_Name 
-		 Rem »ñÈ¡´¦ÀíÏî²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaString", "", str_para 
-		 Rem »ñÈ¡´¦ÀíÏî¸½¼Ó²ÎÊı
+		 Rem è·å–å¤„ç†é¡¹é™„åŠ å‚æ•°
 		 SSParameter.GetParameterSTR "printMap", i & "ParaStringEX", "", str_paraex 
-		 '// ´Ë´¦ÎŞ´úÂë¡¢ËµÃ÷Ã»ÓĞ½Å±¾´¦ÀíÏî..
+		 '// æ­¤å¤„æ— ä»£ç ã€è¯´æ˜æ²¡æœ‰è„šæœ¬å¤„ç†é¡¹..
 	 Next 
 	  
 End Function 
@@ -1538,11 +1538,11 @@ End Function
 
 function LiMianCL(byval mapname,byval FileFolder,byref intCount)
 	intCount = 1
-	'´´½¨FileSystemObject¶ÔÏó
+	'åˆ›å»ºFileSystemObjectå¯¹è±¡
 	Set objFso= CreateObject("Scripting.FileSystemObject")
-	'Ê¹ÓÃGetFolder()»ñµÃÎÄ¼ş¼Ğ¶ÔÏó
+	'ä½¿ç”¨GetFolder()è·å¾—æ–‡ä»¶å¤¹å¯¹è±¡
 	Set objGetFolder = objFso.GetFolder(FileFolder)
-	'±éÀúFiles¼¯ºÏ²¢ÏÔÊ¾ÎÄ¼ş¼ĞÖĞËùÓĞµÄÎÄ¼şÃû
+	'éå†Filesé›†åˆå¹¶æ˜¾ç¤ºæ–‡ä»¶å¤¹ä¸­æ‰€æœ‰çš„æ–‡ä»¶å
 	For Each strFile in objGetFolder.Files		
 			if objFso.GetExtensionName(strFile)="edb" then
 				if instr(strFile.Name ,mapname)>0 then intCount = intCount + 1
@@ -1556,38 +1556,38 @@ Dim g_MapList,g_MapPrePtrfun,g_MapPostPtrfun
 
 Sub OnClick() 
 	 
-	rem ³õÊ¼»¯ 
-	 g_MapList = Array("×ÜÆ½ÃæÍ¼","ËÄÖÁ³ß´ç¶Ô±ÈÍ¼","ÍÁµØºËÑéÍ¼","½¨Öş»ùµ×Í¼","·Ö²ãÃæ»ı¼ÆËãÍ¼","½¨ÖşÁ¢ÃæÊ¾ÒâÍ¼","µØÉÏÍ£³µÎ»·Ö²¼Í¼","µØÏÂÍ£³µÎ»·Ö²¼Í¼","ÂÌµØÃæ»ıÍ³¼ÆÍ¼","¿¢¹¤Í¼","¿¢¹¤¹æ»®¸´ºËÍ¼","ÓÃµØ¸´ºËÍ¼","»ùµØ×ÜÆ½Ãæ²¼ÖÃºËÊµ²âÁ¿Æ½ÃæÍ¼","×ÜÆ½Ãæ²âÁ¿ÂÔÍ¼","Á¢ÃæÍ¼")
+	rem åˆå§‹åŒ– 
+	 g_MapList = Array("æ€»å¹³é¢å›¾","å››è‡³å°ºå¯¸å¯¹æ¯”å›¾","åœŸåœ°æ ¸éªŒå›¾","å»ºç­‘åŸºåº•å›¾","åˆ†å±‚é¢ç§¯è®¡ç®—å›¾","å»ºç­‘ç«‹é¢ç¤ºæ„å›¾","åœ°ä¸Šåœè½¦ä½åˆ†å¸ƒå›¾","åœ°ä¸‹åœè½¦ä½åˆ†å¸ƒå›¾","ç»¿åœ°é¢ç§¯ç»Ÿè®¡å›¾","ç«£å·¥å›¾","ç«£å·¥è§„åˆ’å¤æ ¸å›¾","ç”¨åœ°å¤æ ¸å›¾","åŸºåœ°æ€»å¹³é¢å¸ƒç½®æ ¸å®æµ‹é‡å¹³é¢å›¾","æ€»å¹³é¢æµ‹é‡ç•¥å›¾","ç«‹é¢å›¾")
 	 g_MapPrePtrfun = Array("VBS_preMap0","VBS_preMap1","VBS_preMap2","VBS_preMap3","VBS_preMap4","VBS_preMap5","VBS_preMap6","VBS_preMap7","VBS_preMap8","VBS_preMap9","VBS_preMap10","VBS_preMap11","VBS_preMap12","VBS_preMap13","VBS_preMap14")
 	 g_MapPostPtrfun = Array("VBS_postMap0","VBS_postMap1","VBS_postMap2","VBS_postMap3","VBS_postMap4","VBS_postMap5","VBS_postMap6","VBS_postMap7","VBS_postMap8","VBS_postMap9","VBS_postMap10","VBS_postMap11","VBS_postMap12","VBS_postMap13","VBS_postMap14")
 	 
-	 rem ÏµÍ³´«À´µÄÏûÏ¢,ÓÃ»§Ñ¡ÔñµÄ·¶Î§ÏßID,³É¹ûÍ¼Ãû³Æ
+	 rem ç³»ç»Ÿä¼ æ¥çš„æ¶ˆæ¯,ç”¨æˆ·é€‰æ‹©çš„èŒƒå›´çº¿ID,æˆæœå›¾åç§°
 	 Dim str_msg,str_selectObjid,str_mapName 
 	 
-	 rem »ñÈ¡ÏµÍ³²ÎÊı--ÓÃ»§Ñ¡Ôñ·¶Î§ÏßID
+	 rem è·å–ç³»ç»Ÿå‚æ•°--ç”¨æˆ·é€‰æ‹©èŒƒå›´çº¿ID
 	 SSParameter.GetParameterINT "printMap", "SelectID", -1, str_selectObjid 
 
-	 rem »ñÈ¡ÏµÍ³²ÎÊı--ÏµÍ³ÏûÏ¢ £¨0£º±¾¹¤³Ì³öÍ¼³õÊ¼»¯ÏûÏ¢ 1£ºĞÂ¹¤³Ì¹Ì¶¨Ä¿Â¼³öÍ¼³õÊ¼»¯ÏûÏ¢  2: ĞÂ¹¤³Ì×Ô¶¨ÒåÄ¿Â¼³öÍ¼³õÊ¼»¯ÏûÏ¢  -1£º³öÍ¼ÒÑÍê³É½»¸¶ÓÚ½Å±¾´¦ÀíÏ¸½Ú£©
+	 rem è·å–ç³»ç»Ÿå‚æ•°--ç³»ç»Ÿæ¶ˆæ¯ ï¼ˆ0ï¼šæœ¬å·¥ç¨‹å‡ºå›¾åˆå§‹åŒ–æ¶ˆæ¯ 1ï¼šæ–°å·¥ç¨‹å›ºå®šç›®å½•å‡ºå›¾åˆå§‹åŒ–æ¶ˆæ¯  2: æ–°å·¥ç¨‹è‡ªå®šä¹‰ç›®å½•å‡ºå›¾åˆå§‹åŒ–æ¶ˆæ¯  -1ï¼šå‡ºå›¾å·²å®Œæˆäº¤ä»˜äºè„šæœ¬å¤„ç†ç»†èŠ‚ï¼‰
 	 SSParameter.GetParameterINT "printMap", "printMSG", -1, str_msg  
 
-	 rem »ñÈ¡ÏµÍ³²ÎÊı--×¨ÌâÃû³Æ
+	 rem è·å–ç³»ç»Ÿå‚æ•°--ä¸“é¢˜åç§°
 	 SSParameter.GetParameterSTR "printMap", "SpecialMapName", "", str_mapName 
 	 DistributeMSG str_msg,str_mapName,str_selectObjid 
 End Sub
 
 Sub ViewExtend()
 
-		'Í¼ĞÎ·¶Î§È«ÊÓ
+		'å›¾å½¢èŒƒå›´å…¨è§†
 
 		SSProcess.ExecuteSDLFunction "$SDL.SSProject.View.Extend", 0
 
-		'Í¼ĞÎÖØĞÂÉú³É
+		'å›¾å½¢é‡æ–°ç”Ÿæˆ
 
 		SSProcess.ExecuteSDLFunction "$SDL.SSProject.Display.RedrawExtend", 0
 
 End Sub
 
-'// ÅĞ¶ÏÎÄ¼şÊÇ·ñ´æÔÚ
+'// åˆ¤æ–­æ–‡ä»¶æ˜¯å¦å­˜åœ¨
 Function FileExists(fileName)
 
 
@@ -1597,7 +1597,7 @@ Function FileExists(fileName)
 
 End Function 
 
-'´´½¨ÎÄ¼ş¼Ğ
+'åˆ›å»ºæ–‡ä»¶å¤¹
 Function CreateFolders(path)
     Set fso = CreateObject("scripting.filesystemobject")
     CreateFolderEx fso,path
@@ -1614,7 +1614,7 @@ Function CreateFolderEx(fso,path)
     fso.CreateFolder(path)
 End Function
 
-'ÅĞ¶ÏÎÄ¼ş¼ĞÊÇ·ñ´æÔÚ
+'åˆ¤æ–­æ–‡ä»¶å¤¹æ˜¯å¦å­˜åœ¨
 Function IsfolderExists(folder)
 	Dim fso
 	Set fso=CreateObject("Scripting.FileSystemObject")        
@@ -1626,7 +1626,7 @@ Function IsfolderExists(folder)
 End Function 
 
 
-rem ´ËÂÇÊıº¯ÊıÎŞĞèĞŞ¸Ä
+rem æ­¤è™‘æ•°å‡½æ•°æ— éœ€ä¿®æ”¹
 Function DistributeMSG(MSGid,str_MapName,selectID)
 	 dim pFun
 	 
@@ -1655,7 +1655,7 @@ Function debug_print(str)
 
 End Function 
 
-'// ¼ì²é³É¹ûÄ¿Â¼ÊÇ·ñ´æÔÚ¡¢Èç¹û²»´æÔÚ·ÅÆú³öÍ¼
+'// æ£€æŸ¥æˆæœç›®å½•æ˜¯å¦å­˜åœ¨ã€å¦‚æœä¸å­˜åœ¨æ”¾å¼ƒå‡ºå›¾
 Function CheckReportPath(path_print)
 
 	Dim fso
@@ -1678,7 +1678,7 @@ Function CheckReportPath(path_print)
 
 End Function 
 
-'// »ñÈ¡±¾¹¤³ÌÏîÄ¿Ãû³Æ
+'// è·å–æœ¬å·¥ç¨‹é¡¹ç›®åç§°
 Function GetXMMC(xmmc)
 
 	SSProcess.ClearSelection 
@@ -1697,11 +1697,11 @@ Function GetXMMC(xmmc)
 
 End Function 
 
-'»ñÈ¡¹æ»®Ğí¿Éguid
+'è·å–è§„åˆ’è®¸å¯guid
 Function GetXKZXX(ghxkzbh,jzwmc,GHXKZGUID,jzdtguid)
 
 	Dim arID(20)
-  sql = "SELECT JG_½¨Éè¹¤³Ì½¨Öşµ¥ÌåĞÅÏ¢ÊôĞÔ±í.GuiHXKZGUID,JZWMCGUID,GuiHXKZBH FROM JG_½¨Éè¹¤³Ì½¨Öşµ¥ÌåĞÅÏ¢ÊôĞÔ±í  WHERE (JG_½¨Éè¹¤³Ì½¨Öşµ¥ÌåĞÅÏ¢ÊôĞÔ±í.GHXKZBH = '"&ghxkzbh&"' AND JG_½¨Éè¹¤³Ì½¨Öşµ¥ÌåĞÅÏ¢ÊôĞÔ±í.JianZWMC = '"&jzwmc&" ');"
+  sql = "SELECT JG_å»ºè®¾å·¥ç¨‹å»ºç­‘å•ä½“ä¿¡æ¯å±æ€§è¡¨.GuiHXKZGUID,JZWMCGUID,GuiHXKZBH FROM JG_å»ºè®¾å·¥ç¨‹å»ºç­‘å•ä½“ä¿¡æ¯å±æ€§è¡¨  WHERE (JG_å»ºè®¾å·¥ç¨‹å»ºç­‘å•ä½“ä¿¡æ¯å±æ€§è¡¨.GHXKZBH = '"&ghxkzbh&"' AND JG_å»ºè®¾å·¥ç¨‹å»ºç­‘å•ä½“ä¿¡æ¯å±æ€§è¡¨.JianZWMC = '"&jzwmc&" ');"
   projectname= SSProcess.GetProjectFileName
   SSProcess.OpenAccessMdb projectname
   SSProcess.OpenAccessRecordset projectname, sql
@@ -1726,7 +1726,7 @@ function DaHui
 		SSProcess.PushUndoMark 
 		SSProcess.ClearSelection 
 		SSProcess.ClearSelectCondition
-		SSProcess.SetSelectCondition "SSObj_LayerName", "==", "DEFAULT,±ê×¢²ã,²âÁ¿¿ØÖÆµã,ÊıÑ§»ù´¡,Ë®Ïµµã,Ë®ÏµÏß,Ë®ÏµÃæ,¾ÓÃñµØµã,¾ÓÃñµØÏß,¾ÓÃñµØÃæ,½»Í¨µã,½»Í¨Ïß,½»Í¨Ãæ,¹ÜÏßµã,¹ÜÏßÏß,¹ÜÏßÃæ,¾³½çµã,¾³½çÏß,¾³½çÃæ,µØÃ²µã,µØÃ²Ïß,µØÃ²Ãæ,Ö²±»ÓëÍÁÖÊµã,Ö²±»ÓëÍÁÖÊÏß,Ö²±»ÓëÍÁÖÊÃæ,¸üĞÂÇøÓò,Ë®ÏµÖĞĞÄÏß,µÀÂ·ÖĞĞÄÏß,Ë®Ïµ×¢¼Ç,¾ÓÃñµØ×¢¼Ç,½»Í¨×¢¼Ç,¹ÜÏß×¢¼Ç,¾³½ç×¢¼Ç,µØÃ²×¢¼Ç,Ö²±»×¢¼Ç,´ı¸üĞÂÇøÓò,¹¤×÷ÇøÓò,Í¼Àı²ã,·¿ÎİÃæ,ÉèÊ©µã,ÉèÊ©Ïß,ÉèÊ©Ãæ,ÆäËü¾³½çÏß,ÆäËü¾³½çÃæ,Ô­Ê¼¹Û²âµã,ÃÅÅÆºÅ,µÈ¸ßÏß,¸ß³Ìµã,ÈıÎ¬ÊÓ½Çµã²ã,¹ÜÏßÉèÊ©µã,¹ÜÏßÉèÊ©Ïß,¹ÜÏßÉèÊ©Ãæ,·ÏÆú¹¤³ÌÏß,·ÏÆú¹¤³Ìµã,·ÏÆú¹¤³ÌÃæ,DMTZ,GXYZ,KZD,JMD,DLDW,ZBTZ,SXSS,GCD,DGX,ZDH,ZJ,µ¥Î»Ãû" 
+		SSProcess.SetSelectCondition "SSObj_LayerName", "==", "DEFAULT,æ ‡æ³¨å±‚,æµ‹é‡æ§åˆ¶ç‚¹,æ•°å­¦åŸºç¡€,æ°´ç³»ç‚¹,æ°´ç³»çº¿,æ°´ç³»é¢,å±…æ°‘åœ°ç‚¹,å±…æ°‘åœ°çº¿,å±…æ°‘åœ°é¢,äº¤é€šç‚¹,äº¤é€šçº¿,äº¤é€šé¢,ç®¡çº¿ç‚¹,ç®¡çº¿çº¿,ç®¡çº¿é¢,å¢ƒç•Œç‚¹,å¢ƒç•Œçº¿,å¢ƒç•Œé¢,åœ°è²Œç‚¹,åœ°è²Œçº¿,åœ°è²Œé¢,æ¤è¢«ä¸åœŸè´¨ç‚¹,æ¤è¢«ä¸åœŸè´¨çº¿,æ¤è¢«ä¸åœŸè´¨é¢,æ›´æ–°åŒºåŸŸ,æ°´ç³»ä¸­å¿ƒçº¿,é“è·¯ä¸­å¿ƒçº¿,æ°´ç³»æ³¨è®°,å±…æ°‘åœ°æ³¨è®°,äº¤é€šæ³¨è®°,ç®¡çº¿æ³¨è®°,å¢ƒç•Œæ³¨è®°,åœ°è²Œæ³¨è®°,æ¤è¢«æ³¨è®°,å¾…æ›´æ–°åŒºåŸŸ,å·¥ä½œåŒºåŸŸ,å›¾ä¾‹å±‚,æˆ¿å±‹é¢,è®¾æ–½ç‚¹,è®¾æ–½çº¿,è®¾æ–½é¢,å…¶å®ƒå¢ƒç•Œçº¿,å…¶å®ƒå¢ƒç•Œé¢,åŸå§‹è§‚æµ‹ç‚¹,é—¨ç‰Œå·,ç­‰é«˜çº¿,é«˜ç¨‹ç‚¹,ä¸‰ç»´è§†è§’ç‚¹å±‚,ç®¡çº¿è®¾æ–½ç‚¹,ç®¡çº¿è®¾æ–½çº¿,ç®¡çº¿è®¾æ–½é¢,åºŸå¼ƒå·¥ç¨‹çº¿,åºŸå¼ƒå·¥ç¨‹ç‚¹,åºŸå¼ƒå·¥ç¨‹é¢,DMTZ,GXYZ,KZD,JMD,DLDW,ZBTZ,SXSS,GCD,DGX,ZDH,ZJ,å•ä½å" 
 		SSProcess.SelectFilter
 		geocount = SSProcess.GetSelGeoCount()
 		for i=0 to geocount-1
@@ -1737,7 +1737,7 @@ function DaHui
 		SSProcess.PushUndoMark 
 		SSProcess.ClearSelection 
 		SSProcess.ClearSelectCondition
-		SSProcess.SetSelectCondition "SSObj_LayerName", "==", "DEFAULT,±ê×¢²ã,²âÁ¿¿ØÖÆµã,ÊıÑ§»ù´¡,Ë®Ïµµã,Ë®ÏµÏß,Ë®ÏµÃæ,¾ÓÃñµØµã,¾ÓÃñµØÏß,¾ÓÃñµØÃæ,½»Í¨µã,½»Í¨Ïß,½»Í¨Ãæ,¹ÜÏßµã,¹ÜÏßÏß,¹ÜÏßÃæ,¾³½çµã,¾³½çÏß,¾³½çÃæ,µØÃ²µã,µØÃ²Ïß,µØÃ²Ãæ,Ö²±»ÓëÍÁÖÊµã,Ö²±»ÓëÍÁÖÊÏß,Ö²±»ÓëÍÁÖÊÃæ,¸üĞÂÇøÓò,Ë®ÏµÖĞĞÄÏß,µÀÂ·ÖĞĞÄÏß,Ë®Ïµ×¢¼Ç,¾ÓÃñµØ×¢¼Ç,½»Í¨×¢¼Ç,¾³½ç×¢¼Ç,µØÃ²×¢¼Ç,Ö²±»×¢¼Ç,´ı¸üĞÂÇøÓò,¹¤×÷ÇøÓò,Í¼Àı²ã,·¿ÎİÃæ,ÉèÊ©µã,ÉèÊ©Ïß,ÉèÊ©Ãæ,ÆäËü¾³½çÏß,ÆäËü¾³½çÃæ,Ô­Ê¼¹Û²âµã,ÃÅÅÆºÅ,µÈ¸ßÏß,¸ß³Ìµã,ÈıÎ¬ÊÓ½Çµã²ã,¹ÜÏßÉèÊ©µã,¹ÜÏßÉèÊ©Ïß,¹ÜÏßÉèÊ©Ãæ,·ÏÆú¹¤³ÌÏß,·ÏÆú¹¤³Ìµã,·ÏÆú¹¤³ÌÃæ,DMTZ,GXYZ,KZD,JMD,DLDW,ZBTZ,SXSS,GCD,DGX,ZDH,ZJ,µ¥Î»Ãû" 
+		SSProcess.SetSelectCondition "SSObj_LayerName", "==", "DEFAULT,æ ‡æ³¨å±‚,æµ‹é‡æ§åˆ¶ç‚¹,æ•°å­¦åŸºç¡€,æ°´ç³»ç‚¹,æ°´ç³»çº¿,æ°´ç³»é¢,å±…æ°‘åœ°ç‚¹,å±…æ°‘åœ°çº¿,å±…æ°‘åœ°é¢,äº¤é€šç‚¹,äº¤é€šçº¿,äº¤é€šé¢,ç®¡çº¿ç‚¹,ç®¡çº¿çº¿,ç®¡çº¿é¢,å¢ƒç•Œç‚¹,å¢ƒç•Œçº¿,å¢ƒç•Œé¢,åœ°è²Œç‚¹,åœ°è²Œçº¿,åœ°è²Œé¢,æ¤è¢«ä¸åœŸè´¨ç‚¹,æ¤è¢«ä¸åœŸè´¨çº¿,æ¤è¢«ä¸åœŸè´¨é¢,æ›´æ–°åŒºåŸŸ,æ°´ç³»ä¸­å¿ƒçº¿,é“è·¯ä¸­å¿ƒçº¿,æ°´ç³»æ³¨è®°,å±…æ°‘åœ°æ³¨è®°,äº¤é€šæ³¨è®°,å¢ƒç•Œæ³¨è®°,åœ°è²Œæ³¨è®°,æ¤è¢«æ³¨è®°,å¾…æ›´æ–°åŒºåŸŸ,å·¥ä½œåŒºåŸŸ,å›¾ä¾‹å±‚,æˆ¿å±‹é¢,è®¾æ–½ç‚¹,è®¾æ–½çº¿,è®¾æ–½é¢,å…¶å®ƒå¢ƒç•Œçº¿,å…¶å®ƒå¢ƒç•Œé¢,åŸå§‹è§‚æµ‹ç‚¹,é—¨ç‰Œå·,ç­‰é«˜çº¿,é«˜ç¨‹ç‚¹,ä¸‰ç»´è§†è§’ç‚¹å±‚,ç®¡çº¿è®¾æ–½ç‚¹,ç®¡çº¿è®¾æ–½çº¿,ç®¡çº¿è®¾æ–½é¢,åºŸå¼ƒå·¥ç¨‹çº¿,åºŸå¼ƒå·¥ç¨‹ç‚¹,åºŸå¼ƒå·¥ç¨‹é¢,DMTZ,GXYZ,KZD,JMD,DLDW,ZBTZ,SXSS,GCD,DGX,ZDH,ZJ,å•ä½å" 
 		SSProcess.SelectFilter
 		notecount= SSProcess.GetSelNoteCount()
 		For i1  =0 To notecount- 1
@@ -1840,9 +1840,9 @@ function FChandle()
 		id = SSProcess.GetSelGeoValue(i, "SSObj_ID")
 		ids = SSProcess.SearchInnerObjIDs(id, 2, "9420008", 0)
 		artemp = split(ids,",")
-		'ÃæĞÄµã×ø±ê
+		'é¢å¿ƒç‚¹åæ ‡
 		SSProcess.GetObjectFocusPoint  id , x0,  y0 
-		'ÃæĞÄµãµ½Í¼ÀªÕı¶«¾àÀë
+		'é¢å¿ƒç‚¹åˆ°å›¾å»“æ­£ä¸œè·ç¦»
 		SSProcess.GetObjectPoint     id, 0, x1, y1, z1, pointtype, name
 		SSProcess.GetObjectPoint     id, 1, x2, y2, z2, pointtype, name
 		SSProcess.GetObjectPoint     id, 2, x3, y3, z3, pointtype, name
@@ -1851,11 +1851,11 @@ function FChandle()
 		for j = 0 to ubound(artemp)
 			LC = SSProcess.GetObjectAttr (artemp(j), "[LC]")
 			LCID = SSProcess.GetObjectAttr (artemp(j), "[ID_LC]")
-			'»ñÈ¡Í¼Àª¡¢Â¥²ã¡¢¹¦ÄÜÇøID
-			mdbName=SSProcess.GetProjectFileName   'µ±Ç°¹¤³Ì¹¤³ÌÃû
+			'è·å–å›¾å»“ã€æ¥¼å±‚ã€åŠŸèƒ½åŒºID
+			mdbName=SSProcess.GetProjectFileName   'å½“å‰å·¥ç¨‹å·¥ç¨‹å
 			SSProcess.OpenAccessMdb mdbName
-			'¹¦ÄÜÇø			
-			strSQL="SELECT JG_¹æ»®¹¦ÄÜÇøÊôĞÔ±í.ID from  JG_¹æ»®¹¦ÄÜÇøÊôĞÔ±í inner join GeoAreaTB on JG_¹æ»®¹¦ÄÜÇøÊôĞÔ±í.ID = GeoAreaTB.ID where ([GeoAreaTB].[Mark] Mod 2)<>0 and JG_¹æ»®¹¦ÄÜÇøÊôĞÔ±í.LC = '"&LC&"'"
+			'åŠŸèƒ½åŒº			
+			strSQL="SELECT JG_è§„åˆ’åŠŸèƒ½åŒºå±æ€§è¡¨.ID from  JG_è§„åˆ’åŠŸèƒ½åŒºå±æ€§è¡¨ inner join GeoAreaTB on JG_è§„åˆ’åŠŸèƒ½åŒºå±æ€§è¡¨.ID = GeoAreaTB.ID where ([GeoAreaTB].[Mark] Mod 2)<>0 and JG_è§„åˆ’åŠŸèƒ½åŒºå±æ€§è¡¨.LC = '"&LC&"'"
 			GetSQLRecordAll mdbName, strSQL, arSeletionRecord, nSeletionCount
 			if nSeletionCount>0 then
 				strtemp1 = ""
@@ -1871,8 +1871,8 @@ function FChandle()
 			ELSE
 				strCopyID1(j)= id&","&artemp(j)
 			end if
-			'¸½Êô¹¦ÄÜÇø
-			strSQL="SELECT JG_¹æ»®¸½Êô¹¦ÄÜÇøÊôĞÔ±í.ID from  JG_¹æ»®¸½Êô¹¦ÄÜÇøÊôĞÔ±í inner join GeoAreaTB on JG_¹æ»®¸½Êô¹¦ÄÜÇøÊôĞÔ±í.ID = GeoAreaTB.ID where ([GeoAreaTB].[Mark] Mod 2)<>0 and JG_¹æ»®¸½Êô¹¦ÄÜÇøÊôĞÔ±í.LC = '"&LC&"'"
+			'é™„å±åŠŸèƒ½åŒº
+			strSQL="SELECT JG_è§„åˆ’é™„å±åŠŸèƒ½åŒºå±æ€§è¡¨.ID from  JG_è§„åˆ’é™„å±åŠŸèƒ½åŒºå±æ€§è¡¨ inner join GeoAreaTB on JG_è§„åˆ’é™„å±åŠŸèƒ½åŒºå±æ€§è¡¨.ID = GeoAreaTB.ID where ([GeoAreaTB].[Mark] Mod 2)<>0 and JG_è§„åˆ’é™„å±åŠŸèƒ½åŒºå±æ€§è¡¨.LC = '"&LC&"'"
 			GetSQLRecordAll mdbName, strSQL, arSeletionRecord, nSeletionCount
 			if nSeletionCount>0 then
 				strtemp1 = ""
@@ -1888,8 +1888,8 @@ function FChandle()
 			ELSE
 				strCopyID2(j)= id&","&artemp(j)
 			end if
-			'¹«ÓÃÇø
-			strSQL="SELECT JG_¹æ»®¹«ÓÃÇøÊôĞÔ±í.ID from  JG_¹æ»®¹«ÓÃÇøÊôĞÔ±í inner join GeoAreaTB on JG_¹æ»®¹«ÓÃÇøÊôĞÔ±í.ID = GeoAreaTB.ID where ([GeoAreaTB].[Mark] Mod 2)<>0 and JG_¹æ»®¹«ÓÃÇøÊôĞÔ±í.LC = '"&LC&"'"
+			'å…¬ç”¨åŒº
+			strSQL="SELECT JG_è§„åˆ’å…¬ç”¨åŒºå±æ€§è¡¨.ID from  JG_è§„åˆ’å…¬ç”¨åŒºå±æ€§è¡¨ inner join GeoAreaTB on JG_è§„åˆ’å…¬ç”¨åŒºå±æ€§è¡¨.ID = GeoAreaTB.ID where ([GeoAreaTB].[Mark] Mod 2)<>0 and JG_è§„åˆ’å…¬ç”¨åŒºå±æ€§è¡¨.LC = '"&LC&"'"
 			GetSQLRecordAll mdbName, strSQL, arSeletionRecord, nSeletionCount
 			if nSeletionCount>0 then
 				strtemp1 = ""
@@ -1905,8 +1905,8 @@ function FChandle()
 			ELSE
 				strCopyID3(j)= id&","&artemp(j)
 			end if
-			'×¢¼Ç
-			strSQL="SELECT JG_µ×Í¼×¢¼ÇÊôĞÔ±í.ID from  JG_µ×Í¼×¢¼ÇÊôĞÔ±í  where  JG_µ×Í¼×¢¼ÇÊôĞÔ±í.ID_LC = '"&LCID&"'"
+			'æ³¨è®°
+			strSQL="SELECT JG_åº•å›¾æ³¨è®°å±æ€§è¡¨.ID from  JG_åº•å›¾æ³¨è®°å±æ€§è¡¨  where  JG_åº•å›¾æ³¨è®°å±æ€§è¡¨.ID_LC = '"&LCID&"'"
 			GetSQLRecordAll mdbName, strSQL, arSeletionRecord, nSeletionCount
 			if nSeletionCount>0 then
 				strtemp1 = ""
@@ -1927,7 +1927,7 @@ function FChandle()
 		next
 	next
 
-	'Õ³ÌûÍ¼Àª
+	'ç²˜å¸–å›¾å»“
 	for j = 0 to ubound(artemp)
 		SSProcess.ClearSelection 
 		SSProcess.ClearSelectCondition
@@ -1937,7 +1937,7 @@ function FChandle()
 		SSProcess.AddClipBoardObjToMap Length*(j+1), 0
 	next
 
-	'É¾³ıÔ­Êı¾İ
+	'åˆ é™¤åŸæ•°æ®
 	SSProcess.ClearSelection 
 	SSProcess.ClearSelectCondition
 	SSProcess.SetSelectCondition "SSObj_ID", "==", 1
@@ -1975,43 +1975,43 @@ function TextEXE
 	geoCount = SSProcess.GetSelGeoCount()
 	dim strCopy(1000,1000),strCopyID(10000)
 	For i = 0 To geoCount -1
-		'×¢¼ÇÉú³É×ø±ê
+		'æ³¨è®°ç”Ÿæˆåæ ‡
 		id = SSProcess.GetSelGeoValue(i, "SSObj_ID")	
 		SSProcess.GetObjectPoint id, 0, x0, y0, z0, pointtype, name
 		SSProcess.GetObjectPoint id, 1, x1, y1, z1, pointtype, name
 		x = (x1-x0)/2 + x0
 		y = y0+10
-		'Éú³É×¢¼Ç
+		'ç”Ÿæˆæ³¨è®°
 		ids = SSProcess.SearchInnerObjIDs(id, 2, "9420008", 0)
 		LC = SSProcess.GetObjectAttr (ids, "[LC]")
 		CQC = SSProcess.GetObjectAttr (ids, "[CQC]")
-		if instr(LC,"¡«")=0 then
-			IF CQC<> "Îİ¶¥²ã"  then
+		if instr(LC,"ï½")=0 then
+			IF CQC<> "å±‹é¡¶å±‚"  then
 				artemplc = split(LC,".")
 				if ubound(artemplc) = 0 then
-					'±ê×¼²ã
+					'æ ‡å‡†å±‚
 					strText = ""
 					GetLCXX LC,strText
-					strText = strText&"Æ½ÃæÍ¼"
+					strText = strText&"å¹³é¢å›¾"
 					CreateText strText,x,y,z
 				elseif ubound(artemplc)>0 then
-					'¼Ğ²ã
+					'å¤¹å±‚
 					LC = mid(LC,1,InStr(LC,".")-1)
 					strText = ""
 					GetLCXX LC,strText
-					strText = strText&"¼Ğ²ãÆ½ÃæÍ¼"
+					strText = strText&"å¤¹å±‚å¹³é¢å›¾"
 					CreateText strText,x,y,z
 				end if
 			else
-					strText = "Îİ¶¥²ãÆ½ÃæÍ¼"
+					strText = "å±‹é¡¶å±‚å¹³é¢å›¾"
 					CreateText strText,x,y,z
 			end if
 		else
-			artemplc=split(LC,"¡«")
+			artemplc=split(LC,"ï½")
 			strText = ""
 			GetLCXX artemplc(0),strText0
 			GetLCXX	artemplc(1),strText1
-			strText = strText0&"¡«"&strText1&"Æ½ÃæÍ¼"
+			strText = strText0&"ï½"&strText1&"å¹³é¢å›¾"
 			CreateText strText,x,y,z
 		end if
 	next
@@ -2020,7 +2020,7 @@ end function
 
 function NumberChange(Number,BigNumber)
 		strNumer = "1,2,3,4,5,6,7,8,9"
-		strBigNumber = "Ò»,¶ş,Èı,ËÄ,Îå,Áù,Æß,°Ë,¾Å"
+		strBigNumber = "ä¸€,äºŒ,ä¸‰,å››,äº”,å…­,ä¸ƒ,å…«,ä¹"
 		artempNumber = split(strNumer,",")
 		artempBigNumber = split(strBigNumber,",")
 		for i = 0 to 8
@@ -2046,7 +2046,7 @@ function GetLCXX(LC,strText)
 			for j = 0 to Len(LC)-1
 				IntLC = mid(LC,j+1,1)
 				NumberChange IntLC,BigNumber
-				strText = strText&BigNumber&"²ã"
+				strText = strText&BigNumber&"å±‚"
 			next
 		elseif Len(LC)>1 and instr(LC,"-")=0 then 
 			for j = 0 to Len(LC)-1
@@ -2055,9 +2055,9 @@ function GetLCXX(LC,strText)
 				if strText = "" then
 					strText = BigNumber
 				elseif IntLC<>0 then
-					strText = strText&"Ê®"&BigNumber&"²ã"
+					strText = strText&"å"&BigNumber&"å±‚"
 				elseif IntLC=0 then
-					strText = strText&"Ê®"&"²ã"
+					strText = strText&"å"&"å±‚"
 				end if
 			next
 			if  mid(LC,1,1) = 1 then
@@ -2067,7 +2067,7 @@ function GetLCXX(LC,strText)
 			for j=1 to Len(LC)-1
 				IntLC = mid(LC,j+1,1)
 				NumberChange IntLC,BigNumber
-				strText = "µØÏÂ"&BigNumber&"²ã"
+				strText = "åœ°ä¸‹"&BigNumber&"å±‚"
 			next
 		end if
 
@@ -2086,13 +2086,13 @@ function TKFZ1
 
 		mdbName = SSProcess.GetProjectFileName 
 		SSProcess.OpenAccessMdb  mdbName
-		sql = "select VALUE from PROJECTINFO where KEY='ÏîÄ¿Ãû³Æ'"
+		sql = "select VALUE from PROJECTINFO where KEY='é¡¹ç›®åç§°'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		XMMC=arSeletionRecord(0)
-		sql = "select VALUE from PROJECTINFO where KEY='²âÁ¿ÈËÔ±'"
+		sql = "select VALUE from PROJECTINFO where KEY='æµ‹é‡äººå‘˜'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		HTRY=arSeletionRecord(0)
-		sql = "select VALUE from PROJECTINFO where KEY='¼ì²éÈËÔ±'"
+		sql = "select VALUE from PROJECTINFO where KEY='æ£€æŸ¥äººå‘˜'"
 		GetSQLRecordAll mdbName,sql,arSeletionRecord,nSeletionCount
 		JCRY=arSeletionRecord(0)
 
@@ -2122,7 +2122,7 @@ function TKFZ2(byref mark)
 		FWZL = SSProcess.GetObjectAttr (ids, "[FWZL]")
 		
 		idsList=split(ids,",")
-		if ubound(idsList)>0 then msgbox "³öÍ¼Î»ÖÃÓĞÖØµş×ÔÈ»´±£¬ÇëÈ·ÈÏÊı¾İÊÇ·ñÕıÈ·£¡":mark=false:exit function
+		if ubound(idsList)>0 then msgbox "å‡ºå›¾ä½ç½®æœ‰é‡å è‡ªç„¶å¹¢ï¼Œè¯·ç¡®è®¤æ•°æ®æ˜¯å¦æ­£ç¡®ï¼":mark=false:exit function
 		strtemp = SSProcess.GetObjectAttr (ids, "SSObj_DataMark")
 		artemp = split(strtemp,",")
 
@@ -2134,7 +2134,7 @@ function TKFZ2(byref mark)
 		SSProcess.SetObjectAttr id, "[HuiTY]", artemp(1)
 		SSProcess.SetObjectAttr id, "[JianCY]", artemp(2)
 		SSProcess.ExecuteSDLFunction "$SDL.SSProject.View.Extend", 0
-		'Í¼ĞÎÖØĞÂÉú³É
+		'å›¾å½¢é‡æ–°ç”Ÿæˆ
 		SSProcess.ExecuteSDLFunction "$SDL.SSProject.Display.RedrawExtend", 0
 	next
 end function
@@ -2150,37 +2150,37 @@ end function
 
 Function GetSQLRecordAll(ByRef mdbName, ByRef StrSqlStatement, ByRef arSQLRecord(), ByRef iRecordCount)
 	if StrSqlStatement ="" then
-		msgbox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
+		msgbox "æŸ¥è¯¢è¯­å¥ä¸ºç©ºï¼Œæ“ä½œåœæ­¢ï¼",48
 	end if
 	iRecordCount = -1
-	'SQLÓï¾ä
+	'SQLè¯­å¥
 	sql =StrSqlStatement
-	'´ò¿ª¼ÇÂ¼¼¯
+	'æ‰“å¼€è®°å½•é›†
 	SSProcess.OpenAccessRecordset mdbName, sql
-	'»ñÈ¡¼ÇÂ¼×ÜÊı
+	'è·å–è®°å½•æ€»æ•°
 	RecordCount =SSProcess.GetAccessRecordCount (mdbName, sql)
 	if RecordCount >0 then
 		iRecordCount =0
 		ReDim arSQLRecord(RecordCount)
-		'½«¼ÇÂ¼ÓÎ±êÒÆµ½µÚÒ»ĞĞ
+		'å°†è®°å½•æ¸¸æ ‡ç§»åˆ°ç¬¬ä¸€è¡Œ
 		SSProcess.AccessMoveFirst mdbName, sql
 		iRecordCount = 0
-		'ä¯ÀÀ¼ÇÂ¼
+		'æµè§ˆè®°å½•
 		While SSProcess.AccessIsEOF (mdbName, sql) = 0
 			fields = ""
 			values = ""
-			'»ñÈ¡µ±Ç°¼ÇÂ¼ÄÚÈİ
+			'è·å–å½“å‰è®°å½•å†…å®¹
 			SSProcess.GetAccessRecord mdbName, sql, fields, values
-			arSQLRecord(iRecordCount) =values										'²éÑ¯¼ÇÂ¼
-			iRecordCount =iRecordCount +1													'²éÑ¯¼ÇÂ¼Êı
-			'ÒÆ¶¯¼ÇÂ¼ÓÎ±ê
+			arSQLRecord(iRecordCount) =values										'æŸ¥è¯¢è®°å½•
+			iRecordCount =iRecordCount +1													'æŸ¥è¯¢è®°å½•æ•°
+			'ç§»åŠ¨è®°å½•æ¸¸æ ‡
 			SSProcess.AccessMoveNext mdbName, sql
 		Wend
 	end if
-	'¹Ø±Õ¼ÇÂ¼¼¯
+	'å…³é—­è®°å½•é›†
 	SSProcess.CloseAccessRecordset mdbName, sql
 End FUnction
-'·Ö²ãÍ¼Í¼Àı
+'åˆ†å±‚å›¾å›¾ä¾‹
 function CreateKEY
 	SSProcess.ClearSelection 
 	SSProcess.ClearSelectCondition
@@ -2221,37 +2221,37 @@ function CreateKEY
 end function
 
 
-'·Ö²ãÍ¼Í¼Àı
+'åˆ†å±‚å›¾å›¾ä¾‹
 function LvDiTuLi(x0,y0,ZGNQMC,polygonID,ZDrawCode,ZDrawColor)
 		wid1 = 228 : heig1 = 286
 		wid2 = 228 : heig2 = 286
 		SSFunc.ScanString ZGNQMC, ",", cvArray1, count5
 		arDrawCode = split(ZDrawCode,",")
 		arDrawColor = split(ZDrawColor,",")
-       'ÊúÏß
+       'ç«–çº¿
          makeLine x0,y0,x0,y0+count5*2+2.5,1, "RGB(255,255,255)", polygonID
 			'makeLine x0+0.2,y0+0.2,x0+0.2,y0+count5*2+2.3,1, "RGB(255,255,255)", polygonID
 
 			makeLine x0+16,y0,x0+16,y0+count5*2+2.5, 1,"RGB(255,255,255)", polygonID
 			makeLine x0+8,y0,x0+8,y0+count5*2+2.5, 1,"RGB(255,255,255)", polygonID
 			'makeLine x0+16.8,y0+0.2,x0+16.8,y0+count5*2+2.3, 1,"RGB(255,255,255)", polygonID
-		 'ºáÏß
+		 'æ¨ªçº¿
 			'makeLine x0+0.2,y0+0.2,x0+16.8,y0+0.2,1, "RGB(255,255,255)", polygonID
 			makeLine x0,y0,x0+16,y0,1, "RGB(255,255,255)", polygonID
 			'makeLine x0+0.2,y0+count5*2+2.3 ,x0+16.8,y0+count5*2+2.3,1, "RGB(255,255,255)", polygonID
 			makeLine x0,y0+count5*2+2.5,x0+16,y0+count5*2+2.5,1, "RGB(255,255,255)", polygonID
-			makeNote x0+2.5,y0+count5*2+1.5 , 0, "RGB(255,255,255)", wid2, heig2, "Í¼Àı",polygonID
-			makeNote x0+10,y0+count5*2+1.5 , 0, "RGB(255,255,255)", wid2, heig2, "±¸×¢",polygonID
+			makeNote x0+2.5,y0+count5*2+1.5 , 0, "RGB(255,255,255)", wid2, heig2, "å›¾ä¾‹",polygonID
+			makeNote x0+10,y0+count5*2+1.5 , 0, "RGB(255,255,255)", wid2, heig2, "å¤‡æ³¨",polygonID
 
 			 for j= 0 to count5-1
-			 'ÊúÏß
+			 'ç«–çº¿
                makeArea x0+1,y0+j*2+0.7,x0+7,y0+j*2+0.7,x0+7,y0+j*2+2.3,x0+1,y0+j*2+2.3,arDrawCode(j), arDrawColor(j), polygonID
 			      makeLine x0,y0+j*2+2.5,x0+16,y0+j*2+2.5, 1,"RGB(255,255,255)", polygonID
 					makeNote x0+10,y0+1.5+ j*2, 0, "RGB(255,255,255)", wid2, heig2, cvArray1(j),polygonID
 			  next
 end function 
 
-'¿¢¹¤¹æ»®×ÜÆ½Í¼,¹æ»®¸´ºËÍ¼
+'ç«£å·¥è§„åˆ’æ€»å¹³å›¾,è§„åˆ’å¤æ ¸å›¾
 function CreateKEYZPT
 	SSProcess.ClearSelection 
 	SSProcess.ClearSelectCondition
@@ -2289,7 +2289,7 @@ function CreateKEYZPT
 	end if
 	SSProcess.SetMapScale "500"
 end function
-'¿¢¹¤¹æ»®×ÜÆ½Í¼
+'ç«£å·¥è§„åˆ’æ€»å¹³å›¾
 function LvDiTuLiZPT(x0,y0,polygonID,ZDrawCode,ZDrawColor,ZDrawName,DaYBL)
 		wid1 = (228 *500)/DaYBL: heig1 = (286*500)/DaYBL
 		wid2 = (228*500)/DaYBL : heig2 = (286*500)/DaYBL
@@ -2297,29 +2297,29 @@ function LvDiTuLiZPT(x0,y0,polygonID,ZDrawCode,ZDrawColor,ZDrawName,DaYBL)
 		arDrawColor = split(ZDrawColor,",")
 		arDrawName = split(ZDrawName,",")
 		count5 = ubound(arDrawCode)+2
-       'ÊúÏß
+       'ç«–çº¿
          makeLine x0,y0,x0,y0+count5*2+2.5,1, "RGB(255,255,255)", polygonID
 			'makeLine x0+0.2,y0+0.2,x0+0.2,y0+count5*2+2.3,1, "RGB(255,255,255)", polygonID
 
 			makeLine x0+16,y0,x0+16,y0+count5*2+2.5, 1,"RGB(255,255,255)", polygonID
 			'makeLine x0+8,y0,x0+8,y0+count5*2+2.5, 1,"RGB(255,255,255)", polygonID
 			'makeLine x0+16.8,y0+0.2,x0+16.8,y0+count5*2+2.3, 1,"RGB(255,255,255)", polygonID
-		 'ºáÏß
+		 'æ¨ªçº¿
 			'makeLine x0+0.2,y0+0.2,x0+16.8,y0+0.2,1, "RGB(255,255,255)", polygonID
 			makeLine x0,y0,x0+16,y0,1, "RGB(255,255,255)", polygonID
 			'makeLine x0+0.2,y0+count5*2+2.3 ,x0+16.8,y0+count5*2+2.3,1, "RGB(255,255,255)", polygonID
 			makeLine x0,y0+count5*2+2.5,x0+16,y0+count5*2+2.5,1, "RGB(255,255,255)", polygonID
-			makeNote x0+7,y0+count5*2+1 , 0, "RGB(255,255,255)", wid2, heig2, "Í¼Àı",polygonID
+			makeNote x0+7,y0+count5*2+1 , 0, "RGB(255,255,255)", wid2, heig2, "å›¾ä¾‹",polygonID
 
 			for j= 0 to ubound(arDrawCode)
-			 'ÊúÏß
+			 'ç«–çº¿
                makeLine x0+1,y0+j*2+1.5,x0+7,y0+j*2+1.5,arDrawCode(j), arDrawColor(j), polygonID
 			      'makeLine x0,y0+j*2+2.5,x0+16,y0+j*2+2.5, 1,"RGB(255,255,255)", polygonID
 					makeNote x0+10,y0+1.5+ j*2, 0, "RGB(255,255,255)", wid2, heig2, arDrawName(j),polygonID
 			next
 end function 
 
-'»ùµ×Í¼
+'åŸºåº•å›¾
 function CreateKEYJD
 	SSProcess.ClearSelection 
 	SSProcess.ClearSelectCondition
@@ -2356,7 +2356,7 @@ function CreateKEYJD
 		next
 	end if
 end function
-'»ùµ×Í¼
+'åŸºåº•å›¾
 function LvDiTuLiJD(x0,y0,polygonID,ZDrawCode,ZDrawColor,ZDrawName,DaYBL)
 		wid1 = 228*500/DaYBL : heig1 = 286*500/DaYBL 
 		wid2 = 228*500/DaYBL  : heig2 = 286*500/DaYBL 
@@ -2364,22 +2364,22 @@ function LvDiTuLiJD(x0,y0,polygonID,ZDrawCode,ZDrawColor,ZDrawName,DaYBL)
 		arDrawColor = split(ZDrawColor,",")
 		arDrawName = split(ZDrawName,",")
 		count5 = ubound(arDrawCode)+2
-       'ÊúÏß
+       'ç«–çº¿
          makeLine x0,y0,x0,y0+count5*2+2.5,1, "RGB(255,255,255)", polygonID
 			'makeLine x0+0.2,y0+0.2,x0+0.2,y0+count5*2+2.3,1, "RGB(255,255,255)", polygonID
 
 			makeLine x0+20,y0,x0+20,y0+count5*2+2.5, 1,"RGB(255,255,255)", polygonID
 			'makeLine x0+8,y0,x0+8,y0+count5*2+2.5, 1,"RGB(255,255,255)", polygonID
 			'makeLine x0+16.8,y0+0.2,x0+16.8,y0+count5*2+2.3, 1,"RGB(255,255,255)", polygonID
-		 'ºáÏß
+		 'æ¨ªçº¿
 			'makeLine x0+0.2,y0+0.2,x0+16.8,y0+0.2,1, "RGB(255,255,255)", polygonID
 			makeLine x0,y0,x0+16,y0,1, "RGB(255,255,255)", polygonID
 			'makeLine x0+0.2,y0+count5*2+2.3 ,x0+16.8,y0+count5*2+2.3,1, "RGB(255,255,255)", polygonID
 			makeLine x0,y0+count5*2+2.5,x0+20,y0+count5*2+2.5,1, "RGB(255,255,255)", polygonID
-			makeNote x0+8,y0+count5*2+1 , 0, "RGB(255,255,255)", wid2, heig2, "Í¼Àı",polygonID
+			makeNote x0+8,y0+count5*2+1 , 0, "RGB(255,255,255)", wid2, heig2, "å›¾ä¾‹",polygonID
 
 			for j= 0 to ubound(arDrawCode)
-			 'ÊúÏß
+			 'ç«–çº¿
 				makeNote x0+1,y0+1.5+ j*2, 0, "RGB(255,255,255)", wid2, heig2, arDrawName(j)&":",polygonID
 				makeArea x0+10,y0+j*2+0.7,x0+17,y0+j*2+0.7,x0+17,y0+j*2+2.3,x0+10,y0+j*2+2.3,arDrawCode(j), arDrawColor(j), polygonID
 			next
@@ -2390,7 +2390,7 @@ function makePoint(x,y,code,color,polygonID)
 		SSProcess.SetNewObjValue "SSObj_Code", code
 		SSProcess.SetNewObjValue "SSObj_Color", color
 		SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-		SSProcess.SetNewObjValue "SSObj_LayerName", "¿¢¹¤²âÁ¿³É¹ûÍ¼Í¼ÀªĞÅÏ¢"
+		SSProcess.SetNewObjValue "SSObj_LayerName", "ç«£å·¥æµ‹é‡æˆæœå›¾å›¾å»“ä¿¡æ¯"
 		SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
 		SSProcess.AddNewObjPoint x, y, 0, 0, ""
 		SSProcess.AddNewObjToSaveObjList
@@ -2402,7 +2402,7 @@ function makeLine(x1,y1,x2,y2,code, color, polygonID)
 		SSProcess.SetNewObjValue "SSObj_Code", code
 		SSProcess.SetNewObjValue "SSObj_Color", color
 		SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-		SSProcess.SetNewObjValue "SSObj_LayerName", "¿¢¹¤²âÁ¿³É¹ûÍ¼Í¼ÀªĞÅÏ¢"
+		SSProcess.SetNewObjValue "SSObj_LayerName", "ç«£å·¥æµ‹é‡æˆæœå›¾å›¾å»“ä¿¡æ¯"
 		SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
 		SSProcess.AddNewObjPoint x1, y1, 0, 0, ""
 		SSProcess.AddNewObjPoint x2, y2, 0, 0, ""
@@ -2415,7 +2415,7 @@ function makeArea(x1,y1,x2,y2,x3,y3,x4,y4,code,color,polygonID)
 		SSProcess.SetNewObjValue "SSObj_Code", code
 		SSProcess.SetNewObjValue "SSObj_Color", color
 		SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-		SSProcess.SetNewObjValue "SSObj_LayerName", "¿¢¹¤²âÁ¿³É¹ûÍ¼Í¼ÀªĞÅÏ¢"
+		SSProcess.SetNewObjValue "SSObj_LayerName", "ç«£å·¥æµ‹é‡æˆæœå›¾å›¾å»“ä¿¡æ¯"
 		SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
 		SSProcess.AddNewObjPoint x1, y1, 0, 0, ""
 		SSProcess.AddNewObjPoint x2, y2, 0, 0, ""
@@ -2432,7 +2432,7 @@ function makeNote(x, y, code, color, width, height, fontString,polygonID)
 		SSProcess.SetNewObjValue "SSObj_FontString", fontString
 		SSProcess.SetNewObjValue "SSObj_Color", color
 		SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-		SSProcess.SetNewObjValue "SSObj_LayerName", "¿¢¹¤²âÁ¿³É¹ûÍ¼Í¼ÀªĞÅÏ¢"
+		SSProcess.SetNewObjValue "SSObj_LayerName", "ç«£å·¥æµ‹é‡æˆæœå›¾å›¾å»“ä¿¡æ¯"
 		SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
 		SSProcess.SetNewObjValue "SSObj_FontAlignment", "3"
 		SSProcess.SetNewObjValue "SSObj_FontWidth", width
@@ -2450,25 +2450,25 @@ Function InitDB()
 		adoConnection.Open strcon
 End Function
 
-'//¹Ø¿â
+'//å…³åº“
 Function ReleaseDB()
 		adoConnection.Close
 		Set adoConnection = Nothing
 End Function
-'//ÅĞ¶Ï±íÊÇ·ñ´æÔÚ
+'//åˆ¤æ–­è¡¨æ˜¯å¦å­˜åœ¨
 Function IsTableExits(byval  strMdbName,byval  strTableName_s)
 		strMdbName=SSProcess.GetProjectFileName
 		IsTableExits=false 
 		strTableName_s=ucase(strTableName_s)
-		'ÅĞ¶ÏÎÄ¼şDBÎÄ¼şÊÇ·ñ´æÔÚ
+		'åˆ¤æ–­æ–‡ä»¶DBæ–‡ä»¶æ˜¯å¦å­˜åœ¨
 		Set fso=CreateObject("Scripting.FileSystemObject")   
 		if fso.fileExists(strMdbName)=false then exit function 
-		'»ñÈ¡DBÎÄ¼şºó×ºÃû
+		'è·å–DBæ–‡ä»¶åç¼€å
 		set f=fso.getfile(strMdbName)
 		dbType= fso.GetExtensionName(f)
 		set f = nothing 
 		set fso = nothing 
-		'·ÖDBÀàĞÍ²éÕÒ
+		'åˆ†DBç±»å‹æŸ¥æ‰¾
 		if dbType="dbf" then 
 			strMdbName=Replace(strMdbName,"/","\")
 			ipos=InStrRev(strMdbName,"\")
@@ -2477,11 +2477,11 @@ Function IsTableExits(byval  strMdbName,byval  strTableName_s)
 		else
 			strcon="DBQ="& strMdbName &";DRIVER={Microsoft Access Driver (*.mdb)};"
 		end if 
-		'¿ª¿â
+		'å¼€åº“
 		'''set adoConnection=createobject("adodb.connection")
 		'''adoConnection.Open strcon
 		Set rsSchema = adoConnection.OpenSchema(20)
-		'»ñÈ¡µ±Ç°DBÎÄ¼şËùÓĞ±í
+		'è·å–å½“å‰DBæ–‡ä»¶æ‰€æœ‰è¡¨
 		strAllTableName=""
 		Do While Not rsSchema.EOF
 				strTableName =""&UCASE (rsSchema.Fields("TABLE_NAME"))&""
@@ -2492,7 +2492,7 @@ Function IsTableExits(byval  strMdbName,byval  strTableName_s)
 		Loop
 		rsSchema.Close
 		Set rsSchema = Nothing
-		if IsTableExits=false then addloginfo "¡¾"&strTableName_s&"¡¿±íÔÚedbÖĞ²»´æÔÚ"
+		if IsTableExits=false then addloginfo "ã€"&strTableName_s&"ã€‘è¡¨åœ¨edbä¸­ä¸å­˜åœ¨"
 		''adoConnection.Close
 		''Set adoConnection = Nothing
 End Function	
@@ -2502,7 +2502,7 @@ Function GetProjectTableList(byval strTableName,byval strFields,byval strAddCond
 		if IsTableExits("",strTableName)=false then Exit Function
 		'strFields=GetTableAllFields ("", strTableName, strFields)
 		if  strFields="" then Exit function
-		'ÉèÖÃµØÎïÀàĞÍ
+		'è®¾ç½®åœ°ç‰©ç±»å‹
 		if strGeoType="0" then 
 			GeoType="GeoPointTB"
 		elseif strGeoType="1" then
@@ -2529,9 +2529,9 @@ Function GetProjectTableList(byval strTableName,byval strFields,byval strAddCond
 
 		''addloginfo sql
 		'if instr(sql,"scpcjzmj")>0 then  addloginfo sql
-		'»ñÈ¡µ±Ç°¹¤³Ìedb±í¼ÇÂ¼
+		'è·å–å½“å‰å·¥ç¨‹edbè¡¨è®°å½•
 		AccessName=SSProcess.GetProjectFileName
-		'ÅĞ¶Ï±íÊÇ·ñ´æÔÚ
+		'åˆ¤æ–­è¡¨æ˜¯å¦å­˜åœ¨
 		'if  IsTableExits(AccessName,strTableName)=false then exit function 
 		'set adoConnection=createobject("adodb.connection")
 		'strcon="DBQ="& AccessName &";DRIVER={Microsoft Access Driver (*.mdb)};"  
@@ -2550,7 +2550,7 @@ Function GetProjectTableList(byval strTableName,byval strFields,byval strAddCond
 				For i=0 To fieldCount-1
 						value=adoRs(i)
 						if isnull(value) then value=""
-						value=replace(value,",","£¬")
+						value=replace(value,",","ï¼Œ")
 						rs(rsCount,i)=value
 				Next
 				rsCount=rsCount+1
@@ -2582,7 +2582,7 @@ Function GetSubArea(cellList,cellCount,byval scArea,byval ghArea,byval numberDig
 		scArea=GetFormatNumber(scArea,numberDigit)
 		ghArea=GetFormatNumber(ghArea,numberDigit)
 		subNum=cdbl(scArea)-cdbl(ghArea)
-		subNum=GetFormatNumber(subNum,numberDigit)'²îÖµ-½¨Öş»ùµ×Ãæ»ı
+		subNum=GetFormatNumber(subNum,numberDigit)'å·®å€¼-å»ºç­‘åŸºåº•é¢ç§¯
 		if scArea = "0.00" or scArea = "0" then scArea = ""
 		if ghArea = "0.00" or ghArea = "0" then ghArea = ""
 		if subNum = "0.00" or subNum = "0" then subNum = ""
@@ -2592,114 +2592,114 @@ Function GetSubArea(cellList,cellCount,byval scArea,byval ghArea,byval numberDig
 End Function
 Function OutputTable11( )
 		cellCount=0:redim cellList(cellCount)
-		'**************************************************************×ÜÓÃµØÃæ»ı
-		ydhxTableName="JG_ÓÃµØºìÏßĞÅÏ¢ÊôĞÔ±í"
+		'**************************************************************æ€»ç”¨åœ°é¢ç§¯
+		ydhxTableName="JG_ç”¨åœ°çº¢çº¿ä¿¡æ¯å±æ€§è¡¨"
 		fields="GuiHSPZYDMJ"
 		listCount=GetProjectTableList (ydhxTableName,"GuiHSPZYDMJ","","SpatialData","1",list,fieldCount)
 		if listCount=1 then gh_YongDMJ=list(0,0)
-		gh_YongDMJ=GetFormatNumber(gh_YongDMJ,2)'¹æ»®-×ÜÓÃµØÃæ»ı
+		gh_YongDMJ=GetFormatNumber(gh_YongDMJ,2)'è§„åˆ’-æ€»ç”¨åœ°é¢ç§¯
 		sc_YongDMJ = YDHXYDMJ(YongDMJ)
 		if sc_YongDMJ<>"" then sc_YongDMJ = GetFormatNumber(sc_YongDMJ,2)
 		GetSubArea cellList,cellCount, sc_YongDMJ, gh_YongDMJ,2,1
 		
-		'**************************************************************×Ü½¨ÖşÃæ»ı
-		zrzCount=GetProjectTableList ("FC_×ÔÈ»´±ĞÅÏ¢ÊôĞÔ±í","sum(SCJZMJ)","","SpatialData","2",zrzList,fieldCount)
+		'**************************************************************æ€»å»ºç­‘é¢ç§¯
+		zrzCount=GetProjectTableList ("FC_è‡ªç„¶å¹¢ä¿¡æ¯å±æ€§è¡¨","sum(SCJZMJ)","","SpatialData","2",zrzList,fieldCount)
 		if zrzCount=1 then sc_SCJZMJ=zrzList(0,0)
-		sc_SCJZMJ=GetFormatNumber(sc_SCJZMJ,2)'Êµ²â-×Ü½¨ÖşÃæ»ı
+		sc_SCJZMJ=GetFormatNumber(sc_SCJZMJ,2)'å®æµ‹-æ€»å»ºç­‘é¢ç§¯
 		
-		ghxkTableName="JG_½¨Éè¹¤³Ì¹æ»®Ğí¿ÉÖ¤ĞÅÏ¢ÊôĞÔ±í"
+		ghxkTableName="JG_å»ºè®¾å·¥ç¨‹è§„åˆ’è®¸å¯è¯ä¿¡æ¯å±æ€§è¡¨"
 		'exCondition="YDHXGUID In (select YDHXGUID from "&ydhxTableName&"  INNER JOIN GeoLineTB ON "&ydhxTableName&".ID = GeoLineTB.ID WHERE (GeoLineTB.Mark Mod 2)<>0)"
 
 		exCondition="ID>0"
 		ghxkCount=GetProjectTableList (ghxkTableName,"sum(GuiHSPZJZMJ)",exCondition,"","",ghxkList,fieldCount)
 		if ghxkCount=1 then gh_SCJZMJ=ghxkList(0,0)
-		gh_SCJZMJ=GetFormatNumber(gh_SCJZMJ,2)'¹æ»®-×Ü½¨ÖşÃæ»ı
+		gh_SCJZMJ=GetFormatNumber(gh_SCJZMJ,2)'è§„åˆ’-æ€»å»ºç­‘é¢ç§¯
 		GetSubArea cellList,cellCount, sc_SCJZMJ, gh_SCJZMJ,2,1
 		
 		iniRow=1:iniCol=1
 		startRow=iniRow:startCol=iniCol
-		ghgnqTableName="JG_¹æ»®¹¦ÄÜÇøÊôĞÔ±í"
-		'**************************************************************µØÉÏ½¨ÖşÃæ»ı
+		ghgnqTableName="JG_è§„åˆ’åŠŸèƒ½åŒºå±æ€§è¡¨"
+		'**************************************************************åœ°ä¸Šå»ºç­‘é¢ç§¯
 		GetGnqAreaList cellList,cellCount, ghxkTableName, ghgnqTableName, "int(sjcs)>0","GuiHSPDSJZMJ",exCondition,copyCount,sumDsGNQMJ
-		'¸´ÖÆµØÉÏ¹¦ÄÜÇø
+		'å¤åˆ¶åœ°ä¸ŠåŠŸèƒ½åŒº
 		startRow=iniRow+2
 		startCol=iniCol+1
 	
-		'**************************************************************µØÏÂ½¨ÖşÃæ»ı
+		'**************************************************************åœ°ä¸‹å»ºç­‘é¢ç§¯
 		startRow=startRow+copyCount+1
 		GetGnqAreaList cellList,cellCount, ghxkTableName, ghgnqTableName, "int(sjcs)<0","GuiHSPDXJZMJ",exCondition,copyCount1,sumDxGNQMJ
-		'¸´ÖÆµØÏÂ¹¦ÄÜÇø
+		'å¤åˆ¶åœ°ä¸‹åŠŸèƒ½åŒº
 
 		
 		
-		'**************************************************************½¨Öş»ùµ×Ãæ»ı
-		jdCount=GetProjectTableList ("JG_½¨ÖşÎï»ùµ×ÃæÊôĞÔ±í","sum(JDMJ)","","SpatialData","2",jdList,fieldCount)
+		'**************************************************************å»ºç­‘åŸºåº•é¢ç§¯
+		jdCount=GetProjectTableList ("JG_å»ºç­‘ç‰©åŸºåº•é¢å±æ€§è¡¨","sum(JDMJ)","","SpatialData","2",jdList,fieldCount)
 		if jdCount=1 then sc_JDMJ=jdList(0,0)
-		sc_JDMJ=GetFormatNumber(sc_JDMJ,2)'Êµ²â-½¨Öş»ùµ×Ãæ»ı
+		sc_JDMJ=GetFormatNumber(sc_JDMJ,2)'å®æµ‹-å»ºç­‘åŸºåº•é¢ç§¯
 		ghxkCount=GetProjectTableList (ghxkTableName,"sum(GuiHSPJDMJ),sum(GuiHSPRJL),sum(GuiHSPJZMD),sum(GuiHSPLHL),sum(ZpsJZMJ),sum(ScZZHS),sum(GhZZHS)",exCondition,"","",ghxkList,fieldCount)
 		if ghxkCount=1 then 
 			gh_JDMJ=ghxkList(0,0):gh_GuiHSPRJL=ghxkList(0,1):gh_GuiHSPJZMD=ghxkList(0,2)
 			gh_GuiHSPLHL=ghxkList(0,3):gh_ZpsJZMJ=ghxkList(0,4)
 			ScZZHS=ghxkList(0,5):GhZZHS=ghxkList(0,6)
 		end if 
-		gh_JDMJ=GetFormatNumber(gh_JDMJ,2)'¹æ»®-½¨Öş»ùµ×Ãæ»ı
+		gh_JDMJ=GetFormatNumber(gh_JDMJ,2)'è§„åˆ’-å»ºç­‘åŸºåº•é¢ç§¯
 		GetSubArea cellList,cellCount, sc_JDMJ, gh_JDMJ,2,1
 
-		ldCount=GetProjectTableList ("GH_ÂÌ»¯ÒªËØÊôĞÔ±í","sum(LHMJ)","ID>0","","",sclhmjList,fieldCount)
+		ldCount=GetProjectTableList ("GH_ç»¿åŒ–è¦ç´ å±æ€§è¡¨","sum(LHMJ)","ID>0","","",sclhmjList,fieldCount)
 		if ldCount = 1 then sc_lhmj=sclhmjList(0,0)
 		gh_lhmj = ""
-		GetSubArea cellList,cellCount, sc_lhmj, gh_lhmj,2,1'ÂÌµØÃæ»ı
+		GetSubArea cellList,cellCount, sc_lhmj, gh_lhmj,2,1'ç»¿åœ°é¢ç§¯
 		
 		if  sc_YongDMJ=0 then sc_Rjl=0 else    sc_Rjl=sumDsGNQMJ/sc_YongDMJ
-		GetSubArea cellList,cellCount, sc_Rjl, gh_GuiHSPRJL,2,1'Èİ»ıÂÊ
+		GetSubArea cellList,cellCount, sc_Rjl, gh_GuiHSPRJL,2,1'å®¹ç§¯ç‡
 		
 		if  sc_YongDMJ=0 then sc_Jzmd=0 else    sc_Jzmd=(sc_JDMJ/sc_YongDMJ)*100
-		GetSubArea cellList,cellCount, sc_Jzmd, gh_GuiHSPJZMD,2,1'½¨ÖşÃÜ¶È
+		GetSubArea cellList,cellCount, sc_Jzmd, gh_GuiHSPJZMD,2,1'å»ºç­‘å¯†åº¦
 		
-		ldCount=GetProjectTableList ("GH_ÂÌ»¯ÒªËØÊôĞÔ±í","sum(LHMJ/ZSBL)","ID>0","","",sclhYdmjList,fieldCount)
+		ldCount=GetProjectTableList ("GH_ç»¿åŒ–è¦ç´ å±æ€§è¡¨","sum(LHMJ/ZSBL)","ID>0","","",sclhYdmjList,fieldCount)
 		if ldCount = 1 then sc_lhYdmj=sclhYdmjList(0,0)
 		if  sc_YongDMJ=0 then sc_lhl=0 else    sc_lhl=(sc_lhYdmj/sc_YongDMJ)*100
-		GetSubArea cellList,cellCount, sc_lhl, gh_GuiHSPLHL,2,1'ÂÌµØÂÊ
+		GetSubArea cellList,cellCount, sc_lhl, gh_GuiHSPLHL,2,1'ç»¿åœ°ç‡
 		
 		sc_ZpsJZMJ=""
 		if gh_ZpsJZMJ = 0 then gh_ZpsJZMJ=""
-		GetSubArea cellList,cellCount, sc_ZpsJZMJ, gh_ZpsJZMJ,2,1'×°ÅäÊ½½¨ÖşÃæ»ı
+		GetSubArea cellList,cellCount, sc_ZpsJZMJ, gh_ZpsJZMJ,2,1'è£…é…å¼å»ºç­‘é¢ç§¯
 		
 		cwTableName="CWSCXX"
-		cwCount=GetProjectTableList (cwTableName,"sum(DSCWSL)+sum(DXCWSL),sum(DSCWSL),sum(DXCWSL)","CWLX='ÆÕÍ¨»ú¶¯³µÎ»'","","",cwList,fieldCount)
+		cwCount=GetProjectTableList (cwTableName,"sum(DSCWSL)+sum(DXCWSL),sum(DSCWSL),sum(DXCWSL)","CWLX='æ™®é€šæœºåŠ¨è½¦ä½'","","",cwList,fieldCount)
 		if  cwCount=1 then    sc_Jdcw=cwList(0,0):sc_ds_Jdcw=cwList(0,1):sc_dx_Jdcw=cwList(0,2)
 		
 		ghcwTableName="CWGHXX"
-		cwCount=GetProjectTableList (ghcwTableName,"sum(DSCWSL)+sum(DXCWSL),sum(DSCWSL),sum(DXCWSL)","CWLX='ÆÕÍ¨»ú¶¯³µÎ»'","","",ghcwList,fieldCount)
+		cwCount=GetProjectTableList (ghcwTableName,"sum(DSCWSL)+sum(DXCWSL),sum(DSCWSL),sum(DXCWSL)","CWLX='æ™®é€šæœºåŠ¨è½¦ä½'","","",ghcwList,fieldCount)
 		if  cwCount=1 then    gh_Jdcw=ghcwList(0,0):gh_ds_Jdcw=ghcwList(0,1):gh_dx_Jdcw=ghcwList(0,2)
 		
-		GetSubArea cellList,cellCount, sc_Jdcw, gh_Jdcw,0,1'»ú¶¯³µÎ»
-		GetSubArea cellList,cellCount, sc_ds_Jdcw, gh_ds_Jdcw,0,2'µØÉÏ»ú¶¯³µÎ»
-		GetSubArea cellList,cellCount, sc_dx_Jdcw, gh_dx_Jdcw,0,2'µØÏÂ»ú¶¯³µÎ»
-		GetSubArea cellList,cellCount, ScZZHS, GhZZHS,0,1'×¡Õ¬»§Êı
+		GetSubArea cellList,cellCount, sc_Jdcw, gh_Jdcw,0,1'æœºåŠ¨è½¦ä½
+		GetSubArea cellList,cellCount, sc_ds_Jdcw, gh_ds_Jdcw,0,2'åœ°ä¸ŠæœºåŠ¨è½¦ä½
+		GetSubArea cellList,cellCount, sc_dx_Jdcw, gh_dx_Jdcw,0,2'åœ°ä¸‹æœºåŠ¨è½¦ä½
+		GetSubArea cellList,cellCount, ScZZHS, GhZZHS,0,1'ä½å®…æˆ·æ•°
 		
-		cwCount=GetProjectTableList (cwTableName,"sum(DSCWSL)+sum(DXCWSL)","CWLX='·Ç»ú¶¯³µÎ»'","","",cwList,fieldCount)
+		cwCount=GetProjectTableList (cwTableName,"sum(DSCWSL)+sum(DXCWSL)","CWLX='éæœºåŠ¨è½¦ä½'","","",cwList,fieldCount)
 		if  cwCount=1 then    sc_Fjdcw=cwList(0,0)
-		ghcwCount=GetProjectTableList (ghcwTableName,"sum(DSCWSL)+sum(DXCWSL)","CWLX='·Ç»ú¶¯³µÎ»'","","",ghcwList,fieldCount)
+		ghcwCount=GetProjectTableList (ghcwTableName,"sum(DSCWSL)+sum(DXCWSL)","CWLX='éæœºåŠ¨è½¦ä½'","","",ghcwList,fieldCount)
 		if  ghcwCount=1 then    gh_Fjdcw=ghcwList(0,0)
-		GetSubArea cellList,cellCount, sc_Fjdcw, gh_Fjdcw,0,1'·Ç»ú¶¯³µÎ»
+		GetSubArea cellList,cellCount, sc_Fjdcw, gh_Fjdcw,0,1'éæœºåŠ¨è½¦ä½
 		
 	
 End Function
 
-'//»ñÈ¡¹¦ÄÜÇø·ÖÀàÃæ»ı
+'//è·å–åŠŸèƒ½åŒºåˆ†ç±»é¢ç§¯
 Function GetGnqAreaList(cellList,cellCount,byval ghxkTableName,byval ghgnqTableName,byval strConditon,byval field,exCondition,copyCount,sc_GNQMJ)
 		copyCount=0
-		'**************************************************************½¨ÖşÃæ»ı
+		'**************************************************************å»ºç­‘é¢ç§¯
 		ghgnqCount=GetProjectTableList (ghgnqTableName,"SUM(GNQMJ)",strConditon,"SpatialData","2",ghgnqList,fieldCount)
 		if ghgnqCount=1  then sc_GNQMJ=ghgnqList(0,0)
-		sc_GNQMJ=GetFormatNumber(sc_GNQMJ,2)'Êµ²â-½¨ÖşÃæ»ı
+		sc_GNQMJ=GetFormatNumber(sc_GNQMJ,2)'å®æµ‹-å»ºç­‘é¢ç§¯
 		
 		ghxkCount=GetProjectTableList (ghxkTableName,"sum("&field&")",exCondition,"","",ghxkList,fieldCount)
 		if ghxkCount=1 then gh_GNQMJ=ghxkList(0,0)
-		gh_GNQMJ=GetFormatNumber(gh_GNQMJ,2)'¹æ»®-½¨ÖşÃæ»ı
+		gh_GNQMJ=GetFormatNumber(gh_GNQMJ,2)'è§„åˆ’-å»ºç­‘é¢ç§¯
 		GetSubArea cellList,cellCount, sc_GNQMJ, gh_GNQMJ,2,2
-		'**************************************************************½¨ÖşÃæ»ı-¸÷¹¦ÄÜÇøÃæ»ı
+		'**************************************************************å»ºç­‘é¢ç§¯-å„åŠŸèƒ½åŒºé¢ç§¯
 		ghgnqCount=GetProjectTableList (ghgnqTableName,"SUM(JZMJ),YT",""&strConditon&" group by YT","SpatialData","2",ghgnqList,fieldCount)
 
 		ghldxxCount = GetProjectTableList ("GHLDXX","SUM(JZMJ),GHYT","GHYT<>'' group by GHYT","AttributeData","0",ghldxxList,ghldxxfieldCount)
@@ -2740,113 +2740,113 @@ InitDB()
 	geoCount = SSProcess.GetSelGeoCount()
 
 	xmmc=SSProcess.GetSelGeoValue( 0, "[XiangMMC]" )
-'ÕÒJG_¹æ»®¹¦ÄÜÇøÊôĞÔ±íµÄyt ×Ö¶Î È¥ÖØ µÃµ½ÊıÁ¿a
-		ydhxTableName="JG_¹æ»®¹¦ÄÜÇøÊôĞÔ±í"
+'æ‰¾JG_è§„åˆ’åŠŸèƒ½åŒºå±æ€§è¡¨çš„yt å­—æ®µ å»é‡ å¾—åˆ°æ•°é‡a
+		ydhxTableName="JG_è§„åˆ’åŠŸèƒ½åŒºå±æ€§è¡¨"
 		GNQCount=GetProjectTableList (ydhxTableName,"DISTINCT(YT)","","SpatialData","2",list,fieldCount)
 
-		'¹¦ÄÜÇøÃû³Æ Êı×é
-'×ÜĞĞÊı= a+13
+		'åŠŸèƒ½åŒºåç§° æ•°ç»„
+'æ€»è¡Œæ•°= a+13
 		ZHS=GNQCount+12
-'»­Íâ¿ò
-'»ñÈ¡Í¼Àª×ø±êÎ»ÖÃ
+'ç”»å¤–æ¡†
+'è·å–å›¾å»“åæ ‡ä½ç½®
 
 	SSProcess.GetObjectPoint TKID, 2, x, y, z, pointtype, name
 	x1= x-10
 	y1=y-10
-	ztmc="ºÚÌå"
+	ztmc="é»‘ä½“"
 	ztdx=150
 	ztkd=200
 	yzl=y1-7-10-GNQCount*2-24-1
 
-'±íÍ·
-	makeNote1 x1-10, y1+2, code, color, ztdx, ztkd, xmmc&"ÏîÄ¿¹æ»®ºËÊµ±í",TKID,ztmc
+'è¡¨å¤´
+	makeNote1 x1-10, y1+2, code, color, ztdx, ztkd, xmmc&"é¡¹ç›®è§„åˆ’æ ¸å®è¡¨",TKID,ztmc
 	makeArea x1+3,y1,x1-17,y1,x1-17,yzl+1,x1+3,yzl+1,1,color,TKID 
 
-'µÚÒ»¸öÊúÏß
+'ç¬¬ä¸€ä¸ªç«–çº¿
 
 	makeLine x1-15,y1,x1-15,yzl+1,1, color, TKID
-'µÚÒ»¸öºáÏß
+'ç¬¬ä¸€ä¸ªæ¨ªçº¿
 	makeLine x1-17,y1-3,x1+3,y1-3,1, color, TKID
-'ĞòºÅ
-	makeNote1 x1-16.3, y1-0.5, code, color, ztdx, ztkd, "Ğò",TKID,ztmc
-	makeNote1 x1-16.3, y1-1.5, code, color, ztdx, ztkd, "ºÅ",TKID,ztmc
-'µÚ¶ş¸öÊúÏß
+'åºå·
+	makeNote1 x1-16.3, y1-0.5, code, color, ztdx, ztkd, "åº",TKID,ztmc
+	makeNote1 x1-16.3, y1-1.5, code, color, ztdx, ztkd, "å·",TKID,ztmc
+'ç¬¬äºŒä¸ªç«–çº¿
 	makeLine x1-3,y1,x1-3,yzl+10,1, color, TKID
-	makeNote1 x1-14, y1-1.5, code, color, ztdx, ztkd, "ÓÃµØĞÅÏ¢»ò¼¼ÊõÖ¸±êÃû³Æ",TKID,ztmc
-	makeNote1 x1-1.5, y1-1.5, code, color, ztdx, ztkd, "ºËÊµÊı¾İ",TKID,ztmc
+	makeNote1 x1-14, y1-1.5, code, color, ztdx, ztkd, "ç”¨åœ°ä¿¡æ¯æˆ–æŠ€æœ¯æŒ‡æ ‡åç§°",TKID,ztmc
+	makeNote1 x1-1.5, y1-1.5, code, color, ztdx, ztkd, "æ ¸å®æ•°æ®",TKID,ztmc
 
-'µÚ¶ş¸öºáÏß
+'ç¬¬äºŒä¸ªæ¨ªçº¿
 	makeLine x1-17,y1-5,x1+3,y1-5,1, color, TKID
 	makeNote1 x1-16, y1-3.5, code, color, ztdx, ztkd, "1",TKID,ztmc
-	makeNote1 x1-10, y1-3.5, code, color, ztdx, ztkd, "Èİ»ıÂÊ",TKID,ztmc
-	ghgnqCount=GetProjectTableList ("JG_¹æ»®¹¦ÄÜÇøÊôĞÔ±í","SUM(JZMJ)","int(sjcs)>0","SpatialData","2",ghgnqList,fieldCount)
+	makeNote1 x1-10, y1-3.5, code, color, ztdx, ztkd, "å®¹ç§¯ç‡",TKID,ztmc
+	ghgnqCount=GetProjectTableList ("JG_è§„åˆ’åŠŸèƒ½åŒºå±æ€§è¡¨","SUM(JZMJ)","int(sjcs)>0","SpatialData","2",ghgnqList,fieldCount)
 	if ghgnqCount=1  then sumDsGNQMJ=ghgnqList(0,0)
 	if sumDsGNQMJ="" then sumDsGNQMJ=0
-	sumDsGNQMJ=GetFormatNumber(sumDsGNQMJ,2)'Êµ²â-½¨ÖşÃæ»ı
+	sumDsGNQMJ=GetFormatNumber(sumDsGNQMJ,2)'å®æµ‹-å»ºç­‘é¢ç§¯
 	sc_YongDMJ = YDHXYDMJ(YongDMJ)
 	if sc_YongDMJ<>"" then sc_YongDMJ = GetFormatNumber(sc_YongDMJ,2)
 	if  sc_YongDMJ=0 then sc_Rjl=0 else    sc_Rjl=GetFormatNumber(sumDsGNQMJ/sc_YongDMJ,2)
 	makeNote1 x1-1.5, y1-4, code, color, ztdx, ztkd, sc_Rjl,TKID,ztmc
-'µÚÈı¸öºáÏß
+'ç¬¬ä¸‰ä¸ªæ¨ªçº¿
 	makeLine x1-17,y1-7,x1+3,y1-7,1, color, TKID
 	makeNote1 x1-16, y1-6, code, color, ztdx, ztkd, "2",TKID,ztmc
-	makeNote1 x1-12, y1-5.5, code, color, ztdx, ztkd, "¼ÆËãÈİ»ıÂÊ½¨ÖşÃæ»ı",TKID,ztmc
+	makeNote1 x1-12, y1-5.5, code, color, ztdx, ztkd, "è®¡ç®—å®¹ç§¯ç‡å»ºç­‘é¢ç§¯",TKID,ztmc
 	makeNote1 x1-1.5, y1-5.5, code, color, ztdx, ztkd, sumDsGNQMJ,TKID,ztmc
-'µÚËÄ¸öºáÏß
+'ç¬¬å››ä¸ªæ¨ªçº¿
 	makeLine x1-15,y1-18,x1+3,y1-18,1, color, TKID
 	makeNote1 x1-16, y1-12-GNQCount, code, color, ztdx, ztkd, "3",TKID,ztmc
 
-'µÚ1¸ö¶ÌºáÏß
+'ç¬¬1ä¸ªçŸ­æ¨ªçº¿
 	makeLine x1-15,y1-9,x1+3,y1-9,1, color, TKID
-	makeNote1 x1-10.5, y1-7.5, code, color, ztdx, ztkd, "×Ü½¨ÖşÃæ»ı",TKID,ztmc
-	zrzCount=GetProjectTableList ("FC_×ÔÈ»´±ĞÅÏ¢ÊôĞÔ±í","sum(JZMJ)","","SpatialData","2",zrzList,fieldCount)
+	makeNote1 x1-10.5, y1-7.5, code, color, ztdx, ztkd, "æ€»å»ºç­‘é¢ç§¯",TKID,ztmc
+	zrzCount=GetProjectTableList ("FC_è‡ªç„¶å¹¢ä¿¡æ¯å±æ€§è¡¨","sum(JZMJ)","","SpatialData","2",zrzList,fieldCount)
 	if zrzCount=1 then sc_SCJZMJ=zrzList(0,0)
-	sc_SCJZMJ=GetFormatNumber(sc_SCJZMJ,2)'Êµ²â-×Ü½¨ÖşÃæ»ı
+	sc_SCJZMJ=GetFormatNumber(sc_SCJZMJ,2)'å®æµ‹-æ€»å»ºç­‘é¢ç§¯
 	makeNote1 x1-1.5, y1-7.5, code, color, ztdx, ztkd, sc_SCJZMJ,TKID,ztmc
 
-'µÚ2¸ö¶ÌºáÏß
+'ç¬¬2ä¸ªçŸ­æ¨ªçº¿
 	makeLine x1-9,y1-13,x1+3,y1-13,1, color, TKID
-	makeNote1 x1-8, y1-10, code, color, ztdx, ztkd, "µØÉÏ½¨Öş",TKID,ztmc
-	makeNote1 x1-7, y1-12, code, color, ztdx, ztkd, "Ãæ»ı",TKID,ztmc
+	makeNote1 x1-8, y1-10, code, color, ztdx, ztkd, "åœ°ä¸Šå»ºç­‘",TKID,ztmc
+	makeNote1 x1-7, y1-12, code, color, ztdx, ztkd, "é¢ç§¯",TKID,ztmc
 	makeNote1 x1-1.5, y1-11, code, color, ztdx, ztkd, sumDsGNQMJ,TKID,ztmc
 
-	makeNote1 x1-8, y1-14, code, color, ztdx, ztkd, "µØÏÂ½¨Öş",TKID,ztmc
-	makeNote1 x1-7, y1-16, code, color, ztdx, ztkd, "Ãæ»ı",TKID,ztmc
-	ghgnqCount1=GetProjectTableList ("JG_¹æ»®¹¦ÄÜÇøÊôĞÔ±í","SUM(jzmj)","int(sjcs)<0","SpatialData","2",ghgnqList1,fieldCount1)
+	makeNote1 x1-8, y1-14, code, color, ztdx, ztkd, "åœ°ä¸‹å»ºç­‘",TKID,ztmc
+	makeNote1 x1-7, y1-16, code, color, ztdx, ztkd, "é¢ç§¯",TKID,ztmc
+	ghgnqCount1=GetProjectTableList ("JG_è§„åˆ’åŠŸèƒ½åŒºå±æ€§è¡¨","SUM(jzmj)","int(sjcs)<0","SpatialData","2",ghgnqList1,fieldCount1)
 	if ghgnqCount1=1  then sumDsGNQMJ1=ghgnqList1(0,0)
-	sumDsGNQMJ1=GetFormatNumber(sumDsGNQMJ1,2)'Êµ²â-½¨ÖşÃæ»ı
+	sumDsGNQMJ1=GetFormatNumber(sumDsGNQMJ1,2)'å®æµ‹-å»ºç­‘é¢ç§¯
 	makeNote1 x1-1.5, y1-15, code, color, ztdx, ztkd, sumDsGNQMJ1,TKID,ztmc
-	makeNote1 x1-14, y1-12, code, color, ztdx, ztkd, "°´¿Õ¼ä",TKID,ztmc
-	makeNote1 x1-14, y1-14, code, color, ztdx, ztkd, "Î»ÖÃ·ÖÀà",TKID,ztmc
+	makeNote1 x1-14, y1-12, code, color, ztdx, ztkd, "æŒ‰ç©ºé—´",TKID,ztmc
+	makeNote1 x1-14, y1-14, code, color, ztdx, ztkd, "ä½ç½®åˆ†ç±»",TKID,ztmc
 
-	makeNote1 x1-13, y1-17-GNQCount-2, code, color, ztdx, ztkd, "°´Ê¹ÓÃ",TKID,ztmc
-	makeNote1 x1-13, y1-17-GNQCount-4, code, color, ztdx, ztkd, "ÓÃÍ¾·ÖÀà",TKID,ztmc
-'Ñ­»·±éÀúÓÃÍ¾
+	makeNote1 x1-13, y1-17-GNQCount-2, code, color, ztdx, ztkd, "æŒ‰ä½¿ç”¨",TKID,ztmc
+	makeNote1 x1-13, y1-17-GNQCount-4, code, color, ztdx, ztkd, "ç”¨é€”åˆ†ç±»",TKID,ztmc
+'å¾ªç¯éå†ç”¨é€”
 	for j= 0 to GNQCount-1 
 		ytname=list(j,0)
 		makeLine x1-9,y1-17-j*2-3,x1+3,y1-17-j*2-3,1, color, TKID
 		makeNote1 x1-8, y1-17-j*2-1.5, code, color, ztdx, ztkd,ytname ,TKID,ztmc
-		'²é¶ÔÓ¦Ãæ»ı
+		'æŸ¥å¯¹åº”é¢ç§¯
 		ytCount=GetProjectTableList (ydhxTableName,"sum(jzmj)","yt='"&ytname&"'","SpatialData","2",list1,fieldCount1)
 		ytmj=list1(0,0)
 		makeNote1 x1-1.5, y1-17-j*2-1.5, code, color, ztdx, ztkd,ytmj,TKID,ztmc
 	next
-	'ÊúÏß
+	'ç«–çº¿
 	makeLine x1-9,y1-9,x1-9,y1-7-10-GNQCount*2-1,1, color, TKID
-'µÚÎå¸öºáÏß
+'ç¬¬äº”ä¸ªæ¨ªçº¿
 	makeLine x1-15,y1-7-10-GNQCount*2-1,x1+3,y1-7-10-GNQCount*2-1,1, color, TKID
-'µÚÁù¸öºáÏß
+'ç¬¬å…­ä¸ªæ¨ªçº¿
 	makeLine x1-17,y1-7-10-GNQCount*2-5,x1+3,y1-7-10-GNQCount*2-5,1, color, TKID
 	makeNote1 x1-16, y1-7-10-GNQCount*2-3, code, color, ztdx, ztkd, "4",TKID,ztmc
-'¶ÌºáÏß
+'çŸ­æ¨ªçº¿
 	makeLine x1-15,y1-7-10-GNQCount*2-3,x1+3,y1-7-10-GNQCount*2-3,1, color, TKID
-	makeNote1 x1-10, y1-7-10-GNQCount*2-1.5, code, color, ztdx, ztkd, "µØÉÏ³µÎ»",TKID,ztmc
+	makeNote1 x1-10, y1-7-10-GNQCount*2-1.5, code, color, ztdx, ztkd, "åœ°ä¸Šè½¦ä½",TKID,ztmc
 	cwTableName="CWSCXX"
-	cwCount=GetProjectTableList (cwTableName,"sum(DSCWSL)+sum(DXCWSL),sum(DSCWSL),sum(DXCWSL)","CWLX='ÆÕÍ¨»ú¶¯³µÎ»'","","",cwList,fieldCount)
+	cwCount=GetProjectTableList (cwTableName,"sum(DSCWSL)+sum(DXCWSL),sum(DSCWSL),sum(DXCWSL)","CWLX='æ™®é€šæœºåŠ¨è½¦ä½'","","",cwList,fieldCount)
 	if  cwCount=1 then    sc_Jdcw=cwList(0,0):sc_ds_Jdcw=cwList(0,1):sc_dx_Jdcw=cwList(0,2)
-	cwCount=GetProjectTableList (cwTableName,"sum(DSCWSL)","CWLX='·Ç»ú¶¯³µÎ»'","","",cwList,fieldCount)
+	cwCount=GetProjectTableList (cwTableName,"sum(DSCWSL)","CWLX='éæœºåŠ¨è½¦ä½'","","",cwList,fieldCount)
 	if  cwCount=1 then    sc_dsFjdcw=cwList(0,0)
-	cwCount1=GetProjectTableList (cwTableName,"sum(DXCWSL)","CWLX='·Ç»ú¶¯³µÎ»'","","",cwList1,fieldCount1)
+	cwCount1=GetProjectTableList (cwTableName,"sum(DXCWSL)","CWLX='éæœºåŠ¨è½¦ä½'","","",cwList1,fieldCount1)
 	if  cwCount1=1 then    sc_dXFjdcw=cwList1(0,0)
 	if sc_ds_Jdcw<>"" then sc_ds_Jdcw=cdbl(sc_ds_Jdcw)
 	if sc_dsFjdcw<>"" then sc_dsFjdcw=cdbl(sc_dsFjdcw)
@@ -2855,64 +2855,64 @@ InitDB()
 	dscezsl=sc_ds_Jdcw+sc_dsFjdcw
 	dxcezsl=sc_dx_Jdcw+sc_dXFjdcw
 	makeNote1 x1-1.5, y1-7-10-GNQCount*2-1.5, code, color, ztdx, ztkd, dscezsl,TKID,ztmc
-	makeNote1 x1-10, y1-7-10-GNQCount*2-3.5, code, color, ztdx, ztkd, "µØÏÂ³µÎ»",TKID,ztmc
+	makeNote1 x1-10, y1-7-10-GNQCount*2-3.5, code, color, ztdx, ztkd, "åœ°ä¸‹è½¦ä½",TKID,ztmc
 	makeNote1 x1-1.5, y1-7-10-GNQCount*2-3.5, code, color, ztdx, ztkd,dxcezsl,TKID,ztmc
-'µÚÆß¸öºáÏß
+'ç¬¬ä¸ƒä¸ªæ¨ªçº¿
 	makeLine x1-17,y1-7-10-GNQCount*2-7,x1+3,y1-7-10-GNQCount*2-7,1, color, TKID
 	makeNote1 x1-16, y1-7-10-GNQCount*2-6, code, color, ztdx, ztkd, "5",TKID,ztmc
-	makeNote1 x1-10, y1-7-10-GNQCount*2-5.5, code, color, ztdx, ztkd, "ÂÌµØÂÊ",TKID,ztmc
+	makeNote1 x1-10, y1-7-10-GNQCount*2-5.5, code, color, ztdx, ztkd, "ç»¿åœ°ç‡",TKID,ztmc
 
-	ldCount=GetProjectTableList ("GH_ÂÌ»¯ÒªËØÊôĞÔ±í","sum(LHMJ/ZSBL)","ID>0","","",sclhYdmjList,fieldCount)
+	ldCount=GetProjectTableList ("GH_ç»¿åŒ–è¦ç´ å±æ€§è¡¨","sum(LHMJ/ZSBL)","ID>0","","",sclhYdmjList,fieldCount)
 	if ldCount = 1 then sc_lhYdmj=sclhYdmjList(0,0)
 	if sc_lhYdmj="" then sc_lhYdmj=0
 	if  sc_YongDMJ=0 then sc_lhl=0 else    sc_lhl=(sc_lhYdmj/sc_YongDMJ)*100
 	sc_lhl=GetFormatNumber(sc_lhl,2)
 	makeNote1 x1-1.5, y1-7-10-GNQCount*2-5.5, code, color, ztdx, ztkd, sc_lhl&"%",TKID,ztmc
-'µÚ°Ë¸öºáÏß
+'ç¬¬å…«ä¸ªæ¨ªçº¿
 	makeLine x1-15,y1-7-10-GNQCount*2-9,x1+3,y1-7-10-GNQCount*2-9,1, color, TKID
 	makeNote1 x1-16, y1-7-10-GNQCount*2-11, code, color, ztdx, ztkd, "6",TKID,ztmc
-	makeNote1 x1-10, y1-7-10-GNQCount*2-7.5, code, color, ztdx, ztkd, "ÍÁµØ¿¢¹¤Ãæ»ı",TKID,ztmc
-	'´ı¿ª·ÅmakeNote x1, y1-7-10-GNQCount*2-7, code, color, ztdx, ztkd, "ÍÁµØ¿¢¹¤Ãæ»ıÊı¾İ",TKID,ztmc
-'µÚ¾Å¸öºáÏß
+	makeNote1 x1-10, y1-7-10-GNQCount*2-7.5, code, color, ztdx, ztkd, "åœŸåœ°ç«£å·¥é¢ç§¯",TKID,ztmc
+	'å¾…å¼€æ”¾makeNote x1, y1-7-10-GNQCount*2-7, code, color, ztdx, ztkd, "åœŸåœ°ç«£å·¥é¢ç§¯æ•°æ®",TKID,ztmc
+'ç¬¬ä¹ä¸ªæ¨ªçº¿
 	makeLine x1-17,y1-7-10-GNQCount*2-15,x1+3,y1-7-10-GNQCount*2-15,1, color, TKID
-'Èı·ÖÖ®¶şÊúÏß
+'ä¸‰åˆ†ä¹‹äºŒç«–çº¿
 	makeLine x1-7,y1-7-10-GNQCount*2-9,x1-7,yzl+1,1, color, TKID
-	makeNote1 x1-13, y1-7-10-GNQCount*2-11.5, code, color, ztdx, ztkd, "°´×ÚµØ·ÖÀà",TKID,ztmc
-'¶ÌºáÏß
+	makeNote1 x1-13, y1-7-10-GNQCount*2-11.5, code, color, ztdx, ztkd, "æŒ‰å®—åœ°åˆ†ç±»",TKID,ztmc
+'çŸ­æ¨ªçº¿
 	makeLine x1-7,y1-7-10-GNQCount*2-11,x1+3,y1-7-10-GNQCount*2-11,1, color, TKID
-	makeNote1 x1-6, y1-7-10-GNQCount*2-9.5, code, color, ztdx, ztkd, "×ÚµØÒ»",TKID,ztmc
-	'×ÚµØÓĞÊı¾İÈ¡ÖµÊ± ÏÂÃæ·Å¿ª
-	'makeNote x1, y1-7-10-GNQCount*2-9, code, color, ztdx, ztkd, "×ÚµØÒ»Êı¾İ",TKID,ztmc
-'¶ÌºáÏß
+	makeNote1 x1-6, y1-7-10-GNQCount*2-9.5, code, color, ztdx, ztkd, "å®—åœ°ä¸€",TKID,ztmc
+	'å®—åœ°æœ‰æ•°æ®å–å€¼æ—¶ ä¸‹é¢æ”¾å¼€
+	'makeNote x1, y1-7-10-GNQCount*2-9, code, color, ztdx, ztkd, "å®—åœ°ä¸€æ•°æ®",TKID,ztmc
+'çŸ­æ¨ªçº¿
 	makeLine x1-7,y1-7-10-GNQCount*2-13,x1+3,y1-7-10-GNQCount*2-13,1, color, TKID
-	makeNote1 x1-6, y1-7-10-GNQCount*2-11.5, code, color, ztdx, ztkd, "×ÚµØ¶ş",TKID,ztmc
-	'×ÚµØÓĞÊı¾İÈ¡ÖµÊ± ÏÂÃæ·Å¿ª
-	'makeNote x1, y1-7-10-GNQCount*2-11, code, color, ztdx, ztkd, "×ÚµØ¶şÊı¾İ",TKID,ztmc
-'¶ÌºáÏß
-	makeNote1 x1-6, y1-7-10-GNQCount*2-13.5, code, color, ztdx, ztkd, "×ÚµØÈı",TKID,ztmc
-	'×ÚµØÓĞÊı¾İÈ¡ÖµÊ± ÏÂÃæ·Å¿ª
-	'makeNote x1, y1-7-10-GNQCount*2-13, code, color, ztdx, ztkd, "×ÚµØ¶şÊı¾İ",TKID,ztmc
-'µÚÊ®¸öºáÏß
+	makeNote1 x1-6, y1-7-10-GNQCount*2-11.5, code, color, ztdx, ztkd, "å®—åœ°äºŒ",TKID,ztmc
+	'å®—åœ°æœ‰æ•°æ®å–å€¼æ—¶ ä¸‹é¢æ”¾å¼€
+	'makeNote x1, y1-7-10-GNQCount*2-11, code, color, ztdx, ztkd, "å®—åœ°äºŒæ•°æ®",TKID,ztmc
+'çŸ­æ¨ªçº¿
+	makeNote1 x1-6, y1-7-10-GNQCount*2-13.5, code, color, ztdx, ztkd, "å®—åœ°ä¸‰",TKID,ztmc
+	'å®—åœ°æœ‰æ•°æ®å–å€¼æ—¶ ä¸‹é¢æ”¾å¼€
+	'makeNote x1, y1-7-10-GNQCount*2-13, code, color, ztdx, ztkd, "å®—åœ°äºŒæ•°æ®",TKID,ztmc
+'ç¬¬åä¸ªæ¨ªçº¿
 	makeLine x1-17,y1-7-10-GNQCount*2-19,x1+3,y1-7-10-GNQCount*2-19,1, color, TKID
 	makeNote1 x1-16, y1-7-10-GNQCount*2-17, code, color, ztdx, ztkd, "7",TKID,ztmc
-	makeNote1 x1-13, y1-7-10-GNQCount*2-15.5, code, color, ztdx, ztkd, "²»¶¯²úÈ¨Ö¤»ò",TKID,ztmc
-	makeNote1 x1-13.5, y1-7-10-GNQCount*2-17.5, code, color, ztdx, ztkd, "£¨ÍÁµØÖ¤£©Ö¤ºÅ",TKID,ztmc
-	''´ı¿ª·ÅmakeNote x1,  y1-7-10-GNQCount*2-16, code, color, ztdx, ztkd, "Êı¾İ",TKID,ztmc
-'×îºóÒ»ĞĞ
+	makeNote1 x1-13, y1-7-10-GNQCount*2-15.5, code, color, ztdx, ztkd, "ä¸åŠ¨äº§æƒè¯æˆ–",TKID,ztmc
+	makeNote1 x1-13.5, y1-7-10-GNQCount*2-17.5, code, color, ztdx, ztkd, "ï¼ˆåœŸåœ°è¯ï¼‰è¯å·",TKID,ztmc
+	''å¾…å¼€æ”¾makeNote x1,  y1-7-10-GNQCount*2-16, code, color, ztdx, ztkd, "æ•°æ®",TKID,ztmc
+'æœ€åä¸€è¡Œ
 	makeNote1 x1-16, y1-7-10-GNQCount*2-21, code, color, ztdx, ztkd, "8",TKID,ztmc
-	makeNote1 x1-13, y1-7-10-GNQCount*2-21, code, color, ztdx, ztkd, "ÍÁµØÓÃÍ¾",TKID,ztmc
-''´ı¿ª·ÅmakeNote x1,  y1-7-10-GNQCount*2-19, code, color, ztdx, ztkd, "Êı¾İ",TKID,ztmc
-'ÎÄ×Ö
-	makeNote1 x1-17, y1-7-10-GNQCount*2-27, code, color, ztdx, ztkd, "ËµÃ÷£º",TKID,ztmc
-	makeNote1 x1-17, y1-7-10-GNQCount*2-29, code, color, ztdx, ztkd, "1¡¢³ÇÊĞÊĞÕş£¬Ö¸³ÇÊĞµçÁ¦¡¢Ë®Àû¡¢¸øÅÅË®µÈÉèÊ©¡£",TKID,ztmc
-	makeNote1 x1-17, y1-7-10-GNQCount*2-31, code, color, ztdx, ztkd, "2¡¢ÏîÄ¿ÅäÌ×ÊĞÕş£¬Ö¸Îª±¾ÏîÄ¿ÅäÌ×µÄµçÁ¦¡¢µçĞÅ¡¢¸øÅÅË®¡¢Éè±¸µÈÓÃ·¿¡£",TKID,ztmc
-   makeNote1 x1-17, y1-7-10-GNQCount*2-33, code, color, ztdx, ztkd, "3¡¢¿Õ¸ñÎª¸ù¾İÏîÄ¿µÄ¾ßÌåÇé¿ö¸÷·Ö¾ÖÁíĞĞÌîĞ´µÄÄÚÈİ¡£",TKID,ztmc
-	makeNote1 x1-17, y1-7-10-GNQCount*2-35, code, color, ztdx, ztkd, "4¡¢¸÷Ê¹ÓÃÓÃÍ¾µÄ·¿¼äÆä¿Õ¼äÎ»ÖÃÏê¼ûÊ©¹¤Æ½ÃæÍ¼¡£",TKID,ztmc
-	makeNote1 x1-17, y1-7-10-GNQCount*2-37, code, color, ztdx, ztkd, "5¡¢±íÖĞÃæ»ıÊÇ°´ÕÕ¡¶½¨Öş¹¤³Ì½¨ÖşÃæ»ı¼ÆËãºÍ¿¢¹¤×ÛºÏ²âÁ¿¼¼Êõ¹æ³Ì¡·",TKID,ztmc
-	makeNote1 x1-17, y1-7-10-GNQCount*2-39, code, color, ztdx, ztkd, "£¨DB33/T 1152-2018£©½øĞĞºËÊµ",TKID,ztmc
-	makeNote1 x1-17, y1-7-10-GNQCount*2-41, code, color, ztdx, ztkd, "6¡¢½¨ÖşÎïÄÚÌô¿Õ¡¢ïÎ¿Õ¡¢¼Ğ²ãµÈÎ´±íÊ¾£¬²ã´ÎÓë×ÜÆ½ÃæÍ¼±£³ÖÒ»ÖÂ",TKID,ztmc
+	makeNote1 x1-13, y1-7-10-GNQCount*2-21, code, color, ztdx, ztkd, "åœŸåœ°ç”¨é€”",TKID,ztmc
+''å¾…å¼€æ”¾makeNote x1,  y1-7-10-GNQCount*2-19, code, color, ztdx, ztkd, "æ•°æ®",TKID,ztmc
+'æ–‡å­—
+	makeNote1 x1-17, y1-7-10-GNQCount*2-27, code, color, ztdx, ztkd, "è¯´æ˜ï¼š",TKID,ztmc
+	makeNote1 x1-17, y1-7-10-GNQCount*2-29, code, color, ztdx, ztkd, "1ã€åŸå¸‚å¸‚æ”¿ï¼ŒæŒ‡åŸå¸‚ç”µåŠ›ã€æ°´åˆ©ã€ç»™æ’æ°´ç­‰è®¾æ–½ã€‚",TKID,ztmc
+	makeNote1 x1-17, y1-7-10-GNQCount*2-31, code, color, ztdx, ztkd, "2ã€é¡¹ç›®é…å¥—å¸‚æ”¿ï¼ŒæŒ‡ä¸ºæœ¬é¡¹ç›®é…å¥—çš„ç”µåŠ›ã€ç”µä¿¡ã€ç»™æ’æ°´ã€è®¾å¤‡ç­‰ç”¨æˆ¿ã€‚",TKID,ztmc
+   makeNote1 x1-17, y1-7-10-GNQCount*2-33, code, color, ztdx, ztkd, "3ã€ç©ºæ ¼ä¸ºæ ¹æ®é¡¹ç›®çš„å…·ä½“æƒ…å†µå„åˆ†å±€å¦è¡Œå¡«å†™çš„å†…å®¹ã€‚",TKID,ztmc
+	makeNote1 x1-17, y1-7-10-GNQCount*2-35, code, color, ztdx, ztkd, "4ã€å„ä½¿ç”¨ç”¨é€”çš„æˆ¿é—´å…¶ç©ºé—´ä½ç½®è¯¦è§æ–½å·¥å¹³é¢å›¾ã€‚",TKID,ztmc
+	makeNote1 x1-17, y1-7-10-GNQCount*2-37, code, color, ztdx, ztkd, "5ã€è¡¨ä¸­é¢ç§¯æ˜¯æŒ‰ç…§ã€Šå»ºç­‘å·¥ç¨‹å»ºç­‘é¢ç§¯è®¡ç®—å’Œç«£å·¥ç»¼åˆæµ‹é‡æŠ€æœ¯è§„ç¨‹ã€‹",TKID,ztmc
+	makeNote1 x1-17, y1-7-10-GNQCount*2-39, code, color, ztdx, ztkd, "ï¼ˆDB33/T 1152-2018ï¼‰è¿›è¡Œæ ¸å®",TKID,ztmc
+	makeNote1 x1-17, y1-7-10-GNQCount*2-41, code, color, ztdx, ztkd, "6ã€å»ºç­‘ç‰©å†…æŒ‘ç©ºã€é•‚ç©ºã€å¤¹å±‚ç­‰æœªè¡¨ç¤ºï¼Œå±‚æ¬¡ä¸æ€»å¹³é¢å›¾ä¿æŒä¸€è‡´",TKID,ztmc
 
-'»­ÄÚ¿ò
+'ç”»å†…æ¡†
 
 ReleaseDB()
 end function
@@ -2925,7 +2925,7 @@ SSProcess.SetNewObjValue "SSObj_FontInterval", "80"
   SSProcess.SetNewObjValue "SSObj_Color", color
   SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
 	SSProcess.SetNewObjValue "SSObj_FontName", ztmc
-  SSProcess.SetNewObjValue "SSObj_LayerName", "¿¢¹¤Í¼Àª"
+  SSProcess.SetNewObjValue "SSObj_LayerName", "ç«£å·¥å›¾å»“"
   SSProcess.SetNewObjValue "SSObj_FontInterval", "8"
  SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
   SSProcess.SetNewObjValue "SSObj_FontAlignment", "1"

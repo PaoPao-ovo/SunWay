@@ -1,33 +1,33 @@
 
-'==========================================================¼ì²éÅäÖÃ============================================================
+'==========================================================æ£€æŸ¥é…ç½®============================================================
 
-'¼ì²é¼¯ÏîÄ¿Ãû³Æ
+'æ£€æŸ¥é›†é¡¹ç›®åç§°
 Dim strGroupName
-strGroupName = "·¿Îİ½¨ÖşÃæ»ı·Ö´±»ã×Ü±í"
+strGroupName = "æˆ¿å±‹å»ºç­‘é¢ç§¯åˆ†å¹¢æ±‡æ€»è¡¨"
 
-'¼ì²é¼¯×éÃû³Æ
+'æ£€æŸ¥é›†ç»„åç§°
 Dim strCheckName
-strCheckName = "Í¼±íÒ»ÖÂĞÔ¼ì²é"
+strCheckName = "å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
 
-'¼ì²éÄ£ĞÍÃû³Æ
+'æ£€æŸ¥æ¨¡å‹åç§°
 Dim CheckmodelName
-CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->Í¼±íÒ»ÖÂĞÔ¼ì²é"
+CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->å›¾è¡¨ä¸€è‡´æ€§æ£€æŸ¥"
 
-'¼ì²éÃèÊö
+'æ£€æŸ¥æè¿°
 Dim strDescription
-strDescription = "·¿Îİ½¨ÖşÃæ»ı·Ö´±»ã×Ü±í,»§ÊÒ·¿Îİ½¨ÖşÃæ»ı·Ö²ã»ã×Ü±í,×ÔÈ»´±ÖĞ¡¾BSM¡¿ÔÚ»§¡¾ZRZBSM¡¿ÖĞÕÒ²»µ½ÏàÍ¬µÄÖµ"
+strDescription = "æˆ¿å±‹å»ºç­‘é¢ç§¯åˆ†å¹¢æ±‡æ€»è¡¨,æˆ·å®¤æˆ¿å±‹å»ºç­‘é¢ç§¯åˆ†å±‚æ±‡æ€»è¡¨,è‡ªç„¶å¹¢ä¸­ã€BSMã€‘åœ¨æˆ·ã€ZRZBSMã€‘ä¸­æ‰¾ä¸åˆ°ç›¸åŒçš„å€¼"
 
-'================================================================¼ì²é±íÅäÖÃ======================================================
+'================================================================æ£€æŸ¥è¡¨é…ç½®======================================================
 
-'×ÔÈ»´±ÊôĞÔ±í
+'è‡ªç„¶å¹¢å±æ€§è¡¨
 Dim FxTable
-FxTable = "FC_×ÔÈ»´±ĞÅÏ¢ÊôĞÔ±í"
+FxTable = "FC_è‡ªç„¶å¹¢ä¿¡æ¯å±æ€§è¡¨"
 
-'·ÅÏßÊµ²âµãÊôĞÔ±í
+'æ”¾çº¿å®æµ‹ç‚¹å±æ€§è¡¨
 Dim RealTable
 RealTable = "H"
 
-'=============================================================¹¦ÄÜÈë¿Ú=======================================================================
+'=============================================================åŠŸèƒ½å…¥å£=======================================================================
 
 Sub OnClick()
     
@@ -36,9 +36,9 @@ Sub OnClick()
     
 End Sub' OnClick
 
-'=============================================================µãºÅ×Ö¶ÎÅĞ¶Ï²¢Ìí¼Ó¼ì²é¼ÇÂ¼================================================
+'=============================================================ç‚¹å·å­—æ®µåˆ¤æ–­å¹¶æ·»åŠ æ£€æŸ¥è®°å½•================================================
 
-'Ìí¼Ó¼ì²é¼ÇÂ¼Èë¿Ú
+'æ·»åŠ æ£€æŸ¥è®°å½•å…¥å£
 Function AddRecordInner()
     ClearCheckRecord
     FxPoiInfo FxDhArr,DhCount
@@ -46,13 +46,13 @@ Function AddRecordInner()
     ShowCheckRecord
 End Function' AddRecordInner
 
-'»ñÈ¡·ÅÏß×®µãµÄµãºÅ
+'è·å–æ”¾çº¿æ¡©ç‚¹çš„ç‚¹å·
 Function FxPoiInfo(ByRef FxDhArr(),ByRef DhCount)
     SqlStr = "Select " & FxTable & ".BSM," & FxTable & ".ID" & " From " & FxTable & " Inner Join GeoAreaTB on " & FxTable & ".ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2)<>0 And " & FxTable & ".BSM Is Not Null "
     GetSQLRecordAll SqlStr,FxDhArr,DhCount
 End Function' FxPoiInfo
 
-'ÅĞ¶ÏÊµ²âµãÊÇ·ñ´æÔÚ
+'åˆ¤æ–­å®æµ‹ç‚¹æ˜¯å¦å­˜åœ¨
 Function ConfirmScPoi(ByVal FxDhArr(),ByVal DhCount)
     For i = 0 To DhCount - 1
         FxArr = Split(FxDhArr(i),",", - 1,1)
@@ -66,13 +66,13 @@ Function ConfirmScPoi(ByVal FxDhArr(),ByVal DhCount)
     Next 'i
 End Function' ConfirmScPoi
 
-'==============================================================¹¤¾ßº¯Êı==========================================================
+'==============================================================å·¥å…·å‡½æ•°==========================================================
 
-'»ñÈ¡ËùÓĞ¼ÇÂ¼
+'è·å–æ‰€æœ‰è®°å½•
 Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)
     SSProcess.OpenAccessMdb SSProcess.GetProjectFileName
     If StrSqlStatement = "" Then
-        MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
+        MsgBox "æŸ¥è¯¢è¯­å¥ä¸ºç©ºï¼Œæ“ä½œåœæ­¢ï¼",48
     End If
     iRecordCount =  - 1
     SSProcess.OpenAccessRecordset SSProcess.GetProjectFileName, StrSqlStatement
@@ -95,12 +95,12 @@ Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecord
     SSProcess.CloseAccessMdb SSProcess.GetProjectFileName
 End Function' GetSQLRecordAll
 
-'Çå¿Õ¼ì²é¼¯
+'æ¸…ç©ºæ£€æŸ¥é›†
 Function ClearCheckRecord()
     SSProcess.RemoveCheckRecord strGroupName, strCheckName
 End Function' ClearCheckRecord
 
-'ÏÔÊ¾¼ì²é¼ÇÂ¼
+'æ˜¾ç¤ºæ£€æŸ¥è®°å½•
 Function ShowCheckRecord()
     SSProcess.ShowCheckOutput
     SSProcess.SaveCheckRecord
