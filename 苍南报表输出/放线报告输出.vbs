@@ -1,64 +1,64 @@
 Dim g_docObj
-selectStr = "·ÅÏß±¨¸æ(ÓÐGPS),·ÅÏß±¨¸æ(ÎÞGPS)"
+selectStr = "???????(??GPS),???????(??GPS)"
 Sub OnClick()
     res = AddInputParameter( selectStr, ExportDocType)
     If res = 0  Then Exit Sub
     strTempFileName = ExportDocType & ".doc"
-    strTempFilePath = SSProcess.GetSysPathName (7) & "\Êä³öÄ£°å\" & strTempFileName
+    strTempFilePath = SSProcess.GetSysPathName (7) & "\??????\" & strTempFileName
     Set g_docObj = CreateObject ("asposewordscom.asposewordshelper")
     If  TypeName (g_docObj) = "AsposeWordsHelper" Then
         g_docObj.CreateDocumentByTemplate strTempFilePath
     Else
-        MsgBox "ÇëÏÈ×¢²áAspose.Word²å¼þ"
+        MsgBox "???????Aspose.Word???"
         Exit Sub
     End If
     pathName = GetFilePath
     InitDB()
-    '×Ö·ûÌæ»»
+    '????ÿI
     ReplaceValue
-    If InStr(ExportDocType,"ÓÐ") > 0 Then
-        'ÓÐGPS
-        'GPS-RTKÐ£Õý¼ì²â¼ÇÂ¼±í 
+    If InStr(ExportDocType,"??") > 0 Then
+        '??GPS
+        'GPS-RTK§µ????????? 
         OutGPSTable 2
-        '²âÕ¾¼ÇÂ¼±í 
+        '???????? 
         OutStationTable 3
-        '·ÅÑù×ø±ê±í 
+        '????????? 
         OutFYTable 4
-        '·ÅÑùµã³é¼ì½á¹û 
+        '?????????? 
         OutFYCheckTable 5
     Else
-        'ÎÞGPS
-        '²âÕ¾¼ÇÂ¼±í 
+        '??GPS
+        '???????? 
         OutStationTable 2
-        '·ÅÑù×ø±ê±í 
+        '????????? 
         OutFYTable 3
-        '·ÅÑùµã³é¼ì½á¹û 
+        '?????????? 
         OutFYCheckTable 4
-        '¿ØÖÆµãÆ½Ãæ¼ÆËã±í
+        '????????????
         OutControlCountTable 5
-        '¿ØÖÆµã³É¹û±í
+        '?????????
         OutControlResultTable 6
-        '¿ØÖÆµã±ß³¤¼ì²é±í 
+        '??????????? 
         OutControlLengthTable 7
-        '¶ÎÂä
+        '????
         OutPara()
     End If
     
     ReleaseDB()
-    strFileSavePath = pathName & "3³É¹û\" & strTempFileName
+    strFileSavePath = pathName & "3???\" & strTempFileName
     g_docObj.SaveEx  strFileSavePath
     Set g_docObj = Nothing
-    MsgBox "Êä³öÍê³É"
+    MsgBox "??????"
 End Sub
 
-'//×Ö·ûÌæ»» 
+'//????ÿI 
 Function ReplaceValue
     values = "XiangMBH,XiangMMC,XiangMDZ,JianSDW,WeiTDW,CeHDW,FXDATE,FXXMDATE,ShenPDATE,XiangMFZR,BaoGBZ"
     valuesList = Split(values,",")
     For i = 0 To UBound(valuesList)
         strFieldValue = ""
         strField = valuesList(i)
-        listCount = GetProjectTableList ("·ÅÑéÏßºìÏßÊôÐÔ±í",strField," ·ÅÑéÏßºìÏßÊôÐÔ±í.ID>0 ","SpatialData","2",list,fieldCount)
+        listCount = GetProjectTableList ("??????????????",strField," ??????????????.ID>0 ","SpatialData","2",list,fieldCount)
         If listCount = 1 Then strFieldValue = list(0,0)
         g_docObj.Replace "{" & strField & "}",strFieldValue,0
     Next
@@ -68,16 +68,16 @@ Function ReplaceValue
     For i = 0 To UBound(valuesList)
         strFieldValue = ""
         strField = valuesList(i)
-        listCount = GetProjectTableList ("Õý¸ºÁã±ê¸ßÊôÐÔ±í",strField," Õý¸ºÁã±ê¸ßÊôÐÔ±í.ID>0 ","SpatialData","0",list,fieldCount)
+        listCount = GetProjectTableList ("?????????????",strField," ?????????????.ID>0 ","SpatialData","0",list,fieldCount)
         If listCount = 1 Then strFieldValue = list(0,0)
         g_docObj.Replace "{" & strField & "}",strFieldValue,0
     Next
     
-    g_docObj.Replace "{ÄêÔÂÈÕ}",Year(Now) & "Äê" & Month(Now) & "ÔÂ" & Day(Now) & "ÈÕ",0
+    g_docObj.Replace "{??????}",Year(Now) & "??" & Month(Now) & "??" & Day(Now) & "??",0
 End Function
 
 
-'»ñÈ¡ÊÇ·ñ´æÔÚGPS¼ì²âµã,ÔÝÊ±ÆúÓÃ
+'?????????GPS????,???????
 Function IsExistGPS()
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -87,56 +87,56 @@ Function IsExistGPS()
     If geocount > 0 Then IsExistGPS = True Else IsExistGPS = False
 End Function
 
-'//Ñ¡Ôñ³É¹û±¨¸æ
+'//?????????
 Function AddInputParameter(ByVal selectStr,ByRef ExportDocType)
     res = 1
-    title = "Êä³ö³É¹û±¨¸æ"
+    title = "??????????"
     selectStrList = Split(selectStr,",")
     If UBound(selectStrList) =  - 1 Then  res = 0
     Exit Function
     If ExportDocType = "" Then  ExportDocType = selectStrList(0)
     SSProcess.ClearInputParameter
-    SSProcess.AddInputParameter "·ÅÏß³É¹û±¨¸æ", ExportDocType,0,selectStr, "ÇëÑ¡Ôñ¼ì²éÀàÐÍ"
+    SSProcess.AddInputParameter "??????????", ExportDocType,0,selectStr, "???????????"
     res = SSProcess.ShowInputParameterDlg (title)
-    ExportDocType = SSProcess.GetInputParameter ("·ÅÏß³É¹û±¨¸æ" )
-    SSProcess.WriteEpsIni title,"·ÅÏß³É¹û±¨¸æ",ExportDocType
+    ExportDocType = SSProcess.GetInputParameter ("??????????" )
+    SSProcess.WriteEpsIni title,"??????????",ExportDocType
     AddInputParameter = res
 End Function
 
-'***********************************************************±¨±íÊä³öº¯Êý***********************************************************
+'***********************************************************???????????***********************************************************
 
-' RTKÐ£Õý¼ì²â¼ÇÂ¼±í 
+' RTK§µ????????? 
 Function OutGPSTable(ByVal tableIndex)
     g_docObj.MoveToTable tableIndex,False
     ReDim CellList(CellCount)
     CellCount = 0
-    '±í¸ñÐÐÁÐ³õÊ¼»¯
+    '???????§Ô????
     iniRow = 1
     strGPSPointName = ""
-    'Ñ¡Ôñ¼¯³õÊ¼»¯
+    '???????
     GPSCode = "9130215"
     ControlCode = "9130211,9130212,1102021,1103021"
-    '±í¸ñ´¦Àí
+    '??????
     GPSCount = GetFeatureCount( GPSCode, geocount)
     If GPSCount < 0 Then Exit Function
     copyCount = GPSCount * 3 - 1
-    '¸´ÖÆÐÐ
+    '??????
     g_docObj.CloneTableRow tableIndex,  iniRow, 1,copyCount, False
     For i = 0 To GPSCount - 1
         objID = SSProcess.GetSelGeoValue(i, "SSObj_ID")
         strPointName = SSProcess.GetSelGeoValue(i, "SSObj_PointName")
         'msgbox strPointName
         SSProcess.GetObjectPoint objID, 0, x, y, z, pointtype, name
-        'GPS¼ì²âµãËÑË÷µÄÀíÂÛ¿ØÖÆµãµÄ·¶Î§ÔÝ¶¨0.1Ã×£¬ºóÃæ¿ÉÄÜ»áµ÷Õû
+        'GPS????????????????????¦¶???0.1??????????????
         ids = SSProcess.SearchNearObjIDs(x, y, 0.1, 0, ControlCode, objID )
         If ids <> "" Then
             
             strControlID = Split(ids,",")
             If UBound(strControlID) = 0 Then
                 
-                '»ñÈ¡ÀíÂÛ¿ØÖÆµãµÄxyz
+                '????????????xyz
                 SSProcess.GetObjectPoint strControlID(0), 0, x1, y1, z1, pointtype, name
-                'ÕûÀíµ¥Ôª¸ñÖµ
+                '??????????
                 x = Round(x,3)
                 y = Round(y,3)
                 z = Round(z,3)
@@ -144,27 +144,27 @@ Function OutGPSTable(ByVal tableIndex)
                 y1 = Round(y1,3)
                 z1 = Round(z1,3)
                 strChange = Round(Sqr((x1 - x) * (x1 - x) + (y1 - y) * (y1 - y)),3)
-                strBZ = ""      '±¸×¢²»»ñÈ¡Öµ£¬ÔÝÊ±µ±×÷ºÏ²¢µ¥Ôª¸ñ±êÊ¶
-                ''µ¥Ôª¸ñÊý×é
-                GetValueGPSList CellList,CellCount, strPointName, "X", y, y1, strChange, "{ºÏ²¢±¸×¢}"
+                strBZ = ""      '????????????????????????????
+                ''?????????
+                GetValueGPSList CellList,CellCount, strPointName, "X", y, y1, strChange, "{??????}"
                 GetValueGPSList CellList,CellCount, "", "Y", x, x1, "", ""
-                GetValueGPSList CellList,CellCount, "", "Z", z, z1, "{ºÏ²¢É¾³ý}", ""
+                GetValueGPSList CellList,CellCount, "", "Z", z, z1, "{??????}", ""
             End If
         End If
-        '»ñÈ¡ÀíÂÛ¿ØÖÆµãµãÃû×Ö·û´®
+        '???????????????????
         If strGPSPointName = "" Then
             strGPSPointName = strPointName
         Else
-            strGPSPointName = strGPSPointName & "¡¢" & strPointName
+            strGPSPointName = strGPSPointName & "??" & strPointName
         End If
     Next 'i
-    'Ìî³äµ¥Ôª¸ñ
+    '??????
     startRow = 1
     strPointChange = ""
     For i = 0 To CellCount - 1
         CellValueList = Split(CellList(i),"||")
         startCol = 0
-        '×éÖ¯µãÎ»½Ï²î×Ö·û´®
+        '?????¦Ë????????
         If cellValueList(0) <> "" Then
             If strPointChange = "" Then
                 strPointChange = cellValueList(4)
@@ -172,22 +172,22 @@ Function OutGPSTable(ByVal tableIndex)
                 strPointChange = strPointChange & "," & cellValueList(4)
             End If
         End If
-        'Ìî³äµ¥Ôª¸ñ
+        '??????
         For j = 0 To UBound(CellValueList)
             g_docObj.SetCellText tableIndex,startRow,startCol,cellValueList(j),True,False
             startCol = startCol + 1
         Next
         startRow = startRow + 1
     Next
-    'ºÏ²¢µ¥Ôª¸ñ
+    '????????
     MergeColValue tableIndex, cellCount, 1, 0
     MergeColValue tableIndex, cellCount, 1, 4
     MergeColValue tableIndex, cellCount, 1, 5
     g_docObj.DeleteRow tableIndex,cellCount + 1,False
-    'Çå³ý±êÊ¶
-    g_docObj.Replace "{ºÏ²¢É¾³ý}","",0
-    g_docObj.Replace "{ºÏ²¢±¸×¢}","",0
-    '»ñÈ¡µãÎ»½Ï²î×î´óÖµ
+    '??????
+    g_docObj.Replace "{??????}","",0
+    g_docObj.Replace "{??????}","",0
+    '?????¦Ë???????
     strPointChangeList = Split(strPointChange,",")
     strMaxChange = ""
     If UBound(strPointChangeList) > 0 Then
@@ -202,25 +202,25 @@ Function OutGPSTable(ByVal tableIndex)
         strMaxChange = strPointChangeList(0)
     End If
     If strMaxChange <> "" Then strMaxChange = CDbl(strMaxChange * 100)
-    g_docObj.Replace "{GPS×î´óµãÎ»½Ï²î}",strMaxChange,0
-    If strMaxChange < 5.0 Then g_docObj.Replace "{GPS¹æ·¶ÒªÇó}","Ð¡ÓÚ5.0cm£¬·ûºÏ",0 Else g_docObj.Replace "{GPS¹æ·¶ÒªÇó}","´óÓÚ5.0cm£¬²»·ûºÏ",0
-    'Ìæ»»¶ÎÂäÀíÂÛ¿ØÖÆµã
-    g_docObj.Replace "{ÀíÂÛ¿ØÖÆµã¸öÊý}",GPSCount,0
-    g_docObj.Replace "{ÀíÂÛ¿ØÖÆµãµãÃû}",strGPSPointName,0
+    g_docObj.Replace "{GPS????¦Ë???}",strMaxChange,0
+    If strMaxChange < 5.0 Then g_docObj.Replace "{GPS?ÿZ???}","§³??5.0cm??????",0 Else g_docObj.Replace "{GPS?ÿZ???}","????5.0cm????????",0
+    '?ÿI????????????
+    g_docObj.Replace "{???????????}",GPSCount,0
+    g_docObj.Replace "{???????????}",strGPSPointName,0
 End Function
 
-'²âÕ¾¼ÇÂ¼±í
+'????????
 Function OutStationTable(ByVal tableIndex)
     g_docObj.MoveToTable tableIndex,False
     ReDim CellList(CellCount)
     CellCount = 0
-    '³õÊ¼»¯
+    '?????
     iniRow = 0
     strChange = ""
-    '±í¸ñ´¦Àí
-    strCZTable = "Ö§µãÏßÊôÐÔ±í"
-    strFXtable = "·½ÏòÏßÊôÐÔ±í"
-    strJCtable = "¼ì²éÏßÊôÐÔ±í"
+    '??????
+    strCZTable = "??????????"
+    strFXtable = "???????????"
+    strJCtable = "??????????"
     
     strCZField = "CeZDH"
     strFXField = "FangXDH,FangXZ,ShuiPJL"
@@ -229,7 +229,7 @@ Function OutStationTable(ByVal tableIndex)
     For i = 0 To CZlistCount - 1
         strCeZDH = CZlist(i,0)
         str = ""
-        '»ñÈ¡·½ÏòµãºÅ
+        '?????????
         FXtion = strFXtable & ".ID>0 and " & strFXtable & ".CeZDH = '" & strCeZDH & "'"
         FXlistCount = GetProjectTableList (strFXtable,strFXField,FXtion,"SpatialData","1",FXlist,fieldCount)
         For i1 = 0 To FXlistCount - 1
@@ -238,19 +238,19 @@ Function OutStationTable(ByVal tableIndex)
             strSPJL = FXlist(i1,2)
             strFXDHList = GetString( strFXDH, "," , str)
         Next
-        '²âÕ¾µãÐÐ
-        GetValueCZList  CellList,CellCount, "", "²âÕ¾µã", strCeZDH, strFXDHList, "", "",""
-        '·½Ïòµã±êÌâ
-        GetValueCZList  CellList,CellCount, "·½Ïòµã||·½ÏòÖµ||Ë®Æ½¾àÀë||X×ø±ê²îÖµ||Y×ø±ê²îÖµ", "", "", "", "", "",""
+        '???????
+        GetValueCZList  CellList,CellCount, "", "?????", strCeZDH, strFXDHList, "", "",""
+        '????????
+        GetValueCZList  CellList,CellCount, "?????||?????||??????||X??????||Y??????", "", "", "", "", "",""
         For i1 = 0 To FXlistCount - 1
             strFXDH = FXlist(i1,0)
             strFXZ = FXlist(i1,1)
             strSPJL = FXlist(i1,2)
-            '·½ÏòµãÐÐ
-            GetValueCZList  CellList,CellCount, "", "·½Ïòµã", strFXDH, strFXZ, strSPJL, "",""
+            '???????
+            GetValueCZList  CellList,CellCount, "", "?????", strFXDH, strFXZ, strSPJL, "",""
         Next
-        '¼ì²éµã±êÌâ
-        GetValueCZList  CellList,CellCount, "¼ì²éµã||·½ÏòÖµ||Ë®Æ½¾àÀë||X×ø±ê²îÖµ||Y×ø±ê²îÖµ", "", "", "", "", "",""
+        '???????
+        GetValueCZList  CellList,CellCount, "????||?????||??????||X??????||Y??????", "", "", "", "", "",""
         JCtion = strJCtable & ".ID>0 and " & strJCtable & ".CeZDH = '" & strCeZDH & "'"
         JClistCount = GetProjectTableList (strJCtable,strJCField,JCtion,"SpatialData","1",JClist,fieldCount)
         For i1 = 0 To JClistCount - 1
@@ -259,9 +259,9 @@ Function OutStationTable(ByVal tableIndex)
             strSPJL = JClist(i1,2)
             strX = JClist(i1,3)
             strY = JClist(i1,4)
-            '¼ì²éµãÐÐ
-            GetValueCZList  CellList,CellCount, "", "¼ì²éµã", strJCDH, strFXZ, strSPJL, strX,strY
-            '»ñÈ¡µãÎ»½Ï²î×Ö·û´®
+            '??????
+            GetValueCZList  CellList,CellCount, "", "????", strJCDH, strFXZ, strSPJL, strX,strY
+            '?????¦Ë????????
             strXY = Round(Sqr(strX * strX + strY * strY),3)
             If strChange = "" Then
                 strChange = strXY
@@ -270,10 +270,10 @@ Function OutStationTable(ByVal tableIndex)
             End If
         Next
     Next
-    '¸´ÖÆÐÐ
+    '??????
     copyCount = CellCount - 1
     g_docObj.CloneTableRow tableIndex,  iniRow, 1,copyCount, False
-    'Ìî³äµ¥Ôª¸ñ
+    '??????
     startRow = 0
     For i = 0 To CellCount - 1
         CellValueList = Split(CellList(i),"||")
@@ -284,7 +284,7 @@ Function OutStationTable(ByVal tableIndex)
         Next
         startRow = startRow + 1
     Next
-    '»ñÈ¡×î´óµãÎ»½Ï²î
+    '???????¦Ë???
     strChangeList = Split(strChange,",")
     If UBound(strChangeList) > 0 Then
         For i = 0 To UBound(strChangeList) - 1
@@ -298,30 +298,30 @@ Function OutStationTable(ByVal tableIndex)
         strMaxChange = strChangeList(0)
     End If
     If strMaxChange <> "" Then strMaxChange = CDbl(strMaxChange * 100)
-    g_docObj.Replace "{²âÕ¾×î´óµãÎ»½Ï²î}",strMaxChange,0
-    If strMaxChange < 5.0 Then g_docObj.Replace "{²âÕ¾¹æ·¶ÒªÇó}","Ð¡ÓÚ5.0cm£¬·ûºÏ",0  Else   g_docObj.Replace "{²âÕ¾¹æ·¶ÒªÇó}","´óÓÚ5.0cm£¬²»·ûºÏ",0
+    g_docObj.Replace "{???????¦Ë???}",strMaxChange,0
+    If strMaxChange < 5.0 Then g_docObj.Replace "{????ÿZ???}","§³??5.0cm??????",0  Else   g_docObj.Replace "{????ÿZ???}","????5.0cm????????",0
     
 End Function
 
 
-'·ÅÑù×ø±ê±í
+'?????????
 Function OutFYTable(ByVal tableIndex)
     g_docObj.MoveToTable tableIndex,False
     ReDim CellList(CellCount)
     CellCount = 0
     iniRow = 1
     CopyCount = 0
-    '±í¸ñ´¦Àí
+    '??????
     geocount = GetFeatureCount( "9310013", geocount)
     For i = 0 To geocount - 1
         objID = SSProcess.GetSelGeoValue(i, "SSObj_ID")
         JianZWMC = SSProcess.GetSelGeoValue(i, "[JianZWMC]")
         pointcount = SSProcess.GetSelGeoPointCount(i)
-        '¸´ÖÆµÄÐÐÊý
+        '?????????
         CopyCount = CopyCount + pointcount - 1
         For i1 = 0 To pointcount - 2
             SSProcess.GetObjectPoint objID, i1, x0, y0, z0, pointtype, name
-            '»ñÈ¡ÏÂÒ»¸ö½Çµã×ø±ê
+            '???????????????
             SSProcess.GetObjectPoint objID, i1 + 1, x1, y1, z1, pointtype, name
             x0 = Round(x0,3)
             y0 = Round(y0,3)
@@ -329,14 +329,14 @@ Function OutFYTable(ByVal tableIndex)
             x1 = Round(x1,3)
             y1 = Round(y1,3)
             z1 = Round(z1,3)
-            '»ñÈ¡±ß³¤Öµ
+            '???????
             strChange = Round(Sqr((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0)),3)
-            '»ñÈ¡ÏÂÒ»¸ö½ÇµãµÄµãÃû
+            '???????????????
             ids = SSProcess.SearchNearObjIDs(x1, y1, 0.1, 0, "9130411", objID )
             If ids <> "" Then
                 strControlID = Split(ids,",")
                 For i2 = 0 To UBound(strControlID)
-                    '»ñÈ¡ÊôÐÔ
+                    '???????
                     LiLunPointName = SSProcess.GetObjectAttr(strControlID(i2), "SSObj_PointName")
                     LiLunJianZWMC = SSProcess.GetObjectAttr(strControlID(i2), "[JianZWMC]")
                     If LiLunJianZWMC = JianZWMC Then
@@ -345,12 +345,12 @@ Function OutFYTable(ByVal tableIndex)
                 Next
             End If
             
-            '»ñÈ¡µ±Ç°½ÇµãÊôÐÔ
+            '?????????????
             ids = SSProcess.SearchNearObjIDs(x0, y0, 0.1, 0, "9130411", objID )
             If ids <> "" Then
                 strControlID = Split(ids,",")
                 For i2 = 0 To UBound(strControlID)
-                    '»ñÈ¡ÊôÐÔ
+                    '???????
                     LiLunPointName = SSProcess.GetObjectAttr(strControlID(i2), "SSObj_PointName")
                     LiLunJianZWMC = SSProcess.GetObjectAttr(strControlID(i2), "[JianZWMC]")
                     strPointChange = LiLunPointName & "-" & LiLunPointName1
@@ -368,9 +368,9 @@ Function OutFYTable(ByVal tableIndex)
             End If
         Next
     Next
-    '¸´ÖÆÐÐ
+    '??????
     g_docObj.CloneTableRow tableIndex,  iniRow, 1,CopyCount - 1, False
-    'Ìî³äµ¥Ôª¸ñ
+    '??????
     startRow = 1
     For i = 0 To CellCount - 1
         CellValueList = Split(CellList(i),"||")
@@ -381,28 +381,28 @@ Function OutFYTable(ByVal tableIndex)
         Next
         startRow = startRow + 1
     Next
-    'ºÏ²¢µ¥Ôª¸ñ
+    '????????
     MergeColValue tableIndex, cellCount, 1, 0
     g_docObj.DeleteRow tableIndex,cellCount + 1,False
 End Function
 
-'·ÅÑùµã³é¼ì½á¹û
+'??????????
 Function OutFYCheckTable(ByVal tableIndex)
     g_docObj.MoveToTable tableIndex,False
     ReDim CellList(CellCount)
     CellCount = 0
     iniRow = 1
-    '±í¸ñ´¦Àí
+    '??????
     geocount = GetFeatureCount("9130511", geocount)
     For i = 0 To geocount - 1
-        'Êµ²â·ÅÑùµãµãÃûºÍ×ø±ê
+        '?????????????????
         objID = SSProcess.GetSelGeoValue(i, "SSObj_ID")
         PointName = SSProcess.GetSelGeoValue(i, "SSObj_PointName")
         SSProcess.GetObjectPoint objID, 0, x1, y1, z1, pointtype, name
         x1 = Round(x1,3)
         y1 = Round(y1,3)
         z1 = Round(z1,3)
-        '¿Õ¼äËÑË÷ÀíÂÛ·ÅÑùµã
+        '????????????????
         ids = SSProcess.SearchNearObjIDs(x1, y1, 0.1, 0, "9130411", objID )
         If ids <> "" Then
             strControlID = Split(ids,",")
@@ -412,7 +412,7 @@ Function OutFYCheckTable(ByVal tableIndex)
                 x0 = Round(x0,3)
                 y0 = Round(y0,3)
                 z0 = Round(z0,3)
-                '»ñÈ¡Í¬ÃûÀíÂÛ·ÅÑùµãµÄ×ø±ê£¬±ß³¤
+                '???????????????????????
                 If LiLunPointName = PointName Then
                     strChange = Round(Sqr((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0)),3)
                     CellValue = PointName & "||" & y0 & "||" & x0 & "||" & y1 & "||" & x1 & "||" & strChange
@@ -423,25 +423,25 @@ Function OutFYCheckTable(ByVal tableIndex)
             Next
         End If
     Next
-    '¸´ÖÆÐÐ
+    '??????
     copyCount = geocount - 1
     g_docObj.CloneTableRow tableIndex,  iniRow, 1,copyCount, False
-    'Ìî³äµ¥Ôª¸ñ
+    '??????
     startRow = 1
     strPointChange = ""
     For i = 0 To CellCount - 1
         CellValueList = Split(CellList(i),"||")
         startCol = 0
-        '×éÖ¯µãÎ»½Ï²î×Ö·û´®
+        '?????¦Ë????????
         strPointChange = GetString( cellValueList(5), "," , strPointChange)
-        'Ìî³äµ¥Ôª¸ñ
+        '??????
         For j = 0 To UBound(CellValueList)
             g_docObj.SetCellText tableIndex,startRow,startCol,cellValueList(j),True,False
             startCol = startCol + 1
         Next
         startRow = startRow + 1
     Next
-    '»ñÈ¡µãÎ»½Ï²î×î´óÖµ
+    '?????¦Ë???????
     strPointChangeList = Split(strPointChange,",")
     strMaxChange = ""
     For i = 0 To UBound(strPointChangeList) - 1
@@ -452,12 +452,12 @@ Function OutFYCheckTable(ByVal tableIndex)
         End If
     Next
     If strMaxChange <> "" Then strMaxChange = CDbl(strMaxChange * 100)
-    g_docObj.Replace "{·ÅÑùµã×î´óµãÎ»½Ï²î}",strMaxChange,0
-    If strMaxChange < 5.0 Then g_docObj.Replace "{·ÅÑùµã¹æ·¶ÒªÇó}","Ð¡ÓÚ5.0cm£¬·ûºÏ",0  Else   g_docObj.Replace "{·ÅÑùµã¹æ·¶ÒªÇó}","´óÓÚ5.0cm£¬²»·ûºÏ",0
+    g_docObj.Replace "{??????????¦Ë???}",strMaxChange,0
+    If strMaxChange < 5.0 Then g_docObj.Replace "{??????ÿZ???}","§³??5.0cm??????",0  Else   g_docObj.Replace "{??????ÿZ???}","????5.0cm????????",0
 End Function
 
 
-'¿ØÖÆµãÆ½Ãæ¼ÆËã±í
+'????????????
 Function OutControlCountTable(ByVal tableIndex)
     g_docObj.MoveToTable tableIndex,False
     ReDim CellList(CellCount)
@@ -465,12 +465,12 @@ Function OutControlCountTable(ByVal tableIndex)
     iniRow = 1
     strPointName = ""
     xhCount = 1
-    '±í¸ñ´¦Àí
+    '??????
     geocount = GetFeatureCount("1130211", geocount)
     For i = 0 To geocount - 1
         objID = SSProcess.GetSelGeoValue(i, "SSObj_ID")
         PointName = SSProcess.GetSelGeoValue(i, "SSObj_PointName")
-        'µãÃûÈ¥ÖØ       
+        '???????       
         If strPointName = "" Then
             strPointName = "," & PointName & ","
         ElseIf InStr(strPointName,"," & PointName & ",") = 0 Then
@@ -502,7 +502,7 @@ Function OutControlCountTable(ByVal tableIndex)
             y1 = Round(y1,3)
             z1 = Round(z1,3)
             strChange = Round(Sqr((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0)),3)
-            '»ñÈ¡Í¬ÃûÊµ²â¿ØÖÆµã¸öÊý
+            '????????????????
             SCControlCount = GetFeatureCount("9130311,9130312,9130412,9130512", geocount)
             For i1 = 0 To SCControlCount - 1
                 objID = SSProcess.GetSelGeoValue(i1, "SSObj_ID")
@@ -514,7 +514,7 @@ Function OutControlCountTable(ByVal tableIndex)
                     z0 = Round(z,3)
                 End If
             Next
-            '»ñÈ¡µ¥Ôª¸ñÊý×é
+            '????????????
             CellValue = xhCount & "||" & strPointNameList(i) & "||" & y0 & "||" & y1 & "||" & strChange & "||" & y
             ReDim Preserve CellList(CellCount)
             CellList(CellCount) = CellValue
@@ -526,35 +526,35 @@ Function OutControlCountTable(ByVal tableIndex)
             CellCount = CellCount + 1
         End If
     Next
-    '¸´ÖÆÐÐ
+    '??????
     copyCount = (UBound(strPointNameList) + 1) * 2 - 1
     g_docObj.CloneTableRow tableIndex,  iniRow, 1,copyCount, False
-    'Ìî³äµ¥Ôª¸ñ
+    '??????
     startRow = 1
     For i = 0 To CellCount - 1
         CellValueList = Split(CellList(i),"||")
         startCol = 0
-        'Ìî³äµ¥Ôª¸ñ
+        '??????
         For j = 0 To UBound(CellValueList)
             g_docObj.SetCellText tableIndex,startRow,startCol,cellValueList(j),True,False
             startCol = startCol + 1
         Next
         startRow = startRow + 1
     Next
-    'ºÏ²¢µ¥Ôª¸ñ
+    '????????
     MergeColValue tableIndex, cellCount, 1, 0
     MergeColValue tableIndex, cellCount, 1, 1
     MergeColValue tableIndex, cellCount, 1, 4
     g_docObj.DeleteRow tableIndex,cellCount + 1,False
 End Function
 
-'¿ØÖÆµã³É¹û±í
+'?????????
 Function OutControlResultTable(ByVal tableIndex)
     g_docObj.MoveToTable tableIndex,False
     ReDim CellList(CellCount)
     CellCount = 0
     iniRow = 1
-    '»ñÈ¡ÀíÂÛ¿ØÖÆµã
+    '???????????
     geocount = GetFeatureCount( "1103021,1102021,9130211,9130212", geocount)
     For i = 0 To geocount - 1
         objID = SSProcess.GetSelGeoValue(i, "SSObj_ID")
@@ -569,15 +569,15 @@ Function OutControlResultTable(ByVal tableIndex)
         CellList(CellCount) = CellValue
         CellCount = CellCount + 1
     Next
-    '¸´ÖÆÐÐ
+    '??????
     copyCount = geocount - 1
     g_docObj.CloneTableRow tableIndex,  iniRow, 1,copyCount, False
-    'Ìî³äµ¥Ôª¸ñ
+    '??????
     startRow = 1
     For i = 0 To CellCount - 1
         CellValueList = Split(CellList(i),"||")
         startCol = 0
-        'Ìî³äµ¥Ôª¸ñ
+        '??????
         For j = 0 To UBound(CellValueList)
             g_docObj.SetCellText tableIndex,startRow,startCol,cellValueList(j),True,False
             startCol = startCol + 1
@@ -586,15 +586,15 @@ Function OutControlResultTable(ByVal tableIndex)
     Next
 End Function
 
-'¿ØÖÆµã±ß³¤¼ì²é±í
+'???????????
 Function OutControlLengthTable(ByVal tableIndex)
     g_docObj.MoveToTable tableIndex,False
     ReDim CellList(CellCount)
     CellCount = 0
     iniRow = 1
     xhCount = 1
-    '±í¸ñ´¦Àí
-    strJCtable = "¿ØÖÆµã¼ì²éÏßÊôÐÔ±í"
+    '??????
+    strJCtable = "??????????????"
     strJCField = "CeZDH,JianCDH,YZBC,JCBC,BCJC"
     JClistCount = GetProjectTableList (strJCtable,strJCField,strJCtable & ".ID>0 and CeZDH<>'*' ","SpatialData","1",JClist,fieldCount)
     For i = 0 To JClistCount - 1
@@ -611,15 +611,15 @@ Function OutControlLengthTable(ByVal tableIndex)
         CellCount = CellCount + 1
         xhCount = xhCount + 1
     Next
-    '¸´ÖÆÐÐ
+    '??????
     copyCount = JClistCount - 1
     g_docObj.CloneTableRow tableIndex,  iniRow, 1,copyCount, False
-    'Ìî³äµ¥Ôª¸ñ
+    '??????
     startRow = 1
     For i = 0 To CellCount - 1
         CellValueList = Split(CellList(i),"||")
         startCol = 0
-        'Ìî³äµ¥Ôª¸ñ
+        '??????
         For j = 0 To UBound(CellValueList)
             g_docObj.SetCellText tableIndex,startRow,startCol,cellValueList(j),True,False
             startCol = startCol + 1
@@ -628,7 +628,7 @@ Function OutControlLengthTable(ByVal tableIndex)
     Next
 End Function
 
-'ÎÞGPS¶ÎÂä
+'??GPS????
 Function OutPara()
     ControlCode = "9130212,9130211,1102021,1103021"
     ControlCount = GetFeatureCount( ControlCode, geocount)
@@ -638,21 +638,21 @@ Function OutPara()
         strPointName = SSProcess.GetSelGeoValue(i, "SSObj_PointName")
         strControlPointName = GetString(strPointName, "," , strControlPointName)
     Next
-    g_docObj.Replace "{ÀíÂÛ¿ØÖÆµãµãÃû}",strControlPointName,0
+    g_docObj.Replace "{???????????}",strControlPointName,0
     
     
-    strJCtable = "¿ØÖÆµã¼ì²éÏßÊôÐÔ±í"
+    strJCtable = "??????????????"
     strJCField = "CeZDH,JianCDH,YZBC,JCBC,BCJC"
     JClistCount = GetProjectTableList (strJCtable,"max(BCJC)",strJCtable & ".ID>0 and CeZDH<>'*' ","SpatialData","1",JClist,fieldCount)
     If JClistCount = 1 Then strMaxChange = Round(JClist(0,0),3)
     If strMaxChange <> "" Then strMaxChange = CDbl(strMaxChange * 100)
-    g_docObj.Replace "{×î´ó±ß³¤½Ï²î}",strMaxChange,0
-    If strMaxChange < 5.0 Then g_docObj.Replace "{±ß³¤¹æ·¶ÒªÇó}","Ð¡ÓÚ5.0cm£¬·ûºÏ",0 Else g_docObj.Replace "{±ß³¤¹æ·¶ÒªÇó}","´óÓÚ5.0cm£¬²»·ûºÏ",0
+    g_docObj.Replace "{????????}",strMaxChange,0
+    If strMaxChange < 5.0 Then g_docObj.Replace "{????ÿZ???}","§³??5.0cm??????",0 Else g_docObj.Replace "{????ÿZ???}","????5.0cm????????",0
 End Function
 
 
-'*****************************±í¸ñ¸¨ÖúÕûÀíº¯Êý*******************************
-' Í¨¹ýÑ¡Ôñ¼¯£¬»ñÈ¡ÒªËØÊýÁ¿£¬×¢ÒâºóÃæÇå¿ÕÑ¡Ôñ¼¯²Ù×÷£¬ÔÚ¿ªÍ·ÔËÐÐ
+'*****************************??????????????*******************************
+' ????????????????????????????????????????????
 Function GetFeatureCount(ByVal Code,ByRef geocount)
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -662,7 +662,7 @@ Function GetFeatureCount(ByVal Code,ByRef geocount)
     GetFeatureCount = geocount
 End Function
 
-'ÕûÀí³ö×Ö·û´®
+'???????????
 Function GetString(ByVal value,ByVal splitMark , str)
     If str = "" Then
         str = value
@@ -672,7 +672,7 @@ Function GetString(ByVal value,ByVal splitMark , str)
     GetString = str
 End Function' Name
 
-'ºÏ²¢ÁÐ
+'?????
 Function MergeColValue(ByVal tableIndex,ByVal cellCount,ByVal startRow,ByVal startCol)
     allxhValue = ""
     For i = 0 To cellCount
@@ -701,8 +701,8 @@ Function MergeColValue(ByVal tableIndex,ByVal cellCount,ByVal startRow,ByVal sta
     Next
 End Function
 
-'***********************»ñÈ¡µ¥Ôª¸ñÊôÐÔº¯Êý**********************************
-'GPS¼ì²â¼ÇÂ¼±í
+'***********************???????????????**********************************
+'GPS???????
 Function GetValueGPSList(CellList,CellCount,ByVal strPointName,ByVal strType,ByVal strTypeValue,ByVal strSCValue,ByVal strChange,ByVal strBZ)
     cellValue = ""
     value = strPointName & "||" & strType & "||" & strTypeValue & "||" & strSCValue & "||" & strChange & "||" & strBZ
@@ -712,19 +712,19 @@ Function GetValueGPSList(CellList,CellCount,ByVal strPointName,ByVal strType,ByV
     CellCount = CellCount + 1
 End Function
 
-'²âÕ¾¼ÇÂ¼±í
+'????????
 Function GetValueCZList(CellList,CellCount,ByVal strtitle,ByVal strPointType,ByVal strDH,ByVal strFXZ,ByVal strSPJL,ByVal strX,ByVal strY)
-    If strPointType = "²âÕ¾µã" Then
-        CellValue = strPointType & "||" & strDH & "||" & "" & "||" & "·½Ïòµã" & "||" & strFXZ
+    If strPointType = "?????" Then
+        CellValue = strPointType & "||" & strDH & "||" & "" & "||" & "?????" & "||" & strFXZ
         ReDim Preserve CellList(CellCount)
         CellList(CellCount) = CellValue
         CellCount = CellCount + 1
-    ElseIf strPointType = "·½Ïòµã" Then
+    ElseIf strPointType = "?????" Then
         CellValue = strDH & "||" & strFXZ & "||" & strSPJL
         ReDim Preserve CellList(CellCount)
         CellList(CellCount) = CellValue
         CellCount = CellCount + 1
-    ElseIf strPointType = "¼ì²éµã" Then
+    ElseIf strPointType = "????" Then
         CellValue = strDH & "||" & strFXZ & "||" & strSPJL & "||" & strX & "||" & strY
         ReDim Preserve CellList(CellCount)
         CellList(CellCount) = CellValue
@@ -738,22 +738,22 @@ Function GetValueCZList(CellList,CellCount,ByVal strtitle,ByVal strPointType,ByV
 End Function
 
 
-'***********************************************************Êý¾Ý¿â²Ù×÷º¯Êý***********************************************************
-'//strTableName ±í
-'//strFields ×Ö¶Î
-'//strAddCondition Ìõ¼þ 
-'//strTableType "AttributeData£¨´¿ÊôÐÔ±í£© ,SpatialData£¨µØÎïÊôÐÔ±í£©" 
-'//strGeoType µØÎïÀàÐÍ µã¡¢Ïß¡¢Ãæ¡¢×¢¼Ç(0µã£¬1Ïß£¬2Ãæ£¬3×¢¼Ç)
-'//rs ±í¼ÇÂ¼¶þÎ¬Êý×érs(ÐÐ,ÁÐ)
-'//fieldCount ×Ö¶Î¸öÊý
-'//·µ»ØÖµ £ºsql²éÑ¯±í¼ÇÂ¼¸öÊý
+'***********************************************************????????????***********************************************************
+'//strTableName ??
+'//strFields ???
+'//strAddCondition ???? 
+'//strTableType "AttributeData??????????? ,SpatialData?????????????" 
+'//strGeoType ???????? ??????èå???(0??1???2?—¨3???)
+'//rs ????????????rs(??,??)
+'//fieldCount ??¦È???
+'//????? ??sql????????????
 Function GetProjectTableList(ByVal strTableName,ByVal strFields,ByVal strAddCondition,ByVal strTableType,ByVal strGeoType,ByRef rs(),ByRef fieldCount)
     GetProjectTableList = 0
     values = ""
     rsCount = 0
     fieldCount = 0
     If strTableName = "" Or strFields = "" Then Exit Function
-    'ÉèÖÃµØÎïÀàÐÍ
+    '???????????
     If strGeoType = "0" Then
         GeoType = "GeoPointTB"
     ElseIf strGeoType = "1" Then
@@ -779,9 +779,9 @@ Function GetProjectTableList(ByVal strTableName,ByVal strFields,ByVal strAddCond
     End If
     
     'if instr(sql,"scpcjzmj")>0 then  addloginfo sql
-    '»ñÈ¡µ±Ç°¹¤³Ìedb±í¼ÇÂ¼
+    '??????????edb?????
     AccessName = SSProcess.GetProjectFileName
-    'ÅÐ¶Ï±íÊÇ·ñ´æÔÚ
+    '?§Ø????????
     'if  IsTableExits(AccessName,strTableName)=false then exit function 
     'set adoConnection=createobject("adodb.connection")
     'strcon="DBQ="& AccessName &";DRIVER={Microsoft Access Driver (*.mdb)};"  
@@ -801,7 +801,7 @@ Function GetProjectTableList(ByVal strTableName,ByVal strFields,ByVal strAddCond
         For i = 0 To fieldCount - 1
             value = adoRs(i)
             If IsNull(value) Then value = ""
-            value = Replace(value,",","£¬")
+            value = Replace(value,",","??")
             rs(rsCount,i) = value
         Next
         rsCount = rsCount + 1
@@ -816,38 +816,38 @@ End Function
 
 Function GetSQLRecordAll(ByRef mdbName, ByRef StrSqlStatement, ByRef arSQLRecord(), ByRef iRecordCount)
     If StrSqlStatement = "" Then
-        MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
+        MsgBox "??????????????????",48
     End If
     iRecordCount =  - 1
-    'SQLÓï¾ä
+    'SQL???
     sql = StrSqlStatement
-    '´ò¿ª¼ÇÂ¼¼¯
+    '??????
     SSProcess.OpenAccessRecordset mdbName, sql
-    '»ñÈ¡¼ÇÂ¼×ÜÊý
+    '??????????
     RecordCount = SSProcess.GetAccessRecordCount (mdbName, sql)
     If RecordCount > 0 Then
         iRecordCount = 0
         ReDim arSQLRecord(RecordCount)
-        '½«¼ÇÂ¼ÓÎ±êÒÆµ½µÚÒ»ÐÐ
+        '??????¦Á?????????
         SSProcess.AccessMoveFirst mdbName, sql
         iRecordCount = 0
-        'ä¯ÀÀ¼ÇÂ¼
+        '??????
         While SSProcess.AccessIsEOF (mdbName, sql) = 0
             fields = ""
             values = ""
-            '»ñÈ¡µ±Ç°¼ÇÂ¼ÄÚÈÝ
+            '?????????????
             SSProcess.GetAccessRecord mdbName, sql, fields, values
-            arSQLRecord(iRecordCount) = values                                        '²éÑ¯¼ÇÂ¼
-            iRecordCount = iRecordCount + 1                                                    '²éÑ¯¼ÇÂ¼Êý
-            'ÒÆ¶¯¼ÇÂ¼ÓÎ±ê
+            arSQLRecord(iRecordCount) = values                                        '??????
+            iRecordCount = iRecordCount + 1                                                    '????????
+            '???????¦Á?
             SSProcess.AccessMoveNext mdbName, sql
         WEnd
     End If
-    '¹Ø±Õ¼ÇÂ¼¼¯
+    '???????
     SSProcess.CloseAccessRecordset mdbName, sql
 End Function
 
-'//¿ª¿â
+'//????
 Dim  adoConnection
 Function InitDB()
     accessName = SSProcess.GetProjectFileName
@@ -856,14 +856,14 @@ Function InitDB()
     adoConnection.Open strcon
 End Function
 
-'//¹Ø¿â
+'//???
 Function ReleaseDB()
     adoConnection.Close
     Set adoConnection = Nothing
 End Function
 
-'¸ÄÂ·¾¶
-'//»ñÈ¡³É¹ûÄ¿Â¼Â·¾¶
+'??¡¤??
+'//????????¡¤??
 Function  GetFilePath
     projectFileName = SSProcess.GetSysPathName (5)
     filePath = Replace(projectFileName,".edb","")
@@ -872,7 +872,7 @@ Function  GetFilePath
     GetFilePath = filePath
 End Function
 
-'//µÝ¹é´´½¨¶à¼¶Ä¿Â¼
+'//??ø’??????
 Function CreateFolder(path)
     Set fso = CreateObject("scripting.filesystemobject")
     If fso.FolderExists(path) Then

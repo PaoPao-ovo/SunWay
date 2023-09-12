@@ -1,53 +1,53 @@
-'docÈ«¾Ö¶ÔÏó
+'docå…¨å±€å¯¹è±¡
 Dim g_docObj
 
-'Â·¾¶²Ù×÷¶ÔÏó
+'è·¯å¾„æ“ä½œå¯¹è±¡
 Dim fso
 Set fso = CreateObject("Scripting.FileSystemObject")
 
-'´æ´¢ºìÏßÊôĞÔ
+'å­˜å‚¨çº¢çº¿å±æ€§
 Dim HXarr(1000,2)
 
-'ÆğËãµã²åÈëĞĞÊı
+'èµ·ç®—ç‚¹æ’å…¥è¡Œæ•°
 Dim RowBS
 RowBS = 0
 
-'±í2¸÷±í²åÈëĞĞÊı
+'è¡¨2å„è¡¨æ’å…¥è¡Œæ•°
 Dim Row1arr(1000,2)
 
-'±í3¸÷±í²åÈëµÄĞĞÊı
+'è¡¨3å„è¡¨æ’å…¥çš„è¡Œæ•°
 Dim Row2arr(1000,2)
 
-'±íÊı
+'è¡¨æ•°
 Dim Tablecount
 Tablecount = 0
 
-'²»·ûºÏµãºÅ
+'ä¸ç¬¦åˆç‚¹å·
 Dim DisPoi(1000)
 
-'²»·ûºÏÏßºÅ
+'ä¸ç¬¦åˆçº¿å·
 Dim DisLine(1000)
 
-'²»·ûºÏ¿ØÖÆµã±êÊ¶
+'ä¸ç¬¦åˆæ§åˆ¶ç‚¹æ ‡è¯†
 Dim DifKzPoi(1000)
 
-'²»·ûºÏÕı¸ºÁã±ê¸ß±íºÅ
+'ä¸ç¬¦åˆæ­£è´Ÿé›¶æ ‡é«˜è¡¨å·
 Dim DifZFL(1000)
 
-'Âú×ãµÄ¿ØÖÆµã¸öÊı
+'æ»¡è¶³çš„æ§åˆ¶ç‚¹ä¸ªæ•°
 Dim KzPoiCount
 KzPoiCount = 0
 
-'Èë¿Úº¯Êı
+'å…¥å£å‡½æ•°
 Sub OnClick()
     allvisible()
-    strTempFileName = "ÑéÏß²âÁ¿±¨¸æÄ£°å.doc"
-    strTempFilePath = SSProcess.GetSysPathName (7) & "Êä³öÄ£°å\" & strTempFileName
+    strTempFileName = "éªŒçº¿æµ‹é‡æŠ¥å‘Šæ¨¡æ¿.doc"
+    strTempFilePath = SSProcess.GetSysPathName (7) & "è¾“å‡ºæ¨¡æ¿\" & strTempFileName
     Set g_docObj = CreateObject ("asposewordscom.asposewordshelper")
     If  TypeName (g_docObj) = "AsposeWordsHelper" Then
         g_docObj.CreateDocumentByTemplate strTempFilePath
     Else
-        MsgBox "ÇëÏÈ×¢²áAspose.Word²å¼ş"
+        MsgBox "è¯·å…ˆæ³¨å†ŒAspose.Wordæ’ä»¶"
         Exit Sub
     End If
     
@@ -64,33 +64,39 @@ Sub OnClick()
     CopyTable()
     
     SetPosition()
+
     ZFL()
+
     Set4Line()
+
     SetResultTable()
+
     'InsertPhoto()
     
     strFileSavePath = pathName & proname
+
     'MsgBox strFileSavePath
+
     g_docObj.SaveEx  strFileSavePath
     
 End Sub
 
-'//»ñÈ¡³É¹ûÄ¿Â¼Â·¾¶
+'//è·å–æˆæœç›®å½•è·¯å¾„
 Function  GetFilePath()
     filePath = SSProcess.GetSysPathName(5)
-    filePath = filePath & "3³É¹û" & "\"
+    filePath = filePath & "3æˆæœ" & "\"
     ' filePath = filePath & "\"
     GetFilePath = filePath
 End Function
 
-'//»ñÈ¡³É¹û±¨¸æÃû³Æ
+'//è·å–æˆæœæŠ¥å‘Šåç§°
 Function  GetFileName()
     proname = GetProName()
-    GetFileName = proname & "ÑéÏß²âÁ¿±¨¸æ.doc"
+    GetFileName = proname & "éªŒçº¿æµ‹é‡æŠ¥å‘Š.doc"
 End Function
 
 
-'»ñÈ¡µ±Ç°ºìÏßµÄÏîÄ¿Ãû³Æ
+'è·å–å½“å‰çº¢çº¿çš„é¡¹ç›®åç§°
 Function GetProName()
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -101,7 +107,7 @@ Function GetProName()
     GetProName = xmmc
 End Function' GetProName
 
-'×Ö·ûÌæ»» 
+'å­—ç¬¦æ›¿æ¢ 
 Function ReplaceValue()
     hxid = SSProcess.GetSelGeoValue(0,"SSObj_ID")
     xmmc = SSProcess.GetSelGeoValue (0,"[XiangMMC]")
@@ -147,19 +153,19 @@ Function ReplaceValue()
     
 End Function
 
-'¸´ÖÆ±í
+'å¤åˆ¶è¡¨
 Function CopyTable()
-    zzs = HXarr(11,0) '·¶Î§ÏßÄÚµÄ½¨ÖşÎï×Ü¸öÊı
+    zzs = HXarr(11,0) 'èŒƒå›´çº¿å†…çš„å»ºç­‘ç‰©æ€»ä¸ªæ•°
     zzs = transform(zzs)
     i = 1
     bulidname = GetBuildingName()
     'MsgBox bulidname
     bulidarr = Split(bulidname,",", - 1,1)
-    text = bulidarr(0) & "½¨Éè¹¤³Ì¹æ»®ÑéÏß³É¹û±í"
+    text = bulidarr(0) & "å»ºè®¾å·¥ç¨‹è§„åˆ’éªŒçº¿æˆæœè¡¨"
     g_docObj.SetCellText 4,0,0,text,True,False
     While i <= zzs - 1
         g_docObj.CloneTable 4,2,0,False
-        text = bulidarr(i) & "½¨Éè¹¤³Ì¹æ»®ÑéÏß³É¹û±í"
+        text = bulidarr(i) & "å»ºè®¾å·¥ç¨‹è§„åˆ’éªŒçº¿æˆæœè¡¨"
         g_docObj.SetCellText 4 + i,0,0,text,True,False
         i = i + 1
     WEnd
@@ -167,11 +173,11 @@ Function CopyTable()
     Tablecount = CInt(Tablecount)
 End Function' CopyTable
 
-'»ñÈ¡µ±Ç°µÄ½¨ÖşÎïÃû³Æ
+'è·å–å½“å‰çš„å»ºç­‘ç‰©åç§°
 Function GetBuildingName()
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
-    SSProcess.SetSelectCondition "SSObj_Code", "==", "9130511" 'Êµ²â
+    SSProcess.SetSelectCondition "SSObj_Code", "==", "9130511" 'å®æµ‹
     SSProcess.SelectFilter
     poicount = SSProcess.GetSelgeoCount
     poistring = ""
@@ -186,7 +192,7 @@ Function GetBuildingName()
     GetBuildingName = poistring
 End Function' GetBuildingName
 
-'±éÀú¿ØÖÆµã²¢ÌîÖµ
+'éå†æ§åˆ¶ç‚¹å¹¶å¡«å€¼
 Function SetKZD()
     Dim LLarr(1000,4)
     SSProcess.ClearSelection
@@ -273,16 +279,16 @@ Function SetKZD()
                     g_docObj.SetCellText 4,row + k,9,30,True,False
                     'MsgBox count
                     If Diffxy > 50 Then
-                        g_docObj.SetCellText 4,row + k,10,"²»·ûºÏ",True,False
+                        g_docObj.SetCellText 4,row + k,10,"ä¸ç¬¦åˆ",True,False
                         DifKzPoi(count) = SCarr(i,3)
                     Else
-                        g_docObj.SetCellText 4,row + k,10,"·ûºÏ",True,False
+                        g_docObj.SetCellText 4,row + k,10,"ç¬¦åˆ",True,False
                     End If
                     If Diffh > 30 Then
-                        g_docObj.SetCellText 4,row + k,11,"²»·ûºÏ",True,False
+                        g_docObj.SetCellText 4,row + k,11,"ä¸ç¬¦åˆ",True,False
                         DifKzPoi(count) = SCarr(i,3)
                     Else
-                        g_docObj.SetCellText 4,row + k,11,"·ûºÏ",True,False
+                        g_docObj.SetCellText 4,row + k,11,"ç¬¦åˆ",True,False
                     End If
                     k = k + 1
                     count = count + 1
@@ -309,16 +315,16 @@ Function SetKZD()
                     g_docObj.SetCellText 4,row + k,8,50,True,False
                     g_docObj.SetCellText 4,row + k,9,30,True,False
                     If Diffxy > 50 Then
-                        g_docObj.SetCellText 4,row + k,10,"²»·ûºÏ",True,False
+                        g_docObj.SetCellText 4,row + k,10,"ä¸ç¬¦åˆ",True,False
                         DifKzPoi(count) = SCarr(i,3)
                     Else
-                        g_docObj.SetCellText 4,row + k,10,"·ûºÏ",True,False
+                        g_docObj.SetCellText 4,row + k,10,"ç¬¦åˆ",True,False
                     End If
                     If Diffh > 30 Then
-                        g_docObj.SetCellText 4,row + k,11,"²»·ûºÏ",True,False
+                        g_docObj.SetCellText 4,row + k,11,"ä¸ç¬¦åˆ",True,False
                         DifKzPoi(count) = SCarr(i,3)
                     Else
-                        g_docObj.SetCellText 4,row + k,11,"·ûºÏ",True,False
+                        g_docObj.SetCellText 4,row + k,11,"ç¬¦åˆ",True,False
                     End If
                     k = k + 1
                     count = count + 1
@@ -329,7 +335,7 @@ Function SetKZD()
     
 End Function' SetKZD
 
-'ÉèÖÃ×ø±êÑéÏß½Ï²î
+'è®¾ç½®åæ ‡éªŒçº¿è¾ƒå·®
 Function SetPosition()
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -373,7 +379,7 @@ Function SetPosition()
         For j = 4 To Tablecount + 3
             TitleName = g_docObj.GetCellText(j,0,0,False)
             'MsgBox TitleName
-            Title = Replace(TitleName,"½¨Éè¹¤³Ì¹æ»®ÑéÏß³É¹û±í","")
+            Title = Replace(TitleName,"å»ºè®¾å·¥ç¨‹è§„åˆ’éªŒçº¿æˆæœè¡¨","")
             totallen = Len(Title)
             Title = Left(Title,totallen - 1)
             'MsgBox namearr(i)
@@ -389,14 +395,14 @@ Function SetPosition()
                 g_docObj.SetCellText Tableindex,10 + RowBS + m,4,Pcarr(m,4),True,False
                 g_docObj.SetCellText Tableindex,10 + RowBS + m,5,50,True,False
                 If Pcarr(m,4) * 1000 > 50 Then
-                    g_docObj.SetCellText Tableindex,10 + RowBS + m,6,"²»·ûºÏ",True,False
+                    g_docObj.SetCellText Tableindex,10 + RowBS + m,6,"ä¸ç¬¦åˆ",True,False
                     If DisPoi(count) = "" Then
                         DisPoi(count) = Pcarr(m,5)
                     Else
                         DisPoi(count) = DisPoi(count) & "," & Pcarr(m,5)
                     End If
                 Else
-                    g_docObj.SetCellText Tableindex,10 + RowBS + m,6,"·ûºÏ",True,False
+                    g_docObj.SetCellText Tableindex,10 + RowBS + m,6,"ç¬¦åˆ",True,False
                 End If
             Next 'm
         End If
@@ -415,14 +421,14 @@ Function SetPosition()
                 g_docObj.SetCellText Tableindex,10 + RowBS + m,4,Pcarr(m,4),True,False
                 g_docObj.SetCellText Tableindex,10 + RowBS + m,5,50,True,False
                 If Pcarr(m,4) * 1000 > 50 Then
-                    g_docObj.SetCellText Tableindex,10 + RowBS + m,6,"²»·ûºÏ",True,False
+                    g_docObj.SetCellText Tableindex,10 + RowBS + m,6,"ä¸ç¬¦åˆ",True,False
                     If DisPoi(count) = "" Then
                         DisPoi(count) = Pcarr(m,5)
                     Else
                         DisPoi(count) = DisPoi(count) & "," & Pcarr(m,5)
                     End If
                 Else
-                    g_docObj.SetCellText Tableindex,10 + RowBS + m,6,"·ûºÏ",True,False
+                    g_docObj.SetCellText Tableindex,10 + RowBS + m,6,"ç¬¦åˆ",True,False
                 End If
             Next
             
@@ -431,7 +437,7 @@ Function SetPosition()
     Next 'i
 End Function' SetPosition
 
-'ËÑË÷Õı¸ºÁã±ê¸ß²¢ÌîÖµ
+'æœç´¢æ­£è´Ÿé›¶æ ‡é«˜å¹¶å¡«å€¼
 Function ZFL()
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -449,11 +455,11 @@ Function ZFL()
         ZFLcount = UBound(idsarr)
         
         'MsgBox ZFLcount
-        '»ñÈ¡±íË÷ÒıºÅ
+        'è·å–è¡¨ç´¢å¼•å·
         For j = 4 To Tablecount + 3
             TitleName = g_docObj.GetCellText(j,0,0,False)
             'MsgBox TitleName
-            Title = Replace(TitleName,"½¨Éè¹¤³Ì¹æ»®ÑéÏß³É¹û±í","")
+            Title = Replace(TitleName,"å»ºè®¾å·¥ç¨‹è§„åˆ’éªŒçº¿æˆæœè¡¨","")
             totallen = Len(Title)
             Title = Left(Title,totallen - 1)
             'MsgBox linestrarr(i)
@@ -477,14 +483,14 @@ Function ZFL()
                             g_docObj.SetCellText Tableindex,16 + RowBS + k + Row1arr(m,1),2,Diffh,True,False
                             g_docObj.SetCellText Tableindex,16 + RowBS + k + Row1arr(m,1),3,30,True,False
                             If Diffh * 1000 > 30 Then
-                                g_docObj.SetCellText Tableindex,16 + RowBS + k + Row1arr(m,1),4,"²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,16 + RowBS + k + Row1arr(m,1),4,"ä¸ç¬¦åˆ",True,False
                                 If DifZFL(count) = "" Then
                                     DifZFL(count) = jzwname
                                 Else
                                     DifZFL(count) = DifZFL(count) & "," & jzwname
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,16 + RowBS + k + Row1arr(m,1),4,"·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,16 + RowBS + k + Row1arr(m,1),4,"ç¬¦åˆ",True,False
                             End If
                         Else
                             g_docObj.SetCellText Tableindex,16 + RowBS + k,0,sjgc,True,False
@@ -492,21 +498,21 @@ Function ZFL()
                             g_docObj.SetCellText Tableindex,16 + RowBS + k,2,Diffh,True,False
                             g_docObj.SetCellText Tableindex,16 + RowBS + k,3,30,True,False
                             If Diffh * 1000 > 30 Then
-                                g_docObj.SetCellText Tableindex,16 + RowBS + k,4,"²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,16 + RowBS + k,4,"ä¸ç¬¦åˆ",True,False
                                 If DifZFL(count) = "" Then
                                     DifZFL(count) = jzwname
                                 Else
                                     DifZFL(count) = DifZFL(count) & "," & jzwname
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,16 + RowBS + k,4,"·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,16 + RowBS + k,4,"ç¬¦åˆ",True,False
                             End If
                         End If
                     Next
                 End If
                 
                 If ZFLcount >= 2 Then
-                    g_docObj.CloneTableRow Tableindex, 16 + RowBS + k + Row1arr(k,1), 1,ZFLcount - 1 , False '²åÈëÁĞÊı
+                    g_docObj.CloneTableRow Tableindex, 16 + RowBS + k + Row1arr(k,1), 1,ZFLcount - 1 , False 'æ’å…¥åˆ—æ•°
                     sjgc = SSProcess.GetObjectAttr(idsarr(k),"[SheJGC]")
                     yxgc = SSProcess.GetObjectAttr(idsarr(k),"[YanXGC]")
                     sjgc = Round(sjgc,3)
@@ -520,14 +526,14 @@ Function ZFL()
                             g_docObj.SetCellText Tableindex,16 + RowBS + k + Row1arr(m,1),2,Diffh,True,False
                             g_docObj.SetCellText Tableindex,16 + RowBS + k + Row1arr(m,1),3,30,True,False
                             If Diffh * 1000 > 30 Then
-                                g_docObj.SetCellText Tableindex,16 + RowBS + k + Row1arr(m,1),4,"²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,16 + RowBS + k + Row1arr(m,1),4,"ä¸ç¬¦åˆ",True,False
                                 If DifZFL(count) = "" Then
                                     DifZFL(count) = jzwname
                                 Else
                                     DifZFL(count) = DifZFL(count) & "," & jzwname
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,16 + RowBS + k + Row1arr(m,1),4,"·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,16 + RowBS + k + Row1arr(m,1),4,"ç¬¦åˆ",True,False
                             End If
                             Row2arr(k,0) = Tableindex
                             Row2arr(k,1) = ZFLcount - 1 + Row1arr(k,1)
@@ -537,14 +543,14 @@ Function ZFL()
                             g_docObj.SetCellText Tableindex,16 + RowBS + k,2,Diffh,True,False
                             g_docObj.SetCellText Tableindex,16 + RowBS + k,3,30,True,False
                             If Diffh * 1000 > 30 Then
-                                g_docObj.SetCellText Tableindex,16 + RowBS + k,4,"²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,16 + RowBS + k,4,"ä¸ç¬¦åˆ",True,False
                                 If DifZFL(count) = "" Then
                                     DifZFL(count) = jzwname
                                 Else
                                     DifZFL(count) = DifZFL(count) & "," & jzwname
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,16 + RowBS + k,4,"·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,16 + RowBS + k,4,"ç¬¦åˆ",True,False
                             End If
                             Row2arr(k,0) = Tableindex
                             Row2arr(k,1) = ZFLcount - 1
@@ -580,14 +586,14 @@ Function ZFL()
                             g_docObj.SetCellText Tableindex,16 + RowBS + Row1arr(n,1),2,Diffh,True,False
                             g_docObj.SetCellText Tableindex,16 + RowBS + Row1arr(n,1),3,30,True,False
                             If Diffh * 1000 > 30 Then
-                                g_docObj.SetCellText Tableindex,16 + RowBS + Row1arr(n,1),4,"²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,16 + RowBS + Row1arr(n,1),4,"ä¸ç¬¦åˆ",True,False
                                 If DifZFL(count) = "" Then
                                     DifZFL(count) = Tableindex
                                 Else
                                     DifZFL(count) = DifZFL(count) & "," & Tableindex
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,16 + RowBS + Row1arr(n,1),4,"·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,16 + RowBS + Row1arr(n,1),4,"ç¬¦åˆ",True,False
                             End If
                             
                         Else
@@ -596,14 +602,14 @@ Function ZFL()
                             g_docObj.SetCellText Tableindex,16 + RowBS ,2,Diffh,True,False
                             g_docObj.SetCellText Tableindex,16 + RowBS ,3,30,True,False
                             If Diffh * 1000 > 30 Then
-                                g_docObj.SetCellText Tableindex,16 + RowBS ,4,"²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,16 + RowBS ,4,"ä¸ç¬¦åˆ",True,False
                                 If DifZFL(count) = "" Then
                                     DifZFL(count) = Tableindex
                                 Else
                                     DifZFL(count) = DifZFL(count) & "," & Tableindex
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,16 + RowBS ,4,"·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,16 + RowBS ,4,"ç¬¦åˆ",True,False
                             End If
                         End If
                     Next 'n
@@ -615,12 +621,12 @@ Function ZFL()
 End Function' ZFL
 
 
-'ÉèÖÃËÄÖÁ±ß³¤
+'è®¾ç½®å››è‡³è¾¹é•¿
 Function Set4Line()
     count = 0
     For i = 4 To Tablecount + 3
         TitleName = g_docObj.GetCellText(i,0,0,False)
-        Title = Replace(TitleName,"½¨Éè¹¤³Ì¹æ»®ÑéÏß³É¹û±í","")
+        Title = Replace(TitleName,"å»ºè®¾å·¥ç¨‹è§„åˆ’éªŒçº¿æˆæœè¡¨","")
         totallen = Len(Title)
         Title = Left(Title,totallen - 1)
         'MsgBox Title
@@ -653,15 +659,15 @@ Function Set4Line()
                             content = g_docObj.GetCellText(Tableindex,hs,8,False)
                             contentlen = Len(content)
                             content = Left(content,contentlen - 1)
-                            If content = "" Or content = "·ûºÏ" Then
-                                g_docObj.SetCellText Tableindex,hs,8,bh & "²»·ûºÏ",True,False
+                            If content = "" Or content = "ç¬¦åˆ" Then
+                                g_docObj.SetCellText Tableindex,hs,8,bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
                                     DisLine(count) = DisLine(count) & "," & bh
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
@@ -678,15 +684,15 @@ Function Set4Line()
                             content = g_docObj.GetCellText(Tableindex,hs,8,False)
                             contentlen = Len(content)
                             content = Left(content,contentlen - 1)
-                            If content = "" Or content = "·ûºÏ" Then
-                                g_docObj.SetCellText Tableindex,hs,8,bh & "²»·ûºÏ",True,False
+                            If content = "" Or content = "ç¬¦åˆ" Then
+                                g_docObj.SetCellText Tableindex,hs,8,bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
                                     DisLine(count) = DisLine(count) & "," & bh
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
@@ -699,7 +705,7 @@ Function Set4Line()
                     tjlen1 = Len(tj1)
                     tj1 = Left(tj1,tjlen1 - 1)
                     If tj1 = "" Then
-                        g_docObj.SetCellText Tableindex,hs,8,"·ûºÏ",True,False
+                        g_docObj.SetCellText Tableindex,hs,8,"ç¬¦åˆ",True,False
                     End If
                 Next 'l
             ElseIf Row1arr(k,0) = Tableindex And Row2arr(k,0) <> Tableindex Then
@@ -721,15 +727,15 @@ Function Set4Line()
                             content = g_docObj.GetCellText(Tableindex,hs,8,False)
                             contentlen = Len(content)
                             content = Left(content,contentlen - 1)
-                            If content = "" Or content = "·ûºÏ" Then
-                                g_docObj.SetCellText Tableindex,hs,8,bh & "²»·ûºÏ",True,False
+                            If content = "" Or content = "ç¬¦åˆ" Then
+                                g_docObj.SetCellText Tableindex,hs,8,bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
                                     DisLine(count) = DisLine(count) & "," & bh
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
@@ -747,15 +753,15 @@ Function Set4Line()
                             contentlen = Len(content)
                             content = Left(content,contentlen - 1)
                             'MsgBox content
-                            If content = "" Or content = "·ûºÏ" Then
-                                g_docObj.SetCellText Tableindex,hs,8,bh & "²»·ûºÏ",True,False
+                            If content = "" Or content = "ç¬¦åˆ" Then
+                                g_docObj.SetCellText Tableindex,hs,8,bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
                                     DisLine(count) = DisLine(count) & "," & bh
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
@@ -769,7 +775,7 @@ Function Set4Line()
                     tjlen1 = Len(tj1)
                     tj1 = Left(tj1,tjlen1 - 1)
                     If tj1 = "" Then
-                        g_docObj.SetCellText Tableindex,hs,8,"·ûºÏ",True,False
+                        g_docObj.SetCellText Tableindex,hs,8,"ç¬¦åˆ",True,False
                     End If
                 Next 'l
             ElseIf Row1arr(k,0) <> Tableindex And Row2arr(k,0) = Tableindex Then
@@ -791,15 +797,15 @@ Function Set4Line()
                             content = g_docObj.GetCellText(Tableindex,hs,8,False)
                             contentlen = Len(content)
                             content = Left(content,contentlen - 1)
-                            If content = "" Or content = "·ûºÏ"  Then
-                                g_docObj.SetCellText Tableindex,hs,8,bh & "²»·ûºÏ",True,False
+                            If content = "" Or content = "ç¬¦åˆ"  Then
+                                g_docObj.SetCellText Tableindex,hs,8,bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
                                     DisLine(count) = DisLine(count) & "," & bh
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
@@ -816,15 +822,15 @@ Function Set4Line()
                             content = g_docObj.GetCellText(Tableindex,hs,8,False)
                             contentlen = Len(content)
                             content = Left(content,contentlen - 1)
-                            If content = "" Or content = "·ûºÏ" Then
-                                g_docObj.SetCellText Tableindex,hs,8,bh & "²»·ûºÏ",True,False
+                            If content = "" Or content = "ç¬¦åˆ" Then
+                                g_docObj.SetCellText Tableindex,hs,8,bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
                                     DisLine(count) = DisLine(count) & "," & bh
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
@@ -837,7 +843,7 @@ Function Set4Line()
                     tjlen1 = Len(tj1)
                     tj1 = Left(tj1,tjlen1 - 1)
                     If tj1 = "" Then
-                        g_docObj.SetCellText Tableindex,hs,8,"·ûºÏ",True,False
+                        g_docObj.SetCellText Tableindex,hs,8,"ç¬¦åˆ",True,False
                     End If
                 Next 'l
             Else
@@ -861,16 +867,16 @@ Function Set4Line()
                             contentlen = Len(content)
                             content = Left(content,contentlen - 1)
                             'MsgBox content
-                            If content = "" Or content = "·ûºÏ" Then
+                            If content = "" Or content = "ç¬¦åˆ" Then
                                 'MsgBox bh
-                                g_docObj.SetCellText Tableindex,hs,8,bh & "²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,hs,8,bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
                                     DisLine(count) = DisLine(count) & "," & bh
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
@@ -888,15 +894,15 @@ Function Set4Line()
                             contentlen = Len(content)
                             content = Left(content,contentlen - 1)
                             'MsgBox content
-                            If content = "" Or content = "·ûºÏ" Then
-                                g_docObj.SetCellText Tableindex,hs,8,bh & "²»·ûºÏ",True,False
+                            If content = "" Or content = "ç¬¦åˆ" Then
+                                g_docObj.SetCellText Tableindex,hs,8,bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
                                     DisLine(count) = DisLine(count) & "," & bh
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
@@ -910,7 +916,7 @@ Function Set4Line()
                     tj1 = Left(tj1,tjlen1 - 1)
                     'MsgBox tj
                     If tj1 = "" Then
-                        g_docObj.SetCellText Tableindex,hs,8,"·ûºÏ",True,False
+                        g_docObj.SetCellText Tableindex,hs,8,"ç¬¦åˆ",True,False
                     End If
                 Next 'l
             End If
@@ -921,7 +927,7 @@ Function Set4Line()
             k = i - 4
             'For k = 0 To Tablecount - 1
             If Row1arr(k,0) = Tableindex And Row2arr(k,0) = Tableindex  Then
-                g_docObj.CloneTableRow Tableindex, 20 + RowBS + Row1arr(k,1) + Row2arr(k,1), 1, Round((SelCount - 4) / 2), False '²åÈëĞĞÊı
+                g_docObj.CloneTableRow Tableindex, 20 + RowBS + Row1arr(k,1) + Row2arr(k,1), 1, Round((SelCount - 4) / 2), False 'æ’å…¥è¡Œæ•°
                 For l = 0 To SelCount - 1
                     bh = SSProcess.GetSelGeoValue(l,"[BH]")
                     fxbc = SSProcess.GetSelGeoValue(l,"[FXBC]")
@@ -941,14 +947,14 @@ Function Set4Line()
                             contentlen = Len(content)
                             content = Left(content,contentlen - 1)
                             If content = "" Then
-                                g_docObj.SetCellText Tableindex,hs,8,bh & "²»·ûºÏ",True,False
-                                If DisLine(count) = "" Or content = "·ûºÏ" Then
+                                g_docObj.SetCellText Tableindex,hs,8,bh & "ä¸ç¬¦åˆ",True,False
+                                If DisLine(count) = "" Or content = "ç¬¦åˆ" Then
                                     DisLine(count) = bh
                                 Else
                                     DisLine(count) = DisLine(count) & "," & bh
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
@@ -966,14 +972,14 @@ Function Set4Line()
                             contentlen = Len(content)
                             content = Left(content,contentlen - 1)
                             If content = "" Then
-                                g_docObj.SetCellText Tableindex,hs,8,bh & "²»·ûºÏ",True,False
-                                If DisLine(count) = "" Or content = "·ûºÏ"  Then
+                                g_docObj.SetCellText Tableindex,hs,8,bh & "ä¸ç¬¦åˆ",True,False
+                                If DisLine(count) = "" Or content = "ç¬¦åˆ"  Then
                                     DisLine(count) = bh
                                 Else
                                     DisLine(count) = DisLine(count) & "," & bh
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
@@ -987,11 +993,11 @@ Function Set4Line()
                     tjlen1 = Len(tj1)
                     tj1 = Left(tj1,tjlen1 - 1)
                     If tj1 = "" Then
-                        g_docObj.SetCellText Tableindex,hs,8,"·ûºÏ",True,False
+                        g_docObj.SetCellText Tableindex,hs,8,"ç¬¦åˆ",True,False
                     End If
                 Next 'l
             ElseIf Row1arr(k,0) = Tableindex And Row2arr(k,0) <> Tableindex Then
-                g_docObj.CloneTableRow Tableindex, 20 + RowBS + Row1arr(k,1) , 1, Round((SelCount - 4) / 2), False '²åÈëĞĞÊı
+                g_docObj.CloneTableRow Tableindex, 20 + RowBS + Row1arr(k,1) , 1, Round((SelCount - 4) / 2), False 'æ’å…¥è¡Œæ•°
                 For l = 0 To SelCount - 1
                     bh = SSProcess.GetSelGeoValue(l,"[BH]")
                     fxbc = SSProcess.GetSelGeoValue(l,"[FXBC]")
@@ -1010,15 +1016,15 @@ Function Set4Line()
                             content = g_docObj.GetCellText(Tableindex,hs,8,False)
                             contentlen = Len(content)
                             content = Left(content,contentlen - 1)
-                            If content = "" Or content = "·ûºÏ" Then
-                                g_docObj.SetCellText Tableindex,hs,8,bh & "²»·ûºÏ",True,False
+                            If content = "" Or content = "ç¬¦åˆ" Then
+                                g_docObj.SetCellText Tableindex,hs,8,bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
                                     DisLine(count) = DisLine(count) & "," & bh
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
@@ -1035,15 +1041,15 @@ Function Set4Line()
                             content = g_docObj.GetCellText(Tableindex,hs,8,False)
                             contentlen = Len(content)
                             content = Left(content,contentlen - 1)
-                            If content = "" Or content = "·ûºÏ"  Then
-                                g_docObj.SetCellText Tableindex,hs,8,bh & "²»·ûºÏ",True,False
+                            If content = "" Or content = "ç¬¦åˆ"  Then
+                                g_docObj.SetCellText Tableindex,hs,8,bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
                                     DisLine(count) = DisLine(count) & "," & bh
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
@@ -1057,11 +1063,11 @@ Function Set4Line()
                     tjlen1 = Len(tj1)
                     tj1 = Left(tj1,tjlen1 - 1)
                     If tj1 = "" Then
-                        g_docObj.SetCellText Tableindex,hs,8,"·ûºÏ",True,False
+                        g_docObj.SetCellText Tableindex,hs,8,"ç¬¦åˆ",True,False
                     End If
                 Next 'l
             ElseIf Row1arr(k,0) <> Tableindex And Row2arr(k,0) = Tableindex Then
-                g_docObj.CloneTableRow Tableindex, 20 + RowBS + Row2arr(k,1) , 1, Round((SelCount - 4) / 2), False '²åÈëĞĞÊı
+                g_docObj.CloneTableRow Tableindex, 20 + RowBS + Row2arr(k,1) , 1, Round((SelCount - 4) / 2), False 'æ’å…¥è¡Œæ•°
                 For l = 0 To SelCount - 1
                     bh = SSProcess.GetSelGeoValue(l,"[BH]")
                     fxbc = SSProcess.GetSelGeoValue(l,"[FXBC]")
@@ -1080,15 +1086,15 @@ Function Set4Line()
                             content = g_docObj.GetCellText(Tableindex,hs,8,False)
                             contentlen = Len(content)
                             content = Left(content,contentlen - 1)
-                            If content = "" Or content = "·ûºÏ"  Then
-                                g_docObj.SetCellText Tableindex,hs,8,bh & "²»·ûºÏ",True,False
+                            If content = "" Or content = "ç¬¦åˆ"  Then
+                                g_docObj.SetCellText Tableindex,hs,8,bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
                                     DisLine(count) = DisLine(count) & "," & bh
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
@@ -1105,15 +1111,15 @@ Function Set4Line()
                             content = g_docObj.GetCellText(Tableindex,hs,8,False)
                             contentlen = Len(content)
                             content = Left(content,contentlen - 1)
-                            If content = "" Or content = "·ûºÏ"  Then
-                                g_docObj.SetCellText Tableindex,hs,8,bh & "²»·ûºÏ",True,False
+                            If content = "" Or content = "ç¬¦åˆ"  Then
+                                g_docObj.SetCellText Tableindex,hs,8,bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
                                     DisLine(count) = DisLine(count) & "," & bh
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
@@ -1127,11 +1133,11 @@ Function Set4Line()
                     tjlen1 = Len(tj1)
                     tj1 = Left(tj1,tjlen1 - 1)
                     If tj = "" Then
-                        g_docObj.SetCellText Tableindex,hs,8,"·ûºÏ",True,False
+                        g_docObj.SetCellText Tableindex,hs,8,"ç¬¦åˆ",True,False
                     End If
                 Next 'l
             Else
-                g_docObj.CloneTableRow Tableindex, 20 + RowBS , 1, Round((SelCount - 4) / 2), False '²åÈëĞĞÊı
+                g_docObj.CloneTableRow Tableindex, 20 + RowBS , 1, Round((SelCount - 4) / 2), False 'æ’å…¥è¡Œæ•°
                 For l = 0 To SelCount - 1
                     bh = SSProcess.GetSelGeoValue(l,"[BH]")
                     fxbc = SSProcess.GetSelGeoValue(l,"[FXBC]")
@@ -1150,15 +1156,15 @@ Function Set4Line()
                             content = g_docObj.GetCellText(Tableindex,hs,8,False)
                             contentlen = Len(content)
                             content = Left(content,contentlen - 1)
-                            If content = "" Or content = "·ûºÏ"  Then
-                                g_docObj.SetCellText Tableindex,hs,8,bh & "²»·ûºÏ",True,False
+                            If content = "" Or content = "ç¬¦åˆ"  Then
+                                g_docObj.SetCellText Tableindex,hs,8,bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
                                     DisLine(count) = DisLine(count) & "," & bh
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
@@ -1175,15 +1181,15 @@ Function Set4Line()
                             content = g_docObj.GetCellText(Tableindex,hs,8,False)
                             contentlen = Len(content)
                             content = Left(content,contentlen - 1)
-                            If content = "" Or content = "·ûºÏ" Then
-                                g_docObj.SetCellText Tableindex,hs,8,bh & "²»·ûºÏ",True,False
+                            If content = "" Or content = "ç¬¦åˆ" Then
+                                g_docObj.SetCellText Tableindex,hs,8,bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
                                     DisLine(count) = DisLine(count) & "," & bh
                                 End If
                             Else
-                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "²»·ûºÏ",True,False
+                                g_docObj.SetCellText Tableindex,hs,8,content & bh & "ä¸ç¬¦åˆ",True,False
                                 If DisLine(count) = "" Then
                                     DisLine(count) = bh
                                 Else
@@ -1196,7 +1202,7 @@ Function Set4Line()
                     tjlen1 = Len(tj1)
                     tj1 = Left(tj1,tjlen1 - 1)
                     If tj1 = "" Then
-                        g_docObj.SetCellText Tableindex,hs,8,"·ûºÏ",True,False
+                        g_docObj.SetCellText Tableindex,hs,8,"ç¬¦åˆ",True,False
                     End If
                 Next 'l
             End If
@@ -1206,7 +1212,7 @@ Function Set4Line()
     Next 'i
 End Function' Set4Line
 
-'ºË²éÇé¿ö±í
+'æ ¸æŸ¥æƒ…å†µè¡¨
 Function SetInfoTable()
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -1233,7 +1239,7 @@ Function SetInfoTable()
     End If
 End Function' SetInfoTable
 
-'¹æ»®ÑéÏß²âÁ¿½áÂÛ
+'è§„åˆ’éªŒçº¿æµ‹é‡ç»“è®º
 Function SetResultTable()
     poiname = ""
     For i = 0 To KzPoiCount - 1
@@ -1249,7 +1255,7 @@ Function SetResultTable()
     TotalStr = ""
     
     If poiname <> "" Then
-        str = "¾­Êµ²â£¬±¾´ÎÑéÏß" & poiname & "¿ØÖÆµã²»Âú×ã¾«¶ÈÒªÇó¡£"
+        str = "ç»å®æµ‹ï¼Œæœ¬æ¬¡éªŒçº¿" & poiname & "æ§åˆ¶ç‚¹ä¸æ»¡è¶³ç²¾åº¦è¦æ±‚ã€‚"
         If TotalStr = "" Then
             TotalStr = str
         Else
@@ -1260,25 +1266,25 @@ Function SetResultTable()
     For i = 0 To Tablecount - 1
         TitleName = g_docObj.GetCellText(i + 4,0,0,False)
         'MsgBox TitleName
-        Title = Replace(TitleName,"½¨Éè¹¤³Ì¹æ»®ÑéÏß³É¹û±í","")
+        Title = Replace(TitleName,"å»ºè®¾å·¥ç¨‹è§„åˆ’éªŒçº¿æˆæœè¡¨","")
         totallen = Len(Title)
         Title = Left(Title,totallen - 1)
         If DisPoi(i) <> "" And DisLine(i) <> ""  Then
-            str = "¾­Êµ²â£¬±¾´ÎÑéÏß" & Title & "£¬µãºÅ" & DisPoi(i) & "³¬³öÏŞ²î·¶Î§£¬ËÄÖÁ¾àÀë" & DisLine(i) & "³¬³öÏŞ²î·¶Î§¡£"
+            str = "ç»å®æµ‹ï¼Œæœ¬æ¬¡éªŒçº¿" & Title & "ï¼Œç‚¹å·" & DisPoi(i) & "è¶…å‡ºé™å·®èŒƒå›´ï¼Œå››è‡³è·ç¦»" & DisLine(i) & "è¶…å‡ºé™å·®èŒƒå›´ã€‚"
             If TotalStr = "" Then
                 TotalStr = str
             Else
                 TotalStr = str & Chr(13) & TotalStr
             End If
         ElseIf DisPoi(i) = "" And DisLine(i) <> "" Then
-            str = "¾­Êµ²â£¬±¾´ÎÑéÏß" & Title & "£¬ËÄÖÁ¾àÀë" & DisLine(i) & "³¬³öÏŞ²î·¶Î§¡£"
+            str = "ç»å®æµ‹ï¼Œæœ¬æ¬¡éªŒçº¿" & Title & "ï¼Œå››è‡³è·ç¦»" & DisLine(i) & "è¶…å‡ºé™å·®èŒƒå›´ã€‚"
             If TotalStr = "" Then
                 TotalStr = str
             Else
                 TotalStr = str & Chr(13) & TotalStr
             End If
         ElseIf DisPoi(i) <> "" And DisLine(i) = "" Then
-            str = "¾­Êµ²â£¬±¾´ÎÑéÏß" & Title & "£¬µãºÅ" & DisPoi(i) & "³¬³öÏŞ²î·¶Î§¡£"
+            str = "ç»å®æµ‹ï¼Œæœ¬æ¬¡éªŒçº¿" & Title & "ï¼Œç‚¹å·" & DisPoi(i) & "è¶…å‡ºé™å·®èŒƒå›´ã€‚"
             If TotalStr = "" Then
                 TotalStr = str
             Else
@@ -1288,7 +1294,7 @@ Function SetResultTable()
         
         If DifZFL(i) <> "" Then
             TotalJzwnameArr = Split(DifZFL(i),",", - 1,1)
-            str = "¾­Êµ²â£¬±¾´ÎÑéÏß" & TotalJzwnameArr(0) & "Õı¸ºÁã±ê¸ß²»Âú×ã¾«¶ÈÒªÇó¡£"
+            str = "ç»å®æµ‹ï¼Œæœ¬æ¬¡éªŒçº¿" & TotalJzwnameArr(0) & "æ­£è´Ÿé›¶æ ‡é«˜ä¸æ»¡è¶³ç²¾åº¦è¦æ±‚ã€‚"
             If TotalStr = "" Then
                 TotalStr = str
             Else
@@ -1298,16 +1304,16 @@ Function SetResultTable()
     Next 'i
     
     If TotalStr = "" Then
-        TotalStr = "¾­×ÊÁÏºË²éºÍÏÖ³¡ÑéÏß²âÁ¿£¬¡¶²ÔÄÏÏØ½¨Éè¹¤³Ì·ÅÏß²âÁ¿±¨¸æ¡·±íÊöÄÚÈİ¡¢×¢¼ÇÊı¾İ¼°¼¼Êõ±¨¸æ¸ñÊ½·ûºÏ¹æ¶¨£¬·ÅÏß²âÁ¿ÆğËã¿ØÖÆµã¡¢Ìõ¼şµã£¨Ñé²âµã£©Âú×ã¾«¶ÈÒªÇó£¬¡¶²ÔÄÏÏØ½¨Éè¹¤³Ì·ÅÏß²âÁ¿±¨¸æ¡·ÖĞµÄÌõ¼ş×ø±ê¡¢±ß³¤¡¢ËÄÖÁ¹ØÏµÓë¹æ»®Ğí¿ÉÒ»ÖÂ£¬·ÅÏß·ûºÏ¹æ»®ÒªÇó¡£"
+        TotalStr = "ç»èµ„æ–™æ ¸æŸ¥å’Œç°åœºéªŒçº¿æµ‹é‡ï¼Œã€Šè‹å—å¿å»ºè®¾å·¥ç¨‹æ”¾çº¿æµ‹é‡æŠ¥å‘Šã€‹è¡¨è¿°å†…å®¹ã€æ³¨è®°æ•°æ®åŠæŠ€æœ¯æŠ¥å‘Šæ ¼å¼ç¬¦åˆè§„å®šï¼Œæ”¾çº¿æµ‹é‡èµ·ç®—æ§åˆ¶ç‚¹ã€æ¡ä»¶ç‚¹ï¼ˆéªŒæµ‹ç‚¹ï¼‰æ»¡è¶³ç²¾åº¦è¦æ±‚ï¼Œã€Šè‹å—å¿å»ºè®¾å·¥ç¨‹æ”¾çº¿æµ‹é‡æŠ¥å‘Šã€‹ä¸­çš„æ¡ä»¶åæ ‡ã€è¾¹é•¿ã€å››è‡³å…³ç³»ä¸è§„åˆ’è®¸å¯ä¸€è‡´ï¼Œæ”¾çº¿ç¬¦åˆè§„åˆ’è¦æ±‚ã€‚"
     End If
     g_docObj.Replace "{" & "TEXT" & "}",TotalStr,0
 End Function' SetResultTable
 
-'²åÈëÕÕÆ¬
+'æ’å…¥ç…§ç‰‡
 Function InsertPhoto()
     Dim f1,fc,f
     filePath = SSProcess.GetSysPathName(5)
-    filePath = filePath & "4Ó°Ïñ"
+    filePath = filePath & "4å½±åƒ"
     'MsgBox filePath
     Set f = fso.GetFolder(filePath)
     Set fc = f.Files
@@ -1329,7 +1335,7 @@ Function InsertPhoto()
             col = i Mod 2
             'MsgBox filePath & "\" & sarr(i)
             If col = 0 Then
-                'g_docObj.SetCellText Tableindex,hs,8,"·ûºÏ",True,False
+                'g_docObj.SetCellText Tableindex,hs,8,"ç¬¦åˆ",True,False
                 g_docObj.SetCellImageEx count, row, 0, - 1, filePath & "\" & sarr(i) ,1,1
             Else
                 g_docObj.SetCellImageEx count, row + 1, 1, - 1, filePath & "\" & sarr(i),1,1
@@ -1338,18 +1344,18 @@ Function InsertPhoto()
     Next 'i
 End Function' InsertPhoto
 
-'Êı¾İÀàĞÍ×ª»»
+'æ•°æ®ç±»å‹è½¬æ¢
 Function transform(content)
     If content <> "" Then
         content = CDbl(content)
     Else
-        MsgBox "Êı¾İÓĞÎó"
+        MsgBox "æ•°æ®æœ‰è¯¯"
         Exit Function
     End If
     transform = content
 End Function
 
-'»æÖÆ¸¨ÖúÏß£¨Êµ²â£©
+'ç»˜åˆ¶è¾…åŠ©çº¿ï¼ˆå®æµ‹ï¼‰
 Function MakeLine1(x1,y1,x2,y2,jzwname)
     SSProcess.CreateNewObj 1
     SSProcess.SetNewObjValue "SSObj_Code", "1"
@@ -1361,7 +1367,7 @@ Function MakeLine1(x1,y1,x2,y2,jzwname)
     SSProcess.SaveBufferObjToDatabase
 End Function
 
-'»æÖÆ¸¨ÖúÏß£¨ÀíÂÛ£©
+'ç»˜åˆ¶è¾…åŠ©çº¿ï¼ˆç†è®ºï¼‰
 Function MakeLine2(x1,y1,x2,y2,jzwname)
     SSProcess.CreateNewObj 1
     SSProcess.SetNewObjValue "SSObj_Code", "2"
@@ -1373,7 +1379,7 @@ Function MakeLine2(x1,y1,x2,y2,jzwname)
     SSProcess.SaveBufferObjToDatabase
 End Function
 
-'É¾³ıÏß
+'åˆ é™¤çº¿
 Function DelLine()
     SSProcess.PushUndoMark
     SSProcess.ClearSelection
@@ -1383,7 +1389,7 @@ Function DelLine()
     SSProcess.DeleteSelectionObj
 End Function' DelLine
 
-'Ñ¡Ôñ¸¨ÖúÏß
+'é€‰æ‹©è¾…åŠ©çº¿
 Function SelLine1(coed)
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -1391,7 +1397,7 @@ Function SelLine1(coed)
     SSProcess.SelectFilter
 End Function' SelLine
 
-'Ñ¡Ôñ¸¨ÖúÏß
+'é€‰æ‹©è¾…åŠ©çº¿
 Function SelLine(coed,note)
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -1400,7 +1406,7 @@ Function SelLine(coed,note)
     SSProcess.SelectFilter
 End Function' SelLine
 
-'Ñ¡ÔñÆ«²î·½Ïò
+'é€‰æ‹©åå·®æ–¹å‘
 Function SelDiffLine(coed,name)
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -1409,7 +1415,7 @@ Function SelDiffLine(coed,name)
     SSProcess.SelectFilter
 End Function' SelDiffLine
 
-'Ñ¡ÔñÑéÏß±ß³¤
+'é€‰æ‹©éªŒçº¿è¾¹é•¿
 Function SelYxBc(name)
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -1418,14 +1424,14 @@ Function SelYxBc(name)
     SSProcess.SelectFilter
 End Function' SelYxBc
 
-'¼ÆËã¾àÀë²î
+'è®¡ç®—è·ç¦»å·®
 Function GetLengthDiff(x1,y1,x2,y2)
     diff = Sqr((x1 - x2) ^ 2 + (y1 - y2) ^ 2)
     diff = Round(diff,3)
     GetLengthDiff = diff
 End Function' GetLengthDiff
 
-'´ò¿ªÍ¼²ã
+'æ‰“å¼€å›¾å±‚
 Function allvisible()
     count = SSProcess.GetLayerCount
     For i = 0 To count - 1

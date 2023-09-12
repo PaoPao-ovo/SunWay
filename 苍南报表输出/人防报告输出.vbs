@@ -1,47 +1,47 @@
-' Ò»¡¢»ñÈ¡±¨¸æÄ£°åÂ·¾¶²¢¸´ÖÆµ½Êä³öÂ·¾¶
-' 1¡¢»ñÈ¡µ±Ç°µÄÄ£°åÂ·¾¶²¢´´½¨Word
-' 2¡¢ÉèÖÃWord±£´æÂ·¾¶ºÍÎÄ¼şÃû
+' ä¸€ã€è·å–æŠ¥å‘Šæ¨¡æ¿è·¯å¾„å¹¶å¤åˆ¶åˆ°è¾“å‡ºè·¯å¾„
+' 1ã€è·å–å½“å‰çš„æ¨¡æ¿è·¯å¾„å¹¶åˆ›å»ºWord
+' 2ã€è®¾ç½®Wordä¿å­˜è·¯å¾„å’Œæ–‡ä»¶å
 
-' ¶ş¡¢¸ù¾İÏîÄ¿ºìÏßÊôĞÔÖµ½øĞĞ×Ö·û´®Ìæ»»
-' 1¡¢»ñÈ¡ÏîÄ¿ºìÏßµÄÊôĞÔ£¨»ñÈ¡ÏîÄ¿ĞÅÏ¢Ê±ĞèÒªÈ¥³ıÀ¨ºÅ£©
+' äºŒã€æ ¹æ®é¡¹ç›®çº¢çº¿å±æ€§å€¼è¿›è¡Œå­—ç¬¦ä¸²æ›¿æ¢
+' 1ã€è·å–é¡¹ç›®çº¢çº¿çš„å±æ€§ï¼ˆè·å–é¡¹ç›®ä¿¡æ¯æ—¶éœ€è¦å»é™¤æ‹¬å·ï¼‰
 
-'========================================================Doc²Ù×÷¶ÔÏóºÍÎÄ¼şÂ·¾¶²Ù×÷¶ÔÏó================================================================
+'========================================================Docæ“ä½œå¯¹è±¡å’Œæ–‡ä»¶è·¯å¾„æ“ä½œå¯¹è±¡================================================================
 
-'DocÈ«¾Ö¶ÔÏó
+'Docå…¨å±€å¯¹è±¡
 Dim Global_Word
 Set Global_Word = CreateObject ("asposewordscom.asposewordshelper")
 
-'Â·¾¶²Ù×÷¶ÔÏó
+'è·¯å¾„æ“ä½œå¯¹è±¡
 Dim FileSysObj
 Set FileSysObj = CreateObject("Scripting.FileSystemObject")
 
-'===================================================================¹¦ÄÜÈë¿Ú=======================================================================
+'===================================================================åŠŸèƒ½å…¥å£=======================================================================
 
 Sub OnClick()
     If  TypeName (Global_Word) = "AsposeWordsHelper" Then
-        Global_Word.CreateDocumentByTemplate  SSProcess.GetSysPathName (7) & "Êä³öÄ£°å\" & "ÈË·À²âÁ¿±¨¸æÄ£°å.doc"
+        Global_Word.CreateDocumentByTemplate  SSProcess.GetSysPathName (7) & "è¾“å‡ºæ¨¡æ¿\" & "äººé˜²æµ‹é‡æŠ¥å‘Šæ¨¡æ¿.doc"
     Else
-        MsgBox "ÇëÏÈ×¢²áAspose.Word²å¼ş"
+        MsgBox "è¯·å…ˆæ³¨å†ŒAspose.Wordæ’ä»¶"
         Exit Sub
     End If
     
     AllVisible
     ReplaceValue Yjmj,SPYJmj,ZhuZhaiXs,FZhuZhaiXs,HxId
     If ToDecimal(ZhuZhaiXs) = 0 Or ToDecimal(FZhuZhaiXs) = 0 Then
-        MsgBox "×¡Õ¬ÏµÊı»ò·Ç×¡Õ¬ÏµÊıÎªÁã"
+        MsgBox "ä½å®…ç³»æ•°æˆ–éä½å®…ç³»æ•°ä¸ºé›¶"
         Exit Sub
     End If
     RfResultTableInner RfCount,RfValArr,Yjmj,SPYJmj
     RfYJTableInner Yjmj,ZhuZhaiXs,FZhuZhaiXs,HxId
     
-    Global_Word.SaveEx  SSProcess.GetSysPathName(5) & "³É¹ûÎÄ¼ş" & "\ÈË·À±¨¸æ.doc"
+    Global_Word.SaveEx  SSProcess.GetSysPathName(5) & "æˆæœæ–‡ä»¶" & "\äººé˜²æŠ¥å‘Š.doc"
     
-    MsgBox "Êä³öÍê³É"
+    MsgBox "è¾“å‡ºå®Œæˆ"
 End Sub' OnClick
 
-'======================================================×Ö·û´®Ìæ»»==============================================================================
+'======================================================å­—ç¬¦ä¸²æ›¿æ¢==============================================================================
 
-'×Ö·û´®Ìæ»»
+'å­—ç¬¦ä¸²æ›¿æ¢
 Function ReplaceValue(ByRef Yjmj,ByRef SPYJmj,ByRef ZhuZhaiXs,ByRef FZhuZhaiXs,ByRef HxId)
     
     RePlaceStr = "XiangMMC,XiangMDZ,SheJDW,JianSDW,WeiTDW,CeLDW,CeLRQ,JianZJG,JunGCLDSJZMJ,DSCS,JunGCLZTS,JunGCLDXJZMJ,ZZRFYJMJ,QTRFYJMJ,HLHTMJ,FKYBMJ,ZBYTHD,BPGC,SPRFYJMJ"
@@ -51,7 +51,7 @@ Function ReplaceValue(ByRef Yjmj,ByRef SPYJmj,ByRef ZhuZhaiXs,ByRef FZhuZhaiXs,B
     
     ReDim DateArr(ZrzCount)
     For i = 0 To ZrzCount - 1
-        DateArr(i) = Transform(Replace(Replace(Replace(SSProcess.GetObjectAttr(ZrzArr(i),"[JGRQ]"),"Äê",""),"ÔÂ",""),"ÈÕ",""))
+        DateArr(i) = Transform(Replace(Replace(Replace(SSProcess.GetObjectAttr(ZrzArr(i),"[JGRQ]"),"å¹´",""),"æœˆ",""),"æ—¥",""))
     Next 'i
     UpDateTime = DateArr(0)
     pos = 0
@@ -75,9 +75,9 @@ Function ReplaceValue(ByRef Yjmj,ByRef SPYJmj,ByRef ZhuZhaiXs,ByRef FZhuZhaiXs,B
         Next 'i
     End If
     
-    SqlStr = "Select DISTINCT PSGN From ÈË·À·À»¤µ¥ÔªÊôĞÔ±í inner join GeoAreaTB on ÈË·À·À»¤µ¥ÔªÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2)<>0"
+    SqlStr = "Select DISTINCT PSGN From äººé˜²é˜²æŠ¤å•å…ƒå±æ€§è¡¨ inner join GeoAreaTB on äººé˜²é˜²æŠ¤å•å…ƒå±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2)<>0"
     GetSQLRecordAll SqlStr,DISTINCTArr,LxCount
-    Global_Word.Replace "{PSGN}",Replace(DISTINCTArr(0),",","¡¢"),0
+    Global_Word.Replace "{PSGN}",Replace(DISTINCTArr(0),",","ã€"),0
     
     Yjmj = Transform(SSProcess.GetSelGeoValue(0,"[ZZRFYJMJ]")) + Transform(SSProcess.GetSelGeoValue(0,"[QTRFYJMJ]"))
     SPYJmj = Transform(SSProcess.GetSelGeoValue(0,"[SPRFYJMJ]"))
@@ -101,21 +101,21 @@ Function ReplaceValue(ByRef Yjmj,ByRef SPYJmj,ByRef ZhuZhaiXs,ByRef FZhuZhaiXs,B
         Rightstr = ""
     End If
     Global_Word.Replace "{HeTBH}",Leftstr & Rightstr,0
-    Global_Word.Replace "£ûYJMJ£ı",Yjmj,0
+    Global_Word.Replace "ï½›YJMJï½",Yjmj,0
     Global_Word.Replace "{TTT}",UpDateTime,0
 End Function' ReplaceValue
 
-'==========================================================ÈË·À²âÁ¿³É¹û±í====================================================================
+'==========================================================äººé˜²æµ‹é‡æˆæœè¡¨====================================================================
 
-'ÈË·À²âÁ¿³É¹û±íÈë¿Úº¯Êı
+'äººé˜²æµ‹é‡æˆæœè¡¨å…¥å£å‡½æ•°
 Function RfResultTableInner(ByRef RfCount,ByRef RfValArr(),ByVal Yjmj,ByVal SPYJmj)
     RfClMjInert RfCount,RfValArr,Yjmj,SPYJmj
 End Function' RfResultTableInner
 
-'ÈË·À²âÁ¿Ãæ»ı±í¸ñÌîÖµ
+'äººé˜²æµ‹é‡é¢ç§¯è¡¨æ ¼å¡«å€¼
 Function RfClMjInert(ByRef RfCount,ByRef RfValArr(),ByVal Yjmj,ByVal SPYJmj)
     
-    SqlStr = "Select ÈË·À·À»¤µ¥ÔªÊôĞÔ±í.ID From ÈË·À·À»¤µ¥ÔªÊôĞÔ±í Inner Join GeoAreaTB on ÈË·À·À»¤µ¥ÔªÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2)<>0"
+    SqlStr = "Select äººé˜²é˜²æŠ¤å•å…ƒå±æ€§è¡¨.ID From äººé˜²é˜²æŠ¤å•å…ƒå±æ€§è¡¨ Inner Join GeoAreaTB on äººé˜²é˜²æŠ¤å•å…ƒå±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2)<>0"
     GetSQLRecordAll SqlStr,RfArr,RfCount
     FildArr = Split("FHDYBH,JZMJ,YBMJ,GYMJ,ZSGN,FHUDJ,FHUADJ,KBDYS,KBSL,SZCS,PSGN,TCWS,FJDCS,BZ",",", - 1,1)
     ReDim RfValArr(RfCount)
@@ -150,7 +150,7 @@ Function RfClMjInert(ByRef RfCount,ByRef RfValArr(),ByVal Yjmj,ByVal SPYJmj)
     
 End Function' RfClMjInert
 
-'»ñÈ¡×î´óµÄµØÏÂ²ãÊı
+'è·å–æœ€å¤§çš„åœ°ä¸‹å±‚æ•°
 Function GetMaxUnderFloor(ByVal TableIndex,ByVal StartRow,ByVal EndRow,ByVal CalCol,ByRef MaxUnderFloor)
     MaxUnderFloor = 0
     For i = StartRow To EndRow
@@ -167,13 +167,13 @@ Function GetMaxUnderFloor(ByVal TableIndex,ByVal StartRow,ByVal EndRow,ByVal Cal
     Next 'i
 End Function' GetMaxUnderFloor
 
-'»ñÈ¡µ±Ç°µØÏÂ²ãÊı
+'è·å–å½“å‰åœ°ä¸‹å±‚æ•°
 Function GetCurrentFloor(ByVal Content)
     If Content <> "" Then
         BigNum = Mid(Content,3,Len(Content) - 3)
-        '×î¶àµØÏÂÊ®²ã
+        'æœ€å¤šåœ°ä¸‹åå±‚
         Number = "1,2,3,4,5,6,7,8,9,10"
-        BigNumber = "Ò»,¶ş,Èı,ËÄ,Îå,Áù,Æß,°Ë,¾Å,Ê®"
+        BigNumber = "ä¸€,äºŒ,ä¸‰,å››,äº”,å…­,ä¸ƒ,å…«,ä¹,å"
         NumberArr = Split(Number,",", - 1,1)
         BigNumberArr = Split(BigNumber,",", - 1,1)
         If Len(BigNum) = 1 Then
@@ -207,7 +207,7 @@ Function GetCurrentFloor(ByVal Content)
     
 End Function' GetCurrentFloor
 
-'ÌîĞ´ºÏ¼ÆÖµ
+'å¡«å†™åˆè®¡å€¼
 Function InsertSum(ByVal TableIndex,ByVal StartRow,ByVal EndRow,ByVal HjRow,ByVal CalCol)
     TotalArea = 0
     For i = StartRow To EndRow
@@ -218,33 +218,33 @@ Function InsertSum(ByVal TableIndex,ByVal StartRow,ByVal EndRow,ByVal HjRow,ByVa
     Global_Word.SetCellText Tableindex,HjRow,CalCol,TotalArea,True,False
 End Function' InsertSum
 
-'ÌîĞ´ÈË·ÀÇøÓòËµÃ÷ÇøÓò
+'å¡«å†™äººé˜²åŒºåŸŸè¯´æ˜åŒºåŸŸ
 Function InsertSm(ByVal StartRow,ByVal EndRow,ByVal RfCount,ByVal Yjmj,ByVal SPYJmj)
     RePlaceArr = Split("STR1,STR2,STR3",",", - 1,1)
     GetYbArea StartRow,EndRow,AreaArr,YBString
     ValArr = Split(RfCount & ";" & Transform(GetSelCellVal(Global_Word.GetCellText(3,EndRow + 1,2,False))) & ";" & YBString,";", - 1,1)
     For i = 0 To UBound(RePlaceArr)
-        Global_Word.Replace "£û" & RePlaceArr(i) & "£ı",ValArr(i),0
+        Global_Word.Replace "ï½›" & RePlaceArr(i) & "ï½",ValArr(i),0
     Next 'i
     If (Transform(GetSelCellVal(Global_Word.GetCellText(3,EndRow + 1,2,False))) - SPYJmj) >= 0 Then
-        Replace4 = "Êµ¼Ê³¬Ãæ»ı" & Round(Transform(GetSelCellVal(Global_Word.GetCellText(3,EndRow + 1,2,False))) - SPYJmj,2)
+        Replace4 = "å®é™…è¶…é¢ç§¯" & Round(Transform(GetSelCellVal(Global_Word.GetCellText(3,EndRow + 1,2,False))) - SPYJmj,2)
     Else
-        Replace4 = "Êµ¼ÊĞ¡ÓÚÃæ»ı" & Abs(Round(Transform(GetSelCellVal(Global_Word.GetCellText(3,EndRow + 1,2,False))) - SPYJmj,2))
+        Replace4 = "å®é™…å°äºé¢ç§¯" & Abs(Round(Transform(GetSelCellVal(Global_Word.GetCellText(3,EndRow + 1,2,False))) - SPYJmj,2))
     End If
-    Global_Word.Replace "£û" & "STR4" & "£ı",Replace4,0
-    Global_Word.Replace "£û" & "STR5" & "£ı","Êµ²âÓ¦½¨ÈË·ÀÃæ»ı" & Yjmj,0
+    Global_Word.Replace "ï½›" & "STR4" & "ï½",Replace4,0
+    Global_Word.Replace "ï½›" & "STR5" & "ï½","å®æµ‹åº”å»ºäººé˜²é¢ç§¯" & Yjmj,0
     If (Transform(GetSelCellVal(Global_Word.GetCellText(3,EndRow + 1,2,False))) - Yjmj) >= 0 Then
-        Replace6 = "Êµ¼Ê³¬Ãæ»ı" & Transform(GetSelCellVal(Global_Word.GetCellText(3,EndRow + 1,2,False))) - Yjmj
+        Replace6 = "å®é™…è¶…é¢ç§¯" & Transform(GetSelCellVal(Global_Word.GetCellText(3,EndRow + 1,2,False))) - Yjmj
     Else
-        Replace6 = "Êµ¼ÊĞ¡ÓÚÃæ»ı" & Abs(Transform(GetSelCellVal(Global_Word.GetCellText(3,EndRow + 1,2,False))) - Yjmj)
+        Replace6 = "å®é™…å°äºé¢ç§¯" & Abs(Transform(GetSelCellVal(Global_Word.GetCellText(3,EndRow + 1,2,False))) - Yjmj)
     End If
-    Global_Word.Replace "£û" & "STR6" & "£ı",Replace6,0
+    Global_Word.Replace "ï½›" & "STR6" & "ï½",Replace6,0
     '4:Transform(GetSelCellVal(Global_Word.GetCellText(2,EndRow + 1,2,False))) - SPYJmj
     '5:Yjmj
     '6:Transform(GetSelCellVal(Global_Word.GetCellText(2,EndRow + 1,2,False))) - Yjmj
 End Function' InsertSm
 
-'»ñÈ¡µ±Ç°ÑÚ±Îµ¥ÔªµÄÀàĞÍ
+'è·å–å½“å‰æ©è”½å•å…ƒçš„ç±»å‹
 Function GetYbLx(ByVal StartRow,ByVal EndRow,ByRef Lxstring,ByRef lxCount)
     GnStr = ""
     For i = StartRow To EndRow
@@ -257,7 +257,7 @@ Function GetYbLx(ByVal StartRow,ByVal EndRow,ByRef Lxstring,ByRef lxCount)
     DelRepeat Split(GnStr,",", - 1,1),Lxstring,lxCount
 End Function' GetYbLx
 
-'»ñÈ¡¶ÔÓ¦µÄÑÚ±ÎÇøÃæ»ı×Ö·û´®
+'è·å–å¯¹åº”çš„æ©è”½åŒºé¢ç§¯å­—ç¬¦ä¸²
 Function GetYbArea(ByVal StartRow,ByVal EndRow,ByRef AreaArr(),ByRef TotalString)
     TotalString = ""
     GetYbLx StartRow,EndRow,Lxstring,lxcount
@@ -273,22 +273,22 @@ Function GetYbArea(ByVal StartRow,ByVal EndRow,ByRef AreaArr(),ByRef TotalString
             End If
         Next 'j
         If TotalString = "" Then
-            TotalString = "ÆäÖĞ" & SingleLxCount & "¸ö" & AreaArr(i,0) & "µ¥Ôª¼Æ" & AreaArr(i,1) & "Æ½·½Ã×"
+            TotalString = "å…¶ä¸­" & SingleLxCount & "ä¸ª" & AreaArr(i,0) & "å•å…ƒè®¡" & AreaArr(i,1) & "å¹³æ–¹ç±³"
         Else
-            TotalString = TotalString & "," & SingleLxCount & "¸ö" & AreaArr(i,0) & "µ¥Ôª¼Æ" & AreaArr(i,1) & "Æ½·½Ã×"
+            TotalString = TotalString & "," & SingleLxCount & "ä¸ª" & AreaArr(i,0) & "å•å…ƒè®¡" & AreaArr(i,1) & "å¹³æ–¹ç±³"
         End If
     Next 'i
 End Function' GetYbArea
 
-'========================================================ÈË·ÀÓ¦½¨Ãæ»ı¼ÆËã±í============================================================================
+'========================================================äººé˜²åº”å»ºé¢ç§¯è®¡ç®—è¡¨============================================================================
 
-'ÈË·ÀÓ¦½¨Ãæ»ı¼ÆËã±íÈë¿Úº¯Êı
+'äººé˜²åº”å»ºé¢ç§¯è®¡ç®—è¡¨å…¥å£å‡½æ•°
 Function RfYJTableInner(ByVal Yjmj,ByVal ZhuZhaiXs,ByVal FZhuZhaiXs,ByVal HxId)
     InsertZhuZ 4,HxId,2,EndRow,HjRow,ZhuZhaiXs
     InsertFZhuZ HxId,2,EndRow,4,HjRow,FZhuZhaiXs
 End Function' RfResultTableInner
 
-'ÌîĞ´×¡Õ¬½¨Öş²¿·Ö
+'å¡«å†™ä½å®…å»ºç­‘éƒ¨åˆ†
 Function InsertZhuZ(ByVal TableIndex,ByVal HxId,ByVal StartRow,ByRef EndRow,ByRef HjRow,ByVal ZhuZhaiXs)
     SearchZrz HxId,ZrzArr,ZrzCount
     EndRow = StartRow + ZrzCount - 1
@@ -334,20 +334,20 @@ Function InsertZhuZ(ByVal TableIndex,ByVal HxId,ByVal StartRow,ByRef EndRow,ByRe
     Global_Word.SetCellText TableIndex,HjRow,1,TotalArea,True,False
 End Function' InsertZhuZ
 
-'ÌîĞ´·Ç×¡Õ¬½¨Öş²¿·Ö
+'å¡«å†™éä½å®…å»ºç­‘éƒ¨åˆ†
 Function InsertFZhuZ(ByVal HxId,ByVal StartRow,ByRef EndRow,ByVal TableIndex,ByRef HjRow,ByVal FZhuZhaiXs)
     SearchMjk ZrzCount,HxId,2,EndRow,TableIndex,FZhuZhaiXs,HjRow
     SearchH ZrzCount,HxId,EndRow,iEndRow,TableIndex,FZhuZhaiXs,HjRow
     InsertFZhuZSum TableIndex,2,iEndRow,HjRow
 End Function' InsertFZhuZ
 
-'ËÑË÷ZDGUIDÏàÍ¬µÄ×ÔÈ»´±Êı×é
+'æœç´¢ZDGUIDç›¸åŒçš„è‡ªç„¶å¹¢æ•°ç»„
 Function SearchZrz(ByVal HxId,ByRef ZrzArr,ByRef ZrzCount)
-    SqlString = "Select ZRZH,ZhuZMJ,ZRZGUID From FC_×ÔÈ»´±ĞÅÏ¢ÊôĞÔ±í inner join GeoAreaTB on FC_×ÔÈ»´±ĞÅÏ¢ÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2)<>0 AND FC_×ÔÈ»´±ĞÅÏ¢ÊôĞÔ±í.ZDGUID = " & SSProcess.GetObjectAttr(HxId,"[ZDGUID]")
+    SqlString = "Select ZRZH,ZhuZMJ,ZRZGUID From FC_è‡ªç„¶å¹¢ä¿¡æ¯å±æ€§è¡¨ inner join GeoAreaTB on FC_è‡ªç„¶å¹¢ä¿¡æ¯å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2)<>0 AND FC_è‡ªç„¶å¹¢ä¿¡æ¯å±æ€§è¡¨.ZDGUID = " & SSProcess.GetObjectAttr(HxId,"[ZDGUID]")
     GetSQLRecordAll SqlString,ZrzArr,ZrzCount
 End Function' SearchZrz
 
-'ËÑË÷ZRZGUIDÏàÍ¬µÄÃæ»ı¿é²¢ÌîÖµ
+'æœç´¢ZRZGUIDç›¸åŒçš„é¢ç§¯å—å¹¶å¡«å€¼
 Function SearchMjk(ByRef ZrzCount,ByVal HxId,ByRef StartRow,ByRef EndRow,ByVal TableIndex,ByVal FZhuZhaiXs,ByRef HjRow)
     SearchZrz HxId,ZrzArr,ZrzCount
     StartRow = StartRow
@@ -355,11 +355,11 @@ Function SearchMjk(ByRef ZrzCount,ByVal HxId,ByRef StartRow,ByRef EndRow,ByVal T
     If ZrzCount > 0 Then
         For i = 0 To ZrzCount - 1
             SingleArr = Split(ZrzArr(i),",", - 1,1)
-            SqlString = "Select DISTINCT MJKMC From FC_Ãæ»ı¿éĞÅÏ¢ÊôĞÔ±í inner join GeoAreaTB on FC_Ãæ»ı¿éĞÅÏ¢ÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2)<>0 AND FC_Ãæ»ı¿éĞÅÏ¢ÊôĞÔ±í.ZRZGUID = " & SingleArr(2) & " AND FC_Ãæ»ı¿éĞÅÏ¢ÊôĞÔ±í.FTLX = '²»·ÖÌ¯'"
+            SqlString = "Select DISTINCT MJKMC From FC_é¢ç§¯å—ä¿¡æ¯å±æ€§è¡¨ inner join GeoAreaTB on FC_é¢ç§¯å—ä¿¡æ¯å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2)<>0 AND FC_é¢ç§¯å—ä¿¡æ¯å±æ€§è¡¨.ZRZGUID = " & SingleArr(2) & " AND FC_é¢ç§¯å—ä¿¡æ¯å±æ€§è¡¨.FTLX = 'ä¸åˆ†æ‘Š'"
             GetSQLRecordAll SqlString,MjkMcArr,MjkLxCount
             If MjkLxCount > 0 Then
                 For j = 0 To MjkLxCount - 1
-                    SqlString = "Select Sum(FC_Ãæ»ı¿éĞÅÏ¢ÊôĞÔ±í.KZMJ) From FC_Ãæ»ı¿éĞÅÏ¢ÊôĞÔ±í inner join GeoAreaTB on FC_Ãæ»ı¿éĞÅÏ¢ÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2)<>0 AND FC_Ãæ»ı¿éĞÅÏ¢ÊôĞÔ±í.MJKMC = " & "'" & MjkMcArr(j) & "'" & " AND FC_Ãæ»ı¿éĞÅÏ¢ÊôĞÔ±í.FTLX = '²»·ÖÌ¯'"
+                    SqlString = "Select Sum(FC_é¢ç§¯å—ä¿¡æ¯å±æ€§è¡¨.KZMJ) From FC_é¢ç§¯å—ä¿¡æ¯å±æ€§è¡¨ inner join GeoAreaTB on FC_é¢ç§¯å—ä¿¡æ¯å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2)<>0 AND FC_é¢ç§¯å—ä¿¡æ¯å±æ€§è¡¨.MJKMC = " & "'" & MjkMcArr(j) & "'" & " AND FC_é¢ç§¯å—ä¿¡æ¯å±æ€§è¡¨.FTLX = 'ä¸åˆ†æ‘Š'"
                     GetSQLRecordAll SqlString,FZhuZMjArr,FZhuZCount
                     If StartRow + MjkLxCount - 1 <= HjRow - 1 Then
                         Global_Word.SetCellText TableIndex,StartRow + j ,4,SingleArr(0) & MjkMcArr(j),True,False
@@ -385,15 +385,15 @@ Function SearchMjk(ByRef ZrzCount,ByVal HxId,ByRef StartRow,ByRef EndRow,ByVal T
     End If
 End Function' SearchMjk
 
-'ËÑË÷ZRZGUIDÏàÍ¬µÄ»§²¢ÌîÖµ
+'æœç´¢ZRZGUIDç›¸åŒçš„æˆ·å¹¶å¡«å€¼
 Function SearchH(ByRef ZrzCount,ByVal HxId,ByRef StartRow,ByRef EndRow,ByVal TableIndex,ByVal FZhuZhaiXs,ByRef HjRow)
     SearchZrz HxId,ZrzArr,ZrzCount
     For i = 0 To ZrzCount - 1
         SingleArr = Split(ZrzArr(i),",", - 1,1)
-        SqlString = "Select DISTINCT SYGN From FC_»§ĞÅÏ¢ÊôĞÔ±í inner join GeoAreaTB on FC_»§ĞÅÏ¢ÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2)<>0 AND NOT INSTR(FC_»§ĞÅÏ¢ÊôĞÔ±í.SYGN,'×¡Õ¬') AND FC_»§ĞÅÏ¢ÊôĞÔ±í.ZRZGUID = " & "'" & SingleArr(2) & "'"
+        SqlString = "Select DISTINCT SYGN From FC_æˆ·ä¿¡æ¯å±æ€§è¡¨ inner join GeoAreaTB on FC_æˆ·ä¿¡æ¯å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2)<>0 AND NOT INSTR(FC_æˆ·ä¿¡æ¯å±æ€§è¡¨.SYGN,'ä½å®…') AND FC_æˆ·ä¿¡æ¯å±æ€§è¡¨.ZRZGUID = " & "'" & SingleArr(2) & "'"
         GetSQLRecordAll SqlString,SYGNArr,SYGNCount
         For j = 0 To SYGNCount - 1
-            SqlString = "Select Sum(FC_»§ĞÅÏ¢ÊôĞÔ±í.JZMJ) From FC_»§ĞÅÏ¢ÊôĞÔ±í inner join GeoAreaTB on FC_»§ĞÅÏ¢ÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2)<>0 AND FC_»§ĞÅÏ¢ÊôĞÔ±í.SYGN = " & "'" & SYGNArr(j) & "'" & " AND FC_»§ĞÅÏ¢ÊôĞÔ±í.ZRZGUID = " & "'" & SingleArr(2) & "'"
+            SqlString = "Select Sum(FC_æˆ·ä¿¡æ¯å±æ€§è¡¨.JZMJ) From FC_æˆ·ä¿¡æ¯å±æ€§è¡¨ inner join GeoAreaTB on FC_æˆ·ä¿¡æ¯å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2)<>0 AND FC_æˆ·ä¿¡æ¯å±æ€§è¡¨.SYGN = " & "'" & SYGNArr(j) & "'" & " AND FC_æˆ·ä¿¡æ¯å±æ€§è¡¨.ZRZGUID = " & "'" & SingleArr(2) & "'"
             GetSQLRecordAll SqlString,MJZArr,MJZCount
             If StartRow + SYGNCount - 1 <= HjRow - 1 Then
                 Global_Word.SetCellText TableIndex,StartRow + j ,4,SingleArr(0) & SYGNArr(j),True,False
@@ -414,16 +414,16 @@ Function SearchH(ByRef ZrzCount,ByVal HxId,ByRef StartRow,ByRef EndRow,ByVal Tab
     Next 'i
 End Function' SearchH
 
-'¼ÆËã·Ç×¡Õ¬ºÏ¼ÆÖµ
+'è®¡ç®—éä½å®…åˆè®¡å€¼
 Function InsertFZhuZSum(ByVal TableIndex,ByVal StartRow,ByVal EndRow,ByVal HjRow)
     For i = StartRow To EndRow
         TotalArea = TotalArea + Transform(GetSelCellVal(Global_Word.GetCellText(TableIndex,i,7,False)))
     Next 'i
     Global_Word.SetCellText TableIndex,HjRow,3,TotalArea,True,False
 End Function' InsertFZhuZSum
-'==============================================================¹¤¾ßÀàº¯Êı===============================================================
+'==============================================================å·¥å…·ç±»å‡½æ•°===============================================================
 
-'´ò¿ªËùÓĞÍ¼²ã
+'æ‰“å¼€æ‰€æœ‰å›¾å±‚
 Function AllVisible()
     count = SSProcess.GetLayerCount
     For i = 0 To count - 1
@@ -433,7 +433,7 @@ Function AllVisible()
     SSProcess.RefreshView
 End Function
 
-'Êı¾İÀàĞÍ×ª»»
+'æ•°æ®ç±»å‹è½¬æ¢
 Function Transform(ByVal Values)
     If Values <> "" Then
         Values = CDbl(Values)
@@ -444,7 +444,7 @@ Function Transform(ByVal Values)
     Transform = Values
 End Function'Transform
 
-'È¥³ı×Ö·û´®ÖĞÖØ¸´Öµ
+'å»é™¤å­—ç¬¦ä¸²ä¸­é‡å¤å€¼
 Function DelRepeat(ByVal StrArr(),ByRef ToTalVal,ByRef LxCount)
     ToTalVal = ""
     For i = 0 To UBound(StrArr)
@@ -458,7 +458,7 @@ Function DelRepeat(ByVal StrArr(),ByRef ToTalVal,ByRef LxCount)
     LxCount = UBound(Split(ToTalVal,",", - 1,1)) + 1
 End Function' DelRepeat
 
-'Ñ¡ÔñÖ¸¶¨µØÎï²¢·µ»Ø¸öÊı
+'é€‰æ‹©æŒ‡å®šåœ°ç‰©å¹¶è¿”å›ä¸ªæ•°
 Function SelFeatures(ByVal Code,ByRef Count,ByRef ID)
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -468,28 +468,28 @@ Function SelFeatures(ByVal Code,ByRef Count,ByRef ID)
     ID = SSProcess.GetSelGeoValue(0,"SSObj_ID")
 End Function' SelFeatures
 
-'Ñ¡ÔñÖ¸¶¨µØÎïÄÚ²¿µÄÖ¸¶¨µØÎï²¢·µ»ØµØÎïidÊı×é
+'é€‰æ‹©æŒ‡å®šåœ°ç‰©å†…éƒ¨çš„æŒ‡å®šåœ°ç‰©å¹¶è¿”å›åœ°ç‰©idæ•°ç»„
 Function GetInnerFeatures(ByVal OuterCode,ByVal InnerCode ,ByRef InnerCount,ByRef InnerArr())
     SelFeatures OuterCode,OuterCount,HxID
     InnerArr = Split(SSProcess.SearchInnerObjIDs(HxID,2,InnerCode,0),",", - 1,1)
     InnerCount = UBound(InnerArr) + 1
 End Function' GetInnerFeatures
 
-'»ñÈ¡µ¥Ôª¸ñÖµ
+'è·å–å•å…ƒæ ¼å€¼
 Function GetSelCellVal(ByVal CellContent)
     GetSelCellVal = Left(CellContent,Len(CellContent) - 1)
 End Function' GetSelCellVal
 
-'°Ù·ÖºÅ×ªĞ¡Êı
+'ç™¾åˆ†å·è½¬å°æ•°
 Function ToDecimal(ByVal Percentage)
     ToDecimal = Transform(Left(Percentage,Len(Percentage) - 1)) * 0.01
 End Function' ToDecimal
 
-'»ñÈ¡ËùÓĞ¼ÇÂ¼
+'è·å–æ‰€æœ‰è®°å½•
 Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)
     SSProcess.OpenAccessMdb SSProcess.GetProjectFileName
     If StrSqlStatement = "" Then
-        MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
+        MsgBox "æŸ¥è¯¢è¯­å¥ä¸ºç©ºï¼Œæ“ä½œåœæ­¢ï¼",48
     End If
     iRecordCount =  - 1
     SSProcess.OpenAccessRecordset SSProcess.GetProjectFileName, StrSqlStatement
@@ -512,7 +512,7 @@ Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecord
     SSProcess.CloseAccessMdb SSProcess.GetProjectFileName
 End Function
 
-'ÌîĞ´±í¸ñ
+'å¡«å†™è¡¨æ ¼
 Function InsertTable(ByVal ValueArr(),ByVal ArrSize,ByVal TableIndex,ByVal StartRow,ByVal StartCol,ByVal MaxRow,ByVal EndCol,ByRef HjRow)
     'MsgBox ArrSize
     If ArrSize <= MaxRow - StartRow + 1 Then
@@ -547,7 +547,7 @@ Function InsertTable(ByVal ValueArr(),ByVal ArrSize,ByVal TableIndex,ByVal Start
     End If
 End Function' InsertTable
 
-'ÅĞ¶ÏÊÇ·ñ°üº¬Ö¸¶¨×Ö·û´®
+'åˆ¤æ–­æ˜¯å¦åŒ…å«æŒ‡å®šå­—ç¬¦ä¸²
 Function IsConTain(ByVal TempStr,ByVal ReplaceValue)
     If Replace(TempStr,ReplaceValue,"") = TempStr Then
         IsConTain = 0
