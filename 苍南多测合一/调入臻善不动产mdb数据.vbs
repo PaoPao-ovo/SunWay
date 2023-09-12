@@ -26,12 +26,12 @@ Function BeforeSaveImportData()
         
         
         If objLayerName = "ST_ZD"  Then
-            strEpsCode = "9130223"  'Ê¹ÓÃÈ¨×ÚµØ
+            strEpsCode = "9130223"  'ä½¿ç”¨æƒå®—åœ°
             SSProcess.SetSelGeoValue i, "[ZDGUID]", GenerateGuid()
         ElseIf objLayerName = "ST_DJQ"  Then
-            strEpsCode = "9130023"  'µØ¼®Çø
+            strEpsCode = "9130023"  'åœ°ç±åŒº
         ElseIf objLayerName = "ST_DJZQ"  Then
-            strEpsCode = "9130033" 'µØ¼®×ÓÇø
+            strEpsCode = "9130033" 'åœ°ç±å­åŒº
         ElseIf objLayerName = "ST_DSJZD"  Then
             strEpsCode = "9130231"
         ElseIf objLayerName = "ST_DSJZX"  Then
@@ -39,23 +39,23 @@ Function BeforeSaveImportData()
         ElseIf objLayerName = "ST_DSZD"  Then
             strEpsCode = "9130213"
         ElseIf objLayerName = "ST_DXJZD"  Then
-            strEpsCode = "9130231" '×ÚµØ½çÖ·µã
+            strEpsCode = "9130231" 'å®—åœ°ç•Œå€ç‚¹
         ElseIf objLayerName = "ST_DXJZX"  Then
             strEpsCode = "9130242"
         ElseIf objLayerName = "ST_DXZD"  Then
-            strEpsCode = "9130213"  'ËùÓĞÈ¨×ÚµØ
+            strEpsCode = "9130213"  'æ‰€æœ‰æƒå®—åœ°
         ElseIf objLayerName = "ST_GZW"  Then
-            strEpsCode = "9210113" '¹¹ÖşÎï
+            strEpsCode = "9210113" 'æ„ç­‘ç‰©
         ElseIf objLayerName = "ST_JD"  Then
             strEpsCode = "6601003"
         ElseIf objLayerName = "ST_JF"  Then
             strEpsCode = "6705013"
         ElseIf objLayerName = "ST_JZD"  Then
-            strEpsCode = "9130231" '×ÚµØ½çÖ·µã
+            strEpsCode = "9130231" 'å®—åœ°ç•Œå€ç‚¹
         ElseIf objLayerName = "ST_JZDSUOYQ"  Then
-            strEpsCode = "9130231" '×ÚµØ½çÖ·µã
+            strEpsCode = "9130231" 'å®—åœ°ç•Œå€ç‚¹
         ElseIf objLayerName = "ST_JZDZH"  Then
-            strEpsCode = "9130231" '×ÚµØ½çÖ·µã
+            strEpsCode = "9130231" 'å®—åœ°ç•Œå€ç‚¹
         ElseIf objLayerName = "ST_JZX"  Then
             strEpsCode = "9130242"
         ElseIf objLayerName = "ST_JZXSUOYQ"  Then
@@ -76,14 +76,14 @@ Function BeforeSaveImportData()
             strEpsCode = "6501003"
         ElseIf objLayerName = "ST_XZQZJ"  Then
             strEpsCode = "9035015"
-        ElseIf objLayerName = "ST_ZDNYD"  Then 'Î´¶Ô
+        ElseIf objLayerName = "ST_ZDNYD"  Then 'æœªå¯¹
             strEpsCode = "9130223"
         ElseIf objLayerName = "ST_ZDSUOYQ"  Then
-            strEpsCode = "9130213"  'ËùÓĞÈ¨×ÚµØ
+            strEpsCode = "9130213"  'æ‰€æœ‰æƒå®—åœ°
         ElseIf objLayerName = "ST_ZDZJ"  Then
             strEpsCode = "9135026"
         ElseIf objLayerName = "ST_ZRZ"  Then
-            strEpsCode = "9210123" '×ÔÈ»´±
+            strEpsCode = "9210123" 'è‡ªç„¶å¹¢
         ElseIf objLayerName = "YCFW_C"  Then
             strEpsCode = "9210313"
         ElseIf objLayerName = "YCFW_H"  Then
@@ -119,31 +119,31 @@ Sub OnClick()
     
     'If   RegistrationMode = 1 Then
     ' RegistrationMode1
-    ' If Registrationkeyidlist = Replace(Registrationkeyidlist,HardID,"") Or HardID = "0"  Then  MsgBox "Èí¼şÎ´Õı³£ÊÚÈ¨£¬ÇëÈ·ÈÏ×¢²áÊÇ·ñÕıÈ·£¡"
+    ' If Registrationkeyidlist = Replace(Registrationkeyidlist,HardID,"") Or HardID = "0"  Then  MsgBox "è½¯ä»¶æœªæ­£å¸¸æˆæƒï¼Œè¯·ç¡®è®¤æ³¨å†Œæ˜¯å¦æ­£ç¡®ï¼"
     ' Exit Sub
     'ElseIf RegistrationMode = 2 Then
     ' RegistrationMode2
-    ' If usbkeyidlist = Replace(usbkeyidlist,usbkeyid,"") Or usbkeyid = 0  Then    MsgBox "Èí¼şÎ´Õı³£ÊÚÈ¨£¬ÇëÈ·ÈÏ×¢²áÊÇ·ñÕıÈ·£¡"
+    ' If usbkeyidlist = Replace(usbkeyidlist,usbkeyid,"") Or usbkeyid = 0  Then    MsgBox "è½¯ä»¶æœªæ­£å¸¸æˆæƒï¼Œè¯·ç¡®è®¤æ³¨å†Œæ˜¯å¦æ­£ç¡®ï¼"
     'Exit Sub
     ' Else
-    ' MsgBox "Èí¼şÎ´Õı³£ÊÚÈ¨£¬ÇëÈ·ÈÏ×¢²áÊÇ·ñÕıÈ·£¡"
+    ' MsgBox "è½¯ä»¶æœªæ­£å¸¸æˆæƒï¼Œè¯·ç¡®è®¤æ³¨å†Œæ˜¯å¦æ­£ç¡®ï¼"
     'Exit Sub
     'End If
     
     mapHandle = SSProject.GetActiveMap
     mapType = SSProject.GetMapInfo(mapHandle, "MapType")
     If mapType <> 2 Then
-        MsgBox "±¾¹¦ÄÜÖ»Ö§³ÖÔÚµØĞÎÍ¼´°¿ÚÖ´ĞĞ£¡"
+        MsgBox "æœ¬åŠŸèƒ½åªæ”¯æŒåœ¨åœ°å½¢å›¾çª—å£æ‰§è¡Œï¼"
         Exit Sub
     End If
     If 0 Then
         SSProcess.ClearInputParameter
-        SSProcess.AddInputParameter "Ñ¡Ôñµ÷ÈëÀàĞÍ", "Êµ²â",0, "Ô¤²â,Êµ²â", ""
-        result = SSProcess.ShowInputParameterDlg( "Ñ¡Ôñµ÷ÈëÀàĞÍ" )
+        SSProcess.AddInputParameter "é€‰æ‹©è°ƒå…¥ç±»å‹", "å®æµ‹",0, "é¢„æµ‹,å®æµ‹", ""
+        result = SSProcess.ShowInputParameterDlg( "é€‰æ‹©è°ƒå…¥ç±»å‹" )
         If result = 0 Then Exit Sub
         
         SSProcess.UpdateScriptDlgParameter 1
-        DiaoRLX = SSProcess.GetInputParameter ("Ñ¡Ôñµ÷ÈëÀàĞÍ" )
+        DiaoRLX = SSProcess.GetInputParameter ("é€‰æ‹©è°ƒå…¥ç±»å‹" )
     End If
     
     fileName = SSProcess.SelectFileName(1,"",0,"ArcGis Pdb/Fgdb MDB Files(*.mdb)|*.mdb|All Files (*.*)|*.*||")
@@ -190,9 +190,9 @@ Function DELXSD(SYSID)
     End If
 End Function
 Function importmdb(filename)
-    'Çå¿Õ×ª»»²ÎÊı
+    'æ¸…ç©ºè½¬æ¢å‚æ•°
     SSProcess.ClearDataXParameter
-    'ÉèÖÃµ¼ÈëÎÄ¼ş¸ñÊ½ÎªArcGIS PDB
+    'è®¾ç½®å¯¼å…¥æ–‡ä»¶æ ¼å¼ä¸ºArcGIS PDB
     SSProcess.SetDataXParameter "DataType", "22"
     SSProcess.SetDataXParameter "SaveAttrToMemoData", "0"
     SSProcess.SetDataXParameter "ImportPathName",filename
@@ -208,148 +208,148 @@ Function importmdb(filename)
     SSProcess.SetDataXParameter "ExportLayer" & CStr(AddOne(startIndex)),"ST_DJZQ"
     
     
-    SSProcess.SetDataXParameter "ExportLayer" & CStr(AddOne(startIndex)),"ST_DXJZD" 'µØÏÂ½çÖ·µã
-    SSProcess.SetDataXParameter "ExportLayer" & CStr(AddOne(startIndex)),"ST_DXJZX" 'µØÏÂ½çÖ·Ïß
-    SSProcess.SetDataXParameter "ExportLayer" & CStr(AddOne(startIndex)),"ST_DXZD" 'µØÏÂ×ÚµØ
+    SSProcess.SetDataXParameter "ExportLayer" & CStr(AddOne(startIndex)),"ST_DXJZD" 'åœ°ä¸‹ç•Œå€ç‚¹
+    SSProcess.SetDataXParameter "ExportLayer" & CStr(AddOne(startIndex)),"ST_DXJZX" 'åœ°ä¸‹ç•Œå€çº¿
+    SSProcess.SetDataXParameter "ExportLayer" & CStr(AddOne(startIndex)),"ST_DXZD" 'åœ°ä¸‹å®—åœ°
     
-    'if DiaoRLX="Êµ²â" then   
+    'if DiaoRLX="å®æµ‹" then   
     SSProcess.SetDataXParameter "ExportLayer" & CStr(AddOne(startIndex)),"ST_ZRZ"
     '    else
     SSProcess.SetDataXParameter "ExportLayer" & CStr(AddOne(startIndex)),"YCZRZ"
     '    end if
-    'ÊôĞÔ¶ÔÕÕ
-    '¹ØÁª±íÊä³ö¶ÔÕÕ¸öÊı//Î´ÔÚÊôĞÔ±íÖĞ¹Ò½ÓµÄÊôĞÔ±í
+    'å±æ€§å¯¹ç…§
+    'å…³è”è¡¨è¾“å‡ºå¯¹ç…§ä¸ªæ•°//æœªåœ¨å±æ€§è¡¨ä¸­æŒ‚æ¥çš„å±æ€§è¡¨
     SSProcess.SetDataXParameter "RelateTableRelationCount", "500"
     startIndex = 1
-    'EPS±íÃû,SDE±íÃû,SDE±í±ğÃû
-    'SSProcess.SetDataXParameter "RelateTableRelation"&CStr(AddOne(startIndex)), "ZD_×ÚµØ»ù±¾ĞÅÏ¢ÊôĞÔ±í,T_ZD,ÍÁµØËùÓĞÈ¨"
-    SSProcess.SetDataXParameter "RelateTableRelation" & CStr(AddOne(startIndex)), "QLR_È¨ÀûÈËĞÅÏ¢±í,FW_QLR,È¨ÀûÈËĞÅÏ¢"
-    SSProcess.SetDataXParameter "RelateTableRelation" & CStr(AddOne(startIndex)), "QLR_È¨ÀûÈËĞÅÏ¢±í,ZD_SHIYQQLR,È¨ÀûÈËĞÅÏ¢"
+    'EPSè¡¨å,SDEè¡¨å,SDEè¡¨åˆ«å
+    'SSProcess.SetDataXParameter "RelateTableRelation"&CStr(AddOne(startIndex)), "ZD_å®—åœ°åŸºæœ¬ä¿¡æ¯å±æ€§è¡¨,T_ZD,åœŸåœ°æ‰€æœ‰æƒ"
+    SSProcess.SetDataXParameter "RelateTableRelation" & CStr(AddOne(startIndex)), "QLR_æƒåˆ©äººä¿¡æ¯è¡¨,FW_QLR,æƒåˆ©äººä¿¡æ¯"
+    SSProcess.SetDataXParameter "RelateTableRelation" & CStr(AddOne(startIndex)), "QLR_æƒåˆ©äººä¿¡æ¯è¡¨,ZD_SHIYQQLR,æƒåˆ©äººä¿¡æ¯"
     startIndex = 10
     SSProcess.SetDataXParameter "TableFieldDefCount","20000"
     
     'ZDDM    BDCDYH    SJLX    SYQLX    ZDTZM    QLLX    QLXZ    QLSDFS    PZMJ    ZDMJ    MJDW    ZL    ZDSZD    ZDSZN    ZDSZX    ZDSZB    PZYT    TDYT    DJ    JG    RJL    JZMD    JZXG    JZZDMJ    JZMJ    ZDT    TFH    DJH    JZDWSM    JZXZXSM    DCJS    DCR    DCRQ    CLJS    CLR    CLRQ    SHYJ    SHR    SHRQ    BZ    ZT
-    '²ãÃû,ÀàĞÍ(0µã,1Ïß,2Ãæ,3×¢¼Ç,10µãÏßÃæ¹²ÓÃ),EPS×Ö¶ÎÃû,¿Í»§×Ö¶ÎÃû,[¿Í»§×Ö¶Î±ğÃû,]ÏµÍ³×Ö¶ÎÃû,È±Ê¡Öµ,×Ö¶ÎÀàĞÍ,×Ö¶Î³¤¶È,Ğ¡ÊıÎ»
-    'Ê¹ÓÃÈ¨×ÚµØ
+    'å±‚å,ç±»å‹(0ç‚¹,1çº¿,2é¢,3æ³¨è®°,10ç‚¹çº¿é¢å…±ç”¨),EPSå­—æ®µå,å®¢æˆ·å­—æ®µå,[å®¢æˆ·å­—æ®µåˆ«å,]ç³»ç»Ÿå­—æ®µå,ç¼ºçœå€¼,å­—æ®µç±»å‹,å­—æ®µé•¿åº¦,å°æ•°ä½
+    'ä½¿ç”¨æƒå®—åœ°
     
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,CHXMBH,CHXMBH,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,DJH,DJH,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,DJQDM,DJQDM,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,DJQZH,DJQZH,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,HQ_RQ,HQ_RQ,,,dbDate,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,LGID,LGID,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,QLXZNAME,QSXZ,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,SJ_YT,SJ_YT,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,state,state,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,sysid,sysid,,,dbtext,50,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,SZ_JF,SZ_JF,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,ZL,TDZL,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,YT,XSJ_YT,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,ZD_FH,ZD_FH,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,BSM,ZD_ID,,,dbText,19,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,TDSYQXZ,ZD_SYQLX,,,dbText,19,0"
-    ' SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,YSDM,YS_DM,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,ZDTZM,ZD_TZM,,,dbText,19,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,ZD_ZH,ZD_ZH,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,ZDMJ,ZDMJ,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,ZDSZ,ZDSZ,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"Ê¹ÓÃÈ¨×ÚµØ,2,ZDTYBM,ZDTYBM,,,dbText,255,0"
-    '×ÔÈ»´±
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÔÈ»´±,2,JianSDW,KFDW,¿ª·¢µ¥Î»,,,dbText,50,0"  '==============CeLDW
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÔÈ»´±,2,CeLDW,CHDW,²â»æµ¥Î»,,,dbText,50,0"  '==============CeLDW
-    'SSProcess.SetDataXParameter "TableFieldDef"&CStr(AddOne(startIndex)),"×ÔÈ»´±,2,GHYT,FWYT,¹æ»®ÓÃÍ¾,,,dbText,2,0"  '==============
-    'SSProcess.SetDataXParameter "TableFieldDef"&CStr(AddOne(startIndex)),"×ÔÈ»´±,2,FWJG,FWLX,·¿Îİ½á¹¹,,,dbText,2,0" '==============
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÔÈ»´±,2,ZT,JZWZT,×´Ì¬,,,dbText,2,0" '============
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÔÈ»´±,2,YCDXJZMJ,YCDXMJ,Ô¤²âµØÏÂÃæ»ı,,,dbDouble,16,6"  '==============
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÔÈ»´±,2,YCQTJZMJ,YCQTMJ,Ô¤²âÆäËüÃæ»ı,,,dbDouble,16,6"  '==============
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÔÈ»´±,2,SCDXJZMJ,SCDXMJ,Êµ²âµØÏÂÃæ»ı,,,dbDouble,16,6"  '==============
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÔÈ»´±,2,SCQTJZMJ,SCQTMJ,Êµ²âÆäËüÃæ»ı,,,dbDouble,16,6"  '==============
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÔÈ»´±,2,TNJZMJ,TNMJ,Ì×ÄÚ½¨ÖşÃæ»ı,,,dbDouble,16,6"'==============
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÔÈ»´±,2,GYJZMJ,GYMJ,¹²ÓĞ½¨ÖşÃæ»ı,,,dbDouble,16,6"'==============
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÔÈ»´±,2,DiaoCR,DCR,DCR,,,dbText,200,0"'==============
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÔÈ»´±,2,ShenHR,SHR,SHR,,,dbText,200,0"'==============
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÔÈ»´±,2,ZhiTY,HTY,HTY,,,dbText,200,0"'==============
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÔÈ»´±,2,GuiHXKZBH,GHXKZH,GHXKZH,,,dbText,100,0"'==============
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÔÈ»´±,2,DCJSJYJ,DCYJ,DCYJ,,,dbText,255,0"'==============
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÔÈ»´±,2,ShenHRQ,SHRQ,SHRQ,,,dbDATE,255,0"'==============
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÔÈ»´±,2,CSHYJ,SHYJ,SHYJ,,,dbTEXT,100,0"'==============
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,CHXMBH,CHXMBH,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,DJH,DJH,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,DJQDM,DJQDM,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,DJQZH,DJQZH,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,HQ_RQ,HQ_RQ,,,dbDate,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,LGID,LGID,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,QLXZNAME,QSXZ,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,SJ_YT,SJ_YT,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,state,state,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,sysid,sysid,,,dbtext,50,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,SZ_JF,SZ_JF,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,ZL,TDZL,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,YT,XSJ_YT,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,ZD_FH,ZD_FH,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,BSM,ZD_ID,,,dbText,19,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,TDSYQXZ,ZD_SYQLX,,,dbText,19,0"
+    ' SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,YSDM,YS_DM,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,ZDTZM,ZD_TZM,,,dbText,19,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,ZD_ZH,ZD_ZH,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,ZDMJ,ZDMJ,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,ZDSZ,ZDSZ,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"ä½¿ç”¨æƒå®—åœ°,2,ZDTYBM,ZDTYBM,,,dbText,255,0"
+    'è‡ªç„¶å¹¢
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"è‡ªç„¶å¹¢,2,JianSDW,KFDW,å¼€å‘å•ä½,,,dbText,50,0"  '==============CeLDW
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"è‡ªç„¶å¹¢,2,CeLDW,CHDW,æµ‹ç»˜å•ä½,,,dbText,50,0"  '==============CeLDW
+    'SSProcess.SetDataXParameter "TableFieldDef"&CStr(AddOne(startIndex)),"è‡ªç„¶å¹¢,2,GHYT,FWYT,è§„åˆ’ç”¨é€”,,,dbText,2,0"  '==============
+    'SSProcess.SetDataXParameter "TableFieldDef"&CStr(AddOne(startIndex)),"è‡ªç„¶å¹¢,2,FWJG,FWLX,æˆ¿å±‹ç»“æ„,,,dbText,2,0" '==============
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"è‡ªç„¶å¹¢,2,ZT,JZWZT,çŠ¶æ€,,,dbText,2,0" '============
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"è‡ªç„¶å¹¢,2,YCDXJZMJ,YCDXMJ,é¢„æµ‹åœ°ä¸‹é¢ç§¯,,,dbDouble,16,6"  '==============
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"è‡ªç„¶å¹¢,2,YCQTJZMJ,YCQTMJ,é¢„æµ‹å…¶å®ƒé¢ç§¯,,,dbDouble,16,6"  '==============
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"è‡ªç„¶å¹¢,2,SCDXJZMJ,SCDXMJ,å®æµ‹åœ°ä¸‹é¢ç§¯,,,dbDouble,16,6"  '==============
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"è‡ªç„¶å¹¢,2,SCQTJZMJ,SCQTMJ,å®æµ‹å…¶å®ƒé¢ç§¯,,,dbDouble,16,6"  '==============
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"è‡ªç„¶å¹¢,2,TNJZMJ,TNMJ,å¥—å†…å»ºç­‘é¢ç§¯,,,dbDouble,16,6"'==============
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"è‡ªç„¶å¹¢,2,GYJZMJ,GYMJ,å…±æœ‰å»ºç­‘é¢ç§¯,,,dbDouble,16,6"'==============
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"è‡ªç„¶å¹¢,2,DiaoCR,DCR,DCR,,,dbText,200,0"'==============
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"è‡ªç„¶å¹¢,2,ShenHR,SHR,SHR,,,dbText,200,0"'==============
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"è‡ªç„¶å¹¢,2,ZhiTY,HTY,HTY,,,dbText,200,0"'==============
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"è‡ªç„¶å¹¢,2,GuiHXKZBH,GHXKZH,GHXKZH,,,dbText,100,0"'==============
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"è‡ªç„¶å¹¢,2,DCJSJYJ,DCYJ,DCYJ,,,dbText,255,0"'==============
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"è‡ªç„¶å¹¢,2,ShenHRQ,SHRQ,SHRQ,,,dbDATE,255,0"'==============
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"è‡ªç„¶å¹¢,2,CSHYJ,SHYJ,SHYJ,,,dbTEXT,100,0"'==============
     
-    '½çÖ·µã
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÚµØ½çÖ·µã,0,BSM,JZD_ID,,,,dbText,10,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÚµØ½çÖ·µã,0,SZ_JF,SZ_JF,,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÚµØ½çÖ·µã,0,HYP_JD,HYP_JD,,,,dbLONG,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÚµØ½çÖ·µã,0,HQ_RQ,HQ_RQ,,,,dbdate,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÚµØ½çÖ·µã,0,ISNEW,ISNEW,,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÚµØ½çÖ·µã,0,DJZQDM,DJQDM,,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÚµØ½çÖ·µã,0,CHXMBH,CHXMBH,,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÚµØ½çÖ·µã,0,LGID,LGID,,,,dbText,255,0"
-    'SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÚµØ½çÖ·µã,0,SYSID,SYSID,,,,dblong,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"×ÚµØ½çÖ·µã,0,state,state,,,,dbText,255,0"
+    'ç•Œå€ç‚¹
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"å®—åœ°ç•Œå€ç‚¹,0,BSM,JZD_ID,,,,dbText,10,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"å®—åœ°ç•Œå€ç‚¹,0,SZ_JF,SZ_JF,,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"å®—åœ°ç•Œå€ç‚¹,0,HYP_JD,HYP_JD,,,,dbLONG,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"å®—åœ°ç•Œå€ç‚¹,0,HQ_RQ,HQ_RQ,,,,dbdate,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"å®—åœ°ç•Œå€ç‚¹,0,ISNEW,ISNEW,,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"å®—åœ°ç•Œå€ç‚¹,0,DJZQDM,DJQDM,,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"å®—åœ°ç•Œå€ç‚¹,0,CHXMBH,CHXMBH,,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"å®—åœ°ç•Œå€ç‚¹,0,LGID,LGID,,,,dbText,255,0"
+    'SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"å®—åœ°ç•Œå€ç‚¹,0,SYSID,SYSID,,,,dblong,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"å®—åœ°ç•Œå€ç‚¹,0,state,state,,,,dbText,255,0"
     
-    'È¨ÀûÈËĞÅÏ¢´ı¼Ó
-    '==================================================================================±íÃû,EPS×Ö¶ÎÃû,¿Í»§×Ö¶ÎÃû,[¿Í»§×Ö¶Î±ğÃû,]ÏµÍ³×Ö¶ÎÃû,È±Ê¡Öµ,×Ö¶ÎÀàĞÍ,×Ö¶Î³¤¶È,Ğ¡ÊıÎ»"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,BDCDYH,BDCDYH,,,dbText,28,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,BDCQFJ,BDCQFJ,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,BDCQZH,BDCQZH,,,dbText,50,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,BSM,BSM,,,dbLong,0,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,BZ,BZ,,,dbText,0,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,CHXMBH,CHXMBH,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,DH,DH,,,dbText,50,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,DJSJ,DJSJ,,,dbDate,0,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,DLRDZYX,DLRDZYX,,,dbText,30,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,DLRGDDH,DLRGDDH,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,DLRJGMC,DLRJGMC,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,DLRTXDZ,DLRTXDZ,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,DLRXB,DLRXB,,,dbText,2,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,DaiLRXM,DLRXM,,,dbText,200,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,DLRYB,DLRYB,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,DaiLRDH,DLRYDDH,,,dbText,50,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,DLRYYZZHM,DLRYYZZHM,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,DaiLRZJH,DLRZJH,,,dbText,50,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,DaiLRZJZL,DLRZJZL,,,dbText,50,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,DLRZYZGZH,DLRZYZGZH,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,DZ,DZ,,,dbText,200,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,DZYJ,DZYJ,,,dbText,50,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,FRDZYX,FRDZYX,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,FRGDDH,FRGDDH,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,FaRDB,FRXM,,,dbText,200,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,FaRDBDH,FRYDDH,,,dbText,50,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,FaRDBZJZL,FRZJZL,,,dbText,50,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,FRZW,FRZW,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,FZJG,FZJG,,,dbText,200,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,GJ,GJ,,,dbText,6,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,GYFS,GYFS,,,dbText,2,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,GYQK,GYQK,,,dbText,0,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,GZDW,GZDW,,,dbText,100,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,HJSZSS,HJSZSS,,,dbText,6,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,JYJG,JYJG,,,dbDouble,0,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,LXRDZYX,LXRDZYX,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,LXRGDDH,LXRGDDH,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,LXRTXDZ,LXRTXDZ,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,LXRXM,LXRXM,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,LXRYB,LXRYB,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,LXRYDDH,LXRYDDH,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,MJDW,MJDW,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,QLBL,QLBL,,,dbText,100,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,QLLX,QLLX,,,dbText,5,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,QLMJ,QLMJ,,,dbDouble,0,2"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,QLRLX,QLRLX,,,dbText,2,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,QLRMC,QLRMC,,,dbText,100,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,QXDM,QXDM,,,dbLong,0,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,SSHY,SSHY,,,dbText,6,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,state,state,,,dbLong,0,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,SXH,SXH,,,dbLong,0,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,sysid,sysid,,,dbLong,0,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,XB,XB,,,dbText,2,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,YB,YB,,,dbText,10,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,YSDM,YSDM,,,dbText,10,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,YXTBM,YXTBM,,,dbText,255,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,YXTBSM,YXTBSM,,,dbLong,0,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,ZDBSM,ZDBSM,,,dbLong,0,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,ZJH,ZJH,,,dbText,50,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,ZJZL,ZJZL,,,dbText,2,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,ZRZBSM,ZRZBSM,,,dbLong,0,0"
-    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_È¨ÀûÈËĞÅÏ¢±í,ZSGBH,ZSGBH,,,dbText,255,0"
+    'æƒåˆ©äººä¿¡æ¯å¾…åŠ 
+    '==================================================================================è¡¨å,EPSå­—æ®µå,å®¢æˆ·å­—æ®µå,[å®¢æˆ·å­—æ®µåˆ«å,]ç³»ç»Ÿå­—æ®µå,ç¼ºçœå€¼,å­—æ®µç±»å‹,å­—æ®µé•¿åº¦,å°æ•°ä½"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,BDCDYH,BDCDYH,,,dbText,28,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,BDCQFJ,BDCQFJ,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,BDCQZH,BDCQZH,,,dbText,50,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,BSM,BSM,,,dbLong,0,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,BZ,BZ,,,dbText,0,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,CHXMBH,CHXMBH,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,DH,DH,,,dbText,50,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,DJSJ,DJSJ,,,dbDate,0,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,DLRDZYX,DLRDZYX,,,dbText,30,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,DLRGDDH,DLRGDDH,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,DLRJGMC,DLRJGMC,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,DLRTXDZ,DLRTXDZ,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,DLRXB,DLRXB,,,dbText,2,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,DaiLRXM,DLRXM,,,dbText,200,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,DLRYB,DLRYB,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,DaiLRDH,DLRYDDH,,,dbText,50,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,DLRYYZZHM,DLRYYZZHM,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,DaiLRZJH,DLRZJH,,,dbText,50,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,DaiLRZJZL,DLRZJZL,,,dbText,50,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,DLRZYZGZH,DLRZYZGZH,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,DZ,DZ,,,dbText,200,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,DZYJ,DZYJ,,,dbText,50,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,FRDZYX,FRDZYX,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,FRGDDH,FRGDDH,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,FaRDB,FRXM,,,dbText,200,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,FaRDBDH,FRYDDH,,,dbText,50,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,FaRDBZJZL,FRZJZL,,,dbText,50,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,FRZW,FRZW,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,FZJG,FZJG,,,dbText,200,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,GJ,GJ,,,dbText,6,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,GYFS,GYFS,,,dbText,2,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,GYQK,GYQK,,,dbText,0,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,GZDW,GZDW,,,dbText,100,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,HJSZSS,HJSZSS,,,dbText,6,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,JYJG,JYJG,,,dbDouble,0,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,LXRDZYX,LXRDZYX,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,LXRGDDH,LXRGDDH,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,LXRTXDZ,LXRTXDZ,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,LXRXM,LXRXM,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,LXRYB,LXRYB,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,LXRYDDH,LXRYDDH,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,MJDW,MJDW,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,QLBL,QLBL,,,dbText,100,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,QLLX,QLLX,,,dbText,5,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,QLMJ,QLMJ,,,dbDouble,0,2"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,QLRLX,QLRLX,,,dbText,2,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,QLRMC,QLRMC,,,dbText,100,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,QXDM,QXDM,,,dbLong,0,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,SSHY,SSHY,,,dbText,6,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,state,state,,,dbLong,0,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,SXH,SXH,,,dbLong,0,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,sysid,sysid,,,dbLong,0,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,XB,XB,,,dbText,2,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,YB,YB,,,dbText,10,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,YSDM,YSDM,,,dbText,10,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,YXTBM,YXTBM,,,dbText,255,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,YXTBSM,YXTBSM,,,dbLong,0,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,ZDBSM,ZDBSM,,,dbLong,0,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,ZJH,ZJH,,,dbText,50,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,ZJZL,ZJZL,,,dbText,2,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,ZRZBSM,ZRZBSM,,,dbLong,0,0"
+    SSProcess.SetDataXParameter "TableFieldDef" & CStr(AddOne(startIndex)),"QLR_æƒåˆ©äººä¿¡æ¯è¡¨,ZSGBH,ZSGBH,,,dbText,255,0"
     
     SSProcess.ImportData
     
@@ -364,10 +364,10 @@ Function importmdb(filename)
     JZDMDBATTR = "BZ,CHXMBH,DJQDM,HH,HQRQ,JBLX,JZ_XH,JZD_ID,JZD_X,JZD_Y,JZDH,JZDLX,JZJJ,LGID,RKSJ,SZ_JF,XGJZDBSM,YSDM,ZD_ID,ZDJZD_ID,ZDJZXBSM"
     JZDATTR = "BZ,CHXMBH,DJZQDM,HH,HQRQ,JBLX,SXH,BSM,JZD_X,JZD_Y,JZDH,JZDLX,JZJJ,LGID,RKSJ,SZ_JF,XGJZDBSM,YSDM,ZDBSM,ZDJZD_ID,ZDJZXBSM"
     
-    '1.-------------´ò¿ªÊı¾İ¿â-----------------------
+    '1.-------------æ‰“å¼€æ•°æ®åº“-----------------------
     SSProcess.OpenAccessMdb filename
     
-    ' ×ÚµØĞÅÏ¢´¦Àí
+    ' å®—åœ°ä¿¡æ¯å¤„ç†
     SSProcess.PushUndoMark
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -409,7 +409,7 @@ Function importmdb(filename)
         End If
     Next
     
-    ' ½çÖ·µãĞÅÏ¢´¦Àí
+    ' ç•Œå€ç‚¹ä¿¡æ¯å¤„ç†
     SSProcess.PushUndoMark
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -434,12 +434,12 @@ Function importmdb(filename)
                 End If
             Next
         Else
-            '´ıÌí¼Ó ¶àÌõ¼ÇÂ¼ÊôĞÔ¼Ó¶ººÅ
+            'å¾…æ·»åŠ  å¤šæ¡è®°å½•å±æ€§åŠ é€—å·
             
         End If
     Next
     
-    ' ×ÔÈ»´±ĞÅÏ¢´¦Àí
+    ' è‡ªç„¶å¹¢ä¿¡æ¯å¤„ç†
     SSProcess.PushUndoMark
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -450,46 +450,46 @@ Function importmdb(filename)
         CHZT = ""
         polygonID = SSProcess.GetSelGeoValue( i, "SSObj_ID" )
         CHLB = SSProcess.GetObjectAttr (polygonID, "[CHLB]")
-        If CHLB = "Ô¤²â»æ"  Then CHZT = "1"
-        If CHLB = "Êµ²â»æ"  Then CHZT = "2"
+        If CHLB = "é¢„æµ‹ç»˜"  Then CHZT = "1"
+        If CHLB = "å®æµ‹ç»˜"  Then CHZT = "2"
         SSProcess.SetObjectAttr polygonID, "[CHZT]", CHZT
     Next
     
     
-    '¹Ø±ÕÊı¾İ¿â
+    'å…³é—­æ•°æ®åº“
     SSProcess.CloseAccessMdb filename
 End Function
 
 Function GetSQLRecordAll(ByRef mdbName, ByRef StrSqlStatement, ByRef arSQLRecord(), ByRef iRecordCount)
     If StrSqlStatement = "" Then
-        MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
+        MsgBox "æŸ¥è¯¢è¯­å¥ä¸ºç©ºï¼Œæ“ä½œåœæ­¢ï¼",48
     End If
     iRecordCount =  - 1
-    'SQLÓï¾ä
+    'SQLè¯­å¥
     sql = StrSqlStatement
-    '´ò¿ª¼ÇÂ¼¼¯
+    'æ‰“å¼€è®°å½•é›†
     SSProcess.OpenAccessRecordset mdbName, sql
-    '»ñÈ¡¼ÇÂ¼×ÜÊı
+    'è·å–è®°å½•æ€»æ•°
     RecordCount = SSProcess.GetAccessRecordCount (mdbName, sql)
     If RecordCount > 0 Then
         iRecordCount = 0
         ReDim arSQLRecord(RecordCount)
-        '½«¼ÇÂ¼ÓÎ±êÒÆµ½µÚÒ»ĞĞ
+        'å°†è®°å½•æ¸¸æ ‡ç§»åˆ°ç¬¬ä¸€è¡Œ
         SSProcess.AccessMoveFirst mdbName, sql
         iRecordCount = 0
-        'ä¯ÀÀ¼ÇÂ¼
+        'æµè§ˆè®°å½•
         While SSProcess.AccessIsEOF (mdbName, sql) = 0
             fields = ""
             values = ""
-            '»ñÈ¡µ±Ç°¼ÇÂ¼ÄÚÈİ
+            'è·å–å½“å‰è®°å½•å†…å®¹
             SSProcess.GetAccessRecord mdbName, sql, fields, values
-            arSQLRecord(iRecordCount) = values                                        '²éÑ¯¼ÇÂ¼
-            iRecordCount = iRecordCount + 1                                                    '²éÑ¯¼ÇÂ¼Êı
-            'ÒÆ¶¯¼ÇÂ¼ÓÎ±ê
+            arSQLRecord(iRecordCount) = values                                        'æŸ¥è¯¢è®°å½•
+            iRecordCount = iRecordCount + 1                                                    'æŸ¥è¯¢è®°å½•æ•°
+            'ç§»åŠ¨è®°å½•æ¸¸æ ‡
             SSProcess.AccessMoveNext mdbName, sql
         WEnd
     End If
-    '¹Ø±Õ¼ÇÂ¼¼¯
+    'å…³é—­è®°å½•é›†
     SSProcess.CloseAccessRecordset mdbName, sql
 End Function
 
@@ -498,7 +498,7 @@ Function AddOne( ByRef startIndex )
     AddOne = startIndex
 End Function
 
-'----------------------- Éú³ÉGUID£¨ÕıÈ·º¯Êı£©-------------------------------------------
+'----------------------- ç”ŸæˆGUIDï¼ˆæ­£ç¡®å‡½æ•°ï¼‰-------------------------------------------
 Function GenerateGuid()
     Dim TypeLib
     Set TypeLib = CreateObject("Scriptlet.TypeLib")
@@ -506,7 +506,7 @@ Function GenerateGuid()
 End Function
 
 Function DiaoRDX
-    'µØÎïµ÷Èë
+    'åœ°ç‰©è°ƒå…¥
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
     SSProcess.SetSelectCondition "SSObj_LayerName", "==", "ST_DWD,ST_DMD,ST_DMX,ST_DWX,ST_DMM,ST_FWDWM,ST_LHDWM,ST_STDWM,ST_DLDWM,ST_OTDWM"
@@ -529,7 +529,7 @@ Function DiaoRDX
             SSProcess.SetSelGeoValue  i, "SSObj_ID", SSObj_ID
         End If
     Next
-    '×¢¼Çµ÷Èë
+    'æ³¨è®°è°ƒå…¥
     If 0 Then
         SSProcess.ClearSelection
         SSProcess.ClearSelectCondition
@@ -541,7 +541,7 @@ Function DiaoRDX
             ' SSProcess.LockSelGeoPoint i,1
             'For j=0 to Pointcount-1
             '    SSProcess.GetSelNotePoint i, j, x, y, z, ptype, pname
-            'if EllipseName="CGCS-2000ÍÖÇò" then ËµÃ÷£ºĞèÒª×ª×ø±êÕâ¾ä²»ÓÃ·Å¿ª
+            'if EllipseName="CGCS-2000æ¤­çƒ" then è¯´æ˜ï¼šéœ€è¦è½¬åæ ‡è¿™å¥ä¸ç”¨æ”¾å¼€
             '         SSProcess.LongiLatiToxyCGCS2000 120, y, x, x0, y0 
             
             '    SSProcess.SetSelNotePoint i, j, x0, y0, z, ptype, pname
@@ -568,12 +568,12 @@ Function ReadCodeTable()
     Dim fso, ts, chLine
     Dim strs(10000),strs0(10000),count
     IsNote = 0
-    fileName = SSProcess.GetSysPathName (0) & "\È¨µ÷¿â¶ÔÕÕ.txt"
+    fileName = SSProcess.GetSysPathName (0) & "\æƒè°ƒåº“å¯¹ç…§.txt"
     If fileName = "" Then
         Exit Function
     End If
     If IsExistentFile( fileName ) = 0  Then
-        MsgBox  "¹¤×÷Ì¨ÃæÄ¿Â¼ÏÂÃ»ÓĞ " & fileName & "\È¨µ÷¿â¶ÔÕÕ"
+        MsgBox  "å·¥ä½œå°é¢ç›®å½•ä¸‹æ²¡æœ‰ " & fileName & "\æƒè°ƒåº“å¯¹ç…§"
         Exit Function
     End If
     Set fso = CreateObject("Scripting.FileSystemObject")
@@ -585,18 +585,18 @@ Function ReadCodeTable()
             count = 0
             If  Left(chLine, 2) <> "//" Then
                 'if  chLine = "NoteBegain"  then   IsNote = 1
-                'if IsNote = 0 then 'µØÎï
+                'if IsNote = 0 then 'åœ°ç‰©
                 'SSFunc.ScanString chLine, "//", strs0, count0
                 SSFunc.ScanString chLine, ",", strs, count
-                If count = 2 Then 'µØÎï
-                    NewCodes(CodeCount) = Trim(strs(0))   'ÁÙº£±àÂë
-                    OldCodes(CodeCount) = Trim(strs(1))   'EPS±àÂë
+                If count = 2 Then 'åœ°ç‰©
+                    NewCodes(CodeCount) = Trim(strs(0))   'ä¸´æµ·ç¼–ç 
+                    OldCodes(CodeCount) = Trim(strs(1))   'EPSç¼–ç 
                     'MSGBOX  NewCodes(CodeCount)&"||"& OldCodes(CodeCount)
                     CodeCount = CodeCount + 1
                 End If
-                'if count=3 then'×¢¼Ç
-                '    NewFontClasses(FontClassCount)=Trim(strs(0))   'ÁÙº£×¢¼Ç±àÂë
-                '    OldFontClasses(FontClassCount)=Trim(strs(1))   'eps×¢¼Ç±àÂë 
+                'if count=3 then'æ³¨è®°
+                '    NewFontClasses(FontClassCount)=Trim(strs(0))   'ä¸´æµ·æ³¨è®°ç¼–ç 
+                '    OldFontClasses(FontClassCount)=Trim(strs(1))   'epsæ³¨è®°ç¼–ç  
                 '    FontClassCount=FontClassCount+1
                 '    end if
             End If
@@ -604,7 +604,7 @@ Function ReadCodeTable()
     Loop
     ts.Close
 End Function
-'²éÕÒ¶ÔÓ¦µÄepsµØÎï±àÂë
+'æŸ¥æ‰¾å¯¹åº”çš„epsåœ°ç‰©ç¼–ç 
 Function CallBackFunc_FindGeoCode( FCODE, ByRef EPSCode, ByRef statue)
     EPSCode = ""
     statue = ""
@@ -618,7 +618,7 @@ Function CallBackFunc_FindGeoCode( FCODE, ByRef EPSCode, ByRef statue)
         End If
     Next
 End Function
-'²éÕÒ¶ÔÓ¦EPS×¢¼Ç·ÖÀàºÅ
+'æŸ¥æ‰¾å¯¹åº”EPSæ³¨è®°åˆ†ç±»å·
 Function CallBackFunc_FindFontClass(FCODE1,ByRef MDBFontClass )
     MDBFontClass = ""
     For i = 0 To FontClassCount - 1
@@ -637,14 +637,14 @@ End Function
 
 Function CREATECH(filename)
     SSProcess.OpenAccessMdb filename
-    '»ñÈ¡²ã¶ÔÓ¦µÄ×ÔÈ»´±BSM
+    'è·å–å±‚å¯¹åº”çš„è‡ªç„¶å¹¢BSM
     strSQL = "SELECT CHXMBH,QXDM,ZRZH,CJZMJ,CFTJZMJ,SJC,CBQMJ,BZ,MYC,CG,ZDBSM,SPTYMJ,BSM,YXTBM,CTNJZMJ,YXTBSM,ZRZBSM,GXSJ,CYTMJ,CH,CGYJZMJ,SysID,State FROM FW_C WHERE OBJECTID IS NOT NULL"
     GetSQLRecordAll filename,strSQL,arRecordZD,nRecordZDCount
     If  nRecordZDCount > 0 Then
         'MSGBOX  nRecordZDCount
         For I = 0 To  nRecordZDCount - 1
             
-            '»ñÈ¡×ÔÈ»´±µÄÖĞĞÄµã£¬´´½¨²ã
+            'è·å–è‡ªç„¶å¹¢çš„ä¸­å¿ƒç‚¹ï¼Œåˆ›å»ºå±‚
             CJL = Split (arRecordZD(I),",")
             SSProcess.ClearSelection
             SSProcess.ClearSelectCondition
@@ -663,7 +663,7 @@ Function CREATECH(filename)
         Next
         'msgbox  qsbsm
     End If
-    '´´½¨»§
+    'åˆ›å»ºæˆ·
     
     MDBHZD = "BDCDJBSM,BDCDYH,BQTGS,BSM,BZ,CBSM,CG,CHXMBH,CQLY,DCFJSM,DCR,DCRQ,DCYJ,DJZT,DQTGS,DYH,DYTDMJ,DZWSXH,DZWTZM,FCFHT,FJSXH,FTTDMJ,FW_DH,FW_LDH,FWBM,FWCB,FWJG,FWLX,FWQJXSYT,FWXZ,FWYT,GHYT,GNQBH,GROUPINDEX,GYTDMJ,HH,HX,HXJG,JC,JGSJ,JHQHH,JSXMBSM,LJZH,MPH,MYC,NQTGS,PZJZMJ,QHH,QXDM,RKSJ,SCDXBFJZMJ,SCFTJZMJ,SCFTXS,SCJZMJ,SCQTJZMJ,SCTNJZMJ,SFFF,SHBW,SJC,SJCS,state,sysid,TDQLXZ,TDSYJSSJ,TDSYQMJ,TDSYQSSJ,TDYT,TDYTMC,XMMC,XQMC,XQTGS,YCDXBFJZMJ,YCFTJZMJ,YCFTXS,YCJZMJ,YCQTJZMJ,YCTNJZMJ,YFWJG,YFWLX,YFWXZ,YFWYT,YFWYTMC,YGHYT,YSDM,YXTBH,YXTBM,YXTBSM,YZBM,ZCS,ZDBSM,ZFBDCDYH,ZFBSM,ZFFWBM,ZL,ZRZBSM,ZRZH,ZRZSXH,ZSCJZMJ,ZT,ZYCJZMJ"
     HSQL = "SELECT BDCDJBSM,BDCDYH,BQTGS,BSM,BZ,CBSM,CG,CHXMBH,CQLY,DCFJSM,DCR,DCRQ,DCYJ,DJZT,DQTGS,DYH,DYTDMJ,DZWSXH,DZWTZM,FCFHT,FJSXH,FTTDMJ,FW_DH,FW_LDH,FWBM,FWCB,FWJG,FWLX,FWQJXSYT,FWXZ,FWYT,GHYT,GNQBH,GROUPINDEX,GYTDMJ,HH,HX,HXJG,JC,JGSJ,JHQHH,JSXMBSM,LJZH,MPH,MYC,NQTGS,PZJZMJ,QHH,QXDM,RKSJ,SCDXBFJZMJ,SCFTJZMJ,SCFTXS,SCJZMJ,SCQTJZMJ,SCTNJZMJ,SFFF,SHBW,SJC,SJCS,state,sysid,TDQLXZ,TDSYJSSJ,TDSYQMJ,TDSYQSSJ,TDYT,TDYTMC,XMMC,XQMC,XQTGS,YCDXBFJZMJ,YCFTJZMJ,YCFTXS,YCJZMJ,YCQTJZMJ,YCTNJZMJ,YFWJG,YFWLX,YFWXZ,YFWYT,YFWYTMC,YGHYT,YSDM,YXTBH,YXTBM,YXTBSM,YZBM,ZCS,ZDBSM,ZFBDCDYH,ZFBSM,ZFFWBM,ZL,ZRZBSM,ZRZH,ZRZSXH,ZSCJZMJ,ZT,ZYCJZMJ FROM FW_H WHERE OBJECTID IS NOT NULL"
@@ -672,7 +672,7 @@ Function CREATECH(filename)
     If  RecordHCount > 0 Then
         'MSGBOX  RecordHCount
         For I = 0 To  RecordHCount - 1
-            '»ñÈ¡×ÔÈ»´±µÄÖĞĞÄµã£¬´´½¨»§
+            'è·å–è‡ªç„¶å¹¢çš„ä¸­å¿ƒç‚¹ï¼Œåˆ›å»ºæˆ·
             HJL = Split (HRecord(I),",")
             SSProcess.ClearSelection
             SSProcess.ClearSelectCondition
@@ -699,34 +699,34 @@ End Function
 
 Function GetSQLRecordAll(ByRef mdbName, ByRef StrSqlStatement, ByRef arSQLRecord(), ByRef iRecordCount)
     If StrSqlStatement = "" Then
-        MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
+        MsgBox "æŸ¥è¯¢è¯­å¥ä¸ºç©ºï¼Œæ“ä½œåœæ­¢ï¼",48
     End If
     iRecordCount =  - 1
-    'SQLÓï¾ä
+    'SQLè¯­å¥
     sql = StrSqlStatement
-    '´ò¿ª¼ÇÂ¼¼¯
+    'æ‰“å¼€è®°å½•é›†
     SSProcess.OpenAccessRecordset mdbName, sql
-    '»ñÈ¡¼ÇÂ¼×ÜÊı
+    'è·å–è®°å½•æ€»æ•°
     RecordCount = SSProcess.GetAccessRecordCount (mdbName, sql)
     If RecordCount > 0 Then
         iRecordCount = 0
         ReDim arSQLRecord(RecordCount)
-        '½«¼ÇÂ¼ÓÎ±êÒÆµ½µÚÒ»ĞĞ
+        'å°†è®°å½•æ¸¸æ ‡ç§»åˆ°ç¬¬ä¸€è¡Œ
         SSProcess.AccessMoveFirst mdbName, sql
         iRecordCount = 0
-        'ä¯ÀÀ¼ÇÂ¼
+        'æµè§ˆè®°å½•
         While SSProcess.AccessIsEOF (mdbName, sql) = 0
             fields = ""
             values = ""
-            '»ñÈ¡µ±Ç°¼ÇÂ¼ÄÚÈİ
+            'è·å–å½“å‰è®°å½•å†…å®¹
             SSProcess.GetAccessRecord mdbName, sql, fields, values
-            arSQLRecord(iRecordCount) = values                                        '²éÑ¯¼ÇÂ¼
-            iRecordCount = iRecordCount + 1                                                    '²éÑ¯¼ÇÂ¼Êı
-            'ÒÆ¶¯¼ÇÂ¼ÓÎ±ê
+            arSQLRecord(iRecordCount) = values                                        'æŸ¥è¯¢è®°å½•
+            iRecordCount = iRecordCount + 1                                                    'æŸ¥è¯¢è®°å½•æ•°
+            'ç§»åŠ¨è®°å½•æ¸¸æ ‡
             SSProcess.AccessMoveNext mdbName, sql
         WEnd
     End If
-    '¹Ø±Õ¼ÇÂ¼¼¯
+    'å…³é—­è®°å½•é›†
     SSProcess.CloseAccessRecordset mdbName, sql
 End Function
 
@@ -737,7 +737,7 @@ Function makeAreaC(x1,y1,sxzd)
     SSProcess.SetNewObjValue "SSObj_Code", 9210313
     'SSProcess.SetNewObjValue "SSObj_Color", color
     ' SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "Â¥²ã"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "æ¥¼å±‚"
     sxz = Split(sxzd,",")
     zdmc = Split(zdmcsz,",")
     For i = 0 To UBound(zdmc)
@@ -757,7 +757,7 @@ Function makeAreaH(x1,y1,sxzd)
     SSProcess.SetNewObjValue "SSObj_Code", 9210513
     'SSProcess.SetNewObjValue "SSObj_Color", color
     ' SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "»§"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "æˆ·"
     sxz = Split(sxzd,",")
     '    zdmc=split(EPSHZD,",")
     'for i=0 to ubound(zdmc)    
@@ -787,13 +787,13 @@ Function HTZ(BSM,sxzd)
     Next
     mdbName = SSProcess.GetProjectFileName
     SSProcess.OpenAccessMdb mdbName
-    sql = "update  FC_»§ĞÅÏ¢ÊôĞÔ±í set " & ZFC & " where BSM = " & BSM
+    sql = "update  FC_æˆ·ä¿¡æ¯å±æ€§è¡¨ set " & ZFC & " where BSM = " & BSM
     SSProcess.ExecuteAccessSql  mdbName,sql
     SSProcess.CloseAccessMdb mdbName
-    SSProcess.MapMethod "clearattrbuffer",  "FC_»§ĞÅÏ¢ÊôĞÔ±í"
+    SSProcess.MapMethod "clearattrbuffer",  "FC_æˆ·ä¿¡æ¯å±æ€§è¡¨"
 End Function
 
-'´´½¨²ã
+'åˆ›å»ºå±‚
 Function CreateCeng(ByVal FileName)
     
     SSProcess.OpenAccessMdb FileName
@@ -821,8 +821,8 @@ Function CreateCeng(ByVal FileName)
                 If geoCount > 0 Then
                     SSProcess.CreateNewObj 2
                     SSProcess.SetNewObjValue "SSObj_Code",9210313
-                    SSProcess.SetNewObjValue "SSObj_LayerName", "Â¥²ã"
-                    SSProcess.SetNewObjValue "[BZ]", "ĞÂÔö"
+                    SSProcess.SetNewObjValue "SSObj_LayerName", "æ¥¼å±‚"
+                    SSProcess.SetNewObjValue "[BZ]", "æ–°å¢"
                     SSProcess.SetNewObjValue "[CHZT]", 2
                     For j = 0 To UBound(FildArr)
                         SSProcess.SetNewObjValue "[" & FildArr(j) & "]" , ValArr(j)
@@ -863,8 +863,8 @@ Function CreateCeng(ByVal FileName)
                 If geoCount > 0 Then
                     SSProcess.CreateNewObj 2
                     SSProcess.SetNewObjValue "SSObj_Code",9210313
-                    SSProcess.SetNewObjValue "SSObj_LayerName", "Â¥²ã"
-                    SSProcess.SetNewObjValue "[BZ]", "ĞÂÔö"
+                    SSProcess.SetNewObjValue "SSObj_LayerName", "æ¥¼å±‚"
+                    SSProcess.SetNewObjValue "[BZ]", "æ–°å¢"
                     SSProcess.SetNewObjValue "[CHZT]", 2
                     
                     For j = 0 To UBound(FildArr)
@@ -904,7 +904,7 @@ Function CreateCeng(ByVal FileName)
     
 End Function' CreateCeng
 
-'´´½¨²ã
+'åˆ›å»ºå±‚
 Function CreateYCeng(ByVal FileName)
     
     SSProcess.OpenAccessMdb FileName
@@ -932,8 +932,8 @@ Function CreateYCeng(ByVal FileName)
                 If geoCount > 0 Then
                     SSProcess.CreateNewObj 2
                     SSProcess.SetNewObjValue "SSObj_Code",9210313
-                    SSProcess.SetNewObjValue "SSObj_LayerName", "Â¥²ã"
-                    SSProcess.SetNewObjValue "[BZ]", "ĞÂÔö"
+                    SSProcess.SetNewObjValue "SSObj_LayerName", "æ¥¼å±‚"
+                    SSProcess.SetNewObjValue "[BZ]", "æ–°å¢"
                     SSProcess.SetNewObjValue "[CHZT]", 1
                     For j = 0 To UBound(FildArr)
                         SSProcess.SetNewObjValue "[" & FildArr(j) & "]" , ValArr(j)
@@ -974,8 +974,8 @@ Function CreateYCeng(ByVal FileName)
                 If geoCount > 0 Then
                     SSProcess.CreateNewObj 2
                     SSProcess.SetNewObjValue "SSObj_Code",9210313
-                    SSProcess.SetNewObjValue "SSObj_LayerName", "Â¥²ã"
-                    SSProcess.SetNewObjValue "[BZ]", "ĞÂÔö"
+                    SSProcess.SetNewObjValue "SSObj_LayerName", "æ¥¼å±‚"
+                    SSProcess.SetNewObjValue "[BZ]", "æ–°å¢"
                     SSProcess.SetNewObjValue "[CHZT]", 1
                     
                     For j = 0 To UBound(FildArr)
