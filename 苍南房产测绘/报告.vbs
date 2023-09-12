@@ -116,6 +116,7 @@ Function FCFK_FXArea()
     
     '获取所有的使用功能
     SqlStr = "Select DISTINCT FC_LPB_户信息表.SYGN From FC_LPB_户信息表 Where FC_LPB_户信息表.ID > 0 And FC_LPB_户信息表.CH > 0 And FC_LPB_户信息表.SHBW Not Like '*计入地下*' "
+    
     GetSQLRecordAll MdbName,SqlStr,SYGNArr,SYGNCount
     
     DS_EndRow = SYGNCount - 1 + DS_StartRow
