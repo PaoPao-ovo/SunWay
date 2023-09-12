@@ -1,11 +1,11 @@
 
-'=========================================================Í¼²ãÃû³ÆÅäÖÃ=======================================================
+'=========================================================å›¾å±‚åç§°é…ç½®=======================================================
 
 LayStr = "CD,CT,CY,CQ,CS,QT,BM,FQ,DL,GD,LD,DC,XH,TX,DX,YD,LT,JX,JK,EX,DS,BZ,JS,XF,PS,YS,WS,FS,RQ,MQ,TR,YH,RL,RS,ZQ,SY,GS"
 
-'===========================================¹¦ÄÜÈë¿Ú========================================================
+'===========================================åŠŸèƒ½å…¥å£========================================================
 
-'×ÜÈë¿Ú
+'æ€»å…¥å£
 Sub OnClick()
     
     DelTk
@@ -22,7 +22,7 @@ Sub OnClick()
     
 End Sub
 
-'Éú³ÉÍ¼ÀªºÍÍ¼Àı
+'ç”Ÿæˆå›¾å»“å’Œå›¾ä¾‹
 Function CreatMap()
     SSProcess.CreateMapFrame
     FrameCount = SSProcess.GetMapFrameCount()
@@ -33,13 +33,13 @@ Function CreatMap()
         CreateNote SSProcess.GetCurMapFrame()
     Next
     SSProcess.SaveBufferObjToDatabase
-    SSProcess.MapMethod "LoadData","Í¼Àª²ã"
+    SSProcess.MapMethod "LoadData","å›¾å»“å±‚"
     SSProcess.FreeMapFrame
 End Function
 
 Function CreateNote(ByVal MapId)
     
-    SSProcess.GetObjectPoint MapId, 2, StandX, StandY, StandZ, PointType, Name '×óÉÏ½Çµã×ø±êÖµ
+    SSProcess.GetObjectPoint MapId, 2, StandX, StandY, StandZ, PointType, Name 'å·¦ä¸Šè§’ç‚¹åæ ‡å€¼
     
     BorderStartX = StandX - 10 - 20
     BorderStartY = StandY - 10
@@ -65,7 +65,7 @@ Function CreateNote(ByVal MapId)
     
 End Function' CreateNote
 
-'»ñÈ¡ËùÓĞµÄµãºÍÏßÒªËØÃû³Æ
+'è·å–æ‰€æœ‰çš„ç‚¹å’Œçº¿è¦ç´ åç§°
 Function SelAll(ByVal OuterId,ByRef CodeVal,ByRef CodeCount)
     PoiIds = SSProcess.SearchInPolyObjIDs(OuterId,0,"",0,1,1)
     LinIds = SSProcess.SearchInPolyObjIDs(OuterId,1,"",0,1,1)
@@ -528,6 +528,7 @@ Function SelAll(ByVal OuterId,ByRef CodeVal,ByRef CodeCount)
             End If
         End Select
     Next 'i
+
     ' ReDim CodeStr(UBound(PoiArr) + UBound(LinArr))
     ' For i = 0 To UBound(PoiArr) + UBound(LinArr)
     '     If i <= UBound(PoiArr) Then
@@ -536,7 +537,9 @@ Function SelAll(ByVal OuterId,ByRef CodeVal,ByRef CodeCount)
     '         CodeStr(i) = SSProcess.GetObjectAttr(LinArr(i - UBound(PoiArr) ),"SSObj_Code")
     '     End If
     ' Next 'i
+
     CodeNameVal = CDCodeStr & ";" & CTCodeStr & ";" & CYCodeStr & ";" & CQCodeStr & ";" & CSCodeStr & ";" & QTCodeStr & ";" & BMCodeStr & ";" & FQCodeStr & ";" & DLCodeStr & ";" & GDCodeStr & ";" & LDCodeStr & ";" & DCCodeStr & ";" & XHCodeStr & ";" & TXCodeStr & ";" & DXCodeStr & ";" & YDCodeStr & ";" & LTCodeStr & ";" & JXCodeStr & ";" & JKCodeStr & ";" & DSCodeStr & ";" & BZCodeStr & ";" & JSCodeStr & ";" & XFCodeStr & ";" & PSCodeStr & ";" & YSCodeStr & ";" & WSCodeStr & ";" & FSCodeStr & ";" & RQCodeStr & ";" & MQCodeStr & ";" & YHCodeStr & ";" & RLCodeStr & ";" & RSCodeStr & ";" & ZQCodeStr & ";" & SYCodeStr & ";" & GSCodeStr & ";" & EXCodeStr & ";" & TRCodeStr
+    
     CodeNameArr = Split(CodeNameVal,";", - 1,1)
     For i = 0 To UBound(CodeNameArr)
         If CodeNameArr(i) <> "" Then
@@ -551,11 +554,11 @@ Function SelAll(ByVal OuterId,ByRef CodeVal,ByRef CodeCount)
     DelRepeat CodeStr,CodeVal,CodeCount
 End Function' SelAllPoi
 
-'»æÖÆµã×¢¼Ç
+'ç»˜åˆ¶ç‚¹æ³¨è®°
 Function DrawPoint(ByVal X,ByVal Y,ByVal Code)
     SSProcess.CreateNewObj 0
     SSProcess.SetNewObjValue "SSObj_Code", Code
-    SSProcess.SetNewObjValue "SSObj_LayerName", "¹ÜÏßÍ¼Àı²ã"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ç®¡çº¿å›¾ä¾‹å±‚"
     'SSProcess.SetNewObjValue "SSObj_GroupID", GropuId
     SSProcess.SetNewObjValue "SSObj_Color", SSProcess.GetFeatureCodeInfo(Code,"LineColor")
     SSProcess.AddNewObjPoint X,Y,0,0,""
@@ -564,11 +567,11 @@ Function DrawPoint(ByVal X,ByVal Y,ByVal Code)
     DrawPointNote X + 2.5,Y,Code,150,150
 End Function
 
-'»æÖÆµã×¢¼ÇÃû
+'ç»˜åˆ¶ç‚¹æ³¨è®°å
 Function DrawPointNote(ByVal X,ByVal Y,ByVal Code,ByVal Width,ByVal Height)
     SSProcess.CreateNewObj 3
     SSProcess.SetNewObjValue "SSObj_FontString", SSProcess.GetFeatureCodeInfo(Code,"ObjectName")
-    SSProcess.SetNewObjValue "SSObj_LayerName", "¹ÜÏßÍ¼Àı²ã"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ç®¡çº¿å›¾ä¾‹å±‚"
     'SSProcess.SetNewObjValue "SSObj_GroupID", GropuId
     SSProcess.SetNewObjValue "SSObj_Color", "RGB(255,255,255)"
     SSProcess.SetNewObjValue "SSObj_FontAlignment", "3"
@@ -579,11 +582,11 @@ Function DrawPointNote(ByVal X,ByVal Y,ByVal Code,ByVal Width,ByVal Height)
     SSProcess.SaveBufferObjToDatabase
 End Function
 
-'»æÖÆÏß×¢¼Ç
+'ç»˜åˆ¶çº¿æ³¨è®°
 Function DrawLine(ByVal X1,ByVal X2,ByVal Y,ByVal Code)
     SSProcess.CreateNewObj 1
     SSProcess.SetNewObjValue "SSObj_Code", Code
-    SSProcess.SetNewObjValue "SSObj_LayerName", "¹ÜÏßÍ¼Àı²ã"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ç®¡çº¿å›¾ä¾‹å±‚"
     'SSProcess.SetNewObjValue "SSObj_GroupID", GropuId
     SSProcess.SetNewObjValue "SSObj_Color", SSProcess.GetFeatureCodeInfo(Code,"LineColor")
     SSProcess.AddNewObjPoint X1, Y, 0, 0, ""
@@ -593,11 +596,11 @@ Function DrawLine(ByVal X1,ByVal X2,ByVal Y,ByVal Code)
     DrawLineNote X2 + 1,Y,Code,150,150
 End Function
 
-'»æÖÆÏß×¢¼ÇÃû
+'ç»˜åˆ¶çº¿æ³¨è®°å
 Function DrawLineNote(ByVal X,ByVal Y,ByVal Code,ByVal Width,ByVal Height)
     SSProcess.CreateNewObj 3
     SSProcess.SetNewObjValue "SSObj_FontString", SSProcess.GetFeatureCodeInfo(Code,"ObjectName")
-    SSProcess.SetNewObjValue "SSObj_LayerName", "¹ÜÏßÍ¼Àı²ã"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ç®¡çº¿å›¾ä¾‹å±‚"
     'SSProcess.SetNewObjValue "SSObj_GroupID", GropuId
     SSProcess.SetNewObjValue "SSObj_Color", "RGB(255,255,255)"
     SSProcess.SetNewObjValue "SSObj_FontAlignment", "3"
@@ -608,13 +611,13 @@ Function DrawLineNote(ByVal X,ByVal Y,ByVal Code,ByVal Width,ByVal Height)
     SSProcess.SaveBufferObjToDatabase
 End Function
 
-'ÇøÓò¿òÏß»æÖÆ
+'åŒºåŸŸæ¡†çº¿ç»˜åˆ¶
 Function DrawBorder(ByVal StartX,ByVal EndX,ByVal StartY,ByVal EndY)
     
     SSProcess.CreateNewObj 2
     SSProcess.SetNewObjValue "SSObj_Code", "51111111"
     'SSProcess.SetNewObjValue "SSObj_GroupID", GroupId
-    SSProcess.SetNewObjValue "SSObj_LayerName", "¹ÜÏßÍ¼Àı²ã"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ç®¡çº¿å›¾ä¾‹å±‚"
     SSProcess.SetNewObjValue "SSObj_Color", "RGB(255,255,255)"
     SSProcess.AddNewObjPoint StartX,StartY,0,0,""
     SSProcess.AddNewObjPoint EndX, StartY,0,0,""
@@ -624,17 +627,17 @@ Function DrawBorder(ByVal StartX,ByVal EndX,ByVal StartY,ByVal EndY)
     SSProcess.AddNewObjToSaveObjList
     SSProcess.SaveBufferObjToDatabase
     
-    '»æÖÆ±êÌâ
+    'ç»˜åˆ¶æ ‡é¢˜
     DrawTitle (StartX + EndX) / 2,StartY - 1,200,200
     
 End Function
 
-'»æÖÆ±êÌâ
+'ç»˜åˆ¶æ ‡é¢˜
 Function DrawTitle(ByVal X,ByVal Y,ByVal Width, ByVal Height)
     SSProcess.CreateNewObj 3
-    SSProcess.SetNewObjValue "SSObj_FontString", "Í¼ Àı"
+    SSProcess.SetNewObjValue "SSObj_FontString", "å›¾ ä¾‹"
     SSProcess.SetNewObjValue "SSObj_Color", "RGB(255,255,255)"
-    SSProcess.SetNewObjValue "SSObj_LayerName", "¹ÜÏßÍ¼Àı²ã"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ç®¡çº¿å›¾ä¾‹å±‚"
     SSProcess.SetNewObjValue "SSObj_FontAlignment", "0"
     SSProcess.SetNewObjValue "SSObj_FontWidth", Width
     SSProcess.SetNewObjValue "SSObj_FontHeight", Height
@@ -644,11 +647,11 @@ Function DrawTitle(ByVal X,ByVal Y,ByVal Width, ByVal Height)
     SSProcess.SaveBufferObjToDatabase
 End Function
 
-'Ñ¡ÔñÖ¸¶¨µØÎï²¢·µ»Ø¸öÊı
-Function SelFeatures(ByRef Count,ByRef IdArr()) 'EngLayerName Í¼²ãÃû³Æ(Ó¢ÎÄ),Count ¸öÊı(·µ»ØÖµ),IdArr() IdÊı×é(·µ»ØÖµ)
+'é€‰æ‹©æŒ‡å®šåœ°ç‰©å¹¶è¿”å›ä¸ªæ•°
+Function SelFeatures(ByRef Count,ByRef IdArr()) 'EngLayerName å›¾å±‚åç§°(è‹±æ–‡),Count ä¸ªæ•°(è¿”å›å€¼),IdArr() Idæ•°ç»„(è¿”å›å€¼)
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
-    SSProcess.SetSelectCondition "SSObj_LayerName", "==", "Í¼Àª²ã"
+    SSProcess.SetSelectCondition "SSObj_LayerName", "==", "å›¾å»“å±‚"
     SSProcess.SetSelectCondition "SSObj_Type", "==", "Area"
     SSProcess.SelectFilter
     Count = SSProcess.GetSelGeoCount
@@ -658,7 +661,7 @@ Function SelFeatures(ByRef Count,ByRef IdArr()) 'EngLayerName Í¼²ãÃû³Æ(Ó¢ÎÄ),Cou
     Next 'i
 End Function' SelFeatures
 
-'È¥³ı×Ö·û´®ÖĞÖØ¸´Öµ
+'å»é™¤å­—ç¬¦ä¸²ä¸­é‡å¤å€¼
 Function DelRepeat(ByVal StrArr(),ByRef ToTalVal,ByRef LxCount)
     ToTalVal = ""
     For i = 0 To UBound(StrArr)
@@ -682,19 +685,19 @@ Function GxVisible(ByVal LayString)
     For i = 0 To UBound(LayArr)
         SSProcess.SetLayerStatus LayArr(i), 1, 1
     Next 'i
-    SSProcess.SetLayerStatus "Í¼Àª²ã", 1, 1
+    SSProcess.SetLayerStatus "å›¾å»“å±‚", 1, 1
     SSProcess.RefreshView
 End Function
 
 Function DelTk()
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
-    SSProcess.SetSelectCondition "SSObj_LayerName", "==", "¹ÜÏßÍ¼Àı²ã"
+    SSProcess.SetSelectCondition "SSObj_LayerName", "==", "ç®¡çº¿å›¾ä¾‹å±‚"
     SSProcess.SelectFilter
     SSProcess.DeleteSelectionObj()
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
-    SSProcess.SetSelectCondition "SSObj_LayerName", "==", "Í¼Àª²ã"
+    SSProcess.SetSelectCondition "SSObj_LayerName", "==", "å›¾å»“å±‚"
     SSProcess.SelectFilter
     SSProcess.DeleteSelectionObj()
 End Function' DelTk
@@ -708,7 +711,7 @@ Function AllVisible()
     SSProcess.RefreshView
 End Function
 
-'Íê³ÉÌáÊ¾
+'å®Œæˆæç¤º
 Function Ending()
-    MsgBox "Êä³öÍê³É"
+    MsgBox "è¾“å‡ºå®Œæˆ"
 End Function' Ending

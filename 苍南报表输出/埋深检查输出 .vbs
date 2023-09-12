@@ -1,37 +1,37 @@
-'========================================================Excel²Ù×÷¶ÔÏóºÍÎÄ¼şÂ·¾¶²Ù×÷¶ÔÏó======================================================
+'========================================================Excelæ“ä½œå¯¹è±¡å’Œæ–‡ä»¶è·¯å¾„æ“ä½œå¯¹è±¡======================================================
 
-'Â·¾¶²Ù×÷¶ÔÏó
+'è·¯å¾„æ“ä½œå¯¹è±¡
 Dim FileSysObj
 Set FileSysObj = CreateObject("Scripting.FileSystemObject")
 
-'Excel²Ù×÷¶ÔÏó
+'Excelæ“ä½œå¯¹è±¡
 Dim ExcelObj
 Set ExcelObj = CreateObject("Excel.Application")
 
-'============================================================¼ì²é¼ÇÂ¼ÅäÖÃ====================================================================
+'============================================================æ£€æŸ¥è®°å½•é…ç½®====================================================================
 
-'ÂñÉîãĞÖµ
+'åŸ‹æ·±é˜ˆå€¼
 Dim Threshold
 Threshold = 5
 
-'¼ì²é¼¯ÏîÄ¿Ãû³Æ
+'æ£€æŸ¥é›†é¡¹ç›®åç§°
 Dim strGroupName
-strGroupName = "¹ÜÏß¾«¶È¼ì²é"
+strGroupName = "ç®¡çº¿ç²¾åº¦æ£€æŸ¥"
 
-'¼ì²é¼¯×éÃû³Æ
+'æ£€æŸ¥é›†ç»„åç§°
 Dim strCheckName
-strCheckName = "ÂñÉî¾«¶È¼ì²é"
+strCheckName = "åŸ‹æ·±ç²¾åº¦æ£€æŸ¥"
 
-'¼ì²éÄ£ĞÍÃû³Æ
+'æ£€æŸ¥æ¨¡å‹åç§°
 Dim CheckmodelName
-CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->ÂñÉî¾«¶È¼ì²é"
+CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->åŸ‹æ·±ç²¾åº¦æ£€æŸ¥"
 
-'¼ì²éÃèÊö
+'æ£€æŸ¥æè¿°
 Dim strDescription
-strDescription = "ÂñÉî¾«¶È³¬±ê"
+strDescription = "åŸ‹æ·±ç²¾åº¦è¶…æ ‡"
 
 
-'=============================================================¹¦ÄÜÈë¿Ú=======================================================================
+'=============================================================åŠŸèƒ½å…¥å£=======================================================================
 
 Sub OnClick()
     
@@ -39,15 +39,15 @@ Sub OnClick()
     
     JcrInfo DateTime,PersonName
     
-    ExcelFilePath = SSProcess.SelectFileName(1,"Ñ¡ÔñExcelÎÄ¼ş",0,"EXCEL Files(*.xlsx)|*.xlsx|EXCEL Files(*.xls)|*.xls|All Files (*.*)|*.*||")
+    ExcelFilePath = SSProcess.SelectFileName(1,"é€‰æ‹©Excelæ–‡ä»¶",0,"EXCEL Files(*.xlsx)|*.xlsx|EXCEL Files(*.xls)|*.xls|All Files (*.*)|*.*||")
     
     If  ExcelFilePath = "" Then
-        MsgBox "Î´Ñ¡ÔñÎÄ¼ş£¬ÒÑÍË³ö"
+        MsgBox "æœªé€‰æ‹©æ–‡ä»¶ï¼Œå·²é€€å‡º"
         Exit Sub
     End If
     
     FileName = Right(ExcelFilePath,Len(ExcelFilePath) - InStrRev(ExcelFilePath,"\"))
-    FileSysObj.CopyFile  ExcelFilePath,SSProcess.GetSysPathName(5) & "²âÁ¿¾«¶È\" & FileName
+    FileSysObj.CopyFile  ExcelFilePath,SSProcess.GetSysPathName(5) & "æµ‹é‡ç²¾åº¦\" & FileName
     
     ClearCheckRecord
     
@@ -69,38 +69,38 @@ Sub OnClick()
     
 End Sub' OnClick
 
-'=============================================================±¨±íÌîÖµ==============================================================
+'=============================================================æŠ¥è¡¨å¡«å€¼==============================================================
 
-'ÊäÈë¼ì²éÈËµ¯¿ò
+'è¾“å…¥æ£€æŸ¥äººå¼¹æ¡†
 Function JcrInfo(ByRef DateTime,ByRef PersonName)
     SSProcess.ClearInputParameter
-    SSProcess.AddInputParameter "¼ì²éÈË" , "" , 0 , "" , ""
-    SSProcess.AddInputParameter "ÈÕÆÚ" , GetNowTime , 0 , "" , ""
-    Result = SSProcess.ShowInputParameterDlg ("ĞÅÏ¢Â¼Èë")
+    SSProcess.AddInputParameter "æ£€æŸ¥äºº" , "" , 0 , "" , ""
+    SSProcess.AddInputParameter "æ—¥æœŸ" , GetNowTime , 0 , "" , ""
+    Result = SSProcess.ShowInputParameterDlg ("ä¿¡æ¯å½•å…¥")
     If Result = 1 Then
-        DateTime = SSProcess.GetInputParameter ("ÈÕÆÚ")
-        PersonName = SSProcess.GetInputParameter ("¼ì²éÈË")
+        DateTime = SSProcess.GetInputParameter ("æ—¥æœŸ")
+        PersonName = SSProcess.GetInputParameter ("æ£€æŸ¥äºº")
     End If
 End Function' JcrInfo
 
-'»ñÈ¡µ±Ç°ÏµÍ³Ê±¼ä
+'è·å–å½“å‰ç³»ç»Ÿæ—¶é—´
 Function GetNowTime()
     GetNowTime = CStr(FormatDateTime(Now(),1))
 End Function' GetNowTime
 
-'ÉèÖÃ±íÃû
+'è®¾ç½®è¡¨å
 Function SetTableHeader()
-    SqlStr = "Select XMMC From ¹ÜÏßÏîÄ¿ĞÅÏ¢±í Where ¹ÜÏßÏîÄ¿ĞÅÏ¢±í.ID = 1"
+    SqlStr = "Select XMMC From ç®¡çº¿é¡¹ç›®ä¿¡æ¯è¡¨ Where ç®¡çº¿é¡¹ç›®ä¿¡æ¯è¡¨.ID = 1"
     GetSQLRecordAll SqlStr,Xmmc,Count
     ExcelObj.Cells(2,2) = Xmmc(0)
 End Function' SetTableHeader
 
-'»ñÈ¡×î´óĞĞÊı
+'è·å–æœ€å¤§è¡Œæ•°
 Function GetEndRow()
     GetEndRow = 4
-    Poisition = InStr(ExcelObj.Cells(GetEndRow,1),"×î´ó½Ï²îÎª£º")
+    Poisition = InStr(ExcelObj.Cells(GetEndRow,1),"æœ€å¤§è¾ƒå·®ä¸ºï¼š")
     Do While ExcelObj.Cells(GetEndRow,1) <> ""
-        Poisition = InStr(ExcelObj.Cells(GetEndRow,1),"×î´ó½Ï²îÎª£º")
+        Poisition = InStr(ExcelObj.Cells(GetEndRow,1),"æœ€å¤§è¾ƒå·®ä¸ºï¼š")
         'MsgBox Poisition
         If Poisition = 0 Then
             GetEndRow = GetEndRow + 1
@@ -113,18 +113,18 @@ End Function' GetEndRow
 Function InsertExcel(ByVal ExcelFile,ByVal StartRow,ByVal EndRow,ByRef ErrorIds)
     ErrorIds = ""
     For i = StartRow To EndRow
-        SqlStr = "Select µØÏÂ¹ÜÏßÏßÊôĞÔ±í.ID,µØÏÂ¹ÜÏßÏßÊôĞÔ±í.GXQDMS,µØÏÂ¹ÜÏßÏßÊôĞÔ±í.GXQDDH From µØÏÂ¹ÜÏßÏßÊôĞÔ±í inner join GeoLineTB on µØÏÂ¹ÜÏßÏßÊôĞÔ±í.ID = GeoLineTB.ID WHERE (GeoLineTB.Mark Mod 2)<>0 And GXQDDH = " & AddDenote(ExcelObj.Cells(i,1)) & " And GXZDDH = " & AddDenote(ExcelObj.Cells(i,2))
+        SqlStr = "Select åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.ID,åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.GXQDMS,åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.GXQDDH From åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨ inner join GeoLineTB on åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.ID = GeoLineTB.ID WHERE (GeoLineTB.Mark Mod 2)<>0 And GXQDDH = " & AddDenote(ExcelObj.Cells(i,1)) & " And GXZDDH = " & AddDenote(ExcelObj.Cells(i,2))
         GetSQLRecordAll SqlStr,DeepArr,DeepCount
         If DeepCount >= 1 Then
             TempArr = Split(DeepArr(0),",", - 1,1)
-            SqlStr = "Select µØÏÂ¹ÜÏßµãÊôĞÔ±í.FSW From µØÏÂ¹ÜÏßµãÊôĞÔ±í inner join GeoPointTB on µØÏÂ¹ÜÏßµãÊôĞÔ±í.ID = GeoPointTB.ID WHERE (GeoPointTB.Mark Mod 2)<>0 And µØÏÂ¹ÜÏßµãÊôĞÔ±í.WTDH = " & "'" & TempArr(2) & "'"
+            SqlStr = "Select åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.FSW From åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨ inner join GeoPointTB on åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.ID = GeoPointTB.ID WHERE (GeoPointTB.Mark Mod 2)<>0 And åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨.WTDH = " & "'" & TempArr(2) & "'"
             GetSQLRecordAll SqlStr,PoiFWSArr,Count
             ExcelObj.Cells(i,3) = Round(Transform(TempArr(1)) * 100,2)
             Diff = Abs(Round(Transform(TempArr(1)) * 100 - Transform(ExcelObj.Cells(i,4)),2))
             ExcelObj.Cells(i,5) = Diff
             If PoiFWSArr(0) = "" Then
                 If Diff > 0.15 * Transform(TempArr(1)) * 100 Then
-                    ExcelObj.Cells(i,6) = "ÂñÉî³¬ÏŞ"
+                    ExcelObj.Cells(i,6) = "åŸ‹æ·±è¶…é™"
                     If ErrorIds = "" Then
                         ErrorIds = TempArr(0)
                     Else
@@ -133,7 +133,7 @@ Function InsertExcel(ByVal ExcelFile,ByVal StartRow,ByVal EndRow,ByRef ErrorIds)
                 End If
             ElseIf PoiFWSArr(0) = "*" Then
                 If Diff > 0.15 * Transform(TempArr(1)) * 100 Then
-                    ExcelObj.Cells(i,6) = "ÂñÉî³¬ÏŞ"
+                    ExcelObj.Cells(i,6) = "åŸ‹æ·±è¶…é™"
                     If ErrorIds = "" Then
                         ErrorIds = TempArr(0)
                     Else
@@ -142,7 +142,7 @@ Function InsertExcel(ByVal ExcelFile,ByVal StartRow,ByVal EndRow,ByRef ErrorIds)
                 End If
             ElseIf PoiFWSArr(0) = Null Then
                 If Diff > 0.15 * Transform(TempArr(1)) * 100 Then
-                    ExcelObj.Cells(i,6) = "ÂñÉî³¬ÏŞ"
+                    ExcelObj.Cells(i,6) = "åŸ‹æ·±è¶…é™"
                     If ErrorIds = "" Then
                         ErrorIds = TempArr(0)
                     Else
@@ -151,7 +151,7 @@ Function InsertExcel(ByVal ExcelFile,ByVal StartRow,ByVal EndRow,ByRef ErrorIds)
                 End If
             Else
                 If Diff > Threshold Then
-                    ExcelObj.Cells(i,6) = "ÂñÉî³¬ÏŞ"
+                    ExcelObj.Cells(i,6) = "åŸ‹æ·±è¶…é™"
                     If ErrorIds = "" Then
                         ErrorIds = TempArr(0)
                     Else
@@ -163,7 +163,7 @@ Function InsertExcel(ByVal ExcelFile,ByVal StartRow,ByVal EndRow,ByRef ErrorIds)
     Next 'i
 End Function' InsertExcel
 
-'»ñÈ¡×î´óÉî¶È²î
+'è·å–æœ€å¤§æ·±åº¦å·®
 Function GetMaxDeep(ByVal ExcelFile,ByVal StartRow,ByVal EndRow)
     GetMaxDeep = 0
     For i = StartRow To EndRow
@@ -171,17 +171,17 @@ Function GetMaxDeep(ByVal ExcelFile,ByVal StartRow,ByVal EndRow)
             GetMaxDeep = Transform(ExcelObj.Cells(i,5))
         End If
     Next 'i
-    ExcelObj.Cells(EndRow + 1,1) = "×î´ó½Ï²îÎª£º" & GetMaxDeep & "CM"
+    ExcelObj.Cells(EndRow + 1,1) = "æœ€å¤§è¾ƒå·®ä¸ºï¼š" & GetMaxDeep & "CM"
     TIANzdjc "MSZDJC",GetMaxDeep
 End Function' GetMaxDeep
 
-'ÌîĞ´¼ì²éÈËºÍÈÕÆÚ
+'å¡«å†™æ£€æŸ¥äººå’Œæ—¥æœŸ
 Function SetFooter(ByVal DateTime,ByVal PersonName,ByVal EndRow)
     ExcelObj.Cells(EndRow + 2,2) = PersonName
     ExcelObj.Cells(EndRow + 2,6) = DateTime
 End Function' SetFooter
 
-'Ìí¼Ó¼ì²é¼ÇÂ¼
+'æ·»åŠ æ£€æŸ¥è®°å½•
 Function AddRecord(ByVal ErrorIds)
     If ErrorIds <> "" Then
         ErrorArr = Split(ErrorIds,",", - 1,1)
@@ -193,18 +193,18 @@ Function AddRecord(ByVal ErrorIds)
     SSProcess.SaveCheckRecord
 End Function' AddRecord
 
-'ÂñÉî¼ì²é×î´óÖµÌîÈëĞÅÏ¢±í
+'åŸ‹æ·±æ£€æŸ¥æœ€å¤§å€¼å¡«å…¥ä¿¡æ¯è¡¨
 Function TIANzdjc (zdmc,zdjc)
     mdbName = SSProcess.GetProjectFileName
     SSProcess.OpenAccessMdb mdbName
-    sql = "update  ¹ÜÏßÏîÄ¿ĞÅÏ¢±í set " & zdmc & " = " & zdjc & " where ¹ÜÏßÏîÄ¿ĞÅÏ¢±í.ID= 1"
+    sql = "update  ç®¡çº¿é¡¹ç›®ä¿¡æ¯è¡¨ set " & zdmc & " = " & zdjc & " where ç®¡çº¿é¡¹ç›®ä¿¡æ¯è¡¨.ID= 1"
     SSProcess.ExecuteAccessSql  mdbName,sql
     SSProcess.CloseAccessMdb mdbName
 End Function
 
-'==========================================================¹¤¾ßÀàº¯Êı====================================================================
+'==========================================================å·¥å…·ç±»å‡½æ•°====================================================================
 
-'´ò¿ªËùÓĞÍ¼²ã
+'æ‰“å¼€æ‰€æœ‰å›¾å±‚
 Function AllVisible()
     count = SSProcess.GetLayerCount
     For i = 0 To count - 1
@@ -214,7 +214,7 @@ Function AllVisible()
     SSProcess.RefreshView
 End Function
 
-'Êı¾İÀàĞÍ×ª»»
+'æ•°æ®ç±»å‹è½¬æ¢
 Function Transform(ByVal Values)
     If Values <> "" Then
         Values = CDbl(Values)
@@ -225,7 +225,7 @@ Function Transform(ByVal Values)
     Transform = Values
 End Function'Transform
 
-'´ò¿ªExcel±í
+'æ‰“å¼€Excelè¡¨
 Function OpenExcel(ByVal FilePath,ByRef ExcleFile)
     ExcelObj.Application.Visible = False
     Set ExcleFile = ExcelObj.WorkBooks.Open(FilePath)
@@ -233,24 +233,24 @@ Function OpenExcel(ByVal FilePath,ByRef ExcleFile)
     ExcelSheet.Activate
 End Function
 
-'»ñÈ¡ExcelÃû³Æ
+'è·å–Excelåç§°
 Function GetExcelName(ByVal ExcelFilePath)
     ExcelFilePathArr = Split(ExcelFilePath,"\", - 1,1)
     GetExcelName = ExcelFilePathArr(UBound(ExcelFilePathArr))
 End Function' GetExcelName
 
-'±£´æ¹Ø±ÕExcel±í¸ñ
+'ä¿å­˜å…³é—­Excelè¡¨æ ¼
 Function CloseExcel(ByVal ExcelFile)
     ExcelFile.Save
     ExcelFile.Close
     ExcelObj.Quit
 End Function' CloseExcel
 
-'»ñÈ¡ËùÓĞ¼ÇÂ¼
+'è·å–æ‰€æœ‰è®°å½•
 Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)
     SSProcess.OpenAccessMdb SSProcess.GetProjectFileName
     If StrSqlStatement = "" Then
-        MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
+        MsgBox "æŸ¥è¯¢è¯­å¥ä¸ºç©ºï¼Œæ“ä½œåœæ­¢ï¼",48
     End If
     iRecordCount =  - 1
     SSProcess.OpenAccessRecordset SSProcess.GetProjectFileName, StrSqlStatement
@@ -273,17 +273,17 @@ Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecord
     SSProcess.CloseAccessMdb SSProcess.GetProjectFileName
 End Function
 
-'Ìí¼Óµ¥ÒıºÅ
+'æ·»åŠ å•å¼•å·
 Function AddDenote(ByVal Value)
     AddDenote = "'" & Value & "'"
 End Function' AddDenote
 
-'Çå¿Õ¼ì²é¼¯
+'æ¸…ç©ºæ£€æŸ¥é›†
 Function ClearCheckRecord()
     SSProcess.RemoveCheckRecord strGroupName, strCheckName
 End Function' ClearCheckRecord
 
-'½áÊøÌáÊ¾
+'ç»“æŸæç¤º
 Function Ending()
-    MsgBox "Êä³öÍê³É"
+    MsgBox "è¾“å‡ºå®Œæˆ"
 End Function' Ending
