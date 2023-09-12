@@ -1,36 +1,36 @@
 
-'=============================================¼ì²é¼¯ÅäÖÃ==============================================
+'=============================================æ£€æŸ¥é›†é…ç½®==============================================
 
-'¼ì²é×éÏîÄ¿Ãû³Æ
+'æ£€æŸ¥ç»„é¡¹ç›®åç§°
 Dim strGroupName
-strGroupName = "¹ÜÏß¼ì²é"
+strGroupName = "ç®¡çº¿æ£€æŸ¥"
 
-'¼ì²é¼¯ÏîÃû³Æ
+'æ£€æŸ¥é›†é¡¹åç§°
 Dim strCheckName
-strCheckName = "¹Ü¾¶¼ì²é"
+strCheckName = "ç®¡å¾„æ£€æŸ¥"
 
-'¼ì²éÄ£ĞÍÃû³Æ
+'æ£€æŸ¥æ¨¡å‹åç§°
 Dim CheckmodelName
-CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->¹Ü¾¶¼ì²é"
+CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->ç®¡å¾„æ£€æŸ¥"
 
-'¼ì²éÃèÊö
+'æ£€æŸ¥æè¿°
 Dim strDescription
-strDescription = "¹Ü¾¶³¬¸ß"
+strDescription = "ç®¡å¾„è¶…é«˜"
 
-'===========================================¹¦ÄÜÈë¿Ú========================================================
+'===========================================åŠŸèƒ½å…¥å£========================================================
 
-'×ÜÈë¿Ú
+'æ€»å…¥å£
 Sub OnClick()
     
-    ClearCheckRecord 'Çå¿ÕÔ­À´µÄ¼ì²é¼ÇÂ¼
+    ClearCheckRecord 'æ¸…ç©ºåŸæ¥çš„æ£€æŸ¥è®°å½•
     
-    GetErrorLines LineIds '´íÎó¹ÜÏßµÄID
+    GetErrorLines LineIds 'é”™è¯¯ç®¡çº¿çš„ID
     
-    AddRecords LineIds 'Ìí¼Ó¼ì²é¼ÇÂ¼
+    AddRecords LineIds 'æ·»åŠ æ£€æŸ¥è®°å½•
     
 End Sub' OnClick
 
-'·µ»Ø´íÎó¹ÜÏßID
+'è¿”å›é”™è¯¯ç®¡çº¿ID
 Function GetErrorLines(ByRef LineIds)
     
     EorrorCount = 0
@@ -38,7 +38,7 @@ Function GetErrorLines(ByRef LineIds)
     ReDim LineIds(EorrorCount)
     
     
-    SqlStr = "Select µØÏÂ¹ÜÏßÏßÊôĞÔ±í.ID,GXQDMS,GXZDMS,GJ From µØÏÂ¹ÜÏßÏßÊôĞÔ±í Inner Join GeoLineTB on µØÏÂ¹ÜÏßÏßÊôĞÔ±í.ID = GeoLineTB.ID Where (GeoLineTB.Mark Mod 2)<>0"
+    SqlStr = "Select åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.ID,GXQDMS,GXZDMS,GJ From åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨ Inner Join GeoLineTB on åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.ID = GeoLineTB.ID Where (GeoLineTB.Mark Mod 2)<>0"
     
     GetSQLRecordAll SqlStr,LineArr,LineCount
     
@@ -66,7 +66,7 @@ Function GetErrorLines(ByRef LineIds)
     Next 'i
 End Function' GetErrorLines
 
-'Ìí¼Ó¼ì²é¼ÇÂ¼
+'æ·»åŠ æ£€æŸ¥è®°å½•
 Function AddRecords(ByVal LineIds())
     For i = 0 To UBound(LineIds) - 1
         SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,SSProcess.GetObjectAttr(LineIds(i),"SSObj_X"),SSProcess.GetObjectAttr(LineIds(i),"SSObj_Y"),0,1,LineIds(i),""
@@ -75,9 +75,9 @@ Function AddRecords(ByVal LineIds())
     SSProcess.SaveCheckRecord
 End Function' AddRecords
 
-'================================================¹¤¾ßÀàº¯Êı===========================================
+'================================================å·¥å…·ç±»å‡½æ•°===========================================
 
-'Êı¾İÀàĞÍ×ª»»
+'æ•°æ®ç±»å‹è½¬æ¢
 Function Transform(ByVal Values)
     If Values <> "" Then
         If IsNumeric(Values) = True Then
@@ -89,17 +89,17 @@ Function Transform(ByVal Values)
     Transform = Values
 End Function'Transform
 
-'Çå¿Õ¼ì²é¼¯
+'æ¸…ç©ºæ£€æŸ¥é›†
 Function ClearCheckRecord()
     SSProcess.RemoveCheckRecord strGroupName, strCheckName
 End Function' ClearCheckRecord
 
-'»ñÈ¡ËùÓĞ¼ÇÂ¼
+'è·å–æ‰€æœ‰è®°å½•
 Function GetSQLRecordAll(ByVal StrSqlStatement, ByRef SQLRecord(), ByRef iRecordCount)
     ProJectName = SSProcess.GetProjectFileName
     SSProcess.OpenAccessMdb ProJectName
     If StrSqlStatement = "" Then
-        MsgBox "²éÑ¯Óï¾äÎª¿Õ£¬²Ù×÷Í£Ö¹£¡",48
+        MsgBox "æŸ¥è¯¢è¯­å¥ä¸ºç©ºï¼Œæ“ä½œåœæ­¢ï¼",48
     End If
     iRecordCount =  - 1
     SSProcess.OpenAccessRecordset ProJectName, StrSqlStatement

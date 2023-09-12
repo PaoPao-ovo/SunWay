@@ -1,51 +1,51 @@
 
-'=============================================¼ì²é¼¯ÅäÖÃ==============================================
+'=============================================æ£€æŸ¥é›†é…ç½®==============================================
 
-'¼ì²é×éÏîÄ¿Ãû³Æ
+'æ£€æŸ¥ç»„é¡¹ç›®åç§°
 Dim strGroupName
-strGroupName = "²âÁ¿¿ØÖÆµãÊôĞÔÖµ±ØÌî¼ì²é"
+strGroupName = "æµ‹é‡æ§åˆ¶ç‚¹å±æ€§å€¼å¿…å¡«æ£€æŸ¥"
 
-'¼ì²é¼¯ÏîÃû³Æ
+'æ£€æŸ¥é›†é¡¹åç§°
 Dim strCheckName
-strCheckName = "²âÁ¿¿ØÖÆµãÊôĞÔÖµ±ØÌî¼ì²é"
+strCheckName = "æµ‹é‡æ§åˆ¶ç‚¹å±æ€§å€¼å¿…å¡«æ£€æŸ¥"
 
-'¼ì²éÄ£ĞÍÃû³Æ
+'æ£€æŸ¥æ¨¡å‹åç§°
 Dim CheckmodelName
-CheckmodelName = "×Ô¶¨Òå½Å±¾¼ì²éÀà->²âÁ¿¿ØÖÆµãÊôĞÔÖµ±ØÌî¼ì²é"
+CheckmodelName = "è‡ªå®šä¹‰è„šæœ¬æ£€æŸ¥ç±»->æµ‹é‡æ§åˆ¶ç‚¹å±æ€§å€¼å¿…å¡«æ£€æŸ¥"
 
-'¼ì²éÃèÊö
+'æ£€æŸ¥æè¿°
 Dim strDescription
-strDescription = "²âÁ¿¿ØÖÆµãFCODE,NAME,GRADE,XYCOOR,X,Y,ELEVATION,ZCOORÊôĞÔÖµÓĞÎª¿Õ"
+strDescription = "æµ‹é‡æ§åˆ¶ç‚¹FCODE,NAME,GRADE,XYCOOR,X,Y,ELEVATION,ZCOORå±æ€§å€¼æœ‰ä¸ºç©º"
 
-'========================================¼ì²é×Ö¶ÎÅäÖÃ=================================================
+'========================================æ£€æŸ¥å­—æ®µé…ç½®=================================================
 
 Dim FildsName
 FildsName = "FCODE,NAME,GRADE,XYCOOR,X,Y,ELEVATION,ZCOOR"
 
-'==========================================¹¦ÄÜÖ÷Ìå===================================================
+'==========================================åŠŸèƒ½ä¸»ä½“===================================================
 
-'¹¦ÄÜÈë¿Ú
+'åŠŸèƒ½å…¥å£
 Sub OnClick()
     
     AllVisible
 
     ClearCheckRecord
     
-    SelFeatures "²âÁ¿¿ØÖÆµã",IdCount,IdArr
+    SelFeatures "æµ‹é‡æ§åˆ¶ç‚¹",IdCount,IdArr
     RecordsInner IdCount,IdArr
     
     Ending
 
 End Sub' OnClick
 
-'=========================================¼ì²é¼¯Êä³ö=============================================
+'=========================================æ£€æŸ¥é›†è¾“å‡º=============================================
 
-'¼ì²é¼¯Êä³öÈë¿Ú
+'æ£€æŸ¥é›†è¾“å‡ºå…¥å£
 Function RecordsInner(ByVal IdCount,ByVal IdArr())
     ExportRecords IdCount,IdArr
 End Function' RecordsInner
 
-'Êä³ö¼ì²é¼¯
+'è¾“å‡ºæ£€æŸ¥é›†
 Function ExportRecords(ByVal IdCount,ByVal IdArr())
     For i = 0 To IdCount - 1
         If IsEmpty(IdArr(i),FildsName) Then
@@ -56,9 +56,9 @@ Function ExportRecords(ByVal IdCount,ByVal IdArr())
     SSProcess.SaveCheckRecord
 End Function' ExportRecords
 
-'=========================================¹¤¾ßÀàº¯Êı===========================================
+'=========================================å·¥å…·ç±»å‡½æ•°===========================================
 
-'´ò¿ªËùÓĞÍ¼²ã
+'æ‰“å¼€æ‰€æœ‰å›¾å±‚
 Function AllVisible()
     count = SSProcess.GetLayerCount
     For i = 0 To count - 1
@@ -68,12 +68,12 @@ Function AllVisible()
     SSProcess.RefreshView
 End Function
 
-'Çå¿Õ¼ì²é¼¯
+'æ¸…ç©ºæ£€æŸ¥é›†
 Function ClearCheckRecord()
     SSProcess.RemoveCheckRecord strGroupName, strCheckName
 End Function' ClearCheckRecord
 
-'Ñ¡ÔñÒªËØ
+'é€‰æ‹©è¦ç´ 
 Function SelFeatures(ByVal LayerName,ByRef TotalCount,ByRef AllIdArr())
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -86,7 +86,7 @@ Function SelFeatures(ByVal LayerName,ByRef TotalCount,ByRef AllIdArr())
     Next 'i
 End Function' SelAllFeatures
 
-'ÅĞ¶Ï¿í¶È×Ö¶ÎÊÇ·ñÎª¿Õ
+'åˆ¤æ–­å®½åº¦å­—æ®µæ˜¯å¦ä¸ºç©º
 Function IsEmpty(ByVal Id,ByVal KeyString)
     SplitKeyString KeyString,KeyArr,KeyCount
     IsEmpty = False
@@ -95,7 +95,7 @@ Function IsEmpty(ByVal Id,ByVal KeyString)
     Next 'i
 End Function' IsEmpty
 
-'·Ö½â¼ü×Ö·û´®
+'åˆ†è§£é”®å­—ç¬¦ä¸²
 Function SplitKeyString(ByVal StringName,ByRef StrArr(),ByRef StrCount)
     StrArr = Split(StringName,",", - 1,1)
     StrCount = UBound(StrArr) + 1
@@ -104,12 +104,12 @@ Function SplitKeyString(ByVal StringName,ByRef StrArr(),ByRef StrCount)
     Next 'i
 End Function' SplitKeyString
 
-'Ìí¼Óµ¥Ìõ¼ÇÂ¼
+'æ·»åŠ å•æ¡è®°å½•
 Function AddCheckRecord(ByVal Id)
     SSProcess.AddCheckRecord strGroupName,strCheckName,CheckmodelName,strDescription,SSProcess.GetObjectAttr(Id,"SSObj_X"),SSProcess.GetObjectAttr(Id,"SSObj_Y"),0,1,Id,""
 End Function' AddCheckRecord
 
-'½áÊøº¯Êı
+'ç»“æŸå‡½æ•°
 Function Ending()
-    MsgBox "¼ì²éÍê³É"
+    MsgBox "æ£€æŸ¥å®Œæˆ"
 End Function' Ending
