@@ -1,13 +1,13 @@
 
-'==================================================Í¼ÀªºÍÒªËØµÄ±àÂëÅäÖÃ====================================================
+'==================================================å›¾å»“å’Œè¦ç´ çš„ç¼–ç é…ç½®====================================================
 
-'ÒªËØ±àÂë
+'è¦ç´ ç¼–ç 
 Const CodeStr = "9410001,9410011,9410021,9410031,9410041,9410051,9410061,9410071,9410091,9410101,9410104,9410105,9420005,9420006,9310052,9420006,9430013,9414002;9410001,9410011,9410021,9410031,9410041,9410051,9410061,9410081,9410091,9410011,9410001,9430001,9430061,9430051,9430041,9430033,9430023,9430013,9430014,9430015,9430016,9430024,9430071,9460063,9420005,9310072,9310052,9310082,9310091,9460081,946009;9470103,9410001,9410011,9410021,9410031,9410041,9410051,9410061,9410071;9460081,9460033,9460003,9450013,9420005,9450014,9460091,9460081,9450014,9460003,9460033,9460074;9430023,9430033,9430041,9430061,9430071,9430061,9430051,9430015,9430001.9430013"
 
-'Í¼Àª±àÂë
+'å›¾å»“ç¼–ç 
 Const TKCodeStr = "9420034,9420035;9430093;9470105;9460093;9420037"
 
-'×¢¼Ç·ÖÀàºÅ
+'æ³¨è®°åˆ†ç±»å·
 Const NoteCodeStr = "FX002,GN001,JZ009,JZ011;CW001,CW003,FX002;GH001,GH002;CW005,CW001,CW002;FX005"
 
 Sub OnClick()
@@ -39,7 +39,7 @@ Sub OnClick()
 End Sub' OnClick
 
 
-'»ñÈ¡Í¼ÉÏ´æÔÚµÄCodeÒªËØºÍ×¢¼Ç
+'è·å–å›¾ä¸Šå­˜åœ¨çš„Codeè¦ç´ å’Œæ³¨è®°
 Function GetExitsCode(ByVal CodeStr,ByVal NoteStr,ByRef ExistsCodeArr(),ByRef ExistsCount)
     
     ExistsCount = 0
@@ -58,7 +58,7 @@ Function GetExitsCode(ByVal CodeStr,ByVal NoteStr,ByRef ExistsCodeArr(),ByRef Ex
         CodeCount = SSProcess.GetSelGeoCount
         
         If CodeCount > 0 Then
-            ExistsCodeArr(ExistsCount) = SSProcess.GetFeatureCodeInfo(CodeArr(i),"ObjectName") & "¡¾" & CodeArr(i) & "¡¿" & ":" & "ÒªËØ"
+            ExistsCodeArr(ExistsCount) = SSProcess.GetFeatureCodeInfo(CodeArr(i),"ObjectName") & "ã€" & CodeArr(i) & "ã€‘" & ":" & "è¦ç´ "
             ExistsCount = ExistsCount + 1
             ReDim Preserve ExistsCodeArr(ExistsCount)
         End If
@@ -73,8 +73,8 @@ Function GetExitsCode(ByVal CodeStr,ByVal NoteStr,ByRef ExistsCodeArr(),ByRef Ex
         CodeCount = SSProcess.GetSelNoteCount
         If CodeCount > 0 Then
 
-            ExistsCodeArr(ExistsCount) = SSProcess.GetFontClassInfo(NoteArr(i), "Memo" ) & "¡¾" & NoteArr(i) & "¡¿" & ":" & "×¢¼Ç"      
-            ExistsCodeArr(ExistsCount) = SSProcess.GetFontClassInfo(NoteArr(i), "Memo" ) & "¡¾" & NoteArr(i) & "¡¿" & ":" & "×¢¼Ç"
+            ExistsCodeArr(ExistsCount) = SSProcess.GetFontClassInfo(NoteArr(i), "Memo" ) & "ã€" & NoteArr(i) & "ã€‘" & ":" & "æ³¨è®°"      
+            ExistsCodeArr(ExistsCount) = SSProcess.GetFontClassInfo(NoteArr(i), "Memo" ) & "ã€" & NoteArr(i) & "ã€‘" & ":" & "æ³¨è®°"
             ExistsCount = ExistsCount + 1
             ReDim Preserve ExistsCodeArr(ExistsCount)
             
@@ -83,7 +83,7 @@ Function GetExitsCode(ByVal CodeStr,ByVal NoteStr,ByRef ExistsCodeArr(),ByRef Ex
     
 End Function' GetExitsCode
 
-'Éú³ÉÑ¡Ôñµ¯´°,·µ»ØÑ¡ÔñµÄCode
+'ç”Ÿæˆé€‰æ‹©å¼¹çª—,è¿”å›é€‰æ‹©çš„Code
 Function CreateWindows(ByVal ExistsCodeArr(),ByRef SelArr(),ByRef SelCount,ByVal ExistsCount,ByRef NoteCount,ByRef FeatureCount)
     
     SelCount = 0
@@ -92,24 +92,24 @@ Function CreateWindows(ByVal ExistsCodeArr(),ByRef SelArr(),ByRef SelCount,ByVal
     
     RecordShortListCount = ExistsCount
     
-    ResVal_Dlg = SSFunc.SelectListAttr("Ñ¡ÔñÁĞ±í","´ıÑ¡Êı¾İÁĞ±í","Ñ¡ÖĞÊı¾İÁĞ±í",ExistsCodeArr,RecordShortListCount)
+    ResVal_Dlg = SSFunc.SelectListAttr("é€‰æ‹©åˆ—è¡¨","å¾…é€‰æ•°æ®åˆ—è¡¨","é€‰ä¸­æ•°æ®åˆ—è¡¨",ExistsCodeArr,RecordShortListCount)
     
     If ResVal_Dlg = 1 Then
         If RecordShortListCount > 0 Then
             For i = 0 To RecordShortListCount - 1
                 LXArr = Split(ExistsCodeArr(i),":", - 1,1)
                 LX = LXArr(1)
-                If LX = "×¢¼Ç" Then
-                    StrFirst = Replace(Replace(ExistsCodeArr(i),":×¢¼Ç",""),"¡¾",",")
+                If LX = "æ³¨è®°" Then
+                    StrFirst = Replace(Replace(ExistsCodeArr(i),":æ³¨è®°",""),"ã€",",")
                     CodeArr = Split(StrFirst,",", - 1,1)
-                    SelArr(SelCount) = Replace(CodeArr(1),"¡¿","")
+                    SelArr(SelCount) = Replace(CodeArr(1),"ã€‘","")
                     SelCount = SelCount + 1
                     ReDim Preserve SelArr(SelCount)
                     NoteCount = NoteCount + 1
                 Else
-                    StrFirst = Replace(Replace(ExistsCodeArr(i),":ÒªËØ",""),"¡¾",",")
+                    StrFirst = Replace(Replace(ExistsCodeArr(i),":è¦ç´ ",""),"ã€",",")
                     CodeArr = Split(StrFirst,",", - 1,1)
-                    SelArr(SelCount) = Replace(CodeArr(1),"¡¿","")
+                    SelArr(SelCount) = Replace(CodeArr(1),"ã€‘","")
                     SelCount = SelCount + 1
                     ReDim Preserve SelArr(SelCount)
                     FeatureCount = FeatureCount + 1
@@ -121,6 +121,7 @@ Function CreateWindows(ByVal ExistsCodeArr(),ByRef SelArr(),ByRef SelCount,ByVal
     SelCount = SelCount - 1
     NoteCount = NoteCount - 1
     FeatureCount = FeatureCount - 1
+    
 End Function' CreateWindows
 
 Function DrawTuli(ByVal TKCode,ByVal CodeArr(),ByVal CodeCount,ByVal NoteCount,ByVal FeatureCount)
@@ -226,7 +227,7 @@ Function DrawTuli(ByVal TKCode,ByVal CodeArr(),ByVal CodeCount,ByVal NoteCount,B
                     DrawColor = SSProcess.GetSelGeoValue(k,"SSObj_Color")
                     DrawName = SSProcess.GetFeatureCodeInfo(CodeArr(j),"ObjectName")
                     If LHLX <> "" Then
-                        If LHLX <> "Ğİí¬³¡µØ" Then
+                        If LHLX <> "ä¼‘æ†©åœºåœ°" Then
                             
                             If ZGNQMC = "" Then
                                 ZGNQMC = LHLX
@@ -258,7 +259,7 @@ Function DrawTuli(ByVal TKCode,ByVal CodeArr(),ByVal CodeCount,ByVal NoteCount,B
                                 ZDrawColor = ZDrawColor
                             End If
                             
-                        ElseIf LHLX = "Ğİí¬³¡µØ" Then
+                        ElseIf LHLX = "ä¼‘æ†©åœºåœ°" Then
                             If ZGNQMC = "" Then
                                 ZGNQMC = LHZLX
                                 If ZDrawCode = "" Then
@@ -419,7 +420,7 @@ Function DrawTuli(ByVal TKCode,ByVal CodeArr(),ByVal CodeCount,ByVal NoteCount,B
     End If
 End Function' DrawTuli
 
-'Í£³µ¿â×ÜÆ½Í¼Í¼Àı
+'åœè½¦åº“æ€»å¹³å›¾å›¾ä¾‹
 Function TCK_ZPT(ByVal x0,ByVal y0,ByVal polygonID,ByVal ZDrawCode,ByVal ZDrawColor,ByVal ZDrawName,ByVal DaYBL,ByVal ZDrawNote)
     
     wid2 = (228 * 500) / DaYBL
@@ -469,7 +470,7 @@ Function TCK_ZPT(ByVal x0,ByVal y0,ByVal polygonID,ByVal ZDrawCode,ByVal ZDrawCo
     JG_MakeLine x0,PointHeigth + 2,x0 - 52,PointHeigth + 2,1, "RGB(255,255,255)", polygonID
     
     DrawPoint x0 - 38,y0 + 12,"9000001",polygonID
-    JG_MakeNote x0 - 25,PointHeigth - 1 , 0, "RGB(255,255,255)", wid2, heig2, "Í¼  Àı",polygonID
+    JG_MakeNote x0 - 25,PointHeigth - 1 , 0, "RGB(255,255,255)", wid2, heig2, "å›¾  ä¾‹",polygonID
     
     Count = UBound(arDrawNote)
     
@@ -491,13 +492,13 @@ Function TCK_ZPT(ByVal x0,ByVal y0,ByVal polygonID,ByVal ZDrawCode,ByVal ZDrawCo
     
 End Function'JG_ZPT
 
-'Í£³µ¿âÏß
+'åœè½¦åº“çº¿
 Function TCK_MakeLine(ByVal x1,ByVal y1,ByVal x2,ByVal y2,ByVal code,ByVal color,ByVal polygonID)
     SSProcess.CreateNewObj 1
     SSProcess.SetNewObjValue "SSObj_Code", code
     SSProcess.SetNewObjValue "SSObj_Color", color
     SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "¿¢¹¤²âÁ¿³É¹ûÍ¼Í¼ÀªĞÅÏ¢"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ç«£å·¥æµ‹é‡æˆæœå›¾å›¾å»“ä¿¡æ¯"
     SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
     SSProcess.AddNewObjPoint x1, y1, 0, 0, ""
     SSProcess.AddNewObjPoint x2, y2, 0, 0, ""
@@ -505,19 +506,19 @@ Function TCK_MakeLine(ByVal x1,ByVal y1,ByVal x2,ByVal y2,ByVal code,ByVal color
     SSProcess.SaveBufferObjToDatabase
 End Function' TCK_MakeLine
 
-'»æÖÆµãÒªËØ
+'ç»˜åˆ¶ç‚¹è¦ç´ 
 Function DrawPoint(x,y,code,polygonID)
     SSProcess.CreateNewObj 0
     SSProcess.SetNewObjValue "SSObj_Code", code
     SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "¿¢¹¤Í¼Àª"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ç«£å·¥å›¾å»“"
     SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
     SSProcess.AddNewObjPoint x, y, 0, 0, ""
     SSProcess.AddNewObjToSaveObjList
     SSProcess.SaveBufferObjToDatabase
 End Function
 
-'¿¢¹¤¹æ»®×ÜÆ½Í¼Í¼Àı
+'ç«£å·¥è§„åˆ’æ€»å¹³å›¾å›¾ä¾‹
 Function JG_ZPT(ByVal x0,ByVal y0,ByVal polygonID,ByVal ZDrawCode,ByVal ZDrawColor,ByVal ZDrawName,ByVal DaYBL,ByVal ZDrawNote)
     
     wid2 = (228 * 500) / DaYBL
@@ -550,7 +551,7 @@ Function JG_ZPT(ByVal x0,ByVal y0,ByVal polygonID,ByVal ZDrawCode,ByVal ZDrawCol
     JG_MakeLine x0 + 16,y0,x0 + 16,y0 + count5 * 2 + 2.5, 1,"RGB(255,255,255)", polygonID
     JG_MakeLine x0,y0,x0 + 16,y0,1, "RGB(255,255,255)", polygonID
     JG_MakeLine x0,y0 + count5 * 2 + 2.5,x0 + 16,y0 + count5 * 2 + 2.5,1, "RGB(255,255,255)", polygonID
-    JG_MakeNote x0 + 7,y0 + count5 * 2 + 1 , 0, "RGB(255,255,255)", wid2, heig2, "Í¼Àı",polygonID
+    JG_MakeNote x0 + 7,y0 + count5 * 2 + 1 , 0, "RGB(255,255,255)", wid2, heig2, "å›¾ä¾‹",polygonID
     
     Count = UBound(arDrawNote)
     
@@ -571,7 +572,7 @@ Function JG_ZPT(ByVal x0,ByVal y0,ByVal polygonID,ByVal ZDrawCode,ByVal ZDrawCol
     Next
 End Function'JG_ZPT
 
-'JG×¢¼Ç
+'JGæ³¨è®°
 Function JG_Note(ByVal X,ByVal Y,ByVal Code,ByVal Str,ByVal polygonID,ByVal Name)
     
     SSProcess.CreateNewObj 3
@@ -596,7 +597,7 @@ Function JG_Note(ByVal X,ByVal Y,ByVal Code,ByVal Str,ByVal polygonID,ByVal Name
     
 End Function' JG_Note
 
-'TCK×¢¼Ç
+'TCKæ³¨è®°
 Function TCK_Note(ByVal X,ByVal Y,ByVal Code,ByVal Str,ByVal polygonID,ByVal Name)
     
     SSProcess.CreateNewObj 3
@@ -621,7 +622,7 @@ Function TCK_Note(ByVal X,ByVal Y,ByVal Code,ByVal Str,ByVal polygonID,ByVal Nam
     
 End Function' JG_Note
 
-'Ïû·À×ÜÆ½Í¼Í¼Àı
+'æ¶ˆé˜²æ€»å¹³å›¾å›¾ä¾‹
 Function XF_ZPT(ByVal x0,ByVal y0,ByVal polygonID,ByVal ZDrawCode,ByVal ZDrawColor,ByVal ZDrawName,ByVal DrawNote)
     
     wid1 = 228
@@ -654,7 +655,7 @@ Function XF_ZPT(ByVal x0,ByVal y0,ByVal polygonID,ByVal ZDrawCode,ByVal ZDrawCol
     XF_MakeLine x0 + 15,y0,x0 + 15,y0 + count5 * 2 + 4, 1,"RGB(255,255,255)", polygonID
     XF_MakeLine x0,y0,x0 + 15,y0,1, "RGB(255,255,255)", polygonID
     XF_MakeLine x0,y0 + count5 * 2 + 4,x0 + 15,y0 + count5 * 2 + 4,1, "RGB(255,255,255)", polygonID
-    XF_MakeNote x0 + 8,y0 + count5 * 2 + 2.5 , 0, "RGB(255,255,255)", wid2, heig2, "Í¼Àı",polygonID
+    XF_MakeNote x0 + 8,y0 + count5 * 2 + 2.5 , 0, "RGB(255,255,255)", wid2, heig2, "å›¾ä¾‹",polygonID
     
     Count = UBound(arDrawNote)
     
@@ -686,7 +687,7 @@ Function XF_ZPT(ByVal x0,ByVal y0,ByVal polygonID,ByVal ZDrawCode,ByVal ZDrawCol
     Next
 End Function'XF_ZPT
 
-'XF×¢¼Ç
+'XFæ³¨è®°
 Function XF_Note(ByVal X,ByVal Y,ByVal Code,ByVal Str,ByVal polygonID,ByVal Name)
     
     SSProcess.CreateNewObj 3
@@ -711,7 +712,7 @@ Function XF_Note(ByVal X,ByVal Y,ByVal Code,ByVal Str,ByVal polygonID,ByVal Name
     
 End Function' JG_Note
 
-'ÂÌµØ×ÜÆ½Í¼Í¼Àı
+'ç»¿åœ°æ€»å¹³å›¾å›¾ä¾‹
 Function LD_ZPT(ByVal x0,ByVal y0,ByVal ZGNQMC,ByVal polygonID,ByVal ZDrawCode,ByVal ZDrawColor,ByVal DrawNote)
     wid1 = 228
     heig1 = 286
@@ -746,9 +747,9 @@ Function LD_ZPT(ByVal x0,ByVal y0,ByVal ZGNQMC,ByVal polygonID,ByVal ZDrawCode,B
     LD_MakeLine x0 + 16,y0,x0 + 16,y0 + count5 * 2 + 2.5, 1,"RGB(255,255,255)", polygonID
     LD_MakeLine x0,y0,x0 + 16,y0,1, "RGB(255,255,255)", polygonID
     LD_MakeLine x0,y0 + count5 * 2 + 2.5,x0 + 16,y0 + count5 * 2 + 2.5,1, "RGB(255,255,255)", polygonID
-    LD_MakeNote x0 + 7,y0 + count5 * 2 + 1.5 , 0, "RGB(255,255,255)", wid2, heig2, "Í¼Àı",polygonID
+    LD_MakeNote x0 + 7,y0 + count5 * 2 + 1.5 , 0, "RGB(255,255,255)", wid2, heig2, "å›¾ä¾‹",polygonID
     
-    sttr = "µØÃæÂÌ»¯,µØÏÂÉèÊ©¶¥ÃæÂÌ»¯,Îİ¶¥ÂÌµØ"
+    sttr = "åœ°é¢ç»¿åŒ–,åœ°ä¸‹è®¾æ–½é¡¶é¢ç»¿åŒ–,å±‹é¡¶ç»¿åœ°"
     
     Count = UBound(arDrawNote)
     
@@ -785,7 +786,7 @@ Function JG_MakeLine(ByVal x1,ByVal y1,ByVal x2,ByVal y2,ByVal code,ByVal color,
     SSProcess.SetNewObjValue "SSObj_Code", code
     SSProcess.SetNewObjValue "SSObj_Color", color
     SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "¿¢¹¤²âÁ¿³É¹ûÍ¼Í¼ÀªĞÅÏ¢"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ç«£å·¥æµ‹é‡æˆæœå›¾å›¾å»“ä¿¡æ¯"
     SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
     SSProcess.AddNewObjPoint x1, y1, 0, 0, ""
     SSProcess.AddNewObjPoint x2, y2, 0, 0, ""
@@ -799,7 +800,7 @@ Function JG_MakeNote(ByVal x,ByVal y,ByVal code,ByVal color,ByVal width,ByVal he
     SSProcess.SetNewObjValue "SSObj_FontString", fontString
     SSProcess.SetNewObjValue "SSObj_Color", color
     SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "¿¢¹¤²âÁ¿³É¹ûÍ¼Í¼ÀªĞÅÏ¢"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ç«£å·¥æµ‹é‡æˆæœå›¾å›¾å»“ä¿¡æ¯"
     SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
     SSProcess.SetNewObjValue "SSObj_FontAlignment", "3"
     SSProcess.SetNewObjValue "SSObj_FontWidth", width
@@ -814,7 +815,7 @@ Function XF_MakePoint(x,y,code,color,polygonID)
     SSProcess.SetNewObjValue "SSObj_Code", code
     SSProcess.SetNewObjValue "SSObj_Color", color
     SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "Ïû·ÀºËÊµ×ÜÆ½Ãæ²âÁ¿ÂÔÍ¼Í¼ÀªĞÅÏ¢"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "æ¶ˆé˜²æ ¸å®æ€»å¹³é¢æµ‹é‡ç•¥å›¾å›¾å»“ä¿¡æ¯"
     SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
     SSProcess.AddNewObjPoint x, y, 0, 0, ""
     SSProcess.AddNewObjToSaveObjList
@@ -826,7 +827,7 @@ Function XF_MakeLine(x1,y1,x2,y2,code, color, polygonID)
     SSProcess.SetNewObjValue "SSObj_Code", code
     SSProcess.SetNewObjValue "SSObj_Color", color
     SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "Ïû·ÀºËÊµ×ÜÆ½Ãæ²âÁ¿ÂÔÍ¼Í¼ÀªĞÅÏ¢"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "æ¶ˆé˜²æ ¸å®æ€»å¹³é¢æµ‹é‡ç•¥å›¾å›¾å»“ä¿¡æ¯"
     SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
     SSProcess.AddNewObjPoint x1, y1, 0, 0, ""
     SSProcess.AddNewObjPoint x2, y2, 0, 0, ""
@@ -839,7 +840,7 @@ Function XF_MakeArea(x1,y1,x2,y2,x3,y3,x4,y4,code,color,polygonID)
     SSProcess.SetNewObjValue "SSObj_Code", code
     SSProcess.SetNewObjValue "SSObj_Color", color
     SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "Ïû·ÀºËÊµ×ÜÆ½Ãæ²âÁ¿ÂÔÍ¼Í¼ÀªĞÅÏ¢"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "æ¶ˆé˜²æ ¸å®æ€»å¹³é¢æµ‹é‡ç•¥å›¾å›¾å»“ä¿¡æ¯"
     SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
     SSProcess.AddNewObjPoint x1, y1, 0, 0, ""
     SSProcess.AddNewObjPoint x2, y2, 0, 0, ""
@@ -856,7 +857,7 @@ Function XF_MakeNote(x, y, code, color, width, height, fontString,polygonID)
     SSProcess.SetNewObjValue "SSObj_FontString", fontString
     SSProcess.SetNewObjValue "SSObj_Color", color
     SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "Ïû·ÀºËÊµ×ÜÆ½Ãæ²âÁ¿ÂÔÍ¼Í¼ÀªĞÅÏ¢"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "æ¶ˆé˜²æ ¸å®æ€»å¹³é¢æµ‹é‡ç•¥å›¾å›¾å»“ä¿¡æ¯"
     SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
     SSProcess.SetNewObjValue "SSObj_FontAlignment", "3"
     SSProcess.SetNewObjValue "SSObj_FontWidth", width
@@ -871,7 +872,7 @@ Function LD_MakeLine(x1,y1,x2,y2,code, color, polygonID)
     SSProcess.SetNewObjValue "SSObj_Code", code
     SSProcess.SetNewObjValue "SSObj_Color", color
     SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "¿¢¹¤²âÁ¿³É¹ûÍ¼Í¼ÀªĞÅÏ¢"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ç«£å·¥æµ‹é‡æˆæœå›¾å›¾å»“ä¿¡æ¯"
     SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
     SSProcess.AddNewObjPoint x1, y1, 0, 0, ""
     SSProcess.AddNewObjPoint x2, y2, 0, 0, ""
@@ -885,7 +886,7 @@ Function LD_MakeNote(x, y, code, color, width, height, fontString,polygonID)
     SSProcess.SetNewObjValue "SSObj_FontString", fontString
     SSProcess.SetNewObjValue "SSObj_Color", color
     SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "¿¢¹¤²âÁ¿³É¹ûÍ¼Í¼ÀªĞÅÏ¢"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ç«£å·¥æµ‹é‡æˆæœå›¾å›¾å»“ä¿¡æ¯"
     SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
     SSProcess.SetNewObjValue "SSObj_FontAlignment", "3"
     SSProcess.SetNewObjValue "SSObj_FontWidth", width
@@ -900,10 +901,10 @@ Function LD_MakeArea(x1,y1,x2,y2,x3,y3,x4,y4,code,color,polygonID,field,LHLX)
     SSProcess.SetNewObjValue "SSObj_Code", code
     SSProcess.SetNewObjValue "SSObj_Color", color
     SSProcess.SetNewObjValue "SSObj_DataMark", polygonID
-    SSProcess.SetNewObjValue "SSObj_LayerName", "¿¢¹¤²âÁ¿³É¹ûÍ¼Í¼ÀªĞÅÏ¢"
+    SSProcess.SetNewObjValue "SSObj_LayerName", "ç«£å·¥æµ‹é‡æˆæœå›¾å›¾å»“ä¿¡æ¯"
     SSProcess.SetNewObjValue "SSObj_GroupID", polygonID
     If field = "LHZLX" Then
-        SSProcess.SetNewObjValue "[LHLX]", "Ğİí¬³¡Ëù"
+        SSProcess.SetNewObjValue "[LHLX]", "ä¼‘æ†©åœºæ‰€"
         SSProcess.SetNewObjValue "[" & field & "]", LHLX
     Else
         SSProcess.SetNewObjValue "[" & field & "]", LHLX
@@ -917,10 +918,10 @@ Function LD_MakeArea(x1,y1,x2,y2,x3,y3,x4,y4,code,color,polygonID,field,LHLX)
     SSProcess.SaveBufferObjToDatabase
 End Function
 
-'»æÖÆ¸¨ÖúÃæ
+'ç»˜åˆ¶è¾…åŠ©é¢
 Function AuxiliaryArea(ByVal X1,ByVal Y1,ByVal X2,ByVal Y2,ByVal X3, ByVal Y3,ByVal X4,ByVal Y4,ByRef AreaId)
     SSProcess.CreateNewObj 2
-    SSProcess.SetNewObjValue "SSObj_DataMark","¸¨ÖúÃæ"
+    SSProcess.SetNewObjValue "SSObj_DataMark","è¾…åŠ©é¢"
     SSProcess.SetNewObjValue "SSObj_Code","2"
     SSProcess.AddNewObjPoint X1, Y1, 0, 0, ""
     SSProcess.AddNewObjPoint X2, Y2, 0, 0, ""

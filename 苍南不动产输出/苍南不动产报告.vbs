@@ -100,19 +100,51 @@ Sub OnClick()
     condition = " WHERE ([GeoAreaTB].[Mark] Mod 2)<>0"
     strOrderBy = " ORDER BY " & strTableZD & "." & strKeyFiledName
     sql = sqltexts & " " & condition & " " & strOrderBy
-    MsgBox  sql
     GetSQLRecordAll mdbName,sql,arRecordShortList,RecordShortListCount
-    
-    '指定输出承包方编码
-    'ResVal_Dlg =SSFunc.SelectListAttr("选择列表", "待选数据列表", "选中数据列表", arRecordShortList, RecordShortListCount)
-    
     
     'if ResVal_Dlg = 1 then
     If RecordShortListCount <> 1 Then
-        '关闭数据库
-        SSProcess.CloseAccessMdb mdbName
-        MsgBox "工程内无宗地或多个宗地，退出输出！"
-        Exit Sub
+        
+        '指定输出承包方编码
+        sql = "Select " & strTableZD & ".ZDDM From " & strTableZD & " Inner Join GeoAreaTB On " & strTableZD & ".ID = GeoAreaTB.ID Where ([GeoAreaTB].[Mark] Mod 2)<>0"
+        GetSQLRecordAll mdbName,sql,ExistsCodeArr,SelCount
+        ResVal_Dlg = SSFunc.SelectListAttr("选择列表","待选数据列表","选中数据列表",ExistsCodeArr,SelCount)
+        If ResVal_Dlg = 1 Then
+            If SelCount = 1 Then
+
+                sqltexts = "SELECT [" & strTableZD & "].[" & strKeyFiledName & "],[" & strTableZD & "].[ZDGUID] FROM " & strTableZD & " INNER JOIN GeoAreaTB ON " & strTableZD & ".ID = GeoAreaTB.ID "
+                condition = " WHERE ([GeoAreaTB].[Mark] Mod 2)<>0 And " & strTableZD & ".ZDDM = '" & ExistsCodeArr(0) & "'"
+                strOrderBy = " ORDER BY " & strTableZD & "." & strKeyFiledName
+                sql = sqltexts & " " & condition & " " & strOrderBy
+
+                GetSQLRecordAll mdbName,sql,arRecordShortList,RecordShortListCount
+
+                ReDim arOutRecSelected(RecordShortListCount)                '输出特征记录数组
+                nOutSelectedCount = RecordShortListCount                        '输出记录数量
+                ReDim arOutRecGUIDSelected(RecordShortListCount)            '输出特征记录GUID数组
+                nOutSelectedCount = RecordShortListCount                        '输出记录GUID数量
+                For i = 0 To RecordShortListCount - 1
+                    arOutTempCur = Split(arRecordShortList(i),",")    ':nCount_Temp =bound(arCBFBMCur)
+                    
+                    arOutRecSelected(i) = Trim(arOutTempCur(0))
+                    arOutRecGUIDSelected(i) = Trim(arOutTempCur(1))    'GUID
+                    
+                    If strSelectedOutRPT = "" Then
+                        strSelectedOutRPT = "'" & Trim(arOutTempCur(0)) & "'"
+                    Else
+                        strSelectedOutRPT = strSelectedOutRPT & ",'" & Trim(arOutTempCur(0)) & "'"
+                    End If
+                    If strSelectedGUIDOutRPT = "" Then
+                        strSelectedGUIDOutRPT = "{guid " & Trim(arOutTempCur(1)) & "}"
+                    Else
+                        strSelectedGUIDOutRPT = strSelectedGUIDOutRPT & ",{guid " & Trim(arOutTempCur(1)) & "}"
+                    End If
+                Next
+            Else
+                MsgBox "请选择一个宗地"
+                Exit Sub
+            End If
+        End If
     Else
         ReDim arOutRecSelected(RecordShortListCount)                '输出特征记录数组
         nOutSelectedCount = RecordShortListCount                        '输出记录数量
@@ -532,14 +564,19 @@ Function  WriteZDJBXXB (ByVal arZDJBXX_Temp,ByVal arRecordQLR,ByVal nRecordQLRCo
     End If
     'QDSJ ZZSJ
     
-    If strJZZDMJ <> "" And strJZZDMJ > 0.0 Then
-        strJZZDMJ = FormatNumber(strJZZDMJ,2, - 1,0,0)
+    If strJZZDMJ <> "" And strJZZDMJ > 0.0 and strJZZDMJ<>"*"  Then
+			strJZZDMJ = FormatNumber(strJZZDMJ,2, - 1,0,0)
     Else
         strJZZDMJ = 0
+        
+
         SetCellValue TableNum,23, 5, strJZZDMJ                                                           '建筑占地总面积
     End If
+	
     If strJZZMJ <> "" And strJZZMJ > 0.0 Then
         strJZZMJ = FormatNumber(strJZZMJ,2, - 1,0,0)
+		else
+			strJZZMJ=0
         SetCellValue TableNum,24, 5, strJZZMJ                                                           '建筑总面积
         ReplaceOneStr "{JZMJ}",  FormatNumber(strJZZMJ,2, - 1,0,0)
     End If
@@ -1623,6 +1660,7 @@ Function  IsFolderExists(fldName)
 End Function
 
 Function CreateSavePath
+
     filePath = SSProcess.GetProjectFileName
     path = Left(filePath,InStrRev(filePath,"\"))
     IsFolderExists path

@@ -10,19 +10,19 @@ GXLineField1 = "GC,GJ^DMCC,GXQDMS,GXZDMS,GXQDGDGC,GXZDGDGC,DYZ,SJYL,ZKS/YYKS,XLT
 Sub OnClick()
     Set g_docObj = CreateObject ("AsposeCellsCom.AsposeCellsHelper")
     If  TypeName (g_docObj) <> "AsposeCellsHelper" Then
-        MsgBox "ÇëÏÈ×¢²áAspose.Excel²å¼ş"
+        MsgBox "è¯·å…ˆæ³¨å†ŒAspose.Excelæ’ä»¶"
         Exit Sub
     End If
     InitDB()
     str = GXAddInputParameter(filename,ExportMark,frameCount)
     If str = True Then
-        pathName = SSProcess.GetSysPathName(5) & "³É¹û±í\"
+        pathName = SSProcess.GetSysPathName(5) & "æˆæœè¡¨\"
         If pathName <> "" Then
             If ExportMark = "" Then
-                'ÏîÄ¿Êä³ö
+                'é¡¹ç›®è¾“å‡º
                 ExportMap pathName, filename
             Else
-                'Í¼·ùÊä³ö
+                'å›¾å¹…è¾“å‡º
                 ExportFrame pathName, filename, frameCount
             End If
         Else
@@ -32,34 +32,34 @@ Sub OnClick()
         Exit Sub
     End If
     ReleaseDB()
-    MsgBox "Êä³öÍê³É"
+    MsgBox "è¾“å‡ºå®Œæˆ"
 End Sub
 
 
 Function GXAddInputParameter(ByRef filename,ByRef ExportMark,ByRef frameCount)
     str = True
     SSProcess.ClearInputParameter
-    SSProcess.AddInputParameter "¹ÜÏß±¨±íÊä³ö·½Ê½", "°´Í¼·ùÊä³ö", 0, "°´Í¼·ùÊä³ö,°´ÏîÄ¿Êä³ö", ""
-    result = SSProcess.ShowInputParameterDlg ("¹ÜÏß±¨±íÊä³ö·½Ê½")
+    SSProcess.AddInputParameter "ç®¡çº¿æŠ¥è¡¨è¾“å‡ºæ–¹å¼", "æŒ‰å›¾å¹…è¾“å‡º", 0, "æŒ‰å›¾å¹…è¾“å‡º,æŒ‰é¡¹ç›®è¾“å‡º", ""
+    result = SSProcess.ShowInputParameterDlg ("ç®¡çº¿æŠ¥è¡¨è¾“å‡ºæ–¹å¼")
     If result = 1 Then
-        res = SSProcess.GetInputParameter ("¹ÜÏß±¨±íÊä³ö·½Ê½")
-        If res = "°´Í¼·ùÊä³ö" Then
-            filename = SSProcess.GetSysPathName (7) & "\" & "¹ÜÏß±¨±íÄ£°å£¨Í¼·ù£©.xlsx"
+        res = SSProcess.GetInputParameter ("ç®¡çº¿æŠ¥è¡¨è¾“å‡ºæ–¹å¼")
+        If res = "æŒ‰å›¾å¹…è¾“å‡º" Then
+            filename = SSProcess.GetSysPathName (7) & "\" & "ç®¡çº¿æŠ¥è¡¨æ¨¡æ¿ï¼ˆå›¾å¹…ï¼‰.xlsx"
             SSProcess.ClearInputParameter
-            SSProcess.AddInputParameter "Í¼·ùÊä³öÊä³ö·½Ê½", "µ¥¸öÍ¼·ùÊä³ö", 0, "µ¥¸öÍ¼·ùÊä³ö,°´·¶Î§Ïß·Ö·ùÊä³ö,È«Í¼·Ö·ùÊä³ö", ""
-            result1 = SSProcess.ShowInputParameterDlg ("Í¼·ùÊä³öÊä³ö·½Ê½")
+            SSProcess.AddInputParameter "å›¾å¹…è¾“å‡ºè¾“å‡ºæ–¹å¼", "å•ä¸ªå›¾å¹…è¾“å‡º", 0, "å•ä¸ªå›¾å¹…è¾“å‡º,æŒ‰èŒƒå›´çº¿åˆ†å¹…è¾“å‡º,å…¨å›¾åˆ†å¹…è¾“å‡º", ""
+            result1 = SSProcess.ShowInputParameterDlg ("å›¾å¹…è¾“å‡ºè¾“å‡ºæ–¹å¼")
             If result1 = 1 Then
-                res1 = SSProcess.GetInputParameter ("Í¼·ùÊä³öÊä³ö·½Ê½")
+                res1 = SSProcess.GetInputParameter ("å›¾å¹…è¾“å‡ºè¾“å‡ºæ–¹å¼")
                 SSProcess.ClearSelection
                 SSProcess.ClearSelectCondition
-                If res1 = "µ¥¸öÍ¼·ùÊä³ö" Then
+                If res1 = "å•ä¸ªå›¾å¹…è¾“å‡º" Then
                     frameID = SSProcess.GetCurMapFrame()
                     SSProcess.CreateMapFrameByRegionID  frameID
                     frameCount = SSProcess.GetMapFrameCount()
-                ElseIf res1 = "°´·¶Î§Ïß·Ö·ùÊä³ö" Then
+                ElseIf res1 = "æŒ‰èŒƒå›´çº¿åˆ†å¹…è¾“å‡º" Then
                     SSProcess.CreateMapFrameByRegion 1
                     frameCount = SSProcess.GetMapFrameCount()
-                ElseIf res1 = "È«Í¼·Ö·ùÊä³ö" Then
+                ElseIf res1 = "å…¨å›¾åˆ†å¹…è¾“å‡º" Then
                     SSProcess.CreateMapFrame
                     frameCount = SSProcess.GetMapFrameCount()
                 End If
@@ -69,7 +69,7 @@ Function GXAddInputParameter(ByRef filename,ByRef ExportMark,ByRef frameCount)
                 str = False
             End If
         Else
-            filename = SSProcess.GetSysPathName (7) & "\" & "¹ÜÏß±¨±íÄ£°å£¨ÏîÄ¿£©.xlsx"
+            filename = SSProcess.GetSysPathName (7) & "\" & "ç®¡çº¿æŠ¥è¡¨æ¨¡æ¿ï¼ˆé¡¹ç›®ï¼‰.xlsx"
             ExportMark = ""
         End If
     Else
@@ -79,31 +79,31 @@ Function GXAddInputParameter(ByRef filename,ByRef ExportMark,ByRef frameCount)
     GXAddInputParameter = str
 End Function
 
-'ÏîÄ¿Êä³ö
+'é¡¹ç›®è¾“å‡º
 Function ExportMap(ByVal pathName,ByVal filename)
     g_docObj.CreateDocumentByTemplate filename
-    '±íÍ·
-    'XMMC=SSProcess.ReadEpsIni("¹ÜÏß±¨¸æĞÅÏ¢", "ÏîÄ¿Ãû³Æ" ,"")
-    'CHDW=SSProcess.ReadEpsIni("¹ÜÏß±¨¸æĞÅÏ¢", "²â»æµ¥Î»" ,""):RQDate=year(Date())&"Äê"&month(Date())&"ÔÂ"
+    'è¡¨å¤´
+    'XMMC=SSProcess.ReadEpsIni("ç®¡çº¿æŠ¥å‘Šä¿¡æ¯", "é¡¹ç›®åç§°" ,"")
+    'CHDW=SSProcess.ReadEpsIni("ç®¡çº¿æŠ¥å‘Šä¿¡æ¯", "æµ‹ç»˜å•ä½" ,""):RQDate=year(Date())&"å¹´"&month(Date())&"æœˆ"
     GetXMXX GXXMXX
     XMMC = GXXMXX(1)
     CHDW = GXXMXX(6)
-    RQDate = Year(Date()) & "Äê" & Month(Date()) & "ÔÂ"
-    'Êä³öExcelÂ·¾¶
+    RQDate = Year(Date()) & "å¹´" & Month(Date()) & "æœˆ"
+    'è¾“å‡ºExcelè·¯å¾„
     exlfilePathName = pathName & XMMC & ".xlsx"
-    '»ñÈ¡È«Í¼ÄÚµÄ¹ÜÏßÍ¼²ã
+    'è·å–å…¨å›¾å†…çš„ç®¡çº¿å›¾å±‚
     strLayer = GetMapGXLayer(strLayer)
     strLayerList = Split(strLayer,",")
-    '¸´ÖÆexcelsheet
+    'å¤åˆ¶excelsheet
     For i1 = 0 To UBound(strLayerList)
         g_docObj.CopySheet "Sheet1",strLayerList(i1)
     Next
     
-    '°´ÕÕÍ¼²ãË³ĞòÌîsheetÖµ
+    'æŒ‰ç…§å›¾å±‚é¡ºåºå¡«sheetå€¼
     For i1 = 0 To UBound(strLayerList)
         g_docObj.SetActiveSheet strLayerList(i1)
         
-        g_docObj.SetCellValueEx 0,0,"¹¤³ÌÃû³Æ£º" & XMMC
+        g_docObj.SetCellValueEx 0,0,"å·¥ç¨‹åç§°ï¼š" & XMMC
         
         ids = GetGXLayerID( strLayerList(i1))
         idsList = Split(ids,",")
@@ -118,32 +118,32 @@ Function ExportMap(ByVal pathName,ByVal filename)
                 WTDH = value
                 CellValue = WTDH
                 
-                '¹ÜÏßµãÌîÖµÅĞ¶Ï±êÊ¶
+                'ç®¡çº¿ç‚¹å¡«å€¼åˆ¤æ–­æ ‡è¯†
                 rMarkCount = 0
-                'Á¬½ÓµãºÅ
-                ZDDHCount = GetProjectTableList( "µØÏÂ¹ÜÏßÏßÊôĞÔ±í", "GXZDDH,µØÏÂ¹ÜÏßÏßÊôĞÔ±í.ID", "GXQDDH='" & WTDH & "'", "SpatialData", "1", ZDDHList, fieldCount)
+                'è¿æ¥ç‚¹å·
+                ZDDHCount = GetProjectTableList( "åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨", "GXZDDH,åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.ID", "GXQDDH='" & WTDH & "'", "SpatialData", "1", ZDDHList, fieldCount)
                 If ZDDHCount > 0 Then
                     For i3 = 0 To ZDDHCount - 1
                         If rMarkCount > 0 Then CellValue = ""
-                        '»ñÈ¡¹ÜµãÎª¹ÜÏßÆğµãµÄÊôĞÔÊı×é
+                        'è·å–ç®¡ç‚¹ä¸ºç®¡çº¿èµ·ç‚¹çš„å±æ€§æ•°ç»„
                         GetCellValueList i3,ZDDHList,"GXQDDH",WTDH, CellValue, CellList, Count,rMarkCount
                     Next
                 End If
-                QDDHCount = GetProjectTableList( "µØÏÂ¹ÜÏßÏßÊôĞÔ±í", "GXQDDH,µØÏÂ¹ÜÏßÏßÊôĞÔ±í.ID", "GXZDDH='" & WTDH & "'", "SpatialData", "1", QDDHList, fieldCount)
+                QDDHCount = GetProjectTableList( "åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨", "GXQDDH,åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.ID", "GXZDDH='" & WTDH & "'", "SpatialData", "1", QDDHList, fieldCount)
                 If QDDHCount > 0 Then
                     For i3 = 0 To QDDHCount - 1
                         If rMarkCount > 0 Then CellValue = ""
-                        '»ñÈ¡¹ÜµãÎª¹ÜÏßÖÕµãµÄÊôĞÔÊı×é
+                        'è·å–ç®¡ç‚¹ä¸ºç®¡çº¿ç»ˆç‚¹çš„å±æ€§æ•°ç»„
                         GetCellValueList i3,QDDHList,"GXZDDH",WTDH, CellValue, CellList, Count,rMarkCount
                     Next
                 End If
             End If
         Next
         
-        '¸´ÖÆĞĞ
+        'å¤åˆ¶è¡Œ
         g_docObj.CopySheetRows 3,1,Count - 1
         
-        'ÌîÖµ
+        'å¡«å€¼
         startRow = 3
         For i2 = 0 To Count - 1
             CellValueList = Split(CellList(i2),",")
@@ -154,26 +154,26 @@ Function ExportMap(ByVal pathName,ByVal filename)
             startRow = startRow + 1
         Next
         
-        'ÌîĞ´±íÎ²
-        ' g_docObj.SetCellValueEx Count + 3,0,"×÷Òµµ¥Î»£º" & CHDW
-        ' g_docObj.SetCellValueEx Count + 3,10,"ÈÕÆÚ£º" & RQDate
+        'å¡«å†™è¡¨å°¾
+        ' g_docObj.SetCellValueEx Count + 3,0,"ä½œä¸šå•ä½ï¼š" & CHDW
+        ' g_docObj.SetCellValueEx Count + 3,10,"æ—¥æœŸï¼š" & RQDate
         
-        'É¾³ıµÚÒ»ĞĞ
+        'åˆ é™¤ç¬¬ä¸€è¡Œ
         g_docObj.DeleteSheetRows 0,1
         
-        HeaderStr = "¹¤³ÌÃû³Æ£º" & XMMC
-        g_docObj.PageSetup2 0,HeaderStr,"×÷Òµµ¥Î»£º" & CHDW & Space(30) & " ÖÆ±íÕß£ºËÕÊÀ¾°"
-        g_docObj.PageSetup2 1,"","Ğ£ºËÕß£ºÁÖÅà±ø" & Space(30) & "ÈÕÆÚ£º" & RQDate
+        HeaderStr = "å·¥ç¨‹åç§°ï¼š" & XMMC
+        g_docObj.PageSetup2 0,HeaderStr,"ä½œä¸šå•ä½ï¼š" & CHDW & Space(30) & " åˆ¶è¡¨è€…ï¼šè‹ä¸–æ™¯"
+        g_docObj.PageSetup2 1,"","æ ¡æ ¸è€…ï¼šæ—åŸ¹å…µ" & Space(30) & "æ—¥æœŸï¼š" & RQDate
     Next
     
-    'É¾³ısheet1
+    'åˆ é™¤sheet1
     g_docObj.DeleteSheet "Sheet1"
     g_docObj.SaveEx exlfilePathName, 0
     
 End Function
 
 
-'Í¼·ùÊä³ö
+'å›¾å¹…è¾“å‡º
 Function ExportFrame(ByVal pathName,ByVal filename,ByVal frameCount)
     For i = 0 To frameCount - 1
         g_docObj.CreateDocumentByTemplate filename
@@ -182,33 +182,33 @@ Function ExportFrame(ByVal pathName,ByVal filename,ByVal frameCount)
         SSProcess.SetCurMapFrame x, y, 0, ""
         frameID = SSProcess.GetCurMapFrame()
         mapNumber = SSProcess.GetCurMapFrameNumber()
-        'Êä³öExcelÂ·¾¶
+        'è¾“å‡ºExcelè·¯å¾„
         exlfilePathName = pathName & mapNumber & ".xlsx"
         
         ids = SSProcess.SearchInPolyObjIDs(frameID, 0, "", 1, 1, 1)
         idsList = Split(ids,",")
-        '»ñÈ¡Í¼·ùÄÚµÄ¹ÜÏßÍ¼²ã
+        'è·å–å›¾å¹…å†…çš„ç®¡çº¿å›¾å±‚
         strLayer = GetFrameGXLayer( ids, strLayer)
         strLayerList = Split(strLayer,",")
-        '¸´ÖÆexcelsheet
+        'å¤åˆ¶excelsheet
         For i1 = 0 To UBound(strLayerList)
             g_docObj.CopySheet "Sheet1",strLayerList(i1)
         Next
-        '»ñÈ¡ÏîÄ¿ĞÅÏ¢
+        'è·å–é¡¹ç›®ä¿¡æ¯
         GetXMXX GXXMXX
         XMMC = GXXMXX(1)
         CHDW = GXXMXX(6)
-        '°´ÕÕÍ¼²ãË³ĞòÌîsheetÖµ
+        'æŒ‰ç…§å›¾å±‚é¡ºåºå¡«sheetå€¼
         For i1 = 0 To UBound(strLayerList)
             g_docObj.SetActiveSheet strLayerList(i1)
-            '±íÍ·
-            ''Î´ÌîĞ´
-            'XMMC=SSProcess.ReadEpsIni("¹ÜÏß±¨¸æĞÅÏ¢", "ÏîÄ¿Ãû³Æ" ,""):XMBH=SSProcess.ReadEpsIni("¹ÜÏß±¨¸æĞÅÏ¢", "±àºÅ" ,"")
-            'CHDW=SSProcess.ReadEpsIni("¹ÜÏß±¨¸æĞÅÏ¢", "²â»æµ¥Î»" ,""):RQDate=year(Date())&"Äê"&month(Date())&"ÔÂ"
+            'è¡¨å¤´
+            ''æœªå¡«å†™
+            'XMMC=SSProcess.ReadEpsIni("ç®¡çº¿æŠ¥å‘Šä¿¡æ¯", "é¡¹ç›®åç§°" ,""):XMBH=SSProcess.ReadEpsIni("ç®¡çº¿æŠ¥å‘Šä¿¡æ¯", "ç¼–å·" ,"")
+            'CHDW=SSProcess.ReadEpsIni("ç®¡çº¿æŠ¥å‘Šä¿¡æ¯", "æµ‹ç»˜å•ä½" ,""):RQDate=year(Date())&"å¹´"&month(Date())&"æœˆ"
             
-            g_docObj.SetCellValueEx 0,0,"¹¤³ÌÃû³Æ£º" & XMMC
-            g_docObj.SetCellValueEx 0,8,"¹¤³Ì±àºÅ£º" & XMBH
-            g_docObj.SetCellValueEx 0,17,"Í¼·ùºÅ£º" & mapNumber
+            g_docObj.SetCellValueEx 0,0,"å·¥ç¨‹åç§°ï¼š" & XMMC
+            g_docObj.SetCellValueEx 0,8,"å·¥ç¨‹ç¼–å·ï¼š" & XMBH
+            g_docObj.SetCellValueEx 0,17,"å›¾å¹…å·ï¼š" & mapNumber
             
             ReDim CellList(Count)
             Count = 0
@@ -224,32 +224,32 @@ Function ExportFrame(ByVal pathName,ByVal filename,ByVal frameCount)
                         If i3 = 1 Then WTDH = value
                         CellValue = GetValueString( i3, value,str)
                     Next
-                    '¹ÜÏßµãÌîÖµÅĞ¶Ï±êÊ¶
+                    'ç®¡çº¿ç‚¹å¡«å€¼åˆ¤æ–­æ ‡è¯†
                     rMarkCount = 0
-                    'Á¬½ÓµãºÅ
-                    ZDDHCount = GetProjectTableList( "µØÏÂ¹ÜÏßÏßÊôĞÔ±í", "GXZDDH,µØÏÂ¹ÜÏßÏßÊôĞÔ±í.ID", "GXQDDH='" & WTDH & "'", "SpatialData", "1", ZDDHList, fieldCount)
+                    'è¿æ¥ç‚¹å·
+                    ZDDHCount = GetProjectTableList( "åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨", "GXZDDH,åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.ID", "GXQDDH='" & WTDH & "'", "SpatialData", "1", ZDDHList, fieldCount)
                     If ZDDHCount > 0 Then
                         For i3 = 0 To ZDDHCount - 1
                             If rMarkCount > 0 Then CellValue = ","
-                            '»ñÈ¡¹ÜµãÎª¹ÜÏßÆğµãµÄÊôĞÔÊı×é
+                            'è·å–ç®¡ç‚¹ä¸ºç®¡çº¿èµ·ç‚¹çš„å±æ€§æ•°ç»„
                             GetCellValueList i3,ZDDHList,"GXQDDH",WTDH, CellValue, CellList, Count,rMarkCount
                         Next
                     End If
-                    QDDHCount = GetProjectTableList( "µØÏÂ¹ÜÏßÏßÊôĞÔ±í", "GXQDDH,µØÏÂ¹ÜÏßÏßÊôĞÔ±í.ID", "GXZDDH='" & WTDH & "'", "SpatialData", "1", QDDHList, fieldCount)
+                    QDDHCount = GetProjectTableList( "åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨", "GXQDDH,åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.ID", "GXZDDH='" & WTDH & "'", "SpatialData", "1", QDDHList, fieldCount)
                     If QDDHCount > 0 Then
                         For i3 = 0 To QDDHCount - 1
                             If rMarkCount > 0 Then CellValue = ","
-                            '»ñÈ¡¹ÜµãÎª¹ÜÏßÖÕµãµÄÊôĞÔÊı×é
+                            'è·å–ç®¡ç‚¹ä¸ºç®¡çº¿ç»ˆç‚¹çš„å±æ€§æ•°ç»„
                             GetCellValueList i3,QDDHList,"GXZDDH",WTDH, CellValue, CellList, Count,rMarkCount
                         Next
                     End If
                 End If
             Next
             
-            '¸´ÖÆĞĞ
+            'å¤åˆ¶è¡Œ
             g_docObj.CopySheetRows 3,1,Count - 1
             
-            'ÌîÖµ
+            'å¡«å€¼
             startRow = 3
             For i2 = 0 To Count - 1
                 CellValueList = Split(CellList(i2),",")
@@ -260,33 +260,33 @@ Function ExportFrame(ByVal pathName,ByVal filename,ByVal frameCount)
                 startRow = startRow + 1
             Next
             
-            'ÌîĞ´±íÎ²
-            ' g_docObj.SetCellValueEx Count + 3,0,"×÷Òµµ¥Î»£º" & CHDW
-            ' g_docObj.SetCellValueEx Count + 3,10,"ÈÕÆÚ£º" & RQDate
+            'å¡«å†™è¡¨å°¾
+            ' g_docObj.SetCellValueEx Count + 3,0,"ä½œä¸šå•ä½ï¼š" & CHDW
+            ' g_docObj.SetCellValueEx Count + 3,10,"æ—¥æœŸï¼š" & RQDate
             
-            'É¾³ıµÚÒ»ĞĞ
+            'åˆ é™¤ç¬¬ä¸€è¡Œ
             g_docObj.DeleteSheetRows 0,1
             
-            HeaderStr = "¹¤³ÌÃû³Æ£º" & XMMC
-            g_docObj.PageSetup2 0,HeaderStr,"×÷Òµµ¥Î»£º" & CHDW & Space(30) & " ÖÆ±íÕß£ºËÕÊÀ¾°"
-            g_docObj.PageSetup2 1,"","Ğ£ºËÕß£ºÁÖÅà±ø" & Space(30) & "ÈÕÆÚ£º" & RQDate
+            HeaderStr = "å·¥ç¨‹åç§°ï¼š" & XMMC
+            g_docObj.PageSetup2 0,HeaderStr,"ä½œä¸šå•ä½ï¼š" & CHDW & Space(30) & " åˆ¶è¡¨è€…ï¼šè‹ä¸–æ™¯"
+            g_docObj.PageSetup2 1,"","æ ¡æ ¸è€…ï¼šæ—åŸ¹å…µ" & Space(30) & "æ—¥æœŸï¼š" & RQDate
             
         Next
         
         
-        'É¾³ısheet1
+        'åˆ é™¤sheet1
         g_docObj.DeleteSheet "Sheet1"
         g_docObj.SaveEx exlfilePathName, 0
     Next
     SSProcess.FreeMapFrame()
 End Function
 
-'»ñÈ¡¹ÜÏßÊôĞÔÊı×é
+'è·å–ç®¡çº¿å±æ€§æ•°ç»„
 Function GetCellValueList(ByVal i,ByVal DHList,ByVal GXLineDH,ByVal WTDH,ByVal CellValue,ByRef CellList(),ByRef Count,ByRef rMarkCount)
     GXCellDH = DHList(i,0)
     GXID = DHList(i,1)
     CellValue = CellValue & "," & GXCellDH
-    PonitValueCount = GetProjectTableList( "µØÏÂ¹ÜÏßµãÊôĞÔ±í", GXPointField1, "WTDH='" & WTDH & "'", "SpatialData", "0", GXDList, fieldCount)
+    PonitValueCount = GetProjectTableList( "åœ°ä¸‹ç®¡çº¿ç‚¹å±æ€§è¡¨", GXPointField1, "WTDH='" & WTDH & "'", "SpatialData", "0", GXDList, fieldCount)
     If PonitValueCount = 1 Then
         If rMarkCount = 0 Then
             For i4 = 0 To fieldCount - 1
@@ -298,14 +298,14 @@ Function GetCellValueList(ByVal i,ByVal DHList,ByVal GXLineDH,ByVal WTDH,ByVal C
         End If
     End If
     
-    '¹ÜÏßÊôĞÔ£¬^Îª»òÕß£¬/Îª²¢ÁĞ
+    'ç®¡çº¿å±æ€§ï¼Œ^ä¸ºæˆ–è€…ï¼Œ/ä¸ºå¹¶åˆ—
     GXLineField1List = Split(GXLineField1,",")
     For i3 = 0 To UBound(GXLineField1List)
         If InStr(GXLineField1List(i3),"^") > 0 Then
             GJList = Split(GXLineField1List(i3),"^")
             GJvalue = SSProcess.GetObjectAttr( GXID, "[GJ]")
             DMCCValue = SSProcess.GetObjectAttr( GXID, "[DMCC]")
-            '¹Ü¾¶ºÍ¶ÏÃæ³ß´ç¿ÕÖµÅĞ¶ÏÌîÄÄ¸öÖµ
+            'ç®¡å¾„å’Œæ–­é¢å°ºå¯¸ç©ºå€¼åˆ¤æ–­å¡«å“ªä¸ªå€¼
             If GJvalue <> "" And DMCCValue = "" Then
                 GXLineFields = GJList(0)
             ElseIf  GJvalue = "" And DMCCValue <> "" Then
@@ -318,10 +318,10 @@ Function GetCellValueList(ByVal i,ByVal DHList,ByVal GXLineDH,ByVal WTDH,ByVal C
             GXLineFields = GXLineField1List(i3)
         End If
         If InStr(GXLineFields,",") > 0 Then
-            GXLineCount = GetProjectTableList( "µØÏÂ¹ÜÏßÏßÊôĞÔ±í", GXLineFields, "" & GXLineDH & "='" & WTDH & "' and µØÏÂ¹ÜÏßÏßÊôĞÔ±í.ID=" & GXID, "SpatialData", "1", ValueList, fieldCount)
+            GXLineCount = GetProjectTableList( "åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨", GXLineFields, "" & GXLineDH & "='" & WTDH & "' and åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.ID=" & GXID, "SpatialData", "1", ValueList, fieldCount)
             ZKS = ValueList(0,0)
             YYKS = ValueList(0,1)
-            '×éºÏ×Ü¿×ÊıºÍÒÑÓÃ¿×Êı
+            'ç»„åˆæ€»å­”æ•°å’Œå·²ç”¨å­”æ•°
             If ZKS <> "" And YYKS = "" Then
                 value1 = ZKS
             ElseIf ZKS <> "" And YYKS <> "" Then
@@ -331,7 +331,7 @@ Function GetCellValueList(ByVal i,ByVal DHList,ByVal GXLineDH,ByVal WTDH,ByVal C
             End If
             CellValue = GetValueString( i3, value1,CellValue)
         Else
-            GXLineCount = GetProjectTableList( "µØÏÂ¹ÜÏßÏßÊôĞÔ±í", GXLineFields, "" & GXLineDH & "='" & WTDH & "' and µØÏÂ¹ÜÏßÏßÊôĞÔ±í.ID=" & GXID, "SpatialData", "1", ValueList, fieldCount)
+            GXLineCount = GetProjectTableList( "åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨", GXLineFields, "" & GXLineDH & "='" & WTDH & "' and åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨.ID=" & GXID, "SpatialData", "1", ValueList, fieldCount)
             value1 = ValueList(0,0)
             CellValue = GetValueString( i3, value1,CellValue)
         End If
@@ -343,10 +343,10 @@ Function GetCellValueList(ByVal i,ByVal DHList,ByVal GXLineDH,ByVal WTDH,ByVal C
     rMarkCount = rMarkCount + 1
 End Function
 
-'»ñÈ¡È«Í¼µÄ¹ÜÏßµãÍ¼²ã
+'è·å–å…¨å›¾çš„ç®¡çº¿ç‚¹å›¾å±‚
 Function GetMapGXLayer(ByRef strLayer)
     strLayer = ""
-    GXLXCount = GetProjectTableList( "µØÏÂ¹ÜÏßÏßÊôĞÔ±í", "distinct(GXLX)", "", "SpatialData", "1", ValueList, fieldCount)
+    GXLXCount = GetProjectTableList( "åœ°ä¸‹ç®¡çº¿çº¿å±æ€§è¡¨", "distinct(GXLX)", "", "SpatialData", "1", ValueList, fieldCount)
     For i = 0 To GXLXCount - 1
         GXLX = ValueList(i,0)
         strLayer = GetString( GXLX, "," , strLayer)
@@ -354,7 +354,7 @@ Function GetMapGXLayer(ByRef strLayer)
     GetMapGXLayer = strLayer
 End Function
 
-'Ñ¡Ôñ¼¯»ñÈ¡Ö¸¶¨Í¼²ãµÄ¹Üµãid
+'é€‰æ‹©é›†è·å–æŒ‡å®šå›¾å±‚çš„ç®¡ç‚¹id
 Function GetGXLayerID(ByVal strLayer)
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -371,7 +371,7 @@ Function GetGXLayerID(ByVal strLayer)
 End Function
 
 
-'»ñÈ¡Í¼·ùÄÚµÄ¹ÜÏßÍ¼²ã
+'è·å–å›¾å¹…å†…çš„ç®¡çº¿å›¾å±‚
 Function GetFrameGXLayer(ByVal ids,ByRef strLayer)
     idlist = Split(ids,",")
     strLayer = ""
@@ -386,7 +386,7 @@ Function GetFrameGXLayer(ByVal ids,ByRef strLayer)
     GetFrameGXLayer = strLayer
 End Function
 
-'ÕûÀí³ö×Ö·û´®
+'æ•´ç†å‡ºå­—ç¬¦ä¸²
 Function GetString(ByVal value,ByVal splitMark , str)
     If str = "" Then
         str = value
@@ -396,7 +396,7 @@ Function GetString(ByVal value,ByVal splitMark , str)
     GetString = str
 End Function
 
-'ÕûÀí×Ö¶ÎÖµ×Ö·û´®
+'æ•´ç†å­—æ®µå€¼å­—ç¬¦ä¸²
 Function GetValueString(ByVal index,ByVal value,ByRef str)
     If str = "" Then
         If index = 0 Then
@@ -410,7 +410,7 @@ Function GetValueString(ByVal index,ByVal value,ByRef str)
     GetValueString = str
 End Function
 
-'//¿ª¿â
+'//å¼€åº“
 Dim  adoConnection
 Function InitDB()
     accessName = SSProcess.GetProjectFileName
@@ -419,28 +419,28 @@ Function InitDB()
     adoConnection.Open strcon
 End Function
 
-'//¹Ø¿â
+'//å…³åº“
 Function ReleaseDB()
     adoConnection.Close
     Set adoConnection = Nothing
 End Function
 
 
-'//strTableName ±í
-'//strFields ×Ö¶Î
-'//strAddCondition Ìõ¼ş 
-'//strTableType "AttributeData£¨´¿ÊôĞÔ±í£© ,SpatialData£¨µØÎïÊôĞÔ±í£©" 
-'//strGeoType µØÎïÀàĞÍ µã¡¢Ïß¡¢Ãæ¡¢×¢¼Ç(0µã£¬1Ïß£¬2Ãæ£¬3×¢¼Ç)
-'//rs ±í¼ÇÂ¼¶şÎ¬Êı×érs(ĞĞ,ÁĞ)
-'//fieldCount ×Ö¶Î¸öÊı
-'//·µ»ØÖµ £ºsql²éÑ¯±í¼ÇÂ¼¸öÊı
+'//strTableName è¡¨
+'//strFields å­—æ®µ
+'//strAddCondition æ¡ä»¶ 
+'//strTableType "AttributeDataï¼ˆçº¯å±æ€§è¡¨ï¼‰ ,SpatialDataï¼ˆåœ°ç‰©å±æ€§è¡¨ï¼‰" 
+'//strGeoType åœ°ç‰©ç±»å‹ ç‚¹ã€çº¿ã€é¢ã€æ³¨è®°(0ç‚¹ï¼Œ1çº¿ï¼Œ2é¢ï¼Œ3æ³¨è®°)
+'//rs è¡¨è®°å½•äºŒç»´æ•°ç»„rs(è¡Œ,åˆ—)
+'//fieldCount å­—æ®µä¸ªæ•°
+'//è¿”å›å€¼ ï¼šsqlæŸ¥è¯¢è¡¨è®°å½•ä¸ªæ•°
 Function GetProjectTableList(ByVal strTableName,ByVal strFields,ByVal strAddCondition,ByVal strTableType,ByVal strGeoType,ByRef rs(),ByRef fieldCount)
     GetProjectTableList = 0
     values = ""
     rsCount = 0
     fieldCount = 0
     If strTableName = "" Or strFields = "" Then Exit Function
-    'ÉèÖÃµØÎïÀàĞÍ
+    'è®¾ç½®åœ°ç‰©ç±»å‹
     If strGeoType = "0" Then
         GeoType = "GeoPointTB"
     ElseIf strGeoType = "1" Then
@@ -466,9 +466,9 @@ Function GetProjectTableList(ByVal strTableName,ByVal strFields,ByVal strAddCond
     End If
     
     'if instr(sql,"scpcjzmj")>0 then  addloginfo sql
-    '»ñÈ¡µ±Ç°¹¤³Ìedb±í¼ÇÂ¼
+    'è·å–å½“å‰å·¥ç¨‹edbè¡¨è®°å½•
     AccessName = SSProcess.GetProjectFileName
-    'ÅĞ¶Ï±íÊÇ·ñ´æÔÚ
+    'åˆ¤æ–­è¡¨æ˜¯å¦å­˜åœ¨
     'if  IsTableExits(AccessName,strTableName)=false then exit function 
     'set adoConnection=createobject("adodb.connection")
     'strcon="DBQ="& AccessName &";DRIVER={Microsoft Access Driver (*.mdb)};"  
@@ -488,7 +488,7 @@ Function GetProjectTableList(ByVal strTableName,ByVal strFields,ByVal strAddCond
         For i = 0 To fieldCount - 1
             value = adoRs(i)
             If IsNull(value) Then value = ""
-            value = Replace(value,",","£¬")
+            value = Replace(value,",","ï¼Œ")
             rs(rsCount,i) = value
         Next
         rsCount = rsCount + 1
@@ -505,7 +505,7 @@ End Function
 Function GetXMXX(ByRef XMXXSZ())
     
     mdbName = SSProcess.GetProjectFileName
-    sql = "Select ¹ÜÏßÏîÄ¿ĞÅÏ¢±í." & XMZD & " From ¹ÜÏßÏîÄ¿ĞÅÏ¢±í  WHERE ¹ÜÏßÏîÄ¿ĞÅÏ¢±í.id=1"
+    sql = "Select ç®¡çº¿é¡¹ç›®ä¿¡æ¯è¡¨." & XMZD & " From ç®¡çº¿é¡¹ç›®ä¿¡æ¯è¡¨  WHERE ç®¡çº¿é¡¹ç›®ä¿¡æ¯è¡¨.id=1"
     GetSQLRecordAll mdbName,sql,arSQLRecord,iRecordCount
     For i = 0 To iRecordCount - 1
         XMXXSZ = Split(arSQLRecord(i), ",")
@@ -517,28 +517,28 @@ Function GetSQLRecordAll(ByRef mdbName, ByRef StrSqlStatement, ByRef arSQLRecord
     SSProcess.OpenAccessMdb mdbName
     iRecordCount =  - 1
     sql = StrSqlStatement
-    '´ò¿ª¼ÇÂ¼¼¯
+    'æ‰“å¼€è®°å½•é›†
     SSProcess.OpenAccessRecordset mdbName, sql
-    '»ñÈ¡¼ÇÂ¼×ÜÊı
+    'è·å–è®°å½•æ€»æ•°
     RecordCount = SSProcess.GetAccessRecordCount (mdbName, sql)
     If RecordCount > 0 Then
         iRecordCount = 0
         ReDim arSQLRecord(RecordCount)
-        '½«¼ÇÂ¼ÓÎ±êÒÆµ½µÚÒ»ĞĞ
+        'å°†è®°å½•æ¸¸æ ‡ç§»åˆ°ç¬¬ä¸€è¡Œ
         SSProcess.AccessMoveFirst mdbName, sql
-        'ä¯ÀÀ¼ÇÂ¼
+        'æµè§ˆè®°å½•
         While SSProcess.AccessIsEOF (mdbName, sql) = 0
             fields = ""
             values = ""
-            '»ñÈ¡µ±Ç°¼ÇÂ¼ÄÚÈİ
+            'è·å–å½“å‰è®°å½•å†…å®¹
             SSProcess.GetAccessRecord mdbName, sql, fields, values
             arSQLRecord(iRecordCount) = values
             iRecordCount = iRecordCount + 1
-            'ÒÆ¶¯¼ÇÂ¼ÓÎ±ê
+            'ç§»åŠ¨è®°å½•æ¸¸æ ‡
             SSProcess.AccessMoveNext mdbName, sql
         WEnd
     End If
-    '¹Ø±Õ¼ÇÂ¼¼¯
+    'å…³é—­è®°å½•é›†
     SSProcess.CloseAccessRecordset mdbName, sql
     SSProcess.CloseAccessMdb mdbName
 End Function
