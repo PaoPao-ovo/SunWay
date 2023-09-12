@@ -1,30 +1,30 @@
 
-'========================================================ÎÄ¼şÂ·¾¶²Ù×÷¶ÔÏó================================================================
+'========================================================æ–‡ä»¶è·¯å¾„æ“ä½œå¯¹è±¡================================================================
 
-'Â·¾¶²Ù×÷¶ÔÏó
+'è·¯å¾„æ“ä½œå¯¹è±¡
 Dim FileSysObj
 Set FileSysObj = CreateObject("Scripting.FileSystemObject")
 
-'¸´ÖÆºóÂ·¾¶×Ö·û´®
+'å¤åˆ¶åè·¯å¾„å­—ç¬¦ä¸²
 Dim CopyPathStr
 CopyPathStr = ""
 
-'Word²Ù×÷¶ÔÏó
+'Wordæ“ä½œå¯¹è±¡
 Dim g_docObj
 
-'==============================================================¹¦ÄÜÈë¿Ú==================================================================
+'==============================================================åŠŸèƒ½å…¥å£==================================================================
 
 Sub OnClick()
     
-    strTempFileName = "²ÔÄÏÏØ×ÚµØÎ»ÖÃÍ¼Ä£°å.docx"
-    strTempFilePath = SSProcess.GetSysPathName (7) & "\¹¦ÄÜÄ£°å\" & strTempFileName
+    strTempFileName = "è‹å—å¿å®—åœ°ä½ç½®å›¾æ¨¡æ¿.docx"
+    strTempFilePath = SSProcess.GetSysPathName (7) & "\åŠŸèƒ½æ¨¡æ¿\" & strTempFileName
     
     Set g_docObj = CreateObject ("asposewordscom.asposewordshelper")
     
     If TypeName (g_docObj) = "AsposeWordsHelper" Then
         g_docObj.CreateDocumentByTemplate strTempFilePath
     Else
-        MsgBox "ÇëÏÈ×¢²áAspose.Word²å¼ş"
+        MsgBox "è¯·å…ˆæ³¨å†ŒAspose.Wordæ’ä»¶"
         Exit Sub
     End If
     
@@ -32,13 +32,13 @@ Sub OnClick()
     
     InitDB()
     
-    ReplaceCell ZhuJi 'Ìæ»»µ¥Ôª¸ñÎÄ×Ö
+    ReplaceCell ZhuJi 'æ›¿æ¢å•å…ƒæ ¼æ–‡å­—
     
     ReleaseDB()
     
-    strWordFileName = Replace(strTempFileName, "Ä£°å", "")
+    strWordFileName = Replace(strTempFileName, "æ¨¡æ¿", "")
     
-    strFileSavePath = pathName & "±¨¸æ³É¹û\" & strWordFileName
+    strFileSavePath = pathName & "æŠ¥å‘Šæˆæœ\" & strWordFileName
     
     g_docObj.SaveEx strFileSavePath
     
@@ -48,31 +48,31 @@ Sub OnClick()
     
     TempFile.Delete
     
-    MsgBox "Êä³öÍê³É"
+    MsgBox "è¾“å‡ºå®Œæˆ"
     
 End Sub
 
 Function OpenProject(ByVal strFileSavePath,ByVal pathName,ByVal strWordFileName,ByVal ZhuJi)
     
-    '¹¤³ÌÃû³Æ
+    'å·¥ç¨‹åç§°
     EdbNameStr = ""
     
-    '¸´ÖÆÕ÷µØ·¶Î§Ãæ£¨504£©µ½Õ³Ìù°å
+    'å¤åˆ¶å¾åœ°èŒƒå›´é¢ï¼ˆ504ï¼‰åˆ°ç²˜è´´æ¿
     CloneArea
     
-    'Ñ¡ÔñÎÄ¼şµÄÂ·¾¶(¶àÑ¡Ö®¼äÒÔ","½øĞĞ·Ö¸ô)
-    FilePathStr = SSProcess.SelectFileName(1,"Ñ¡ÔñÎÄ¼ş",1,"EDB Files (*.edb)|*.edb|All Files (*.*)|*.*||")
+    'é€‰æ‹©æ–‡ä»¶çš„è·¯å¾„(å¤šé€‰ä¹‹é—´ä»¥","è¿›è¡Œåˆ†éš”)
+    FilePathStr = SSProcess.SelectFileName(1,"é€‰æ‹©æ–‡ä»¶",1,"EDB Files (*.edb)|*.edb|All Files (*.*)|*.*||")
     
     FilePathArr = Split(FilePathStr,",", - 1,1)
     
-    '¸´ÖÆ¹¤³Ì
+    'å¤åˆ¶å·¥ç¨‹
     For i = 0 To UBound(FilePathArr)
         Set EdbFile = FileSysObj.GetFile(FilePathArr(i))
-        EdbFile.Copy SSProcess.GetSysPathName(5) & "±¨¸æ³É¹û\" & EdbFile.Name
+        EdbFile.Copy SSProcess.GetSysPathName(5) & "æŠ¥å‘Šæˆæœ\" & EdbFile.Name
         If CopyPathStr = "" Then
-            CopyPathStr = SSProcess.GetSysPathName(5) & "±¨¸æ³É¹û\" & EdbFile.Name
+            CopyPathStr = SSProcess.GetSysPathName(5) & "æŠ¥å‘Šæˆæœ\" & EdbFile.Name
         Else
-            CopyPathStr = CopyPathStr & "," & SSProcess.GetSysPathName(5) & "±¨¸æ³É¹û\" & EdbFile.Name
+            CopyPathStr = CopyPathStr & "," & SSProcess.GetSysPathName(5) & "æŠ¥å‘Šæˆæœ\" & EdbFile.Name
         End If
         If EdbNameStr = "" Then
             EdbNameStr = EdbFile.Name
@@ -84,7 +84,7 @@ Function OpenProject(ByVal strFileSavePath,ByVal pathName,ByVal strWordFileName,
     EdbNameArr = Split(EdbNameStr,",", - 1,1)
     
     For i = 0 To UBound(EdbNameArr)
-        CreatPath = pathName & "±¨¸æ³É¹û\" & Replace(EdbNameArr(i),".edb","") & strWordFileName
+        CreatPath = pathName & "æŠ¥å‘Šæˆæœ\" & Replace(EdbNameArr(i),".edb","") & strWordFileName
         g_docObj.CreateDocumentByTemplate strFileSavePath
         ReadDT Replace(EdbNameArr(i),".edb","")
         g_docObj.SaveEx CreatPath
@@ -92,7 +92,7 @@ Function OpenProject(ByVal strFileSavePath,ByVal pathName,ByVal strWordFileName,
     
     EdbScale = SSProcess.GetMapScale()
     
-    '´ò¿ªÑ¡ÔñµÄ¹¤³Ì²¢Õ³Ìù
+    'æ‰“å¼€é€‰æ‹©çš„å·¥ç¨‹å¹¶ç²˜è´´
     CopyPathArr = Split(CopyPathStr,",", - 1,1)
     
     For i = 0 To UBound(CopyPathArr)
@@ -102,7 +102,7 @@ Function OpenProject(ByVal strFileSavePath,ByVal pathName,ByVal strWordFileName,
         SSProcess.AddClipBoardObjToMap 0,0
         CopyArr = Split(CopyPathArr(i),"\", - 1,1)
         EdbName = Replace(CopyArr(UBound(CopyArr)),".edb","")
-        g_docObj.OpenDocument pathName & "±¨¸æ³É¹û\" & EdbName & strWordFileName
+        g_docObj.OpenDocument pathName & "æŠ¥å‘Šæˆæœ\" & EdbName & strWordFileName
         
         NotePosition X,Y
         
@@ -118,25 +118,25 @@ Function OpenProject(ByVal strFileSavePath,ByVal pathName,ByVal strWordFileName,
         
         InsterPicture MinX,MinY,MaxX,MaxY
         
-        g_docObj.SaveEx pathName & "±¨¸æ³É¹û\" & EdbName & strWordFileName
+        g_docObj.SaveEx pathName & "æŠ¥å‘Šæˆæœ\" & EdbName & strWordFileName
         'SSProcess.CloseDatabase
     Next 'i
     
 End Function' OpenProject()
 
-'»æÖÆÍ¼ÀıºÍÖ¸ÄÏÕë
+'ç»˜åˆ¶å›¾ä¾‹å’ŒæŒ‡å—é’ˆ
 Function DrawCompass(ByVal EdbScale,ByRef MinX,ByRef MinY,ByRef MaxX,ByRef MaxY)
     If EdbScale = 500 Then
-        makePoint MaxX - 10,MaxY - 10,"9120066",RGB(255,255,255),polygonID  '»æÖÆÖ¸ÄÏÕë
-        makePoint MinX + 10,MinY + 10,"9120046",RGB(255,255,255),polygonID  '»æÖÆÍ¼Àı
+        makePoint MaxX - 10,MaxY - 10,"9120066",RGB(255,255,255),polygonID  'ç»˜åˆ¶æŒ‡å—é’ˆ
+        makePoint MinX + 10,MinY + 10,"9120046",RGB(255,255,255),polygonID  'ç»˜åˆ¶å›¾ä¾‹
     ElseIf EdbScale = 5000 Then
-        makePoint MaxX,MaxY,"9120066",RGB(255,255,255),polygonID  '»æÖÆÖ¸ÄÏÕë
-        makePoint MinX,MinY,"9120047",RGB(255,255,255),polygonID  '»æÖÆÍ¼Àı
+        makePoint MaxX,MaxY,"9120066",RGB(255,255,255),polygonID  'ç»˜åˆ¶æŒ‡å—é’ˆ
+        makePoint MinX,MinY,"9120047",RGB(255,255,255),polygonID  'ç»˜åˆ¶å›¾ä¾‹
     End If
     'makeArea MinX,MinY,MaxX,MinY,MaxX,MaxY,MinX,MaxY,2,RGB(255,255,255)
 End Function' DrawNote
 
-'·µ»Ø×¢¼ÇÎ»ÖÃ
+'è¿”å›æ³¨è®°ä½ç½®
 Function NotePosition(ByRef X,ByRef Y)
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -147,7 +147,7 @@ Function NotePosition(ByRef X,ByRef Y)
     SSProcess.GetObjectFocusPoint ID,X,Y
 End Function' NotePosition
 
-'Ñ¡ÔñÒªËØ¸´ÖÆµ½Õ³Ìù°å
+'é€‰æ‹©è¦ç´ å¤åˆ¶åˆ°ç²˜è´´æ¿
 Function CloneArea()
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
@@ -156,7 +156,7 @@ Function CloneArea()
     SSProcess.SelectionObjToClipBoard
 End Function' CloneArea
 
-'²åÈëÍ¼Æ¬
+'æ’å…¥å›¾ç‰‡
 Function InsterPicture(ByVal MinX,ByVal MinY,ByVal MaxX,ByVal MaxY)
     
     Path = SSProcess.GetSysPathName(7) & "Pictures\"
@@ -175,8 +175,9 @@ Function InsterPicture(ByVal MinX,ByVal MinY,ByVal MaxX,ByVal MaxY)
     
 End Function' InsterPicture
 
-'»ñÈ¡Õ÷µØ·¶Î§×ø±ê    
+'è·å–å¾åœ°èŒƒå›´åæ ‡    
 Function CJCTFWX(ByRef MinX,ByRef MinY,ByRef MaxX,ByRef MaxY)
+
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
     SSProcess.SetSelectCondition "SSObj_code", "==", "504"
@@ -204,7 +205,7 @@ Function CJCTFWX(ByRef MinX,ByRef MinY,ByRef MaxX,ByRef MaxY)
         Next
     Next
     
-    '×îĞ¡¿ò×ø±ê
+    'æœ€å°æ¡†åæ ‡
     MinX = MinX - 10
     MaxX = MaxX + 10
     MinY = MinY - 10
@@ -238,18 +239,18 @@ Function makePoint(x,y,code,color,polygonID)
 End Function
 
 Function ReadDT(ByVal YearTime)
-    Tablename = "²ÔÄÏÏØÍÁµØÀûÓÃÏÖ×´Í¼¡¾" & YearTime & "¡¿×ÚµØÇøÎ»Í¼"
+    Tablename = "è‹å—å¿åœŸåœ°åˆ©ç”¨ç°çŠ¶å›¾ã€" & YearTime & "ã€‘å®—åœ°åŒºä½å›¾"
     g_docObj.Replace "{Tablename}",Tablename,0
 End Function
 
 Function ReplaceCell(ByRef Hr)
-    SuoZXZ = WriteFormHX  '´ÓºìÏß¶ÁÈ¡ÊôĞÔÌîĞ´Ä£°å£¬²¢·µ»ØËùÊôÏçÕò
-    Res_value = WriteFormDLTB '´ÓÍ¼°ß¶ÁÈ¡ÊôĞÔÌîĞ´Ä£°å£¬²¢·µ»ØÍÁµØÈ¨ÊôºÍµØÍ¼ÒªÊ¹ÓÃµÄ×¢¼Ç
+    SuoZXZ = WriteFormHX  'ä»çº¢çº¿è¯»å–å±æ€§å¡«å†™æ¨¡æ¿ï¼Œå¹¶è¿”å›æ‰€å±ä¹¡é•‡
+    Res_value = WriteFormDLTB 'ä»å›¾æ–‘è¯»å–å±æ€§å¡«å†™æ¨¡æ¿ï¼Œå¹¶è¿”å›åœŸåœ°æƒå±å’Œåœ°å›¾è¦ä½¿ç”¨çš„æ³¨è®°
     
-    ZhuJi = Split(Res_value, "||")(0) 'µØÍ¼ÉÏµÄ×¢¼Ç
-    ZhuJi = Replace(ZhuJi, " ", "¡¢")
+    ZhuJi = Split(Res_value, "||")(0) 'åœ°å›¾ä¸Šçš„æ³¨è®°
+    ZhuJi = Replace(ZhuJi, " ", "ã€")
     ZhuJi = Right(ZhuJi, Len(ZhuJi) - 1)
-    ZjArr = Split(ZhuJi,"¡¢", - 1,1)
+    ZjArr = Split(ZhuJi,"ã€", - 1,1)
     Hr = ""
     For i = 0 To UBound(ZjArr)
         If Hr = "" Then
@@ -258,11 +259,11 @@ Function ReplaceCell(ByRef Hr)
             If i > 0 And i Mod 3 = 0 Then
                 Hr = Hr & ";" & ZjArr(i)
             Else
-                Hr = Hr & "¡¢" & ZjArr(i)
+                Hr = Hr & "ã€" & ZjArr(i)
             End If
         End If
     Next 'i
-    TuDQS = SuoZXZ & Split(Res_value, "||")(1) 'ÍÁµØÈ¨Êô
+    TuDQS = SuoZXZ & Split(Res_value, "||")(1) 'åœŸåœ°æƒå±
     
     g_docObj.Replace "{TuDQS}",TuDQS,0
     
@@ -287,35 +288,36 @@ Function DrawNote(ByVal BZStr,ByVal X,ByVal Y,ByVal NoteScale)
 End Function' DrawNote
 
 Function WriteFormDLTB
-    '¸ù¾İµØÀàÍ¼°ßÊä³öÍÁµØÈ¨Êô¡¢ÍÁµØÀàĞÍ¡¢{TuDQS}¡¢{TuDLX} 
+
+    'æ ¹æ®åœ°ç±»å›¾æ–‘è¾“å‡ºåœŸåœ°æƒå±ã€åœŸåœ°ç±»å‹ã€{TuDQS}ã€{TuDLX} 
     TuDLX = ""
     ZhuJI = ""
     TuDQS = ""
     mdbName = SSProcess.GetProjectFileName
-    sql = "Select DISTINCT µØÀàÍ¼°ßÊôĞÔ±í.dlmc From µØÀàÍ¼°ßÊôĞÔ±í INNER JOIN GeoAreaTB ON µØÀàÍ¼°ßÊôĞÔ±í.ID = GeoAreaTB.ID WHERE([GeoAreaTB].[Mark] Mod 2)<>0"
+    sql = "Select DISTINCT åœ°ç±»å›¾æ–‘å±æ€§è¡¨.dlmc From åœ°ç±»å›¾æ–‘å±æ€§è¡¨ INNER JOIN GeoAreaTB ON åœ°ç±»å›¾æ–‘å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE([GeoAreaTB].[Mark] Mod 2)<>0"
     GetSQLRecordAll mdbName,sql,arSQLRecord,iRecordCount
     For i = 0 To iRecordCount - 1
         dlmc = arSQLRecord (i)
         TuDLX = TuDLX & " " & dlmc
         
-        sql1 = "Select sum (µØÀàÍ¼°ßÊôĞÔ±í.tbmj) From µØÀàÍ¼°ßÊôĞÔ±í INNER JOIN GeoAreaTB ON µØÀàÍ¼°ßÊôĞÔ±í.ID = GeoAreaTB.ID WHERE  ([GeoAreaTB].[Mark] Mod 2)<>0 and µØÀàÍ¼°ßÊôĞÔ±í.dlmc = '" & dlmc & "'"
+        sql1 = "Select sum (åœ°ç±»å›¾æ–‘å±æ€§è¡¨.tbmj) From åœ°ç±»å›¾æ–‘å±æ€§è¡¨ INNER JOIN GeoAreaTB ON åœ°ç±»å›¾æ–‘å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE  ([GeoAreaTB].[Mark] Mod 2)<>0 and åœ°ç±»å›¾æ–‘å±æ€§è¡¨.dlmc = '" & dlmc & "'"
         GetSQLRecordAll mdbName,sql1,arSQLRecord1,iRecordCount1
         For j = 0 To iRecordCount1 - 1
-            message = dlmc & arSQLRecord1(j) & "¹«Çê"
+            message = dlmc & arSQLRecord1(j) & "å…¬é¡·"
             ZhuJI = ZhuJI & " " & message
         Next
     Next
     
-    sql2 = "Select DISTINCT µØÀàÍ¼°ßÊôĞÔ±í.qsdw From µØÀàÍ¼°ßÊôĞÔ±í INNER JOIN GeoAreaTB ON µØÀàÍ¼°ßÊôĞÔ±í.ID = GeoAreaTB.ID WHERE([GeoAreaTB].[Mark] Mod 2)<>0"
+    sql2 = "Select DISTINCT åœ°ç±»å›¾æ–‘å±æ€§è¡¨.qsdw From åœ°ç±»å›¾æ–‘å±æ€§è¡¨ INNER JOIN GeoAreaTB ON åœ°ç±»å›¾æ–‘å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE([GeoAreaTB].[Mark] Mod 2)<>0"
     GetSQLRecordAll mdbName,sql2,arSQLRecord2,iRecordCount2
     For k = 0 To iRecordCount2 - 1
         qsdw = arSQLRecord2 (k)
-        TuDQS = TuDQS & "¡¢" & qsdw
+        TuDQS = TuDQS & "ã€" & qsdw
         
         TuDQS = Right(TuDQS, Len(TuDQS) - 1)
         
     Next
-    TuDLX = Replace(TuDLX, " ", "¡¢")
+    TuDLX = Replace(TuDLX, " ", "ã€")
     
     TuDLX = Right(TuDLX, Len(TuDLX) - 1)
     
@@ -326,11 +328,11 @@ End Function
 
 
 Function WriteFormHX
-    '¸ù¾İºìÏßÊôĞÔÖĞµÄÓÃµØµ¥Î»,ÏîÄ¿Ãû³Æ,µØ¿éÃæ»ı {XMMC},{YDDW},{DKMJ}ÌîÄ£°åÖĞµÄ¶ÔÓ¦×Ö¶Î
-    ' ½«ËùÔÚÏçÕò,{SuoZXZ}·µ»Ø
+    'æ ¹æ®çº¢çº¿å±æ€§ä¸­çš„ç”¨åœ°å•ä½,é¡¹ç›®åç§°,åœ°å—é¢ç§¯ {XMMC},{YDDW},{DKMJ}å¡«æ¨¡æ¿ä¸­çš„å¯¹åº”å­—æ®µ
+    ' å°†æ‰€åœ¨ä¹¡é•‡,{SuoZXZ}è¿”å›
     values = "XMMC,YDDW,DKMJ"
     valuesList = Split(values,",")
-    SqlStr = "Select Õ÷µØÊôĞÔ±í.DKMJ,YDDW,XMMC From Õ÷µØÊôĞÔ±í Inner Join GeoAreaTB on Õ÷µØÊôĞÔ±í.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2)<>0"
+    SqlStr = "Select å¾åœ°å±æ€§è¡¨.DKMJ,YDDW,XMMC From å¾åœ°å±æ€§è¡¨ Inner Join GeoAreaTB on å¾åœ°å±æ€§è¡¨.ID = GeoAreaTB.ID WHERE (GeoAreaTB.Mark Mod 2)<>0"
     ProJectName = SSProcess.GetProjectFileName
     GetSQLRecordAll ProJectName,SqlStr,InfoArr,DKCount
     Mj = 0
@@ -348,12 +350,12 @@ Function WriteFormHX
     For i = 0 To UBound(valuesList)
         'strFieldValue = ""
         strField = valuesList(i)
-        'listCount = GetProjectTableList ("Õ÷µØÊôĞÔ±í",strField," Õ÷µØÊôĞÔ±í.ID>0 ","SpatialData","2",list,fieldCount)
+        'listCount = GetProjectTableList ("å¾åœ°å±æ€§è¡¨",strField," å¾åœ°å±æ€§è¡¨.ID>0 ","SpatialData","2",list,fieldCount)
         'If listCount = 1 Then strFieldValue = list(0,0)
         g_docObj.Replace "{" & strField & "}",strFieldValue(i),0
     Next
     
-    listCount = GetProjectTableList ("Õ÷µØÊôĞÔ±í","SuoZXZ"," Õ÷µØÊôĞÔ±í.ID>0 ","SpatialData","2",list,fieldCount)
+    listCount = GetProjectTableList ("å¾åœ°å±æ€§è¡¨","SuoZXZ"," å¾åœ°å±æ€§è¡¨.ID>0 ","SpatialData","2",list,fieldCount)
     If listCount = 1 Then
         SuoZXZ = list(0,0)
     End If
@@ -366,41 +368,41 @@ Function GetSQLRecordAll(ByRef mdbName, ByRef StrSqlStatement, ByRef arSQLRecord
     SSProcess.OpenAccessMdb mdbName
     iRecordCount =  - 1
     sql = StrSqlStatement
-    '´ò¿ª¼ÇÂ¼¼¯
+    'æ‰“å¼€è®°å½•é›†
     SSProcess.OpenAccessRecordset mdbName, sql
-    '»ñÈ¡¼ÇÂ¼×ÜÊı
+    'è·å–è®°å½•æ€»æ•°
     RecordCount = SSProcess.GetAccessRecordCount (mdbName, sql)
     If RecordCount > 0 Then
         iRecordCount = 0
         ReDim arSQLRecord(RecordCount)
-        '½«¼ÇÂ¼ÓÎ±êÒÆµ½µÚÒ»ĞĞ
+        'å°†è®°å½•æ¸¸æ ‡ç§»åˆ°ç¬¬ä¸€è¡Œ
         SSProcess.AccessMoveFirst mdbName, sql
-        'ä¯ÀÀ¼ÇÂ¼
+        'æµè§ˆè®°å½•
         While SSProcess.AccessIsEOF (mdbName, sql) = 0
             fields = ""
             values = ""
-            '»ñÈ¡µ±Ç°¼ÇÂ¼ÄÚÈİ
+            'è·å–å½“å‰è®°å½•å†…å®¹
             SSProcess.GetAccessRecord mdbName, sql, fields, values
-            arSQLRecord(iRecordCount) = values    '²éÑ¯¼ÇÂ¼
-            iRecordCount = iRecordCount + 1        '²éÑ¯¼ÇÂ¼Êı
-            'ÒÆ¶¯¼ÇÂ¼ÓÎ±ê
+            arSQLRecord(iRecordCount) = values    'æŸ¥è¯¢è®°å½•
+            iRecordCount = iRecordCount + 1        'æŸ¥è¯¢è®°å½•æ•°
+            'ç§»åŠ¨è®°å½•æ¸¸æ ‡
             SSProcess.AccessMoveNext mdbName, sql
         WEnd
     End If
-    '¹Ø±Õ¼ÇÂ¼¼¯
+    'å…³é—­è®°å½•é›†
     SSProcess.CloseAccessRecordset mdbName, sql
     SSProcess.CloseAccessMdb mdbName
 End Function
 
 
-'»ñÈ¡³É¹ûÄ¿Â¼Â·¾¶
+'è·å–æˆæœç›®å½•è·¯å¾„
 Function  GetFilePath
     projectFileName = SSProcess.GetSysPathName (5)
     GetFilePath = projectFileName
 End Function
 
-'***********************Êı¾İ¿â²Ù×÷º¯Êı*********************
-'//¿ª¿â
+'***********************æ•°æ®åº“æ“ä½œå‡½æ•°*********************
+'//å¼€åº“
 Dim  adoConnection
 Function InitDB()
     accessName = SSProcess.GetProjectFileName
@@ -410,14 +412,14 @@ Function InitDB()
 End Function
 
 
-'¹Ø¿â
+'å…³åº“
 Function ReleaseDB()
     adoConnection.Close
     Set adoConnection = Nothing
 End Function
 
 
-'µİ¹é´´½¨¶à¼¶Ä¿Â¼
+'é€’å½’åˆ›å»ºå¤šçº§ç›®å½•
 Function CreateFolder(path)
     Set fso = CreateObject("scripting.filesystemobject")
     If fso.FolderExists(path) Then
@@ -431,16 +433,16 @@ Function CreateFolder(path)
 End Function
 
 
-'SQL²éÑ¯×Ö¶Î
+'SQLæŸ¥è¯¢å­—æ®µ
 Function GetProjectTableList(ByVal strTableName,ByVal strFields,ByVal strAddCondition,ByVal strTableType,ByVal strGeoType,ByRef rs(),ByRef fieldCount)
-    'strTableName ±í
-    'strFields ×Ö¶Î
-    'strAddCondition Ìõ¼ş 
-    'strTableType AttributeData(´¿ÊôĞÔ±í) ,SpatialData(µØÎïÊôĞÔ±í)
-    'strGeoType µØÎïÀàĞÍ µã¡¢Ïß¡¢Ãæ¡¢×¢¼Ç(0µã,1Ïß,2Ãæ,3×¢¼Ç)
-    'rs ±í¼ÇÂ¼¶şÎ¬Êı×érs(ĞĞ,ÁĞ)
-    'fieldCount ×Ö¶Î¸öÊı
-    '·µ»ØÖµ :sql²éÑ¯±í¼ÇÂ¼¸öÊı
+    'strTableName è¡¨
+    'strFields å­—æ®µ
+    'strAddCondition æ¡ä»¶ 
+    'strTableType AttributeData(çº¯å±æ€§è¡¨) ,SpatialData(åœ°ç‰©å±æ€§è¡¨)
+    'strGeoType åœ°ç‰©ç±»å‹ ç‚¹ã€çº¿ã€é¢ã€æ³¨è®°(0ç‚¹,1çº¿,2é¢,3æ³¨è®°)
+    'rs è¡¨è®°å½•äºŒç»´æ•°ç»„rs(è¡Œ,åˆ—)
+    'fieldCount å­—æ®µä¸ªæ•°
+    'è¿”å›å€¼ :sqlæŸ¥è¯¢è¡¨è®°å½•ä¸ªæ•°
     
     
     GetProjectTableList = 0
@@ -448,7 +450,7 @@ Function GetProjectTableList(ByVal strTableName,ByVal strFields,ByVal strAddCond
     rsCount = 0
     fieldCount = 0
     If strTableName = "" Or strFields = "" Then Exit Function
-    'ÉèÖÃµØÎïÀàĞÍ
+    'è®¾ç½®åœ°ç‰©ç±»å‹
     If strGeoType = "0" Then
         GeoType = "GeoPointTB"
     ElseIf strGeoType = "1" Then
@@ -473,9 +475,9 @@ Function GetProjectTableList(ByVal strTableName,ByVal strFields,ByVal strAddCond
         End If
     End If
     
-    '»ñÈ¡µ±Ç°¹¤³Ìedb±í¼ÇÂ¼
+    'è·å–å½“å‰å·¥ç¨‹edbè¡¨è®°å½•
     AccessName = SSProcess.GetProjectFileName
-    'ÅĞ¶Ï±íÊÇ·ñ´æÔÚ
+    'åˆ¤æ–­è¡¨æ˜¯å¦å­˜åœ¨
     Set adoRs = CreateObject("ADODB.recordset")
     count = 0
     adoRs.cursorLocation = 3
@@ -491,7 +493,7 @@ Function GetProjectTableList(ByVal strTableName,ByVal strFields,ByVal strAddCond
         For i = 0 To fieldCount - 1
             value = adoRs(i)
             If IsNull(value) Then value = ""
-            value = Replace(value,",","£¬")
+            value = Replace(value,",","ï¼Œ")
             rs(rsCount,i) = value
         Next
         rsCount = rsCount + 1
@@ -503,7 +505,7 @@ Function GetProjectTableList(ByVal strTableName,ByVal strFields,ByVal strAddCond
     GetProjectTableList = rsCount
 End Function
 
-'Êı¾İÀàĞÍ×ª»»
+'æ•°æ®ç±»å‹è½¬æ¢
 Function Transform(ByVal Values)
     If Values <> "" Then
         If IsNumeric(Values) = True Then

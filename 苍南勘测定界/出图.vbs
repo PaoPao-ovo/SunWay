@@ -1,37 +1,37 @@
 
-'========================================================ÎÄ¼şÂ·¾¶²Ù×÷¶ÔÏó================================================================
+'========================================================æ–‡ä»¶è·¯å¾„æ“ä½œå¯¹è±¡================================================================
 
-'Â·¾¶²Ù×÷¶ÔÏó
+'è·¯å¾„æ“ä½œå¯¹è±¡
 Dim FileSysObj
 Set FileSysObj = CreateObject("Scripting.FileSystemObject")
 
-'¸´ÖÆºóÂ·¾¶×Ö·û´®
+'å¤åˆ¶åè·¯å¾„å­—ç¬¦ä¸²
 Dim CopyPathStr
 CopyPathStr = ""
 
-'=============================================================¹¦ÄÜÈë¿Ú=======================================================================
+'=============================================================åŠŸèƒ½å…¥å£=======================================================================
 
 Function OpenProject()
-    '¸´ÖÆÕ÷µØ·¶Î§Ãæ£¨504£©µ½Õ³Ìù°å
+    'å¤åˆ¶å¾åœ°èŒƒå›´é¢ï¼ˆ504ï¼‰åˆ°ç²˜è´´æ¿
     CloneArea
     
-    'Ñ¡ÔñÎÄ¼şµÄÂ·¾¶(¶àÑ¡Ö®¼äÒÔ","½øĞĞ·Ö¸ô)
-    FilePathStr = SSProcess.SelectFileName(1,"Ñ¡ÔñÎÄ¼ş",1,"EDB Files (*.edb)|*.edb|All Files (*.*)|*.*||")
+    'é€‰æ‹©æ–‡ä»¶çš„è·¯å¾„(å¤šé€‰ä¹‹é—´ä»¥","è¿›è¡Œåˆ†éš”)
+    FilePathStr = SSProcess.SelectFileName(1,"é€‰æ‹©æ–‡ä»¶",1,"EDB Files (*.edb)|*.edb|All Files (*.*)|*.*||")
     
     FilePathArr = Split(FilePathStr,",", - 1,1)
     
-    '¸´ÖÆ¹¤³Ì
+    'å¤åˆ¶å·¥ç¨‹
     For i = 0 To UBound(FilePathArr)
         Set EdbFile = FileSysObj.GetFile(FilePathArr(i))
-        EdbFile.Copy SSProcess.GetSysPathName(5) & "±¨¸æ³É¹û\" & EdbFile.Name
+        EdbFile.Copy SSProcess.GetSysPathName(5) & "æŠ¥å‘Šæˆæœ\" & EdbFile.Name
         If CopyPathStr = "" Then
-            CopyPathStr = SSProcess.GetSysPathName(5) & "±¨¸æ³É¹û\" & EdbFile.Name
+            CopyPathStr = SSProcess.GetSysPathName(5) & "æŠ¥å‘Šæˆæœ\" & EdbFile.Name
         Else
-            CopyPathStr = CopyPathStr & "," & SSProcess.GetSysPathName(5) & "±¨¸æ³É¹û\" & EdbFile.Name
+            CopyPathStr = CopyPathStr & "," & SSProcess.GetSysPathName(5) & "æŠ¥å‘Šæˆæœ\" & EdbFile.Name
         End If
     Next 'i
     
-    '´ò¿ªÑ¡ÔñµÄ¹¤³Ì²¢Õ³Ìù
+    'æ‰“å¼€é€‰æ‹©çš„å·¥ç¨‹å¹¶ç²˜è´´
     CopyPathArr = Split(CopyPathStr,",", - 1,1)
     For i = 0 To UBound(CopyPathArr)
         SSProcess.OpenDatabase CopyPathArr(i)
@@ -40,7 +40,7 @@ Function OpenProject()
     
 End Function' OpenProject()
 
-'Ñ¡ÔñÒªËØ¸´ÖÆµ½Õ³Ìù°å
+'é€‰æ‹©è¦ç´ å¤åˆ¶åˆ°ç²˜è´´æ¿
 Function CloneArea()
     SSProcess.ClearSelection
     SSProcess.ClearSelectCondition
