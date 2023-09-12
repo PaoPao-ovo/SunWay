@@ -110,7 +110,7 @@ Sub OnClick()
     GetSQLRecordAll mdbName,sql,arRecordShortList,RecordShortListCount
     
     'if ResVal_Dlg = 1 then
-    If RecordShortListCount <> 1 Then
+    If RecordShortListCount > 1 Then
         
         '指定输出承包方编码
         sql = "Select " & strTableZD & ".ZDDM From " & strTableZD & " Inner Join GeoAreaTB On " & strTableZD & ".ID = GeoAreaTB.ID Where ([GeoAreaTB].[Mark] Mod 2)<>0"
@@ -148,9 +148,283 @@ Sub OnClick()
                     End If
                 Next
             Else
-                MsgBox "请选择一个宗地"
-                Exit Sub
+                For ii = 0 To SelCount - 1
+                    sqltexts = "SELECT [" & strTableZD & "].[" & strKeyFiledName & "],[" & strTableZD & "].[ZDGUID] FROM " & strTableZD & " INNER JOIN GeoAreaTB ON " & strTableZD & ".ID = GeoAreaTB.ID "
+                    condition = " WHERE ([GeoAreaTB].[Mark] Mod 2)<>0 And " & strTableZD & ".ZDDM = '" & ExistsCodeArr(ii) & "'"
+                    strOrderBy = " ORDER BY " & strTableZD & "." & strKeyFiledName
+                    sql = sqltexts & " " & condition & " " & strOrderBy
+                    
+                    GetSQLRecordAll mdbName,sql,arRecordShortList,RecordShortListCount
+                    
+                    ReDim arOutRecSelected(RecordShortListCount)                '输出特征记录数组
+                    nOutSelectedCount = RecordShortListCount                        '输出记录数量
+                    ReDim arOutRecGUIDSelected(RecordShortListCount)            '输出特征记录GUID数组
+                    nOutSelectedCount = RecordShortListCount                        '输出记录GUID数量
+                    For i = 0 To RecordShortListCount - 1
+                        arOutTempCur = Split(arRecordShortList(i),",")    ':nCount_Temp =bound(arCBFBMCur)
+                        
+                        arOutRecSelected(i) = Trim(arOutTempCur(0))
+                        arOutRecGUIDSelected(i) = Trim(arOutTempCur(1))    'GUID
+                        
+                        If strSelectedOutRPT = "" Then
+                            strSelectedOutRPT = "'" & Trim(arOutTempCur(0)) & "'"
+                        Else
+                            strSelectedOutRPT = strSelectedOutRPT & ",'" & Trim(arOutTempCur(0)) & "'"
+                        End If
+                        If strSelectedGUIDOutRPT = "" Then
+                            strSelectedGUIDOutRPT = "{guid " & Trim(arOutTempCur(1)) & "}"
+                        Else
+                            strSelectedGUIDOutRPT = strSelectedGUIDOutRPT & ",{guid " & Trim(arOutTempCur(1)) & "}"
+                        End If
+                    Next
+                    
+                    sqltexts = "SELECT " & strTableZD & "." & strKeyFiledName & "," & strTableZD & ".ZDGUID, " & strTableZD & ".YBZDDM, " & strTableZD & ".QLLX, " & strTableZD & ".QLXZ, " _
+                     & strTableZD & ".TDQSLY, " & strTableZD & ".ZL, " & strTableZD & ".QLSDFS, " & strTableZD & ".GMJJHYFLDM, " & strTableZD & ".BDCDYH, " & strTableZD & ".TFH, " _
+                     & strTableZD & ".ZDSZB, " & strTableZD & ".ZDSZD, " & strTableZD & ".ZDSZN, " & strTableZD & ".ZDSZX, " & strTableZD & ".DJ, " & strTableZD & ".JG, " _
+                     & strTableZD & ".PZYT, " & strTableZD & ".YT, " & strTableZD & ".PZMJ, " & strTableZD & ".ZDMJ, " & strTableZD & ".JianZZDMJ, " & strTableZD & ".JianZZMJ, " _
+                     & strTableZD & ".ShiYQX, " & strTableZD & ".GYQLRQK, " & strTableZD & ".ZDJBXXSM, " & strTableZD & ".JZDWSM, " & strTableZD & ".ZYQSJXZXSM, " _
+                     & strTableZD & ".QSDCJS, " & strTableZD & ".DJCLJS, " & strTableZD & ".DJDCJGSHYJ, " & strTableZD & ".CeLDW, " & strTableZD & ".ZDBLC," & strTableZD & ".DiaoCRQ," _
+                     & strTableZD & ".CeLRQ," & strTableZD & ".XiangMMC," & strTableZD & ".XiangMFZR," & strTableZD & ".QDSJ," & strTableZD & ".ZZSJ," & strTableZD & ".DJZQMC," & strTableZD & ".ID FROM " & strTableZD & " INNER JOIN GeoAreaTB ON " & strTableZD & ".ID = GeoAreaTB.ID "
+                    condition = "WHERE ([GeoAreaTB].[Mark] Mod 2)<>0 And " & strTableZD & "." & strKeyFiledName & " In(" & strSelectedOutRPT & ")"
+                    strSQL = sqltexts & " " & condition
+                    GetSQLRecordAll mdbName,strSQL,arRecordZD,nRecordZDCount
+                    
+                    '-----GetOutContent.3.2---读取权利人信息---------------------------------------
+                    sqltexts = "SELECT QLR_权利人信息表.GLGUID, " & strTableZD & ".ZDDM, QLR_权利人信息表.SXH, QLR_权利人信息表.QLRMC, QLR_权利人信息表.QLRLX, QLR_权利人信息表.ZJZL, QLR_权利人信息表.ZJH, QLR_权利人信息表.DZ, QLR_权利人信息表.FaRDB, QLR_权利人信息表.FaRDBZJZL, QLR_权利人信息表.FaRDBZJH, QLR_权利人信息表.FaRDBDH, QLR_权利人信息表.DaiLRXM, QLR_权利人信息表.DaiLRZJZL, QLR_权利人信息表.DaiLRZJH, QLR_权利人信息表.DaiLRDH FROM GeoAreaTB INNER JOIN (" & strTableZD & " INNER JOIN QLR_权利人信息表 ON " & strTableZD & ".ZDGUID = QLR_权利人信息表.GLGUID) ON GeoAreaTB.ID = " & strTableZD & ".ID "
+                    condition = "WHERE ([GeoAreaTB].[Mark] Mod 2)<>0 And QLR_权利人信息表.GLGUID In (" & strSelectedGUIDOutRPT & ")"        '(((QLR_权利人信息表.GLGUID) In ({guid {780E4627-10E8-40F8-897A-DA71483AF6D8}},{guid {F05AC15E-CA2A-490D-AC46-30DD9DE4380C}}))
+                    strOrderBy = "ORDER BY QLR_权利人信息表.SXH"
+                    strSQL = sqltexts & " " & condition & " " & strOrderBy
+                    'addloginfo strSQL
+                    'GetSQLRecordAll mdbName,strSQL,arRecordQLR,arRecordQLR                '向函数中传递带GUID的参数提示出错，未找到原因--变量错误
+                    
+                    '读取权利人信息
+                    SSProcess.OpenAccessRecordset mdbName, strSQL
+                    '获取记录总数
+                    RecordCount = SSProcess.GetAccessRecordCount (mdbName, strSQL)
+                    If RecordCount > 0 Then
+                        nRecordQLRCount = RecordCount
+                        iRecordCount = 0
+                        ReDim arRecordQLR(RecordCount)
+                        '将记录游标移到第一行
+                        SSProcess.AccessMoveFirst mdbName, strSQL
+                        iRecordCount = 0
+                        '浏览记录
+                        While SSProcess.AccessIsEOF (mdbName, strSQL) = 0
+                            fields = ""
+                            values = ""
+                            '获取当前记录内容
+                            SSProcess.GetAccessRecord mdbName, strSQL, fields, values
+                            arRecordQLR(iRecordCount) = values                                        '查询记录
+                            iRecordCount = iRecordCount + 1                                                    '查询记录数
+                            '移动记录游标
+                            SSProcess.AccessMoveNext mdbName, strSQL
+                        WEnd
+                    End If
+                    '关闭记录集
+                    SSProcess.CloseAccessRecordset mdbName, strSQL
+                    '-------------------------------------------------------------
+                    Rem MsgBox     iRecordCount
+                    '-----GetOutContent.3.3---界址签章表记录数组---------------------------------------
+                    sqltexts = "SELECT " & strTableJZQZ & ".ZDGUID, " & strTableJZQZ & ".JZDHQ, " & strTableJZQZ & ".JZDHZJ, " & strTableJZQZ & ".JZDHZ, " & strTableJZQZ & ".LZQLRMC, " & strTableJZQZ & ".LZZJR, " & strTableJZQZ & ".BZZJR, " & strTableJZQZ & ".JZQZRQ FROM " & strTableJZQZ
+                    condition = "WHERE " & strTableJZQZ & ".ZDGUID In(" & strSelectedGUIDOutRPT & ")"
+                    strOrderBy = "ORDER BY " & strTableJZQZ & ".ZDGUID, " & strTableJZQZ & ".ID"
+                    strSQL = sqltexts & " " & condition & " " & strOrderBy
+                    GetSQLRecordAll mdbName,strSQL,arRecordJZQZB,nRecordJZQZBCount
+                    
+                    
+                    '-----GetOutContent.3.4---宗地共用分摊面积记录数组---------------------------------------
+                    sqltexts = "SELECT " & strTableGYMJFT & ".ZDGUID, " & strTableGYMJFT & ".DZWDM, " & strTableGYMJFT & ".QLMJ, " & strTableGYMJFT & ".DYTDMJ, " & strTableGYMJFT & ".FTTDMJ FROM " & strTableGYMJFT
+                    condition = "WHERE " & strTableGYMJFT & ".ID<>0 And " & strTableGYMJFT & ".ZDGUID In(" & strSelectedGUIDOutRPT & ")"
+                    strOrderBy = "ORDER BY " & strTableGYMJFT & ".ZDGUID, " & strTableGYMJFT & ".ID"
+                    strSQL = sqltexts & " " & condition & " " & strOrderBy
+                    Rem MsgBox strSQL
+                    GetSQLRecordAll mdbName,strSQL,arRecordGYMJFT,nRecordGYMJFTCount
+                    Rem MsgBox nRecordGYMJFTCount
+                    '当共用分摊表没有内容时，从户表提取分摊内容
+                    If nRecordGYMJFTCount =  - 1 Then
+                        sqltexts = "SELECT " & strTableHu & ".ZDGUID, Right([BDCDYH],9) , " & strTableHu & ".DYTDMJ, " & strTableHu & ".FTTDMJ FROM GeoAreaTB INNER JOIN " & strTableHu & " ON GeoAreaTB.ID = " & strTableHu & ".ID"
+                        condition = "WHERE " & strTableHu & ".ZDGUID In(" & strSelectedGUIDOutRPT & ")" & " AND (" & strTableHu & ".HXH like '*复式1层*'  or  " & strTableHu & ".HXH not like '*复式*') And (([GeoAreaTB].[Mark] Mod 2)<>0)"
+                        strOrderBy = "ORDER BY " & strTableHu & ".ZDGUID, Right([BDCDYH],9)"
+                        strSQL = sqltexts & " " & condition & " " & strOrderBy
+                        GetSQLRecordAll mdbName,strSQL,arRecordGYMJFT,nRecordGYMJFTCount
+                        Rem MsgBox "B：" & nRecordGYMJFTCount
+                    End If
+                    
+                    '-----GetOutContent.3.5---获取户信息---------------------------------------
+                    sqltexts = "SELECT FC_户信息属性表.HGUID, FC_户信息属性表.ZRZGUID, FC_户信息属性表.BDCDYH, FC_户信息属性表.ZL, FC_户信息属性表.FWXZ, FC_户信息属性表.ChanB, FC_户信息属性表.FWYT1, FC_户信息属性表.FWYT2," _
+                     & " FC_户信息属性表.FWYT3, FC_户信息属性表.GHYT, FC_户信息属性表.ZRZH, FC_户信息属性表.HH, FC_户信息属性表.ZCS, FC_户信息属性表.CH, FC_户信息属性表.FWJG, FC_户信息属性表.JGSJ, FC_户信息属性表.JZMJ, " _
+                     & " FC_户信息属性表.TNJZMJ, FC_户信息属性表.FTJZMJ, FC_户信息属性表.CQLY, FC_户信息属性表.FTTDMJ, FC_户信息属性表.DQ, FC_户信息属性表.NQ, FC_户信息属性表.XQ, FC_户信息属性表.BQ, " _
+                     & "FC_户信息属性表.YCJZMJ, FC_户信息属性表.YCTNJZMJ, FC_户信息属性表.YCFTJZMJ, FC_户信息属性表.SCJZMJ, FC_户信息属性表.SCTNJZMJ, FC_户信息属性表.SCFTJZMJ, FC_户信息属性表.ZDGUID " _
+                     & " FROM GeoAreaTB INNER JOIN FC_户信息属性表 ON GeoAreaTB.ID = FC_户信息属性表.ID "
+                    condition = "WHERE ([GeoAreaTB].[Mark] Mod 2)<>0 And FC_户信息属性表.ZDGUID In (" & strSelectedGUIDOutRPT & ")"        '(((QLR_权利人信息表.GLGUID) In ({guid {780E4627-10E8-40F8-897A-DA71483AF6D8}},{guid {F05AC15E-CA2A-490D-AC46-30DD9DE4380C}}))
+                    'strOrderBy ="ORDER BY FC_户信息属性表.SWBH"
+                    strSQL = sqltexts & " " & condition
+                    ' addloginfo "FC_户信息属性表-strSQL=" & strSQL
+                    GetSQLRecordAll mdbName,strSQL,arRecordHU,nRecordHUCount
+                    
+                    '-----GetOutContent.3.6---获取自然幢信息---------------------------------------
+                    'sqltexts ="SELECT FC_自然幢信息属性表.ZRZGUID, FC_自然幢信息属性表.XMMC, FC_自然幢信息属性表.ZTS, FC_自然幢信息属性表.ZZDMJ, FC_自然幢信息属性表.DCRY, FC_自然幢信息属性表.DCRQ, FC_自然幢信息属性表.CHZT FROM FC_自然幢信息属性表 INNER JOIN GeoAreaTB ON FC_自然幢信息属性表.ID = GeoAreaTB.ID "
+                    'condition ="WHERE ([GeoAreaTB].[Mark] Mod 2)<>0 And FC_自然幢信息属性表.ZDGUID In (" & strSelectedGUIDOutRPT & ")"
+                    sqltexts = "SELECT FC_自然幢信息属性表.ZDDM, FC_自然幢信息属性表.XMMC, FC_自然幢信息属性表.ZTS, FC_自然幢信息属性表.ZZDMJ, FC_自然幢信息属性表.DCRY,  FC_自然幢信息属性表.DCRQ, FC_自然幢信息属性表.CHZT," _
+                     & " FC_自然幢信息属性表.ZRZH,FC_自然幢信息属性表.JGRQ, FC_自然幢信息属性表.SCJZMJ, FC_自然幢信息属性表.YCJZMJ, FC_自然幢信息属性表.FWJGNAME, FC_自然幢信息属性表.ZCS, FC_自然幢信息属性表.ZTS," _
+                     & " FC_自然幢信息属性表.JZWJBYT, FC_自然幢信息属性表.GHYTNAME, FC_自然幢信息属性表.ZRZGUID, FC_自然幢信息属性表.BDCDYH,FC_自然幢信息属性表.DQTGS, " _
+                     & "FC_自然幢信息属性表.NQTGS,FC_自然幢信息属性表.XQTGS,FC_自然幢信息属性表.BQTGS,FC_自然幢信息属性表.CQLY,FC_自然幢信息属性表.FTMJ ,FC_自然幢信息属性表.FWXZ,FC_自然幢信息属性表.ZRZH,FC_自然幢信息属性表.JZMJ,FC_自然幢信息属性表.TNJZMJ,FC_自然幢信息属性表.GYJZMJ,FC_自然幢信息属性表.ChanB,FC_自然幢信息属性表.GHYT,FC_自然幢信息属性表.FWYT,FC_自然幢信息属性表.FWXZ,FC_自然幢信息属性表.SFZYYT,FC_自然幢信息属性表.ZCS,FC_自然幢信息属性表.DSCS,FC_自然幢信息属性表.DXCS FROM FC_自然幢信息属性表 INNER JOIN GeoAreaTB ON FC_自然幢信息属性表.ID = GeoAreaTB.ID "
+                    condition = "WHERE ([GeoAreaTB].[Mark] Mod 2)<>0 And FC_自然幢信息属性表.ZDGUID In (" & strSelectedGUIDOutRPT & ")"
+                    strOrderBy = "ORDER BY FC_自然幢信息属性表.ZRZH"
+                    strSQL = sqltexts & " " & condition & " " & strOrderBy
+                    'addloginfo "strSQL=" & strSQL
+                    GetSQLRecordAll mdbName,strSQL,arRecordZRZ,nRecordZRZCount
+                    
+                    Dim nZDMID1,strZDMCode1,nZDMDS1            '宗地面ID，宗地面要素编码，宗地面点数
+                    Dim strQLRBJ1                         '权利人信息标记 1 有 0 无
+                    Dim nJZXCD1                                '界址线长度
+                    For i_rpt = 0 To nOutSelectedCount - 1
+                        strQLRBJ1 = "0"                                     '权利人信息标记 1 有 0 无
+                        Mark_ZD_BDCDYH = 0                                '宗地不动产单元号
+                        Mark_ShareTable_Del =  - 1                '设置共有/共用表的删除标记的初值
+                        '-----BG.1.1-----宗地基本信息表-----------------
+                        '从宗地记录数组中查宗地基本信息
+                        GetIndexOnly_StringInclude arOutRecSelected(i_rpt),arRecordZD,nRecordZDCount,Index_ZDXX
+                        arZDJBXX_Temp = Split(arRecordZD(Index_ZDXX),",")
+                        nZDJBXXColCount_Temp = UBound(arZDJBXX_Temp)
+                        '获取宗地面的图形基本属性
+                        nZDMID1 = arZDJBXX_Temp(nZDJBXXColCount_Temp)                                                  '宗地面ID
+                        strZDMCode1 = SSProcess.GetObjectAttr(nZDMID1, "SSObj_Code")                   '宗地面编码
+                        nZDMDS1 = SSProcess.GetObjectAttr( nZDMID1, "SSObj_PointCount")            '宗地面点数
+                        nDZWDYS = SSProcess.GetObjectAttr( nZDMID1, "[GYMJFTDZWDYS]")                '定着物单元数据
+                        strZDGYTFSM = SSProcess.GetObjectAttr( nZDMID1, "[GYGYZDMJFTBZ]")    '共用面积分摊说明
+                        strXMMC = SSProcess.GetObjectAttr( nZDMID1, "[XiangMMC]")
+                        YeWLX = SSProcess.GetObjectAttr( nZDMID1, "[YeWLX]")
+                        If YeWLX = "房开项目"  Then
+                            templateDocName = SSProcess.GetSysPathName(8) & "输出模板\不动产测量报告模板_房开.docx"
+                        ElseIf YeWLX = "民房项目"  Then
+                            templateDocName = SSProcess.GetSysPathName(8) & "输出模板\不动产测量报告模板_民房.docx"
+                        ElseIf  YeWLX = "单一产权"  Then
+                            templateDocName = SSProcess.GetSysPathName(8) & "输出模板\不动产测量报告模板_厂房.docx"
+                        Else
+                            MsgBox "业务类型为空，请在项目信息录入中填写！"
+                            Exit Sub
+                        End If
+                        
+                        'msgbox templateDocName
+                        If ReportFileStatus(templateDocName) = "不存在" Then
+                            MsgBox "报表模板不存在，请核实！" & Chr(13) & Chr(13) & templateDocName,48
+                            Exit Sub
+                        End If
+                        initDocCom  templateDocName
+                        docObj.CreateDocumentByTemplate templateDocName
+                        
+                        resultFileName = CreateSavePath()
+                        initDB()
+                        
+                        'strDCY =SSProcess.GetObjectAttr( nZDMID1, "[DiaoCR]")                '调查员
+                        'strCLY =SSProcess.GetObjectAttr( nZDMID1, "[CeLY]")                    '测量员
+                        'strSHR =SSProcess.GetObjectAttr( nZDMID1, "[ShenHR]")                '审核人
+                        'strSHRQ =SSProcess.GetObjectAttr( nZDMID1, "[ShenHRQ]")        '审核日期
+                        'strZHITY =SSProcess.GetObjectAttr( nZDMID1, "[ZhiTY]")        '制图员
+                        
+                        Rem arRecordJZBSB(),nRecordJZBSBCount
+                        '-----BG.2-----界址标示表-----------------
+                        ReDim arRecordJZBSB(nZDMDS1,22)            '重定义界址表数组大小
+                        GetJZDinfo nZDMID1,nZDMDS1,arRecordJZBSB,nRecordJZBSBCount
+                        
+                        '-----BG.3-----获取界址签章表-----------------
+                        GetIndexMul arOutRecGUIDSelected(i_rpt),arRecordJZQZB,nRecordJZQZBCount,index_JZQZB
+                        
+                        '-----BG.4-----共有共用宗地面积分摊信息表-----------------
+                        GetIndexMul arOutRecGUIDSelected(i_rpt),arRecordGYMJFT,nRecordGYMJFTCount,index_GYMJFT
+                        
+                        '---------------------------------开始输出报告----------------------------------------------
+                        
+                        '-------WriteRPT.3.2-宗地基本信息表-------------------------
+                        docObj.MoveToSection 2
+                        WriteZDJBXXB   arZDJBXX_Temp, arRecordQLR,nRecordQLRCount ,arOutRecGUIDSelected(i_rpt),strZDMCode1
+                        
+                        'GetIndexMul_SpecifyColumn arOutRecGUIDSelected(i_rpt),arRecordHU,31,nRecordHUCount,index_HU
+                        
+                        '-------WriteRPT.3.2-房屋基本信息调查表----------------------------------
+                        docObj.MoveToSection 3
+                        TableNum = 0
+                        
+                        WriteFWJBXXDCB nZDMID1,arRecordZRZ, nRecordZRZCount, index_ZRZ
+                        
+                        '-------WriteRPT.3.3-填写界址标示表----------------------------------
+                        docObj.MoveToSection 4
+                        WriteJZDZBB arRecordJZBSB,nRecordJZBSBCount,nResPageNum
+                        
+                        '-------WriteRPT.3.4-获取界址签章表----------------------------------
+                        nResPageNum_JZQZ = nResPageNum + 1    '界址签章表号
+                        If index_JZQZB <> "" Then
+                            arIndexJZQZTemp = Split(index_JZQZB,",")
+                            nJZQZCount_Temp = UBound(arIndexJZQZTemp)
+                            If nJZQZCount_Temp > 19 Then  docObj.CloneTableRow nResPageNum_JZQZ, 6, 1, nJZQZCount_Temp - 19
+                            For i_JZQZ = 0 To nJZQZCount_Temp
+                                arJZQZTemp = Split(arRecordJZQZB(i_JZQZ),",")
+                                SetCellValue nResPageNum_JZQZ,i_JZQZ + 4, 0, arJZQZTemp(1)        '填写单元格内容
+                                SetCellValue nResPageNum_JZQZ,i_JZQZ + 4, 1, arJZQZTemp(2)
+                                SetCellValue nResPageNum_JZQZ,i_JZQZ + 4, 2, arJZQZTemp(3)
+                                SetCellValue nResPageNum_JZQZ,i_JZQZ + 4, 3, arJZQZTemp(4)
+                                SetCellValue nResPageNum_JZQZ,i_JZQZ + 4, 4, arJZQZTemp(5)
+                                SetCellValue nResPageNum_JZQZ,i_JZQZ + 4, 5, arJZQZTemp(6)
+                                SetCellValue nResPageNum_JZQZ,i_JZQZ + 4, 6, arJZQZTemp(7)
+                            Next
+                        End If
+                        
+                        docObj.MoveToSection 7
+                        '地籍调查界址点成果表
+                        WriteDJDCJZDCGB arRecordJZBSB,nRecordJZBSBCount,nResPageNum,nZDMID1
+                        'msgbox "6"
+                        '宗地测绘成果面积明细表
+                        If YeWLX = "房开项目"  Or YeWLX = "民房项目"  Then
+                            docObj.MoveToSection 8
+                            TableNum = 0
+                            strzdmj = SSProcess.GetObjectAttr(nZDMID1, "[ZDMJ]")
+                            strJZZDMJ = SSProcess.GetObjectAttr(nZDMID1, "[JianZZDMJ]")
+                            If strXMMC <> "" And strXMMC <> "*" Then SetCellValue TableNum,1, 0,  strXMMC
+                            If strZDMJ <> "" And strZDMJ <> "*" Then SetCellValue TableNum,1, 1,  FormatNumber(strZDMJ,2, - 1,0,0)             '宗地面积
+                            If strJZZDMJ <> "" And strJZZDMJ <> "*" Then SetCellValue TableNum,1, 2,  FormatNumber(strJZZDMJ,2, - 1,0,0) '建筑占地面积
+                            SetCellValue TableNum,1, 3,  FormatNumber((strZDMJ - strJZZDMJ),2, - 1,0,0) '宗地内绿化及道路面积=宗地面积-建筑占地面积
+                            SetCellValue TableNum,15, 3,  FormatNumber((strZDMJ - strJZZDMJ),2, - 1,0,0)
+                            SetCellValue TableNum,15, 1,  FormatNumber(strZDMJ,2, - 1,0,0)
+                            SetCellValue TableNum,15, 2,  FormatNumber(strJZZDMJ,2, - 1,0,0)
+                            
+                            '分幢建筑占地面积明细表
+                            docObj.MoveToSection 9
+                            WriteFZJZZDMJMXB nZDMID1, arRecordZRZ,nRecordZRZCount,index_ZRZ
+                        End If
+                        'msgbox "7"
+                        If YeWLX = "房开项目"  Then
+                            '建筑物区分所有权业主共有部分登记信息
+                            docObj.MoveToSection 10
+                            WriteGYDJXXB  nZDMID1, arOutRecGUIDSelected(i_rpt)
+                            '各基本单元不动产面积分摊表
+                            docObj.MoveToSection 11
+                            WriteJBDYBDCMJFTB nZDMID1,arRecordZRZ,nRecordZRZCount,index_ZRZ
+                        End If
+                        
+                        If YeWLX = "民房项目"  Then
+                            '各基本单元不动产面积分摊表
+                            docObj.MoveToSection 10
+                            WriteJBDYBDCMJFTB nZDMID1,arRecordZRZ,nRecordZRZCount,index_ZRZ
+                        End If
+                        'msgbox "8"
+                        '分摊系数 幢占地面积/幢建筑面积  土地用途-使用功能
+                        ' savedoc()
+                        ' exit sub         
+                        SSProcess.CloseAccessMdb mdbName
+                        docObj.UpdateFields
+                        strOutputPath = resultFileName & arOutRecSelected(i_rpt) & "_不动产测量报告.doc"
+                        'addloginfo "strOutputPath=" & strOutputPath
+                        docObj.SaveEx strOutputPath
+                        ReleaseDB()
+                    Next
+                Next 'i
+                
+                MsgBox "输出完成!"
+
             End If
+        Else
+            Exit Sub
         End If
     Else
         ReDim arOutRecSelected(RecordShortListCount)                '输出特征记录数组
