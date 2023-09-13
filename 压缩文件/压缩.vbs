@@ -1,9 +1,9 @@
 
-'=======================================================¹¦ÄÜÈë¿Ú====================================================================
+'=======================================================åŠŸèƒ½å…¥å£====================================================================
 
 Sub OnClick()
     
-    '·µ»ØZIPÎÄ¼şÃû³Æ
+    'è¿”å›ZIPæ–‡ä»¶åç§°
     SaveName SaveZipName,Result
     If Result = 1 Then
         YsFolder SaveZipName
@@ -12,17 +12,17 @@ Sub OnClick()
     End If
 End Sub' OnClick
 
-'»ñÈ¡±£´æÎÄ¼şÃû³Æ
+'è·å–ä¿å­˜æ–‡ä»¶åç§°
 Function SaveName(ByRef SaveZipName,ByRef Result)
     SSProcess.ClearInputParameter
-    SSProcess.AddInputParameter "±£´æÎÄ¼şÃû" , "XXX¿¢¹¤²âÁ¿" , 0 , "XXXÍÁµØ¿±²â¶¨½ç,XXX½¨Éè¹¤³Ì¹æ»®·ÅÏß,XXXÕı¸ºÁã¼ì²â,XXX²»¶¯²úÓë²â»æ,XXX¿¢¹¤¶à²âºÏÒ»,XXX²»¶¯²úÊµ²â»æ,XXXË®Ó¡¼°µç×ÓÕÂ" , ""
-    Result = SSProcess.ShowInputParameterDlg ("ÊäÈëÎÄ¼şÃû³Æ")
-    SaveZipName = SSProcess.GetInputParameter("±£´æÎÄ¼şÃû")
+    SSProcess.AddInputParameter "ä¿å­˜æ–‡ä»¶å" , "XXXç«£å·¥æµ‹é‡" , 0 , "XXXåœŸåœ°å‹˜æµ‹å®šç•Œ,XXXå»ºè®¾å·¥ç¨‹è§„åˆ’æ”¾çº¿,XXXæ­£è´Ÿé›¶æ£€æµ‹,XXXä¸åŠ¨äº§ä¸æµ‹ç»˜,XXXç«£å·¥å¤šæµ‹åˆä¸€,XXXä¸åŠ¨äº§å®æµ‹ç»˜,XXXæ°´å°åŠç”µå­ç« " , ""
+    Result = SSProcess.ShowInputParameterDlg ("è¾“å…¥æ–‡ä»¶åç§°")
+    SaveZipName = SSProcess.GetInputParameter("ä¿å­˜æ–‡ä»¶å")
     SSProcess.RefreshView
 End Function' SaveName
 
 Function YsFolder(ByVal ZipName)
-    SelFolderPath = SSProcess.SelectPathName() 'Ñ¡ÔñµÄÎÄ¼ş¼ĞÂ·¾¶
+    SelFolderPath = SSProcess.SelectPathName() 'é€‰æ‹©çš„æ–‡ä»¶å¤¹è·¯å¾„
     SavePath = SSProcess.GetSysPathName(5) & ZipName & ".zip"
     ArchiveFolder SavePath,SelFolderPath
 End Function' YsFolder
