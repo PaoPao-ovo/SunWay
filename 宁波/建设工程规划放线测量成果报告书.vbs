@@ -408,7 +408,7 @@ Function OutputTable3(ByVal tableIndex)
     Next
     
     '保留最后的总结
-    For i = 0 To copyCount - 2
+    For i = 0 To copyCount - 1
         g_docObj.DeleteRow tableIndex + i,14,False
         g_docObj.DeleteRow tableIndex + i,14,False
         g_docObj.CloneTableRow tableIndex + i,13,1,2,False
